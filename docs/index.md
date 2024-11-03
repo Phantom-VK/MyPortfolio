@@ -1,0 +1,3 @@
+ MyPortfolio    
+
+❌🕸️ @keyframes kobweb-spin { from { transform: rotate(0deg); } to { transform: rotate(359deg); } } body > #status { position: fixed; font-size: 24px; background: whitesmoke; top: 20px; left: 50%; transform: translateX(-50%); padding: 10px; border: 1px solid; border-radius: 10px; visibility: hidden; opacity: 0; z-index: 2147483647; user-select: none; } body > #status > .hidden { display: none; } body > #status > .visible { display: inline-block; } body > #status.fade-in { visibility: visible; opacity: 1; transition: opacity 1s; } body > #status.fade-out { visibility: hidden; opacity: 0; transition: visibility 0s 1s, opacity 1s; } body > #status > #spinner { animation: kobweb-spin 1.5s linear infinite; }
