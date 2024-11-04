@@ -2,6 +2,7 @@ package com.vikramaditya.portfolio.utils
 
 
 import com.varabyte.kobweb.compose.ui.graphics.Color
+import org.jetbrains.compose.web.css.rgb
 
 object Res {
     enum class Theme(val color: Color) {
@@ -13,7 +14,12 @@ object Res {
         GRADIENT_ONE(color = Color.rgb(r = 161, g = 196, b = 253)),
         GRADIENT_ONE_DARK(color = Color.rgb(r = 19, g = 38, b = 58)),
         GRADIENT_TWO(color = Color.rgb(r = 194, g = 233, b = 251)),
-        GRADIENT_TWO_DARK(color = Color.rgb(r = 20, g = 46, b = 73))
+        GRADIENT_TWO_DARK(color = Color.rgb(r = 20, g = 46, b = 73)),
+        GoogleBlue(Color.rgb(66, 133, 244)),
+        GoogleRed(Color.rgb(234, 67, 53)),
+        GoogleYellow(Color.rgb(251, 188, 5)),
+        GoogleGreen(Color.rgb(52, 168, 83))
+
     }
 
     object Icon {

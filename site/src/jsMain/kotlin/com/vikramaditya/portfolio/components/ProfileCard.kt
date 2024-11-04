@@ -25,8 +25,8 @@ import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
 
 @Composable
-fun ProfileCard(colorMode: ColorMode)  {
-    val breakpoint = rememberBreakpoint()
+fun ProfileCard(colorMode: ColorMode,breakpoint: Breakpoint)  {
+
     SimpleGrid(
         numColumns = numColumns(base = 1, md = 2),
         modifier = Modifier
