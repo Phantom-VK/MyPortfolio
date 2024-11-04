@@ -9,11 +9,10 @@ import com.varabyte.kobweb.core.Page
 import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.vikramaditya.portfolio.components.ProfileCard
-import com.vikramaditya.portfolio.components.SkillCard
 import com.vikramaditya.portfolio.components.SkillSection
 import com.vikramaditya.portfolio.components.ThemeSwitchButton
 import com.vikramaditya.portfolio.utils.Res
-import kotlinx.browser.localStorage
+import kotlinx.browser.sessionStorage
 
 
 @Page
@@ -25,7 +24,7 @@ fun HomePage() {
 
 
     LaunchedEffect(colorMode) {
-        val savedTheme = localStorage.getItem(Res.String.SAVED_THEME) ?: ColorMode.LIGHT.name
+        val savedTheme = sessionStorage.getItem(Res.String.SAVED_THEME) ?: ColorMode.LIGHT.name
         colorMode = ColorMode.valueOf(savedTheme)
     }
 
@@ -33,7 +32,7 @@ fun HomePage() {
         colorMode = colorMode,
         onClick = {
             colorMode = colorMode.opposite
-            localStorage.setItem(Res.String.SAVED_THEME, colorMode.name)
+            sessionStorage.setItem(Res.String.SAVED_THEME, colorMode.name)
         }
     )
 
