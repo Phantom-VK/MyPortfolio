@@ -27,7 +27,6 @@ import org.jetbrains.compose.web.css.px
 @Composable
     fun SkillCard(title: String,
                   description: String,
-                  icon: String,
                   colorMode: ColorMode,
                   breakpoint: Breakpoint) {
         Box(

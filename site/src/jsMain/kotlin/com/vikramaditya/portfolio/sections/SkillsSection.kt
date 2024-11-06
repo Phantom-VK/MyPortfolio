@@ -51,21 +51,18 @@ fun SkillSection(colorMode: ColorMode, breakpoint: Breakpoint){
                 SkillCard(
                     "Programming",
                     "Python (Advanced), Java (Intermediate), Kotlin (Intermediate), OOP",
-                    "fas fa-code",
                     colorMode,
                     breakpoint
                 )
                 SkillCard(
                     "Development",
                     "Android Development, Jetpack Compose, Kobweb, Firebase",
-                    "fas fa-mobile-alt",
                     colorMode,
                     breakpoint
                 )
                 SkillCard(
                     "Tools",
                     "Android Studio, Git, GitHub, PyCharm, IntelliJ IDEA, Figma, VSCode",
-                    "fas fa-tools",
                     colorMode,
                     breakpoint
                 )

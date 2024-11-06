@@ -24,16 +24,12 @@ fun HomePage() {
     val breakpoint = rememberBreakpoint()
 
 
-    LaunchedEffect(colorMode) {
-        val savedTheme = sessionStorage.getItem(Res.String.SAVED_THEME) ?: ColorMode.LIGHT.name
-        colorMode = ColorMode.valueOf(savedTheme)
-    }
+
 
     ThemeSwitchButton(
         colorMode = colorMode,
         onClick = {
             colorMode = colorMode.opposite
-            sessionStorage.setItem(Res.String.SAVED_THEME, colorMode.name)
         }
     )
 
