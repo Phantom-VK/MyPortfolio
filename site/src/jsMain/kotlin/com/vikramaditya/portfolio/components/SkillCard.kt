@@ -3,6 +3,7 @@ package com.vikramaditya.portfolio.components
 import androidx.compose.runtime.Composable
 import com.varabyte.kobweb.compose.css.FontWeight
 import com.varabyte.kobweb.compose.css.TextAlign
+import com.varabyte.kobweb.compose.css.TextOverflow
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.ui.Alignment
@@ -16,6 +17,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.lineHeight
 import com.varabyte.kobweb.compose.ui.modifiers.margin
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.compose.ui.modifiers.textAlign
+import com.varabyte.kobweb.compose.ui.modifiers.textOverflow
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.style.toModifier
@@ -25,46 +27,49 @@ import com.vikramaditya.portfolio.utils.Res
 import org.jetbrains.compose.web.css.px
 
 @Composable
-    fun SkillCard(title: String,
-                  description: String,
-                  colorMode: ColorMode,
-                  breakpoint: Breakpoint) {
-        Box(
-            GoogleCardStyle.toModifier()
-                .padding(16.px)
+fun SkillCard(
+    title: String,
+    description: String,
+    colorMode: ColorMode,
+    breakpoint: Breakpoint
+) {
+    Box(
+        GoogleCardStyle.toModifier()
+            .padding(16.px)
+
+    ) {
+        Column(
+            Modifier.padding(24.px),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Column(
-                Modifier.padding(24.px),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                SpanText(
-                    text = title,
-                    modifier = Modifier
-                        .margin(bottom = 12.px)
-                        .fontFamily(Res.String.ROBOTO_CONDENSED)
-                        .color(if (colorMode.isLight) Colors.Black else Colors.White)
-                        .fontSize(36.px)
-                        .fontWeight(FontWeight.Bold)
-                        .textAlign(
-                            if (breakpoint <= Breakpoint.SM) TextAlign.Center
-                            else TextAlign.Start
-                        )
-                )
+            SpanText(
+                text = title,
+                modifier = Modifier
+                    .margin(bottom = 12.px)
+                    .fontFamily(Res.String.ROBOTO_CONDENSED)
+                    .color(if (colorMode.isLight) Colors.Black else Colors.White)
+                    .fontSize(36.px)
+                    .textOverflow(TextOverflow.Ellipsis)
+                    .fontWeight(FontWeight.Bold)
+                    .textAlign(
+                        if (breakpoint <= Breakpoint.SM) TextAlign.Center
+                        else TextAlign.Start
+                    )
+            )
 
-                SpanText(
-                    text = description,
-                    modifier = Modifier
-                        .margin(bottom = 24.px)
-                        .fontFamily(Res.String.ROBOTO_REGULAR)
-                        .lineHeight(1.6)
-                        .color(if (colorMode.isLight) Colors.Black else Colors.White)
-                        .fontSize(16.px)
-                )
-
-
-            }
+            SpanText(
+                text = description,
+                modifier = Modifier
+                    .margin(bottom = 24.px)
+                    .fontFamily(Res.String.ROBOTO_REGULAR)
+                    .textOverflow(TextOverflow.Ellipsis)
+                    .lineHeight(1.6)
+                    .color(if (colorMode.isLight) Colors.Black else Colors.White)
+                    .fontSize(16.px)
+            )
         }
     }
+}
 //                H3(
 //                    Modifier
 //                        .margin(bottom = 12.px)

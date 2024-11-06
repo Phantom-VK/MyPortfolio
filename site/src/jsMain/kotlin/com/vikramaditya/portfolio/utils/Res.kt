@@ -15,9 +15,9 @@ object Res {
         GRADIENT_ONE_DARK(color = Color.rgb(r = 19, g = 38, b = 58)),
         GRADIENT_TWO(color = Color.rgb(r = 194, g = 233, b = 251)),
         GRADIENT_TWO_DARK(color = Color.rgb(r = 20, g = 46, b = 73)),
-        GoogleBlue(Color.rgb(66, 133, 244)),
+        GoogleBlue(Color.rgb(66, 103, 210)),
         GoogleRed(Color.rgb(234, 67, 53)),
-        GoogleYellow(Color.rgb(251, 188, 5)),
+        GoogleYellow(Color.rgb(251, 188, 4)),
         GoogleGreen(Color.rgb(52, 168, 83))
 
     }

@@ -8,7 +8,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.background
 import com.varabyte.kobweb.compose.ui.modifiers.rotate
 import com.varabyte.kobweb.compose.ui.modifiers.transition
 import com.varabyte.kobweb.silk.style.CssStyle
-import com. varabyte. kobweb. silk. style. selectors. hover
+import com.varabyte.kobweb.silk.style.selectors.hover
 import com.vikramaditya.portfolio.utils.Res
 import org.jetbrains.compose.web.css.deg
 import org.jetbrains.compose.web.css.ms

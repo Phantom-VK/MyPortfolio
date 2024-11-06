@@ -19,9 +19,9 @@ import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.dom.Section
 
 
+
 @Composable
 fun ProjectsSection(colorMode: ColorMode) {
-
     Section(
         Modifier
             .fillMaxWidth()
@@ -30,7 +30,10 @@ fun ProjectsSection(colorMode: ColorMode) {
             .backgroundColor(if (colorMode.isLight) Colors.WhiteSmoke else Colors.DarkSlateGray)
             .toAttrs()
     ) {
-        SimpleGrid(numColumns = numColumns(base = 1, md = 4), modifier = Modifier.maxWidth(1200.px).gap(24.px)) {
+        SimpleGrid(
+            numColumns = numColumns(base = 1,sm = 2, md = 4),
+            modifier = Modifier.fillMaxWidth().gap(24.px)
+        ) {
             ProjectCard(
                 "BoothMap",
                 "Election booth locator app serving 2,000+ users with precise navigation and booth information retrieval.",

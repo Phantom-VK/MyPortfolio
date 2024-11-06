@@ -33,28 +33,28 @@ val GoogleCardStyle = CssStyle {
                 BoxShadow.of(
                     offsetX = (-4).px,
                     offsetY = 4.px,
-                    blurRadius = 8.px,
+                    blurRadius = 15.px,
                     color = Res.Theme.GoogleBlue.color
                 ),
                 // Google Red shadow
                 BoxShadow.of(
                     offsetX = 4.px,
                     offsetY = 4.px,
-                    blurRadius = 8.px,
+                    blurRadius = 15.px,
                     color = Res.Theme.GoogleRed.color
                 ),
                 // Google Yellow shadow
                 BoxShadow.of(
                     offsetX = 4.px,
                     offsetY = (-4).px,
-                    blurRadius = 8.px,
+                    blurRadius = 15.px,
                     color = Res.Theme.GoogleYellow.color
                 ),
                 // Google Green shadow
                 BoxShadow.of(
                     offsetX = (-4).px,
                     offsetY = (-4).px,
-                    blurRadius = 8.px,
+                    blurRadius = 15.px,
                     color = Res.Theme.GoogleGreen.color
                 )
             )

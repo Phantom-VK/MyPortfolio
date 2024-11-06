@@ -11,6 +11,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.margin
 import com.varabyte.kobweb.compose.ui.modifiers.position
 import com.varabyte.kobweb.compose.ui.modifiers.zIndex
 import com.varabyte.kobweb.compose.ui.styleModifier
+import com.varabyte.kobweb.silk.style.toModifier
 import com. varabyte. kobweb. silk. style. breakpoint. Breakpoint
 import com. varabyte. kobweb. silk. style. toModifier
 import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint

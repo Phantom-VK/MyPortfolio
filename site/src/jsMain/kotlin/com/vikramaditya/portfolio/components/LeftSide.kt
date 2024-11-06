@@ -11,23 +11,21 @@ import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
-import com.varabyte.kobweb.compose.ui.styleModifier
 import com.varabyte.kobweb.silk.components.forms.Button
 import com.varabyte.kobweb.silk.components.forms.ButtonSize
 import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.components.layout.Surface
-import com. varabyte. kobweb. silk. style. breakpoint. Breakpoint
 import com.varabyte.kobweb.silk.components.text.SpanText
+import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
+import com.varabyte.kobweb.silk.style.toModifier
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
+import com.varabyte.kobweb.silk.theme.colors.ColorSchemes
 import com.vikramaditya.portfolio.styles.ButtonStyle
+import com.vikramaditya.portfolio.styles.SocialIconStyle
 import com.vikramaditya.portfolio.utils.Res
 import kotlinx.browser.window
 import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
-import com. varabyte. kobweb. silk. style. toModifier
-import com.varabyte.kobweb.silk.theme.colors.ColorScheme
-import com.varabyte.kobweb.silk.theme.colors.ColorSchemes
-import com.vikramaditya.portfolio.styles.SocialIconStyle
 
 @Composable
 fun LeftSide(
