@@ -1,4 +1,4 @@
-package com.vikramaditya.portfolio.components
+package com.vikramaditya.portfolio.sections
 
 import androidx.compose.runtime.Composable
 import com.varabyte.kobweb.compose.css.ObjectFit
@@ -18,8 +18,8 @@ import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.components.layout.SimpleGrid
 import com.varabyte.kobweb.silk.components.layout.numColumns
 import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
-import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
+import com.vikramaditya.portfolio.components.LeftSide
 import com.vikramaditya.portfolio.utils.Res
 import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
