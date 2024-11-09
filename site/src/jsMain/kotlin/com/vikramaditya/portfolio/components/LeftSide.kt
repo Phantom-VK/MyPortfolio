@@ -2,13 +2,17 @@ package com.vikramaditya.portfolio.components
 
 
 import androidx.compose.runtime.Composable
+import com.varabyte.kobweb.compose.css.CSSPosition
 import com.varabyte.kobweb.compose.css.FontWeight
 import com.varabyte.kobweb.compose.css.TextAlign
+import com.varabyte.kobweb.compose.css.functions.RadialGradient
+import com.varabyte.kobweb.compose.css.functions.radialGradient
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
+import com.varabyte.kobweb.compose.ui.graphics.Color
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.silk.components.forms.Button
@@ -24,7 +28,7 @@ import com.vikramaditya.portfolio.styles.ButtonStyle
 import com.vikramaditya.portfolio.styles.SocialIconStyle
 import com.vikramaditya.portfolio.utils.Res
 import kotlinx.browser.window
-import org.jetbrains.compose.web.css.percent
+import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.px
 
 @Composable
@@ -36,7 +40,7 @@ fun LeftSide(
         modifier = Modifier
             .fillMaxSize()
             .padding(all = 40.px),
-        verticalArrangement = Arrangement.Center,
+        verticalArrangement = Arrangement.SpaceBetween,
         horizontalAlignment = if (breakpoint <= Breakpoint.SM)
             Alignment.CenterHorizontally else Alignment.Start
     ) {
@@ -121,3 +125,4 @@ fun LeftSide(
         }
     }
 }
+

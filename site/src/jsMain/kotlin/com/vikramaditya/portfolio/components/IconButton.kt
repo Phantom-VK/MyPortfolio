@@ -59,13 +59,12 @@ enum class SocialIcon(
         icon = Res.Icon.GITHUB_LIGHT,
         link = "https://github.com/Phantom-VK"
     ),
-    //Change with LinkedIN
-    Gitlab(
-        icon = Res.Icon.GITLAB,
+    LinkedIn(
+        icon = Res.Icon.LINKEDIN,
         link = "https://www.linkedin.com/in/vikramaditya-khupse-04838a259"
     ),
-    GitlabLight(
-        icon = Res.Icon.GITLAB_LIGHT,
+    LinkedInLight(
+        icon = Res.Icon.LINKEDIN_LIGHT,
         link = "https://www.linkedin.com/in/vikramaditya-khupse-04838a259"
     ),
     Instagram(

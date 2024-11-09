@@ -2,7 +2,10 @@ package com.vikramaditya.portfolio.sections
 
 import androidx.compose.runtime.Composable
 import com.varabyte.kobweb.compose.css.ObjectFit
+import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Box
+import com.varabyte.kobweb.compose.foundation.layout.Row
+import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.backgroundColor
@@ -10,6 +13,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.borderRadius
 import com.varabyte.kobweb.compose.ui.modifiers.boxShadow
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
+import com.varabyte.kobweb.compose.ui.modifiers.gap
 import com.varabyte.kobweb.compose.ui.modifiers.height
 import com.varabyte.kobweb.compose.ui.modifiers.objectFit
 import com.varabyte.kobweb.compose.ui.modifiers.padding
@@ -25,31 +29,30 @@ import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
 
 @Composable
-fun ProfileCard(colorMode: ColorMode,breakpoint: Breakpoint)  {
+fun ProfileCard(colorMode: ColorMode, breakpoint: Breakpoint) {
 
-    SimpleGrid(
-        numColumns = numColumns(base = 1, md = 2),
+    Row(
         modifier = Modifier
             .fillMaxWidth()
             .thenIf(
                 breakpoint > Breakpoint.MD,
                 other = Modifier.height(Res.Dimens.MAX_CARD_HEIGHT.px)
             )
-            .boxShadow(
-                color = Colors.Black.copy(alpha = 10),
-                blurRadius = 50.px,
-                spreadRadius = 50.px
-            )
             .padding(all = 12.px)
             .borderRadius(r = Res.Dimens.BORDER_RADIUS.px)
-            .backgroundColor(if(colorMode.isLight) Colors.White else Colors.Black)
+            .backgroundColor(if (colorMode.isLight) Colors.White else Colors.Black)
+            .gap(24.px),
+        horizontalArrangement = if (breakpoint > Breakpoint.MD) Arrangement.Start else Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically
     ) {
         LeftSide(colorMode = colorMode, breakpoint = breakpoint)
-        RightSide(breakpoint = breakpoint)
+
+        if (breakpoint > Breakpoint.SM) {
+            RightSide(breakpoint = breakpoint)
+        }
     }
-
-
 }
+
 
 
 

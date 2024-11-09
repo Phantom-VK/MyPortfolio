@@ -2,7 +2,6 @@ package com.vikramaditya.portfolio.utils
 
 
 import com.varabyte.kobweb.compose.ui.graphics.Color
-import org.jetbrains.compose.web.css.rgb
 
 object Res {
     enum class Theme(val color: Color) {
@@ -29,8 +28,8 @@ object Res {
         const val GITHUB_LIGHT = "github_light.svg"
         const val INSTAGRAM = "instagram.svg"
         const val INSTAGRAM_LIGHT = "instagram_light.svg"
-        const val GITLAB = "gitlab.svg"
-        const val GITLAB_LIGHT = "gitlab_light.svg"
+        const val LINKEDIN = "linkedin.svg"
+        const val LINKEDIN_LIGHT = "linkedin_light.svg"
         const val SUN = "sun.svg"
         const val MOON = "moon.svg"
     }

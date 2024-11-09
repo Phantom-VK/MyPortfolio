@@ -1,4 +1,8 @@
 import com.varabyte.kobweb.gradle.application.util.configAsKobwebApplication
+import kotlinx.html.link
+import kotlinx.html.script
+import kotlinx.html.unsafe
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
@@ -13,26 +17,40 @@ version = "1.0-SNAPSHOT"
 kobweb {
     app {
         index {
-            description.set("Powered by Kobweb")
+            head.add {
+                link {
+                    rel = "stylesheet"
+                    href = "/highlight.js/styles/dracula.css"
+                }
+                script {
+                    src = "/highlight.js/highlight.min.js"
+                }
+
+            }
         }
     }
-}
 
-kotlin {
-    configAsKobwebApplication("portfolio")
 
-    sourceSets {
-        commonMain.dependencies {
-            implementation(libs.compose.runtime)
+    kotlin {
+        configAsKobwebApplication("portfolio")
+        js {
+            @OptIn(ExperimentalKotlinGradlePluginApi::class)
+            compilerOptions.target = "es2015"
         }
 
-        jsMain.dependencies {
-            implementation(libs.compose.html.core)
-            implementation(libs.kobweb.core)
-            implementation(libs.kobweb.silk)
-            implementation(libs.silk.icons.fa)
-            implementation(libs.kobwebx.markdown)
+        sourceSets {
+            commonMain.dependencies {
+                implementation(libs.compose.runtime)
+            }
 
+            jsMain.dependencies {
+                implementation(libs.compose.html.core)
+                implementation(libs.kobweb.core)
+                implementation(libs.kobweb.silk)
+                implementation(libs.silk.icons.fa)
+                implementation(libs.kobwebx.markdown)
+
+            }
         }
     }
 }

@@ -2,20 +2,29 @@ package com.vikramaditya.portfolio.components
 
 import androidx.compose.runtime.*
 import androidx.compose.runtime.Composable
+import com.varabyte.kobweb.compose.css.CSSPosition
+import com.varabyte.kobweb.compose.css.functions.RadialGradient
+import com.varabyte.kobweb.compose.css.functions.radialGradient
 import com.varabyte.kobweb.compose.foundation.layout.Column
+import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
+import com.varabyte.kobweb.compose.ui.graphics.Color
 import com.varabyte.kobweb.compose.ui.graphics.Colors
-import com.varabyte.kobweb.compose.ui.modifiers.background
+import com.varabyte.kobweb.compose.ui.modifiers.backgroundColor
+import com.varabyte.kobweb.compose.ui.modifiers.backgroundImage
 import com.varabyte.kobweb.compose.ui.modifiers.borderRadius
 import com.varabyte.kobweb.compose.ui.modifiers.color
+import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.lineHeight
-import com.varabyte.kobweb.compose.ui.modifiers.margin
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.compose.ui.toAttrs
-import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
-import com.varabyte.kobweb.silk.style.breakpoint.displayIfAtLeast
+import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import kotlinx.coroutines.delay
+import org.jetbrains.compose.web.css.AlignContent
+import org.jetbrains.compose.web.css.AlignSelf
+import org.jetbrains.compose.web.css.alignContent
+import org.jetbrains.compose.web.css.alignSelf
 import org.jetbrains.compose.web.css.background
 import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.fontFamily
@@ -28,28 +37,30 @@ import kotlin.text.trimIndent
 @Composable
 fun AnimatedText(){
     Column(
-        modifier = Modifier.displayIfAtLeast(Breakpoint.MD),
+        modifier = Modifier.fillMaxWidth().background(ColorMode.DARK).borderRadius(12.px),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        Row(modifier = Modifier.fillMaxWidth()){
 
-        KotlinCode(
+            KotlinCode(
+                modifier = Modifier
 
-            modifier = Modifier
-                // Choose a background color that's dark-ish but not as dark as the hero example itself, so it
-                // stands out
-                .lineHeight(1.5.cssRem)
-                .padding(0.75.cssRem)
-                .borderRadius(12.px),
-            code = """Motivated IT student with strong proficiency in Android development using Kotlin and Jetpack Compose, advanced
-skills in Python and Java. Distinguished by exceptional problem-solving abilities and rapid technology adaptation.
-Experienced in building Android apps and Python projects, with multiple certifications and HackerRank
-achievements. Demonstrates leadership through roles in Google Developer Group and SWAG Developer’s Club,
-SGGSIE&T.""".trimIndent()
-        )
+                    .color(Colors.White)
+                    .lineHeight(1.5.cssRem)
+                    .padding(0.75.cssRem)
+                    .borderRadius(topRight = 12.px, bottomRight = 12.px),
+                code = """vikramaditya@khupse:~${'$'}
+println(Motivated IT student with strong proficiency in Android development using Kotlin and Jetpack Compose, advanced
+skills in Python and Java.)""".trimIndent(),
+                codeClass = "language-kotlin"
+            )
+        }
+
+
     }
 }
 @Composable
-fun KotlinCode(code: String, modifier: Modifier = Modifier) {
+fun KotlinCode(code: String, modifier: Modifier = Modifier,codeClass: String) {
     var displayedCode: String by remember { mutableStateOf("") }
     var showCursor by remember { mutableStateOf(true) }
 
@@ -67,10 +78,14 @@ fun KotlinCode(code: String, modifier: Modifier = Modifier) {
 
     Pre(attrs = modifier.toAttrs()) {
         Code(attrs = {
-            classes("language-kotlin").also {
+            classes(codeClass).also {
                 style {
                     fontFamily("Menlo", "monospace")
                     background("transparent")
+                    alignSelf(AlignSelf.Center)
+                    alignContent(AlignContent.Center)
+                    property("white-space", "pre-wrap")
+                    property("word-break", "break-word")
                 }
             }
         }) {
@@ -79,3 +94,10 @@ fun KotlinCode(code: String, modifier: Modifier = Modifier) {
     }
 }
 
+fun Modifier.background(colorMode: ColorMode) =
+    this.then(when (colorMode) {
+        ColorMode.DARK -> Modifier.backgroundImage(
+            radialGradient(RadialGradient.Shape.Circle, Color.rgb(41, 41, 46), Color.rgb(25, 25, 28), CSSPosition.Top)
+        )
+        ColorMode.LIGHT -> Modifier.backgroundColor(Colors.White)
+    })

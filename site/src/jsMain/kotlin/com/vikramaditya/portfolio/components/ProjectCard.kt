@@ -51,7 +51,7 @@ fun ProjectCard(
                 H1 {
                     SpanText(
                         modifier = Modifier
-                            .color(Res.Theme.GoogleBlue.color)
+                            .color(Res.Theme.BLUE.color)
                             .textAlign(TextAlign.Center),
                         text = title
                     )
