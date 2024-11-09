@@ -7,7 +7,6 @@ import com.varabyte.kobweb.compose.ui.modifiers.alignContent
 import com.varabyte.kobweb.compose.ui.modifiers.backgroundColor
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.gap
-import com.varabyte.kobweb.compose.ui.modifiers.maxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.silk.components.layout.SimpleGrid
@@ -19,7 +18,6 @@ import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.dom.Section
 
 
-
 @Composable
 fun ProjectsSection(colorMode: ColorMode) {
     Section(
@@ -27,7 +25,6 @@ fun ProjectsSection(colorMode: ColorMode) {
             .fillMaxWidth()
             .padding(15.px)
             .alignContent(AlignContent.Center)
-            .backgroundColor(if (colorMode.isLight) Colors.WhiteSmoke else Colors.DarkSlateGray)
             .toAttrs()
     ) {
         SimpleGrid(

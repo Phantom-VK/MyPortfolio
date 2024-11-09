@@ -1,11 +1,14 @@
 package com.vikramaditya.portfolio.sections
 
 import androidx.compose.runtime.Composable
+import com.varabyte.kobweb.compose.css.BackgroundColor
 import com.varabyte.kobweb.compose.css.FontWeight
 import com.varabyte.kobweb.compose.css.TextAlign
 import com.varabyte.kobweb.compose.ui.Modifier
+import com.varabyte.kobweb.compose.ui.graphics.Color
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.alignContent
+import com.varabyte.kobweb.compose.ui.modifiers.background
 import com.varabyte.kobweb.compose.ui.modifiers.backgroundColor
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.fontSize
@@ -22,6 +25,7 @@ import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.vikramaditya.portfolio.components.SkillCard
+import com.vikramaditya.portfolio.utils.Res
 import org.jetbrains.compose.web.css.AlignContent
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.dom.H2
@@ -35,7 +39,6 @@ fun SkillSection(colorMode: ColorMode, breakpoint: Breakpoint) {
             .fillMaxWidth()
             .padding(32.px)
             .alignContent(AlignContent.Center)
-            .backgroundColor(if (colorMode.isLight) Colors.WhiteSmoke else Colors.DarkSlateGray)
             .toAttrs()
     ) {
         SpanText(

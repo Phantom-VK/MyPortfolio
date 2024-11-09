@@ -4,12 +4,17 @@ import androidx.compose.runtime.Composable
 import com.varabyte.kobweb.compose.css.FontWeight
 import com.varabyte.kobweb.compose.css.TextAlign
 import com.varabyte.kobweb.compose.css.TextOverflow
+import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
+import com.varabyte.kobweb.compose.ui.modifiers.border
+import com.varabyte.kobweb.compose.ui.modifiers.borderRadius
 import com.varabyte.kobweb.compose.ui.modifiers.color
+import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
+import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.fontFamily
 import com.varabyte.kobweb.compose.ui.modifiers.fontSize
 import com.varabyte.kobweb.compose.ui.modifiers.fontWeight
@@ -24,7 +29,11 @@ import com.varabyte.kobweb.silk.style.toModifier
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.vikramaditya.portfolio.styles.GoogleCardStyle
 import com.vikramaditya.portfolio.utils.Res
+import org.jetbrains.compose.web.css.LineStyle
+import org.jetbrains.compose.web.css.cssRem
+import org.jetbrains.compose.web.css.em
 import org.jetbrains.compose.web.css.px
+import org.jetbrains.compose.web.dom.H1
 
 @Composable
 fun SkillCard(
@@ -35,52 +44,38 @@ fun SkillCard(
 ) {
     Box(
         GoogleCardStyle.toModifier()
-            .padding(16.px)
+            .then(Modifier
+                .fillMaxWidth()
+                .padding(2.em)
+
+            )
 
     ) {
         Column(
-            Modifier.padding(24.px),
-            horizontalAlignment = Alignment.CenterHorizontally
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.SpaceAround,
         ) {
+            H1 {
             SpanText(
                 text = title,
                 modifier = Modifier
-                    .margin(bottom = 12.px)
                     .fontFamily(Res.String.ROBOTO_CONDENSED)
-                    .color(if (colorMode.isLight) Colors.Black else Colors.White)
-                    .fontSize(36.px)
-                    .textOverflow(TextOverflow.Ellipsis)
                     .fontWeight(FontWeight.Bold)
                     .textAlign(
                         if (breakpoint <= Breakpoint.SM) TextAlign.Center
                         else TextAlign.Start
                     )
             )
+        }
 
             SpanText(
                 text = description,
                 modifier = Modifier
                     .margin(bottom = 24.px)
                     .fontFamily(Res.String.ROBOTO_REGULAR)
-                    .textOverflow(TextOverflow.Ellipsis)
                     .lineHeight(1.6)
-                    .color(if (colorMode.isLight) Colors.Black else Colors.White)
                     .fontSize(16.px)
             )
         }
     }
 }
-//                H3(
-//                    Modifier
-//                        .margin(bottom = 12.px)
-//                        .fontSize(24.px)
-//                        .fontWeight(FontWeight.Bold)
-//                        .toAttrs()
-//                ) { Text(title) }
-//                P(
-//                    Modifier
-//                        .fontSize(16.px)
-//                        .lineHeight(1.6)
-//                        .color(if (colorMode.isLight) Colors.DarkGray else Colors.LightGray)
-//                        .toAttrs()
-//                ) { Text(description) }

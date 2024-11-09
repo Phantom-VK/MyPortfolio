@@ -13,6 +13,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.color
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
 import com.varabyte.kobweb.compose.ui.modifiers.gap
 import com.varabyte.kobweb.compose.ui.modifiers.padding
+import com.varabyte.kobweb.compose.ui.modifiers.width
 import com.varabyte.kobweb.core.Page
 import com.varabyte.kobweb.silk.components.navigation.Link
 import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
@@ -36,9 +37,8 @@ fun HomePage() {
     )
 
     Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        modifier = Modifier.width(100.percent),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         ProfileCard(colorMode, breakpoint)
         SkillSection(colorMode, breakpoint)
