@@ -61,7 +61,7 @@ fun ProjectCard(
                 modifier = Modifier
                     .margin(bottom = 1.em)
                     .lineHeight(1.5)
-                    .fontSize(2.cssRem),
+                    .fontSize(1.cssRem),
                 text = description
             )
             SpanText(

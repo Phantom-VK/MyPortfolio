@@ -11,6 +11,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.alignItems
 import com.varabyte.kobweb.compose.ui.modifiers.background
 import com.varabyte.kobweb.compose.ui.modifiers.color
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
+import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.gap
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.compose.ui.modifiers.width
@@ -37,7 +38,7 @@ fun HomePage() {
     )
 
     Column(
-        modifier = Modifier.width(100.percent),
+        modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         ProfileCard(colorMode, breakpoint)

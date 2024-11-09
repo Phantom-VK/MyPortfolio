@@ -75,19 +75,7 @@ fun LeftSide(
                     else Alignment.Start
                 )
         ) {}
-        SpanText(
-            modifier = Modifier
-                .fontFamily(Res.String.ROBOTO_REGULAR)
-                .fontSize(12.px)
-                .color(if (colorMode.isLight) Colors.Black else Colors.White)
-                .opacity(50.percent)
-                .margin(bottom = 36.px)
-                .textAlign(
-                    if (breakpoint <= Breakpoint.SM) TextAlign.Center
-                    else TextAlign.Start
-                ),
-            text = Res.String.ABOUT_ME
-        )
+        AnimatedText()
         Button(
             modifier = ButtonStyle.toModifier()
                 .margin(bottom = 50.px),

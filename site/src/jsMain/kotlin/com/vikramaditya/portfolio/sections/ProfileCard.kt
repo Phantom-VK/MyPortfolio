@@ -30,10 +30,7 @@ fun ProfileCard(colorMode: ColorMode,breakpoint: Breakpoint)  {
     SimpleGrid(
         numColumns = numColumns(base = 1, md = 2),
         modifier = Modifier
-            .fillMaxWidth(
-                if (breakpoint <= Breakpoint.MD) 100.percent
-                else Res.Dimens.MAX_CARD_WIDTH.px
-            )
+            .fillMaxWidth()
             .thenIf(
                 breakpoint > Breakpoint.MD,
                 other = Modifier.height(Res.Dimens.MAX_CARD_HEIGHT.px)
@@ -61,7 +58,7 @@ fun ProfileCard(colorMode: ColorMode,breakpoint: Breakpoint)  {
 fun RightSide(breakpoint: Breakpoint) {
     Box(
         modifier = Modifier
-            .fillMaxWidth()
+            .fillMaxSize()
             .thenIf(
                 condition = breakpoint > Breakpoint.MD,
                 other = Modifier.height((Res.Dimens.MAX_CARD_HEIGHT - 24).px)
@@ -70,7 +67,7 @@ fun RightSide(breakpoint: Breakpoint) {
         Image(
             modifier = Modifier
                 .fillMaxSize()
-                .objectFit(ObjectFit.Cover),
+                .objectFit(ObjectFit.Contain),
             src = Res.Image.PROFILE_PHOTO
         )
     }

@@ -27,7 +27,9 @@ import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.vikramaditya.portfolio.components.SkillCard
 import com.vikramaditya.portfolio.utils.Res
 import org.jetbrains.compose.web.css.AlignContent
+import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.px
+import org.jetbrains.compose.web.dom.H1
 import org.jetbrains.compose.web.dom.H2
 import org.jetbrains.compose.web.dom.Section
 import org.jetbrains.compose.web.dom.Text
@@ -41,14 +43,14 @@ fun SkillSection(colorMode: ColorMode, breakpoint: Breakpoint) {
             .alignContent(AlignContent.Center)
             .toAttrs()
     ) {
-        SpanText(
-            modifier = Modifier
-                .margin(bottom = 24.px)
-                .fontSize(36.px)
-                .fontWeight(FontWeight.Bold)
-                .textAlign(TextAlign.Center),
-            text = "Technical Skills"
-        )
+        H1{
+            SpanText(
+                modifier = Modifier
+                    .fontSize(2.cssRem)
+                    .fontWeight(FontWeight.Bold),
+                text = "Technical Skills"
+            )
+        }
 
         SimpleGrid(
             numColumns = numColumns(base = 1,sm = 2,  md = 3),

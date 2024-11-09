@@ -1,20 +1,26 @@
 package com.vikramaditya.portfolio.sections
 
 import androidx.compose.runtime.Composable
+import com.varabyte.kobweb.compose.css.FontWeight
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.alignContent
 import com.varabyte.kobweb.compose.ui.modifiers.backgroundColor
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
+import com.varabyte.kobweb.compose.ui.modifiers.fontSize
+import com.varabyte.kobweb.compose.ui.modifiers.fontWeight
 import com.varabyte.kobweb.compose.ui.modifiers.gap
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.silk.components.layout.SimpleGrid
 import com.varabyte.kobweb.silk.components.layout.numColumns
+import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.vikramaditya.portfolio.components.ProjectCard
 import org.jetbrains.compose.web.css.AlignContent
+import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.px
+import org.jetbrains.compose.web.dom.H1
 import org.jetbrains.compose.web.dom.Section
 
 
@@ -27,6 +33,14 @@ fun ProjectsSection(colorMode: ColorMode) {
             .alignContent(AlignContent.Center)
             .toAttrs()
     ) {
+        H1{
+            SpanText(
+                modifier = Modifier
+                    .fontSize(2.cssRem)
+                    .fontWeight(FontWeight.Bold),
+                text = "Projects"
+            )
+        }
         SimpleGrid(
             numColumns = numColumns(base = 1,sm = 2, md = 4),
             modifier = Modifier.fillMaxWidth().gap(24.px)
