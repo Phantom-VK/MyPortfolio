@@ -1,3 +1,4 @@
+import com.varabyte.kobweb.common.navigation.RoutePrefix
 import com.varabyte.kobweb.gradle.application.util.configAsKobwebApplication
 import kotlinx.html.link
 import kotlinx.html.script
@@ -19,38 +20,34 @@ kobweb {
             head.add {
                 link {
                     rel = "stylesheet"
-                    href = "/highlight/styles/dracula.css"
+                    href = RoutePrefix("/MyPortfolio").prependTo("/highlight/js/styles/dracula.css")
                 }
                 script {
-                    src = "/highlight/highlight.min.js"
+                    src = RoutePrefix("/MyPortfolio").prependTo("/highlight/js/highlight.min.js")
                 }
             }
         }
     }
 }
 
-
-
-    kotlin {
-        configAsKobwebApplication("portfolio")
-        js {
-            @OptIn(ExperimentalKotlinGradlePluginApi::class)
-            compilerOptions.target = "es2015"
-        }
-
-        sourceSets {
-            commonMain.dependencies {
-                implementation(libs.compose.runtime)
-            }
-
-            jsMain.dependencies {
-                implementation(libs.compose.html.core)
-                implementation(libs.kobweb.core)
-                implementation(libs.kobweb.silk)
-                implementation(libs.silk.icons.fa)
-                implementation(libs.kobwebx.markdown)
-
-            }
-        }
+kotlin {
+    configAsKobwebApplication("portfolio")
+    js {
+        @OptIn(ExperimentalKotlinGradlePluginApi::class)
+        compilerOptions.target = "es2015"
     }
 
+    sourceSets {
+        commonMain.dependencies {
+            implementation(libs.compose.runtime)
+        }
+
+        jsMain.dependencies {
+            implementation(libs.compose.html.core)
+            implementation(libs.kobweb.core)
+            implementation(libs.kobweb.silk)
+            implementation(libs.silk.icons.fa)
+            implementation(libs.kobwebx.markdown)
+        }
+    }
+}

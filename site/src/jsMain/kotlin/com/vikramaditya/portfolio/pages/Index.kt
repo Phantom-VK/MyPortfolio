@@ -13,11 +13,9 @@ import com.vikramaditya.portfolio.sections.ContactSection
 import com.vikramaditya.portfolio.sections.ProfileCard
 import com.vikramaditya.portfolio.sections.ProjectsSection
 import com.vikramaditya.portfolio.sections.SkillSection
+import kotlinx.browser.window
 
-//    LaunchedEffect(window.location.href) {
-//        // See kobweb config in build.gradle.kts which sets up highlight.js
-//        js("hljs.highlightAll()")
-//    }
+
 @Page
 @Composable
 fun HomePage() {
@@ -28,6 +26,11 @@ fun HomePage() {
         colorMode = colorMode,
         onClick = { colorMode = colorMode.opposite }
     )
+
+        LaunchedEffect(window.location.href) {
+        // See kobweb config in build.gradle.kts which sets up highlight.js
+        js("hljs.highlightAll()")
+    }
 
     Column(
         modifier = Modifier.fillMaxWidth(),

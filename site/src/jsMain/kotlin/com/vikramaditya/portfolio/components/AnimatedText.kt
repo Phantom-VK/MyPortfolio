@@ -51,10 +51,12 @@ fun AnimatedText() {
                     .background(ColorMode.DARK)
                     .borderRadius(topRight = 12.px, bottomRight = 12.px),
                 code = """
-                    vikramaditya@khupse:~$
+                    @Composable
+                    fun AboutMe(){
                     println(Motivated IT student with strong proficiency in Android development 
                     using Kotlin and Jetpack Compose, advanced
                     skills in Python and Java.)
+                    }
                 """.trimIndent(),
                 codeClass = "language-kotlin"
             )
@@ -91,7 +93,7 @@ fun KotlinCode(code: String, modifier: Modifier = Modifier,codeClass: String) {
                 }
             }
         }) {
-            Text(displayedCode)
+            Text(code)
         }
     }
 }
