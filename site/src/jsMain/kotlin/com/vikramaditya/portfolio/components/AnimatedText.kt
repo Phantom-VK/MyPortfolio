@@ -66,20 +66,22 @@ fun AnimatedText() {
 
 @Composable
 fun KotlinCode(code: String, modifier: Modifier = Modifier,codeClass: String) {
-    var displayedCode: String by remember { mutableStateOf("") }
-    var showCursor by remember { mutableStateOf(true) }
-
-    LaunchedEffect(code) {
-        displayedCode = ""
-        for (i in code.indices) {
-            displayedCode = displayedCode.dropLastWhile { it == '|' }
-            displayedCode += code[i]
-            displayedCode += if (showCursor) '|' else ""
-            showCursor = !showCursor
-            delay(50)
-        }
-        displayedCode = displayedCode.dropLastWhile { it == '|' }
-    }
+//    var displayedCode: String by remember { mutableStateOf("") }
+//    var showCursor by remember { mutableStateOf(true) }
+//    var doneAnimation by remember { mutableStateOf(false) }
+//
+//    LaunchedEffect(code) {
+//        displayedCode = ""
+//        for (char in code) {
+//            displayedCode = displayedCode.dropLastWhile { it == '|' }
+//            displayedCode += char
+//            displayedCode += if (showCursor) '|' else ""
+//            showCursor = !showCursor
+//            delay(50)
+//        }
+//        displayedCode = displayedCode.dropLastWhile { it == '|' }
+//        doneAnimation = true
+//    }
 
 
     Pre(attrs = modifier.toAttrs()) {
@@ -94,6 +96,7 @@ fun KotlinCode(code: String, modifier: Modifier = Modifier,codeClass: String) {
             }
         }) {
             Text(code)
+
         }
     }
 }
