@@ -4,22 +4,58 @@ package com.vikramaditya.portfolio.utils
 import com.varabyte.kobweb.compose.ui.graphics.Color
 
 object Res {
-    enum class Theme(val color: Color) {
-        BLUE(color = Color.rgb(r = 33, g = 150, b = 243)),
-        LIGHT_BLUE(color = Color.rgb(r = 168, g = 236, b = 255)),
-        DARK_BLUE(color = Color.rgb(r = 34, g = 63, b = 94)),
-        SOCIAL_ICON_BACKGROUND_LIGHT(color = Color.rgb(r = 230, g = 230, b = 230)),
-        SOCIAL_ICON_BACKGROUND_DARK(color = Color.rgb(r = 48, g = 82, b = 118)),
-        GRADIENT_ONE(color = Color.rgb(r = 161, g = 196, b = 253)),
-        GRADIENT_ONE_DARK(color = Color.rgb(r = 19, g = 38, b = 58)),
-        GRADIENT_TWO(color = Color.rgb(r = 194, g = 233, b = 251)),
-        GRADIENT_TWO_DARK(color = Color.rgb(r = 20, g = 46, b = 73)),
-        GoogleBlue(Color.rgb(66, 103, 210)),
-        GoogleRed(Color.rgb(234, 67, 53)),
-        GoogleYellow(Color.rgb(251, 188, 4)),
-        GoogleGreen(Color.rgb(52, 168, 83))
 
+
+    enum class Theme(val color: Color) {
+        // Backgrounds
+        DARK_THEME_BACKGROUND(Color.rgb(r = 18, g = 18, b = 18)),
+        LIGHT_THEME_BACKGROUND(Color.rgb(r = 245, g = 245, b = 245)),
+
+        // Cards/Containers
+        DARK_CARD_BACKGROUND(Color.rgb(r = 25, g = 25, b = 50)),
+        LIGHT_CARD_BACKGROUND(Color.rgb(r = 230, g = 240, b = 255)),
+
+        // Headings (Titles and Section Headers)
+        PRIMARY_HEADING_TEXT(Color.rgb(r = 33, g = 150, b = 243)),
+
+        // Body Text
+        BODY_TEXT_DARK(Color.rgb(r = 33, g = 33, b = 33)),
+        BODY_TEXT_LIGHT(Color.rgb(r = 210, g = 210, b = 210)),
+
+        // Skill Category Labels
+        SKILL_LABEL_GRADIENT_START(Color.rgb(r = 123, g = 31, b = 162)),
+        SKILL_LABEL_GRADIENT_END(Color.rgb(r = 0, g = 188, b = 212)),
+        SKILL_LABEL_GRADIENT_DARK_START(Color.rgb(r = 85, g = 26, b = 139)),
+        SKILL_LABEL_GRADIENT_DARK_END(Color.rgb(r = 0, g = 150, b = 136)),
+
+        // Buttons (e.g., Social Media Buttons)
+        PRIMARY_BUTTON(Color.rgb(r = 56, g = 142, b = 60)),
+        BUTTON_HOVER_LIGHT(Color.rgb(r = 0, g = 188, b = 212)),
+        BUTTON_HOVER_DARK(Color.rgb(r = 38, g = 198, b = 218)),
+
+        // Borders
+        CARD_BORDER_LIGHT(Color.rgb(r = 180, g = 180, b = 200)),
+        CARD_BORDER_DARK(Color.rgb(r = 50, g = 50, b = 100)),
+
+        // Icon Colors
+        SOCIAL_ICON_BACKGROUND_LIGHT(Color.rgb(r = 225, g = 235, b = 255)),
+        SOCIAL_ICON_BACKGROUND_DARK(Color.rgb(r = 50, g = 60, b = 100)),
+
+        // Project Titles and Links
+        PROJECT_TITLE_LIGHT(Color.rgb(r = 25, g = 118, b = 210)),
+        PROJECT_TITLE_DARK(Color.rgb(r = 33, g = 150, b = 243)),
+
+        // Existing colors (from initial code)
+        BLUE(Color.rgb(r = 33, g = 150, b = 243)),
+        LIGHT_BLUE(Color.rgb(r = 168, g = 236, b = 255)),
+        DARK_BLUE(Color.rgb(r = 34, g = 63, b = 94)),
+        GRADIENT_ONE(Color.rgb(r = 161, g = 196, b = 253)),
+        GRADIENT_ONE_DARK(Color.rgb(r = 19, g = 38, b = 58)),
+        GRADIENT_TWO(Color.rgb(r = 194, g = 233, b = 251)),
+        GRADIENT_TWO_DARK(Color.rgb(r = 20, g = 46, b = 73)),
+        GoogleBlue(Color.rgb(r = 66, g = 103, b = 210))
     }
+
 
     object Icon {
         const val EMAIL_LIGHT = "mail.svg"
@@ -51,7 +87,8 @@ object Res {
         const val ROBOTO_CONDENSED = "RobotoCondensedBold"
         const val ROBOTO_REGULAR = "RobotoRegular"
         const val MY_EMAIL = "mailto:vikramadityakhupse@gmail.com"
-        const val SAVED_THEME = "theme"
+        const val COLOR_MODE_KEY = "app:colorMode"
+
     }
 
     object Dimens {

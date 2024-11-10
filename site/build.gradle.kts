@@ -1,7 +1,6 @@
 import com.varabyte.kobweb.gradle.application.util.configAsKobwebApplication
 import kotlinx.html.link
 import kotlinx.html.script
-import kotlinx.html.unsafe
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 
 plugins {
@@ -20,15 +19,16 @@ kobweb {
             head.add {
                 link {
                     rel = "stylesheet"
-                    href = "/highlight.js/styles/dracula.css"
+                    href = "/highlight/styles/dracula.css"
                 }
                 script {
-                    src = "/highlight.js/highlight.min.js"
+                    src = "/highlight/highlight.min.js"
                 }
-
             }
         }
     }
+}
+
 
 
     kotlin {
@@ -53,4 +53,4 @@ kobweb {
             }
         }
     }
-}
+

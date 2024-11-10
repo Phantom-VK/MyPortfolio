@@ -7,8 +7,6 @@ import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
-import com.varabyte.kobweb.compose.ui.modifiers.border
-import com.varabyte.kobweb.compose.ui.modifiers.borderRadius
 import com.varabyte.kobweb.compose.ui.modifiers.color
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
@@ -24,7 +22,6 @@ import com.vikramaditya.portfolio.styles.GoogleCardStyle
 import com.vikramaditya.portfolio.utils.Res
 import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.em
-import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.dom.H1
 
 @Composable
@@ -51,7 +48,10 @@ fun ProjectCard(
                 H1 {
                     SpanText(
                         modifier = Modifier
-                            .color(Res.Theme.BLUE.color)
+                            .color(
+                                if(colorMode.isLight) Res.Theme.PROJECT_TITLE_LIGHT.color
+                                else Res.Theme.PROJECT_TITLE_DARK.color
+                            )
                             .textAlign(TextAlign.Center),
                         text = title
                     )

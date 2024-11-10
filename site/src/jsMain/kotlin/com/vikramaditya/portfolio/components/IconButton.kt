@@ -29,16 +29,20 @@ fun IconButton(
         Box(
             modifier = modifier
                 .padding(all = 8.px)
+                .background(
+                    color = if (colorMode.isLight) Res.Theme.SOCIAL_ICON_BACKGROUND_LIGHT.color
+                    else Res.Theme.SOCIAL_ICON_BACKGROUND_DARK.color
+                )
                 .borderRadius(r = BORDER_RADIUS.px)
                 .cursor(Cursor.Pointer)
                 .border(
                     width = 1.px,
                     style = LineStyle.Solid,
-                    color = if (colorMode.isLight) Res.Theme.SOCIAL_ICON_BACKGROUND_LIGHT.color
-                    else Res.Theme.SOCIAL_ICON_BACKGROUND_DARK.color
+                    color = if (colorMode.isLight) Res.Theme.CARD_BORDER_LIGHT.color
+                    else Res.Theme.CARD_BORDER_DARK.color
                 )
                 .onClick { onClick?.invoke() }
-        ){
+        ) {
             Image(
                 modifier = Modifier.size(iconSize),
                 src = icon
@@ -46,6 +50,7 @@ fun IconButton(
         }
     }
 }
+
 
 enum class SocialIcon(
     val icon: String,

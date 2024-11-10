@@ -35,30 +35,33 @@ import org.jetbrains.compose.web.dom.Text
 import kotlin.text.trimIndent
 
 @Composable
-fun AnimatedText(){
+fun AnimatedText() {
     Column(
-        modifier = Modifier.fillMaxWidth().background(ColorMode.DARK).borderRadius(12.px),
+        modifier = Modifier
+            .fillMaxWidth()
+            .borderRadius(12.px),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Row(modifier = Modifier.fillMaxWidth()){
-
+        Row(modifier = Modifier.fillMaxWidth()) {
             KotlinCode(
                 modifier = Modifier
-
                     .color(Colors.White)
                     .lineHeight(1.5.cssRem)
                     .padding(0.75.cssRem)
+                    .background(ColorMode.DARK)
                     .borderRadius(topRight = 12.px, bottomRight = 12.px),
-                code = """vikramaditya@khupse:~${'$'}
-println(Motivated IT student with strong proficiency in Android development using Kotlin and Jetpack Compose, advanced
-skills in Python and Java.)""".trimIndent(),
+                code = """
+                    vikramaditya@khupse:~$
+                    println(Motivated IT student with strong proficiency in Android development 
+                    using Kotlin and Jetpack Compose, advanced
+                    skills in Python and Java.)
+                """.trimIndent(),
                 codeClass = "language-kotlin"
             )
         }
-
-
     }
 }
+
 @Composable
 fun KotlinCode(code: String, modifier: Modifier = Modifier,codeClass: String) {
     var displayedCode: String by remember { mutableStateOf("") }
@@ -76,6 +79,7 @@ fun KotlinCode(code: String, modifier: Modifier = Modifier,codeClass: String) {
         displayedCode = displayedCode.dropLastWhile { it == '|' }
     }
 
+
     Pre(attrs = modifier.toAttrs()) {
         Code(attrs = {
             classes(codeClass).also {
@@ -84,8 +88,6 @@ fun KotlinCode(code: String, modifier: Modifier = Modifier,codeClass: String) {
                     background("transparent")
                     alignSelf(AlignSelf.Center)
                     alignContent(AlignContent.Center)
-                    property("white-space", "pre-wrap")
-                    property("word-break", "break-word")
                 }
             }
         }) {
@@ -94,7 +96,9 @@ fun KotlinCode(code: String, modifier: Modifier = Modifier,codeClass: String) {
     }
 }
 
-fun Modifier.background(colorMode: ColorMode) =
+
+
+private fun Modifier.background(colorMode: ColorMode) =
     this.then(when (colorMode) {
         ColorMode.DARK -> Modifier.backgroundImage(
             radialGradient(RadialGradient.Shape.Circle, Color.rgb(41, 41, 46), Color.rgb(25, 25, 28), CSSPosition.Top)

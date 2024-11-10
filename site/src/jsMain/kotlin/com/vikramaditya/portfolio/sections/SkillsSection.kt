@@ -39,6 +39,7 @@ fun SkillSection(colorMode: ColorMode, breakpoint: Breakpoint) {
     Section(
         Modifier
             .fillMaxWidth()
+            .background(if (colorMode.isLight) Res.Theme.LIGHT_THEME_BACKGROUND.color else Res.Theme.DARK_THEME_BACKGROUND.color)
             .padding(32.px)
             .alignContent(AlignContent.Center)
             .toAttrs()

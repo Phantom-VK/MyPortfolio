@@ -20,15 +20,14 @@ import org.jetbrains.compose.web.css.rgba
 
 val GoogleCardStyle = CssStyle {
 
-
     base {
         Modifier
-            .background(if (colorMode.isLight) Colors.White else Colors.Black)
+            .background(if (colorMode.isLight) Res.Theme.LIGHT_CARD_BACKGROUND.color else Res.Theme.DARK_CARD_BACKGROUND.color)
             .border {
-                if (colorMode.isLight){
-                    color(Res.Theme.GoogleBlue.color)}
-                else{
-                    color(Colors.White)
+                if (colorMode.isLight) {
+                    color(Res.Theme.GoogleBlue.color)
+                } else {
+                    color(Res.Theme.LIGHT_BLUE.color)
                 }
                 width(1.px)
                 style(LineStyle.Solid)
@@ -41,29 +40,29 @@ val GoogleCardStyle = CssStyle {
     hover {
         Modifier
             .border {
-                if (colorMode.isLight){
-                color(Res.Theme.GoogleBlue.color)}
-                else{
-                    color(Colors.White)
+                if (colorMode.isLight) {
+                    color(Res.Theme.GoogleBlue.color)
+                } else {
+                    color(Res.Theme.LIGHT_BLUE.color)
                 }
                 width(1.px)
                 style(LineStyle.Solid)
             }
             .borderRadius(12.px)
             .boxShadow(
-                if (colorMode.isLight)
+                if (colorMode.isLight) {
                     BoxShadow.of(
                         blurRadius = 20.px,
                         color = Res.Theme.GoogleBlue.color
                     )
-                else
+                } else {
                     BoxShadow.of(
                         blurRadius = 20.px,
-                        color = Colors.White
+                        color = Res.Theme.PRIMARY_BUTTON.color
                     )
-
-
+                }
             )
             .transform { scale(1.02) }
     }
 }
+
