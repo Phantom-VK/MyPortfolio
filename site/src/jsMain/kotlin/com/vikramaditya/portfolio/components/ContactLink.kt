@@ -23,8 +23,8 @@ fun ContactLink(
         modifier = ContactLinkButtonStyle.toModifier()
             .padding(8.px)
             .color(
-                if (colorMode.isLight) Res.Theme.SKILL_LABEL_GRADIENT_END.color
-                else Res.Theme.SKILL_LABEL_GRADIENT_DARK_END.color
+                if (colorMode.isLight) Res.Theme.LIGHT_THEME_BACKGROUND.color
+                else Res.Theme.DARK_THEME_BACKGROUND.color
             )
     ) {
         Text(text)

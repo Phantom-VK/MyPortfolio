@@ -39,7 +39,6 @@ fun HomePage() {
         ProfileCard(colorMode, breakpoint)
         SkillSection(colorMode, breakpoint)
         ProjectsSection(colorMode)
-        ContactSection(colorMode)
     }
 }
 
