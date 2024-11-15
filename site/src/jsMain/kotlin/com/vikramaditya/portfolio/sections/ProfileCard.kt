@@ -33,7 +33,7 @@ fun ProfileCard(colorMode: ColorMode, breakpoint: Breakpoint) {
                 breakpoint > Breakpoint.MD,
                 other = Modifier.height(Res.Dimens.MAX_CARD_HEIGHT.px)
             )
-            .padding(all = 12.px)
+            .padding(all = 7.px)
             .backgroundColor(if (colorMode.isLight) Res.Theme.LIGHT_THEME_BACKGROUND.color else Res.Theme.DARK_THEME_BACKGROUND.color)
             .gap(24.px),
         horizontalArrangement = if (breakpoint > Breakpoint.MD)

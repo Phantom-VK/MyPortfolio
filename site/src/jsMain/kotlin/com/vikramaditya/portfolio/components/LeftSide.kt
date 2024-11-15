@@ -27,32 +27,15 @@ fun LeftSide(colorMode: ColorMode, breakpoint: Breakpoint) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(all = 40.px),
+            .gap(20.px)
+            .padding(all = 20.px),
         verticalArrangement = Arrangement.SpaceBetween,
         horizontalAlignment = if (breakpoint <= Breakpoint.SM)
             Alignment.CenterHorizontally else Alignment.Start
     ) {
         ProfileHeader(colorMode, breakpoint)
 
-        AnimatedText(code = """def profile_page():
-
-    def about_me():
-        print("Hello there!! I am Vikramaditya Khupse")
-        print("Ambitious Student | Programmer | Tech Enthusiast")
-
-    on_a_journey = True
-    while on_a_journey:
-        return  "to lead, learn, inspire, and drive meaningful change in tech"
-
-    with strong_skills in ("Python", "Java", "Kotlin - Jetpack Compose")
-
-    for to_dive in new_technologies:
-        with full dedication
-        if especially:
-            if it spark my curiosity:
-                print("Embracing every challenge as an opportunity to grow and innovate.")
- """,
-            codeClass = "language-python")
+        AnimatedText(colorMode = colorMode)
 
         SocialLinks(colorMode, breakpoint)
     }

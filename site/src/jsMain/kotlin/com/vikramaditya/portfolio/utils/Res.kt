@@ -10,6 +10,7 @@ object Res {
         // Backgrounds
         DARK_THEME_BACKGROUND(Color.rgb(r = 18, g = 18, b = 18)),
         LIGHT_THEME_BACKGROUND(Color.rgb(r = 245, g = 245, b = 245)),
+        GREY_BACKGROUND(Color.rgb(r = 40, g = 44, b = 52)),
 
         // Cards/Containers
         DARK_CARD_BACKGROUND(Color.rgb(r = 25, g = 25, b = 50)),
@@ -49,11 +50,8 @@ object Res {
         BLUE(Color.rgb(r = 33, g = 150, b = 243)),
         LIGHT_BLUE(Color.rgb(r = 168, g = 236, b = 255)),
         DARK_BLUE(Color.rgb(r = 34, g = 63, b = 94)),
-        GRADIENT_ONE(Color.rgb(r = 161, g = 196, b = 253)),
-        GRADIENT_ONE_DARK(Color.rgb(r = 19, g = 38, b = 58)),
-        GRADIENT_TWO(Color.rgb(r = 194, g = 233, b = 251)),
-        GRADIENT_TWO_DARK(Color.rgb(r = 20, g = 46, b = 73)),
-        GoogleBlue(Color.rgb(r = 66, g = 103, b = 210))
+        GoogleBlue(Color.rgb(r = 66, g = 103, b = 210)),
+        JavaOrange(Color.rgb(r =255,g = 165 ,b = 0))
     }
 
 
@@ -77,18 +75,90 @@ object Res {
     object String {
         const val NAME = "Vikramaditya Khupse"
         const val PROFESSION = "Third Year Information Technology Student"
-        const val ABOUT_ME =
-            "Motivated IT student with strong proficiency in Android development using Kotlin and Jetpack Compose, advanced\n" +
-                    "skills in Python and Java. Distinguished by exceptional problem-solving abilities and rapid technology adaptation.\n" +
-                    "Experienced in building Android apps and Python projects, with multiple certifications and HackerRank\n" +
-                    "achievements. Demonstrates leadership through roles in Google Developer Group and SWAG Developer’s Club,\n" +
-                    "SGGSIE&T."
-        const val BUTTON_TEXT = "Get in touch"
         const val ROBOTO_CONDENSED = "RobotoCondensedBold"
         const val ROBOTO_REGULAR = "RobotoRegular"
         const val MY_EMAIL = "mailto:vikramadityakhupse@gmail.com"
-        const val COLOR_MODE_KEY = "app:colorMode"
+        const val PYTHON_CODE = """def profile_page():
 
+    def about_me():
+        print("Hello there!! I am Vikramaditya Khupse")
+        print("Ambitious Student | Programmer | Tech Enthusiast")
+
+    on_a_journey = True
+    while on_a_journey:
+        return  "to lead, learn, inspire, and drive meaningful change in tech"
+
+    with strong_skills in ("Python", "Java", "Kotlin - Jetpack Compose")
+
+    for to_dive in new_technologies:
+        with full dedication
+        if especially:
+            if it spark my curiosity:
+                print("Embracing every challenge as an opportunity to grow and innovate.")
+ """
+        const val JAVA_CODE = """public class ProfilePage {
+
+    public static void aboutMe() {
+        System.out.println("Hello there!! I am Vikramaditya Khupse");
+        System.out.println("Ambitious Student | Programmer | Tech Enthusiast");
+    }
+
+    public static String journey() {
+        boolean onAJourney = true;
+        while (onAJourney) {
+            return "to lead, learn, inspire, and drive meaningful change in tech";
+        }
+        return ""; // Unreachable, but required for compilation
+    }
+
+    public static void diveIntoTechnologies() {
+        String[] strongSkills = {"Python", "Java", "Kotlin - Jetpack Compose"};
+
+        for (String technology : strongSkills) {
+            boolean especially = technology.contains("spark curiosity");
+            if (especially) {
+                System.out.println("Embracing every challenge as an opportunity to grow and innovate.");
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        aboutMe();
+        System.out.println(journey());
+        diveIntoTechnologies();
+    }
+}
+"""
+        const val KOBWEB_CODE = """
+fun profilePage() {
+    fun aboutMe() {
+        println("Hello there!! I am Vikramaditya Khupse")
+        println("Ambitious Student | Programmer | Tech Enthusiast")
+    }
+
+    var onAJourney = true
+    while (onAJourney) {
+        return "to lead, learn, inspire, and drive meaningful change in tech"
+    }
+
+    val strongSkills = listOf("Python", "Java", "Kotlin - Jetpack Compose")
+
+    for (toDive in newTechnologies) {
+        with(fullDedication) {
+            if (especially) {
+                if (it.sparksCuriosity()) {
+                    println("Embracing every challenge as an opportunity to grow and innovate.")
+                }
+            }
+        }
+    }
+}"""
+
+
+    }
+
+    object Selected{
+        var LANGUAGE = "language-python"
     }
 
     object Dimens {
