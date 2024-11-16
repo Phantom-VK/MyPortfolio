@@ -13,6 +13,8 @@ import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.silk.components.forms.Button
 import com.varabyte.kobweb.silk.components.text.SpanText
+import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
+import com.varabyte.kobweb.silk.style.breakpoint.displayIfAtLeast
 import com.varabyte.kobweb.silk.style.toModifier
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.vikramaditya.portfolio.styles.LanguageButtonStyle
@@ -25,11 +27,17 @@ import org.jetbrains.compose.web.dom.Pre
 import org.jetbrains.compose.web.dom.Text
 
 @Composable
-fun AnimatedText(colorMode: ColorMode) {
+fun CodeBox(colorMode: ColorMode) {
     var selectedLang = remember { mutableStateOf(Res.Selected.LANGUAGE) }
+
+    fun updateSelectedLanguage(newLanguage: String) {
+        selectedLang.value = newLanguage
+        Res.Selected.LANGUAGE = newLanguage
+    }
 
     Column(
         modifier = Modifier
+            .displayIfAtLeast(Breakpoint.MD)
             .fillMaxWidth()
             .background(Res.Theme.GREY_BACKGROUND.color)
             .borderRadius(topLeft = 0.px, topRightAndBottomLeft = 12.px, bottomRight = 12.px),
@@ -45,49 +53,25 @@ fun AnimatedText(colorMode: ColorMode) {
             horizontalArrangement = Arrangement.Start
         ) {
             LanguageButton(
-                language = "Python",
-                onClick = {
-                    Res.Selected.LANGUAGE = "language-python"
-                }
-            )
+                language = "Python"
+            ) {
+                updateSelectedLanguage("language-python")
+            }
+
             LanguageButton(
                 language = "Java"
             ) {
-                Res.Selected.LANGUAGE = "language-java"
+                updateSelectedLanguage("language-java")
             }
+
             LanguageButton(
                 language = "Kotlin"
             ) {
-                Res.Selected.LANGUAGE = "language-kotlin"
+                updateSelectedLanguage("language-kotlin")
             }
         }
 
-        Pre(
-            attrs = Modifier
-                .fillMaxWidth()
-                .height(300.px)
-                .background(Res.Theme.GREY_BACKGROUND.color)
-                .overflow(Overflow.Auto)
-                .toAttrs()
-        ) {
-            Code(attrs = {
-                classes(Res.Selected.LANGUAGE).also {
-                    style {
-                        fontFamily("Menlo", "monospace")
-                        background("transparent")
-                    }
-                }
-            }) {
-                Text(
-                    when (selectedLang.value) {
-                        "language-python" -> Res.String.PYTHON_CODE
-                        "language-java" -> Res.String.JAVA_CODE
-                        "language-kotlin" -> Res.String.KOBWEB_CODE
-                        else -> Res.String.PYTHON_CODE
-                    }
-                )
-            }
-        }
+        CodeBlock(selectedLang.value)
     }
 }
 
@@ -104,5 +88,40 @@ fun LanguageButton(language: String, onClick: () -> Unit) {
             text = language,
             modifier = Modifier.color(Colors.White)
         )
+    }
+}
+
+@Composable
+fun CodeBlock(codeClass:String) {
+    Pre(
+        attrs = Modifier
+            .fillMaxWidth()
+            .height(300.px)
+            .background(Res.Theme.GREY_BACKGROUND.color)
+            .overflow(Overflow.Auto)
+            .toAttrs()
+    ) {
+
+        Code(attrs = {
+            classes(codeClass).also {
+                style {
+                    fontFamily("Menlo", "monospace")
+                    background("transparent")
+                }
+            }
+        }) {
+
+
+
+            Text(
+                when (codeClass) {
+
+                    "language-python" -> Res.String.PYTHON_CODE
+                    "language-java" -> Res.String.JAVA_CODE
+                    "language-kotlin" -> Res.String.KOBWEB_CODE
+                    else -> Res.String.PYTHON_CODE
+                }
+            )
+        }
     }
 }

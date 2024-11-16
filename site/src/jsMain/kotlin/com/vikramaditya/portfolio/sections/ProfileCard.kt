@@ -7,9 +7,7 @@ import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
-import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.backgroundColor
-import com.varabyte.kobweb.compose.ui.modifiers.borderRadius
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.gap
@@ -19,6 +17,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.compose.ui.thenIf
 import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
+import com.varabyte.kobweb.silk.style.breakpoint.displayIfAtLeast
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.vikramaditya.portfolio.components.LeftSide
 import com.vikramaditya.portfolio.utils.Res
@@ -42,20 +41,16 @@ fun ProfileCard(colorMode: ColorMode, breakpoint: Breakpoint) {
     ) {
         LeftSide(colorMode = colorMode, breakpoint = breakpoint)
 
-        if (breakpoint > Breakpoint.SM) {
-            RightSide(breakpoint = breakpoint)
-        }
+        RightSide(breakpoint = breakpoint)
     }
 }
-
-
-
 
 
 @Composable
 private fun RightSide(breakpoint: Breakpoint) {
     Box(
         modifier = Modifier
+            .displayIfAtLeast(Breakpoint.XL)
             .fillMaxSize()
             .thenIf(
                 condition = breakpoint > Breakpoint.MD,

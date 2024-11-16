@@ -23,11 +23,8 @@ object Res {
         BODY_TEXT_DARK(Color.rgb(r = 33, g = 33, b = 33)),
         BODY_TEXT_LIGHT(Color.rgb(r = 210, g = 210, b = 210)),
 
-        // Skill Category Labels
-        SKILL_LABEL_GRADIENT_START(Color.rgb(r = 123, g = 31, b = 162)),
-        SKILL_LABEL_GRADIENT_END(Color.rgb(r = 0, g = 188, b = 212)),
-        SKILL_LABEL_GRADIENT_DARK_START(Color.rgb(r = 85, g = 26, b = 139)),
-        SKILL_LABEL_GRADIENT_DARK_END(Color.rgb(r = 0, g = 150, b = 136)),
+        GLASS_BOX_BORDER_COLOR_LIGHT(Color.rgb(0xE9E9E9)),
+        GLASS_BOX_BORDER_COLOR_DARK(Color.rgb(0x4E4E4E)),
 
         // Buttons (e.g., Social Media Buttons)
         PRIMARY_BUTTON(Color.rgb(r = 56, g = 142, b = 60)),
@@ -56,20 +53,34 @@ object Res {
 
 
     object Icon {
-        const val EMAIL_LIGHT = "mail.svg"
+        const val EMAIL_LIGHT = "images/icons/mail.svg"
         const val EMAIL_DARK = "mail_light.svg"
-        const val GITHUB = "github.svg"
-        const val GITHUB_LIGHT = "github_light.svg"
-        const val INSTAGRAM = "instagram.svg"
-        const val INSTAGRAM_LIGHT = "instagram_light.svg"
-        const val LINKEDIN = "linkedin.svg"
-        const val LINKEDIN_LIGHT = "linkedin_light.svg"
-        const val SUN = "sun.svg"
-        const val MOON = "moon.svg"
+        const val PORTAL_STAR = "images/tools/portal_star.svg"
+        const val GITHUB = "images/icons/github.svg"
+        const val GITHUB_LIGHT = "images/icons/github_light.svg"
+        const val INSTAGRAM = "images/icons/instagram.svg"
+        const val INSTAGRAM_LIGHT = "images/icons/instagram_light.svg"
+        const val LINKEDIN = "images/icons/linkedin.svg"
+        const val LINKEDIN_LIGHT = "images/icons/linkedin_light.svg"
+        const val SUN = "images/icons/sun.svg"
+        const val MOON = "images/icons/moon.svg"
     }
 
     object Image {
         const val PROFILE_PHOTO = "mypfp.jpeg"
+
+    }
+    object Logo{
+        const val ANDROID_LOGO = "images/tools/Android.svg"
+        const val FIGMA_LOGO = "images/tools/Figma.svg"
+        const val FIREBASE_LOGO = "images/tools/Firebase.svg"
+        const val GIT_LOGO = "images/tools/Git.svg"
+        const val INTELLIJ_LOGO = "images/tools/IntelliJ.svg"
+        const val VSCODE_LOGO = "images/tools/VSCode.svg"
+        const val JAVA_LOGO = "images/skills/Java.svg"
+        const val KOTLIN_LOGO = "images/skills/Kotlin.svg"
+        const val PYTHON_LOGO = "images/skills/python.svg"
+        const val MYSQL_LOGO = "images/skills/mysql.svg"
     }
 
     object String {
@@ -78,6 +89,7 @@ object Res {
         const val ROBOTO_CONDENSED = "RobotoCondensedBold"
         const val ROBOTO_REGULAR = "RobotoRegular"
         const val MY_EMAIL = "mailto:vikramadityakhupse@gmail.com"
+        const val SKILLS_TITLE = "Skills & Tools"
         const val PYTHON_CODE = """def profile_page():
 
     def about_me():

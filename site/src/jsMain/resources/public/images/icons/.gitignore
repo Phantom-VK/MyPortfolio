@@ -1,0 +1,4 @@
+# Kobweb ignores
+../../../../../../../.kobweb/site
+!../../../../../../.kobweb/conf.yaml
+!.kobweb/site

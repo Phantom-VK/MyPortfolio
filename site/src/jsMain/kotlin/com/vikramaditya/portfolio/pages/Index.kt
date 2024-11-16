@@ -11,7 +11,7 @@ import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.vikramaditya.portfolio.components.ThemeSwitchButton
 import com.vikramaditya.portfolio.sections.ProfileCard
 import com.vikramaditya.portfolio.sections.ProjectsSection
-import com.vikramaditya.portfolio.sections.SkillSection
+import com.vikramaditya.portfolio.sections.SkillsAndTools
 import kotlinx.browser.window
 
 
@@ -28,7 +28,6 @@ fun HomePage() {
 
         LaunchedEffect(window.location.href) {
         // See kobweb config in build.gradle.kts which sets up highlight.js
-            js("hljs.initHighlightingOnLoad()")
         js("hljs.highlightAll()")
 
     }
@@ -38,7 +37,7 @@ fun HomePage() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         ProfileCard(colorMode, breakpoint)
-        SkillSection(colorMode, breakpoint)
+        SkillsAndTools()
         ProjectsSection(colorMode)
     }
 }

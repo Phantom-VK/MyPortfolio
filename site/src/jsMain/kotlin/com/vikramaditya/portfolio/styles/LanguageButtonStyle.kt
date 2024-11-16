@@ -22,12 +22,11 @@ val LanguageButtonStyle = CssStyle {
     }
     hover {
         Modifier
-            .scaleY(1.2)
+            .scaleY(1.1)
             .boxShadow(
                 BoxShadow.of(
                     offsetX = 0.px,
-                    offsetY = (-10).px,
-                    blurRadius = 20.px,
+                    offsetY = (-2).px,
                     color = when(Res.Selected.LANGUAGE){
                         "language-python" -> Res.Theme.PRIMARY_BUTTON.color
                         "language-java" -> Res.Theme.JavaOrange.color

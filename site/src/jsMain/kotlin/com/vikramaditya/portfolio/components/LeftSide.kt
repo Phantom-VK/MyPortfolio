@@ -35,7 +35,7 @@ fun LeftSide(colorMode: ColorMode, breakpoint: Breakpoint) {
     ) {
         ProfileHeader(colorMode, breakpoint)
 
-        AnimatedText(colorMode = colorMode)
+        CodeBox(colorMode = colorMode)
 
         SocialLinks(colorMode, breakpoint)
     }
