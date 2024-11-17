@@ -36,7 +36,7 @@ fun SkillsAndTools() {
         SectionTitle(Res.String.SKILLS_TITLE)
 
         SimpleGrid(
-            modifier = Modifier.fillMaxWidth().margin(top = 2.cssRem),
+            modifier = Modifier.fillMaxWidth().margin(top = 0.5.cssRem),
             numColumns = numColumns(base = 1, sm = 2)
         ) {
             GlassBox(

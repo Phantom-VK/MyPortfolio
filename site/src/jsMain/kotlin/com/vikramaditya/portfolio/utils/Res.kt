@@ -90,6 +90,7 @@ object Res {
         const val ROBOTO_REGULAR = "RobotoRegular"
         const val MY_EMAIL = "mailto:vikramadityakhupse@gmail.com"
         const val SKILLS_TITLE = "Skills & Tools"
+        const val PROJECTS_TITLE = "Projects"
         const val PYTHON_CODE = """def profile_page():
 
     def about_me():
