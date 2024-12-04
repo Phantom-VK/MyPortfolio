@@ -3,17 +3,22 @@ package com.vikramaditya.portfolio.styles
 import com.varabyte.kobweb.compose.css.BoxShadow
 import com.varabyte.kobweb.compose.css.Transition
 import com.varabyte.kobweb.compose.ui.Modifier
-import com.varabyte.kobweb.compose.ui.modifiers.*
+import com.varabyte.kobweb.compose.ui.modifiers.background
+import com.varabyte.kobweb.compose.ui.modifiers.border
+import com.varabyte.kobweb.compose.ui.modifiers.borderRadius
+import com.varabyte.kobweb.compose.ui.modifiers.boxShadow
+import com.varabyte.kobweb.compose.ui.modifiers.transform
+import com.varabyte.kobweb.compose.ui.modifiers.transition
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.selectors.hover
 import com.vikramaditya.portfolio.utils.Res
+import org.jetbrains.compose.web.css.AnimationTimingFunction
 import org.jetbrains.compose.web.css.LineStyle
 import org.jetbrains.compose.web.css.ms
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.css.rgba
 
-val GoogleCardStyle = CssStyle {
-
+val CircularMovingShadowStyle = CssStyle{
     base {
         Modifier
             .background(if (colorMode.isLight) Res.Theme.LIGHT_CARD_BACKGROUND.color else Res.Theme.DARK_CARD_BACKGROUND.color)
@@ -46,17 +51,21 @@ val GoogleCardStyle = CssStyle {
             .boxShadow(
                 if (colorMode.isLight) {
                     BoxShadow.of(
+                        offsetX = 10.px, // Move further right
+                        offsetY = 10.px, // Move further down
                         blurRadius = 20.px,
                         color = Res.Theme.GoogleBlue.color
                     )
                 } else {
                     BoxShadow.of(
+                        offsetX = (-10).px, // Shift left
+                        offsetY = 10.px,
                         blurRadius = 20.px,
                         color = Res.Theme.PRIMARY_BUTTON.color
                     )
                 }
             )
-            .transform { scale(1.02) }
+            .transform { scale(1.05) } // Slight scale effect
     }
-}
 
+}

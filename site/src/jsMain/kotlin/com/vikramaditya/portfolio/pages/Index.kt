@@ -8,6 +8,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.core.Page
 import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
+import com.vikramaditya.portfolio.components.AnimatedHoverBox
 import com.vikramaditya.portfolio.components.ThemeSwitchButton
 import com.vikramaditya.portfolio.sections.ProfileCard
 import com.vikramaditya.portfolio.sections.ProjectsSection
@@ -39,6 +40,7 @@ fun HomePage() {
         ProfileCard(colorMode, breakpoint)
         SkillsAndTools()
         ProjectsSection(colorMode)
+        AnimatedHoverBox(colorMode)
     }
 }
 

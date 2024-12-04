@@ -25,8 +25,6 @@ val LanguageButtonStyle = CssStyle {
             .scaleY(1.1)
             .boxShadow(
                 BoxShadow.of(
-                    offsetX = 0.px,
-                    offsetY = (-2).px,
                     color = when(Res.Selected.LANGUAGE){
                         "language-python" -> Res.Theme.PRIMARY_BUTTON.color
                         "language-java" -> Res.Theme.JavaOrange.color
@@ -40,7 +38,5 @@ val LanguageButtonStyle = CssStyle {
 
 
             )
-
-
     }
 }
