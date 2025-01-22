@@ -8,7 +8,11 @@ import com.varabyte.kobweb.silk.components.layout.Surface
 import com.varabyte.kobweb.silk.style.common.SmoothColorStyle
 import com.varabyte.kobweb.silk.style.toModifier
 import com.vikramaditya.portfolio.utils.Res
+import kotlinx.coroutines.delay
 import org.jetbrains.compose.web.css.*
+import kotlin.math.PI
+import kotlin.math.cos
+import kotlin.math.sin
 
 
 @App
@@ -23,3 +27,5 @@ fun AppEntry(content: @Composable () -> Unit) {
         }
     }
 }
+
+

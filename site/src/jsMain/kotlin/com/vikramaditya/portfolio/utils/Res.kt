@@ -2,6 +2,7 @@ package com.vikramaditya.portfolio.utils
 
 
 import com.varabyte.kobweb.compose.ui.graphics.Color
+import org.jetbrains.compose.web.css.px
 
 object Res {
 
@@ -50,6 +51,8 @@ object Res {
         GoogleBlue(Color.rgb(r = 66, g = 103, b = 210)),
         JavaOrange(Color.rgb(r =255,g = 165 ,b = 0))
     }
+
+
 
 
     object Icon {
@@ -181,4 +184,7 @@ fun profilePage() {
         const val ICON_SIZE = 24
         const val ICON_SIZE_LG = 32
     }
+
+
 }
+
