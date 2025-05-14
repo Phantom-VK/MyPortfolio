@@ -14,6 +14,7 @@ import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.vikramaditya.portfolio.components.ThemeSwitchButton
 import com.vikramaditya.portfolio.layouts.PageLayout
+import com.vikramaditya.portfolio.sections.AboutMe
 import com.vikramaditya.portfolio.sections.Header
 import com.vikramaditya.portfolio.sections.ProfileCard
 import com.vikramaditya.portfolio.sections.SocialLinks
@@ -41,6 +42,7 @@ fun HomePage() {
     ) {
         Header(colorMode, breakpoint)
         ProfileCard(colorMode, breakpoint)
+        AboutMe()
 
 //
 //        SkillsAndTools()

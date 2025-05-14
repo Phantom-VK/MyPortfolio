@@ -25,6 +25,7 @@ import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.vikramaditya.portfolio.utils.Res
 import org.jetbrains.compose.web.css.Position
 import org.jetbrains.compose.web.css.cssRem
+import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.css.rgba
 
@@ -52,11 +53,9 @@ fun Header(colorMode: ColorMode, breakpoint: Breakpoint){
         Res.Theme.LIGHT_THEME_BACKGROUND.color to Res.Theme.DARK_THEME_BACKGROUND.color
     }
 
-    Spacer()
-
     Row(
         modifier = Modifier.fillMaxWidth()
-            .padding(leftRight = 30.px)
+            .padding(leftRight = 5.percent, topBottom = 2.percent)
             .backdropFilter(blur(4.px))
             .position(Position.Fixed).top(0.px),
         verticalAlignment = Alignment.CenterVertically
@@ -65,9 +64,8 @@ fun Header(colorMode: ColorMode, breakpoint: Breakpoint){
 
 
         SpanText(
-            text = Res.String.NAME,
+            text = "Hi, I am ${Res.String.NAME}",
             modifier = Modifier
-                .margin(bottom = 12.px)
                 .fontFamily("DM Sans")
                 .color(textColor)
                 .fontSize(FontSize.XXLarge)

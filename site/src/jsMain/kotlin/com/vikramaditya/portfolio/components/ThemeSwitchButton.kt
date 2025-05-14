@@ -41,13 +41,13 @@ fun ThemeSwitchButton(
     ) {
         IconButton(
             modifier = Modifier
-                .margin(all = if (breakpoint > Breakpoint.SM) 24.px else 16.px)
+                .margin(all = if (breakpoint > Breakpoint.SM) 20.px else 16.px)
                 .styleModifier {
                     property("pointer-events", "auto")
                 },
             colorMode = colorMode,
             icon = if (colorMode.isLight) Res.Icon.SUN else Res.Icon.MOON,
-            iconSize = if (breakpoint > Breakpoint.SM) ICON_SIZE_LG.px else ICON_SIZE.px,
+            iconSize = ICON_SIZE.px,
             onClick = onClick
         )
     }
