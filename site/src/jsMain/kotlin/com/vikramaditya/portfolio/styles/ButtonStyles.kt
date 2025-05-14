@@ -2,8 +2,8 @@ package com.vikramaditya.portfolio.styles
 
 
 import com.varabyte.kobweb.compose.css.Transition
-import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.css.margin
+import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.background
 import com.varabyte.kobweb.compose.ui.modifiers.display
 import com.varabyte.kobweb.compose.ui.modifiers.transform
@@ -39,3 +39,5 @@ val ContactLinkButtonStyle = CssStyle {
             }
     }
 }
+
+

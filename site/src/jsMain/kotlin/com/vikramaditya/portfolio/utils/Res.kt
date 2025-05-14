@@ -8,9 +8,10 @@ object Res {
 
 
     enum class Theme(val color: Color) {
+
         // Backgrounds
-        DARK_THEME_BACKGROUND(Color.rgb(r = 18, g = 18, b = 18)),
-        LIGHT_THEME_BACKGROUND(Color.rgb(r = 245, g = 245, b = 245)),
+        DARK_THEME_BACKGROUND(Color.rgb(r = 23, g = 23, b = 23)),
+        LIGHT_THEME_BACKGROUND(Color.rgb(r = 220, g = 220, b = 220)),
         GREY_BACKGROUND(Color.rgb(r = 40, g = 44, b = 52)),
 
         // Cards/Containers
@@ -28,7 +29,7 @@ object Res {
         GLASS_BOX_BORDER_COLOR_DARK(Color.rgb(0x4E4E4E)),
 
         // Buttons (e.g., Social Media Buttons)
-        PRIMARY_BUTTON(Color.rgb(r = 56, g = 142, b = 60)),
+        PRIMARY_BUTTON(Color.rgb(r = 39, g = 174, b = 96)),
         BUTTON_HOVER_LIGHT(Color.rgb(r = 0, g = 188, b = 212)),
         BUTTON_HOVER_DARK(Color.rgb(r = 38, g = 198, b = 218)),
 
@@ -59,6 +60,7 @@ object Res {
         const val EMAIL_LIGHT = "images/icons/mail.svg"
         const val EMAIL_DARK = "mail_light.svg"
         const val PORTAL_STAR = "images/tools/portal_star.svg"
+        const val PORTAL_STAR_DARK = "images/tools/portal_star_dark.svg"
         const val GITHUB = "images/icons/github.svg"
         const val GITHUB_LIGHT = "images/icons/github_light.svg"
         const val INSTAGRAM = "images/icons/instagram.svg"
@@ -70,7 +72,11 @@ object Res {
     }
 
     object Image {
-        const val PROFILE_PHOTO = "mypfp.jpeg"
+        const val PROFILE_PHOTO = "mypfp2.jpg"
+        const val NAVIGATION_ARROW = "images/Navigation_Arrow.svg"
+        const val CUSTOM_CURSOR_DARK = "images/Custom_Cursor_Dark.svg"
+        const val CUSTOM_CURSOR_LIGHT = "images/Custom_Cursor_Light.svg"
+        const val PAGE_BACKGROUND = "images/page_background.jpg"
 
     }
     object Logo{
@@ -87,7 +93,8 @@ object Res {
     }
 
     object String {
-        const val NAME = "Vikramaditya Khupse"
+        const val NAME = "Vikramaditya"
+        const val FULL_NAME = "Vikramaditya Khupse"
         const val PROFESSION = "Third Year Information Technology Student"
         const val ROBOTO_CONDENSED = "RobotoCondensedBold"
         const val ROBOTO_REGULAR = "RobotoRegular"
@@ -124,7 +131,7 @@ object Res {
         while (onAJourney) {
             return "to lead, learn, inspire, and drive meaningful change in tech";
         }
-        return ""; // Unreachable, but required for compilation
+        return ""; 
     }
 
     public static void diveIntoTechnologies() {

@@ -40,7 +40,7 @@ fun ThemeSwitchButton(
         horizontalAlignment = Alignment.End
     ) {
         IconButton(
-            modifier = ThemeIconStyle.toModifier()
+            modifier = Modifier
                 .margin(all = if (breakpoint > Breakpoint.SM) 24.px else 16.px)
                 .styleModifier {
                     property("pointer-events", "auto")

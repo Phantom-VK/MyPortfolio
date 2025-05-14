@@ -33,7 +33,6 @@ fun LeftSide(colorMode: ColorMode, breakpoint: Breakpoint) {
         horizontalAlignment = if (breakpoint <= Breakpoint.SM)
             Alignment.CenterHorizontally else Alignment.Start
     ) {
-        ProfileHeader(colorMode, breakpoint)
 
         CodeBox(colorMode = colorMode)
 

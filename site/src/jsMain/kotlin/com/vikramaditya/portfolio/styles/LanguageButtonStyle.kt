@@ -15,14 +15,12 @@ import org.jetbrains.compose.web.css.px
 val LanguageButtonStyle = CssStyle {
     base {
         Modifier
-            .scaleY(1)
             .transition(
                 Transition.of(property = "scaleY", duration = 300.ms),
             )
     }
     hover {
         Modifier
-            .scaleY(1.1)
             .boxShadow(
                 BoxShadow.of(
                     color = when(Res.Selected.LANGUAGE){

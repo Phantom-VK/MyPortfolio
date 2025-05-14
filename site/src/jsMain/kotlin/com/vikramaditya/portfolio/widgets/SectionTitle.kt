@@ -8,6 +8,7 @@ import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.color
 import com.varabyte.kobweb.compose.ui.modifiers.fontWeight
+import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.compose.ui.modifiers.size
 import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.style.toModifier
@@ -24,7 +25,8 @@ import org.jetbrains.compose.web.dom.Div
 fun SectionTitle(
     sectionTitleText: String
 ) {
-    Row {
+    Row(modifier = Modifier
+        .padding(10.px)){
         Div(attrs = SubheadlineTextStyle.toAttrs()) {
             SpanText(
                 text = sectionTitleText,
@@ -40,10 +42,11 @@ fun SectionTitle(
             )
         }
         Image(
-            src = Res.Icon.PORTAL_STAR,
+            src = if(ColorMode.current == ColorMode.DARK) Res.Icon.PORTAL_STAR else Res.Icon.PORTAL_STAR_DARK,
             modifier = Modifier
                 .align(Alignment.Top)
                 .size(22.px)
+
         )
     }
 }

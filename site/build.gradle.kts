@@ -1,7 +1,5 @@
-import com.varabyte.kobweb.common.navigation.RoutePrefix
 import com.varabyte.kobweb.gradle.application.util.configAsKobwebApplication
 import kotlinx.html.link
-import kotlinx.html.script
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 
 plugins {
@@ -18,13 +16,29 @@ kobweb {
     app {
         index {
             head.add {
-                link {
+                link(rel = "preconnect", href = "https://fonts.googleapis.com")
+                link(rel = "preconnect", href = "https://fonts.gstatic.com") { attributes["crossorigin"] = "" }
+                link(
+                    href = "https://fonts.googleapis.com/css2?family=Roboto&display=swap",
                     rel = "stylesheet"
-                    href = RoutePrefix("/MyPortfolio").prependTo("/highlight/js/styles/atom-one-dark.css")
-                }
-                script {
-                    src = RoutePrefix("/MyPortfolio").prependTo("/highlight/js/highlight.min.js")
-                }
+                )
+                link(
+                    href = "https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap",
+                    rel = "stylesheet"
+                )
+                link(
+                    href = "https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap",
+                    rel = "stylesheet"
+                )
+
+
+//                link {
+//                    rel = "stylesheet"
+//                    href = RoutePrefix("/MyPortfolio").prependTo("/highlight/js/styles/atom-one-dark.css")
+//                }
+//                script {
+//                    src = RoutePrefix("/MyPortfolio").prependTo("/highlight/js/highlight.min.js")
+//                }
             }
         }
     }
