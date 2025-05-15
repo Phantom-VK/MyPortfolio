@@ -68,6 +68,11 @@ object Res {
         const val LINKEDIN_LIGHT = "images/icons/linkedin_light.svg"
         const val SUN = "images/icons/sun.svg"
         const val MOON = "images/icons/moon.svg"
+
+        const val DEV = "images/icons/dev.svg"
+        const val HEXAWEB = "images/icons/hexaweb.svg"
+        const val CUBOID = "images/icons/cuboid.svg"
+
     }
 
     object Image {

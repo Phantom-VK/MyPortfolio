@@ -58,13 +58,12 @@ fun AboutMe() {
                     .fillMaxSize()
                     .textAlign(TextAlign.JustifyAll)
                     .color(if(colorMode.isDark) Color.white else Color.black)
-                    .fontSize(1.25.em)
+                    .fontSize(20.px)
                     .fontFamily("DM Sans")
 
 
             )
         }
-
 
         GreenButton(
             "Resume"

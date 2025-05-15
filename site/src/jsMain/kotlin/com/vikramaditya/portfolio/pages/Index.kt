@@ -5,6 +5,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Column
+import com.varabyte.kobweb.compose.foundation.layout.Spacer
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.background
@@ -21,6 +22,7 @@ import com.vikramaditya.portfolio.sections.AboutMe
 import com.vikramaditya.portfolio.sections.Header
 import com.vikramaditya.portfolio.sections.ProfileCard
 import com.vikramaditya.portfolio.sections.SocialLinks
+import com.vikramaditya.portfolio.sections.WhatIDo
 import com.vikramaditya.portfolio.utils.Res
 import org.jetbrains.compose.web.css.Position
 import org.jetbrains.compose.web.css.px
@@ -50,11 +52,7 @@ fun HomePage() {
             ProfileCard(colorMode, breakpoint)
             AboutMe()
 
-//
-//        SkillsAndTools()
-//
-//        ProjectsSection(colorMode)
-
+            WhatIDo()
 
         }
     }

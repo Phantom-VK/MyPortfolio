@@ -121,7 +121,7 @@ fun CodeBox(colorMode: ColorMode) {
                     Span(
                         attrs = Modifier
                             .styleModifier {
-                                property("border-right", "2px solid ${if (colorMode.isLight) "#2D3748" else "#E2E8F0"}")
+                                    property("border-right", "2px solid  #E2E8F0")
                                 property("animation", "blink 1s step-end infinite")
                             }
                             .toAttrs()
