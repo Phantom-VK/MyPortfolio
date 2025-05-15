@@ -4,11 +4,10 @@ import androidx.compose.runtime.Composable
 import com.varabyte.kobweb.compose.css.Height
 import com.varabyte.kobweb.compose.css.ObjectFit
 import com.varabyte.kobweb.compose.css.Overflow
+import com.varabyte.kobweb.compose.css.functions.dropShadow
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Box
-import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.Row
-import com.varabyte.kobweb.compose.foundation.layout.Spacer
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.*
@@ -16,8 +15,6 @@ import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.style.toModifier
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
-import com.varabyte.kobweb.silk.theme.shapes.Circle
-import com.varabyte.kobweb.silk.theme.shapes.clip
 import com.vikramaditya.portfolio.components.CodeBox
 import com.vikramaditya.portfolio.components.IconButton
 import com.vikramaditya.portfolio.components.SocialIcon
@@ -30,14 +27,13 @@ import org.jetbrains.compose.web.css.px
 @Composable
 fun ProfileCard(colorMode: ColorMode, breakpoint: Breakpoint) {
 
-
-
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(Height.FitContent)
                 .padding(leftRight = 5.percent, topBottom = 10.percent)
-                .gap(24.px),
+                .gap(24.px)
+                .zIndex(1),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = if (breakpoint <= Breakpoint.MD)
                 Arrangement.Center else Arrangement.SpaceBetween
@@ -55,16 +51,23 @@ fun ProfileCard(colorMode: ColorMode, breakpoint: Breakpoint) {
             if (breakpoint >= Breakpoint.MD) {
                 Box(
                     modifier = Modifier
-                        .size(if (breakpoint >= Breakpoint.LG) 360.px else 280.px)
+                        .size(if (breakpoint >= Breakpoint.LG) 380.px else 280.px)
                         .borderRadius(12.px)
                         .overflow(Overflow.Hidden)
+                        .filter(
+                            dropShadow(
+                                offsetX = 0.px,    // No horizontal offset
+                                offsetY = 0.px,    // No vertical offset
+                                blurRadius = 20.px, // Larger = more diffuse glow
+                                color = Res.Theme.PRIMARY_BUTTON.color
+                            )
+                        )
                 ) {
                     Image(
                         modifier = Modifier
                             .fillMaxSize()
-                            .alignSelf(AlignSelf.Baseline)
-                            .objectFit(ObjectFit.Fill), // Ensures proper cropping
-                        src = Res.Image.PROFILE_PHOTO
+                            .objectFit(ObjectFit.Cover), // Changed to Cover for better cropping
+                        src = if(colorMode.isDark) Res.Image.PROFILE_PHOTO_GREEN else Res.Image.PROFILE_PHOTO_REGULAR
                     )
                 }
             }

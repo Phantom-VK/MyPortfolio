@@ -2,7 +2,6 @@ package com.vikramaditya.portfolio.utils
 
 
 import com.varabyte.kobweb.compose.ui.graphics.Color
-import org.jetbrains.compose.web.css.px
 
 object Res {
 
@@ -60,7 +59,7 @@ object Res {
         const val EMAIL_LIGHT = "images/icons/mail.svg"
         const val EMAIL_DARK = "mail_light.svg"
         const val PORTAL_STAR = "images/tools/portal_star.svg"
-        const val PORTAL_STAR_DARK = "images/tools/portal_star_dark.svg"
+        const val PORTAL_STAR_DARK = "images/tools/polar_star_dark.svg"
         const val GITHUB = "images/icons/github.svg"
         const val GITHUB_LIGHT = "images/icons/github_light.svg"
         const val INSTAGRAM = "images/icons/instagram.svg"
@@ -72,7 +71,8 @@ object Res {
     }
 
     object Image {
-        const val PROFILE_PHOTO = "mypfp2.jpg"
+        const val PROFILE_PHOTO_GREEN = "mypfpgreen.jpeg"
+        const val PROFILE_PHOTO_REGULAR = "mypfpregular.jpeg"
         const val NAVIGATION_ARROW = "images/Navigation_Arrow.svg"
         const val CUSTOM_CURSOR_DARK = "images/Custom_Cursor_Dark.svg"
         const val CUSTOM_CURSOR_LIGHT = "images/Custom_Cursor_Light.svg"
@@ -99,8 +99,8 @@ object Res {
         const val ROBOTO_CONDENSED = "RobotoCondensedBold"
         const val ROBOTO_REGULAR = "RobotoRegular"
         const val MY_EMAIL = "mailto:vikramadityakhupse@gmail.com"
+        const val RESUME_URL = "https://drive.google.com/file/d/15d60D12-CgiQoxtlycWp-bU4JC_In3mp/view?usp=drive_link"
         const val SKILLS_TITLE = "Skills & Tools"
-        const val PROJECTS_TITLE = "Projects"
         const val PYTHON_CODE = """def profile_page():
 
     def about_me():
@@ -176,6 +176,18 @@ fun profilePage() {
         }
     }
 }"""
+
+        const val ABOUT_ME = """
+            I’m an IT student who’s deeply passionate about computers, technology, and the craft of coding — not just the trends. 
+   I don’t box myself into a niche — whether it’s AI, app development, or system tools, if it involves building and solving, I’m all in.
+                   Proficient in Python, Java, and Kotlin (Jetpack Compose), I’ve worked on, from Android apps to automation scripts. 
+                            I also design clean, functional UIs using Figma to ensure user-first thinking in everything I create.
+                      As Co-Lead of Google Developer Group (GDG) and Vice President of SWAG Devs Club, I lead with initiative 
+                            and community spirit — organizing, mentoring, and contributing meaningfully to campus tech culture.
+                  I’m not driven by hype. I love code, I love solving problems, and I’m always ready to work on something different.
+                  
+                                                                Aiming to lead, inspire and drive transformative change!
+        """
 
 
     }

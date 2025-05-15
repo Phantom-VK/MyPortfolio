@@ -7,8 +7,11 @@ import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
+import com.varabyte.kobweb.compose.ui.modifiers.background
 import com.varabyte.kobweb.compose.ui.modifiers.color
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
+import com.varabyte.kobweb.compose.ui.modifiers.position
+import com.varabyte.kobweb.compose.ui.modifiers.top
 import com.varabyte.kobweb.core.Page
 import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
@@ -19,6 +22,8 @@ import com.vikramaditya.portfolio.sections.Header
 import com.vikramaditya.portfolio.sections.ProfileCard
 import com.vikramaditya.portfolio.sections.SocialLinks
 import com.vikramaditya.portfolio.utils.Res
+import org.jetbrains.compose.web.css.Position
+import org.jetbrains.compose.web.css.px
 
 
 @Page
@@ -27,22 +32,23 @@ fun HomePage() {
     var colorMode by ColorMode.currentState
     val breakpoint = rememberBreakpoint()
 
-    ThemeSwitchButton(
-        colorMode = colorMode,
-        onClick = { colorMode = colorMode.opposite }
-    )
 
 
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .color(if(colorMode.isDark) Res.Theme.DARK_THEME_BACKGROUND.color else Res.Theme.LIGHT_THEME_BACKGROUND.color),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.SpaceEvenly
+    PageLayout(
+        title = "Home"
     ) {
-        Header(colorMode, breakpoint)
-        ProfileCard(colorMode, breakpoint)
-        AboutMe()
+
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .color(if(colorMode.isDark) Res.Theme.DARK_THEME_BACKGROUND.color
+                else Res.Theme.LIGHT_THEME_BACKGROUND.color),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.SpaceEvenly
+        ) {
+
+            ProfileCard(colorMode, breakpoint)
+            AboutMe()
 
 //
 //        SkillsAndTools()
@@ -50,14 +56,8 @@ fun HomePage() {
 //        ProjectsSection(colorMode)
 
 
+        }
     }
-
-
-
-
-
-
-
 
 
 }

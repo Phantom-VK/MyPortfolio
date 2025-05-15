@@ -7,6 +7,8 @@ import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.color
+import com.varabyte.kobweb.compose.ui.modifiers.fontFamily
+import com.varabyte.kobweb.compose.ui.modifiers.fontStyle
 import com.varabyte.kobweb.compose.ui.modifiers.fontWeight
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.compose.ui.modifiers.size
@@ -32,13 +34,15 @@ fun SectionTitle(
                 text = sectionTitleText,
                 modifier = SectionTitleStyle.toModifier()
                     .align(Alignment.Bottom)
+                    .fontFamily("DM Sans")
+                    .fontWeight(FontWeight.Bold)
                     .color(
                         when (ColorMode.current) {
                             ColorMode.LIGHT -> Colors.Black
                             ColorMode.DARK -> Colors.White
                         }
                     )
-                    .fontWeight(FontWeight.Bold)
+
             )
         }
         Image(
