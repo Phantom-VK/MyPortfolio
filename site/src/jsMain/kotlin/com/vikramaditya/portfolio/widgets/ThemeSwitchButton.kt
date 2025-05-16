@@ -1,5 +1,4 @@
-package com.vikramaditya.portfolio.components
-
+package com.vikramaditya.portfolio.widgets
 
 import androidx.compose.runtime.Composable
 import com.varabyte.kobweb.compose.css.Cursor
@@ -18,8 +17,6 @@ import com.varabyte.kobweb.compose.ui.styleModifier
 import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.vikramaditya.portfolio.utils.Res
-import com.vikramaditya.portfolio.utils.Res.Dimens.BORDER_RADIUS
-import com.vikramaditya.portfolio.utils.Res.Dimens.ICON_SIZE
 import org.jetbrains.compose.web.css.Color
 import org.jetbrains.compose.web.css.LineStyle
 import org.jetbrains.compose.web.css.px
@@ -30,7 +27,7 @@ fun ThemeSwitchButton(
     onClick: () -> Unit
 ) {
     Box(
-        modifier = Modifier
+        modifier = Modifier.Companion
             .styleModifier {
                 property("pointer-events", "auto")
             }
@@ -40,18 +37,18 @@ fun ThemeSwitchButton(
                 color = if (colorMode.isLight) Color.white
                 else Res.Theme.THEME_GREEN.color
             )
-            .borderRadius(r = BORDER_RADIUS.px)
-            .cursor(Cursor.Pointer)
+            .borderRadius(r = Res.Dimens.BORDER_RADIUS.px)
+            .cursor(Cursor.Companion.Pointer)
             .border(
                 width = 1.px,
-                style = LineStyle.Solid,
+                style = LineStyle.Companion.Solid,
                 color = if (colorMode.isLight) Res.Theme.CARD_BORDER_LIGHT.color
                 else Res.Theme.CARD_BORDER_DARK.color
             )
             .onClick { onClick.invoke() }
     ) {
         Image(
-            modifier = Modifier.size( ICON_SIZE.px),
+            modifier = Modifier.Companion.size(Res.Dimens.ICON_SIZE.px),
             src = if (colorMode.isLight) Res.Icon.SUN else Res.Icon.MOON
         )
     }

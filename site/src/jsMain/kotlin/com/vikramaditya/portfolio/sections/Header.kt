@@ -18,8 +18,8 @@ import com.varabyte.kobweb.silk.components.navigation.UncoloredLinkVariant
 import com.varabyte.kobweb.silk.components.navigation.UndecoratedLinkVariant
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
-import com.vikramaditya.portfolio.components.HangingText
-import com.vikramaditya.portfolio.components.ThemeSwitchButton
+import com.vikramaditya.portfolio.widgets.HangingText
+import com.vikramaditya.portfolio.widgets.ThemeSwitchButton
 import com.vikramaditya.portfolio.utils.Res
 import kotlinx.browser.window
 import org.jetbrains.compose.web.css.percent

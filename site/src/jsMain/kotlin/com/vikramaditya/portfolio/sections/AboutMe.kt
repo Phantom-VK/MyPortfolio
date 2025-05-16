@@ -56,7 +56,7 @@ fun AboutMe() {
                 .fillMaxSize()
                 .borderRadius(7.px)
                 .background(color = Res.Theme.GREY_BACKGROUND.color)
-                .padding(5.percent)
+                .padding(3.percent)
         ) {
             SpanText(
                 Res.String.ABOUT_ME,
