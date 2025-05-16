@@ -5,6 +5,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Column
+import com.varabyte.kobweb.compose.foundation.layout.Spacer
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.color
@@ -13,10 +14,12 @@ import com.varabyte.kobweb.compose.ui.modifiers.zIndex
 import com.varabyte.kobweb.core.Page
 import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
+import com.vikramaditya.portfolio.components.ProjectCard
 import com.vikramaditya.portfolio.layouts.PageLayout
 import com.vikramaditya.portfolio.sections.AboutMe
 import com.vikramaditya.portfolio.sections.MySkillsSection
 import com.vikramaditya.portfolio.sections.ProfileCard
+import com.vikramaditya.portfolio.sections.ProjectSection
 import com.vikramaditya.portfolio.sections.WhatIDo
 import com.vikramaditya.portfolio.utils.Res
 import com.vikramaditya.portfolio.widgets.Cube3D
@@ -56,10 +59,10 @@ fun HomePage() {
             WhatIDo()
             SectionTitle("My Skills", id = "skills")
             MySkillsSection()
-            SectionTitle(
-                "Tech Stack", id = "tech-stack")
+            SectionTitle("Tech Stack", id = "tech-stack")
             Cube3D()
-
+            SectionTitle("Project", id = "projects")
+            ProjectSection()
 
         }
     }

@@ -27,6 +27,7 @@ object Res {
         // Buttons (e.g., Social Media Buttons)
         THEME_GREEN(Color.rgb(r = 39, g = 174, b = 96)),
         THEME_GREEN_NEON(Color.rgb(44, 255, 5)),
+        MATRIX_GLOW(Color.rgb(0, 255, 65)),
 
 
         // Borders

@@ -31,6 +31,7 @@ import org.jetbrains.compose.web.dom.Div
 
 @Composable
 fun Cube3D() {
+
     Box (
         modifier =
             Modifier
