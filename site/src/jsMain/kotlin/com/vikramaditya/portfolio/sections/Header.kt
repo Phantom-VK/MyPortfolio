@@ -66,7 +66,7 @@ fun Header(modifier: Modifier){
             SpanText(
                 text = "Hi, I am ${Res.String.NAME}",
                 modifier = Modifier
-                    .fontFamily("DM Sans")
+                    .fontFamily("Share Tech Mono")
                     .color(textColor)
                     .fontSize(FontSize.XXLarge)
                     .fontWeight(FontWeight.Bold)

@@ -34,9 +34,9 @@ fun AboutMe() {
     val breakpoint = rememberBreakpoint()
 
     val fontSize = when (breakpoint) {
-        Breakpoint.SM, Breakpoint.XL -> 18.px
-        Breakpoint.MD -> 20.px
-        else -> 22.px
+        Breakpoint.SM, Breakpoint.XL -> 20.px
+        Breakpoint.MD -> 24.px
+        else -> 25.px
     }
 
     Column(
@@ -69,7 +69,7 @@ fun AboutMe() {
                         else
                             Colors.White
                     )
-                    .fontFamily("DM Sans")
+                    .fontFamily("VT323")
                     .fontSize(fontSize)
             )
         }

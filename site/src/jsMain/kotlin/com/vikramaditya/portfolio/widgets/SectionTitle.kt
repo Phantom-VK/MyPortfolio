@@ -30,7 +30,7 @@ fun SectionTitle(
                 text = sectionTitleText,
                 modifier = SectionTitleStyle.toModifier()
                     .align(Alignment.Bottom)
-                    .fontFamily("DM Sans")
+                    .fontFamily("Share Tech Mono")
                     .fontWeight(FontWeight.Bold)
                     .color(
                         when (ColorMode.current) {
