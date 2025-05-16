@@ -1,6 +1,11 @@
 package com.vikramaditya.portfolio.sections
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import com.varabyte.kobweb.compose.css.Height
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Column
@@ -24,13 +29,15 @@ import org.jetbrains.compose.web.css.percent
 @Composable
 fun WhatIDo(){
 
+    var selectedCard by remember { mutableIntStateOf(-1) }
+
     Column(
         modifier = Modifier
         .fillMaxSize(),
         verticalArrangement = Arrangement.SpaceBetween,
         horizontalAlignment = Alignment.CenterHorizontally){
 
-        SectionTitle("What I do")
+        SectionTitle("What I do?")
 
         SimpleGrid(
             numColumns = numColumns(base = 1, sm = 1, md = 3),
@@ -41,19 +48,28 @@ fun WhatIDo(){
         ){
             WhatIDoCard(
                 iconImage = Res.Icon.HEXAWEB,
-                description = "Software Development"
-            )
+                description = "Software Development",
+                isSelected = selectedCard == 0
+            ){
+                selectedCard = 0
+            }
             Spacer()
             WhatIDoCard(
                 iconImage = Res.Icon.DEV,
-                description = "App Development"
-            )
+                description = "App Development",
+                isSelected = selectedCard == 1
+            ){
+                selectedCard = 1
+            }
             Spacer()
             WhatIDoCard(
                 iconImage = Res.Icon.CUBOID,
                 description = "UI/UX And" +
-                        " Software Design"
-            )
+                        " Software Design",
+                isSelected = selectedCard == 2
+            ){
+                selectedCard = 2
+            }
         }
     }
 

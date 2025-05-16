@@ -1,31 +1,24 @@
 package com.vikramaditya.portfolio.components
 
 import androidx.compose.runtime.Composable
+import androidx.compose.web.events.SyntheticMouseEvent
+import com.varabyte.kobweb.compose.css.ScrollSnapAlign
 import com.varabyte.kobweb.compose.css.TextAlign
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
-import com.varabyte.kobweb.compose.ui.modifiers.background
-import com.varabyte.kobweb.compose.ui.modifiers.borderRadius
-import com.varabyte.kobweb.compose.ui.modifiers.color
-import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
-import com.varabyte.kobweb.compose.ui.modifiers.fontFamily
-import com.varabyte.kobweb.compose.ui.modifiers.fontSize
-import com.varabyte.kobweb.compose.ui.modifiers.padding
-import com.varabyte.kobweb.compose.ui.modifiers.textAlign
+import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.silk.components.graphics.Image
+import com.varabyte.kobweb.silk.components.layout.HorizontalDivider
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.vikramaditya.portfolio.utils.Res
-import org.jetbrains.compose.web.css.Color
-import org.jetbrains.compose.web.css.em
-import org.jetbrains.compose.web.css.percent
-import org.jetbrains.compose.web.css.px
+import org.jetbrains.compose.web.css.*
 
 @Composable
-fun WhatIDoCard(iconImage:String, description:String){
+fun WhatIDoCard(iconImage:String, description:String, isSelected:Boolean, onClick: (SyntheticMouseEvent) -> Unit = {  }){
 
     val colorMode = ColorMode.current
 
@@ -35,12 +28,13 @@ fun WhatIDoCard(iconImage:String, description:String){
             .fillMaxSize()
             .borderRadius(7.px)
             .background(color = Res.Theme.GREY_BACKGROUND.color)
-            .padding(5.percent)
+            .onClick(onClick)
 
     ){
         Column(
             modifier = Modifier
-                .fillMaxSize(),
+                .fillMaxSize()
+                .padding(5.percent),
             verticalArrangement = Arrangement.SpaceBetween,
             horizontalAlignment = Alignment.Start
         ){
@@ -58,8 +52,23 @@ fun WhatIDoCard(iconImage:String, description:String){
                     .fontSize(2.5.em)
                     .color(if(colorMode.isDark) Res.Theme.GLASS_BOX_BORDER_COLOR_DARK.color else Color.white)
             )
+
         }
+
+
+
+        HorizontalDivider(
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .fillMaxWidth()
+                .borderTop(
+                    3.px, LineStyle.Ridge
+                )
+                .color(if(isSelected) Res.Theme.PRIMARY_BUTTON.color else Color.transparent)
+        )
+
     }
+
 
 
 }

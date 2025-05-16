@@ -84,7 +84,7 @@ fun PageLayout(
         Box(
             modifier = Modifier
                 .position(Position.Fixed)
-                .backdropFilter(blur(4.px))
+//                .backdropFilter(blur(4.px))
                 .zIndex(2)
                 .fillMaxWidth()
         ) {
