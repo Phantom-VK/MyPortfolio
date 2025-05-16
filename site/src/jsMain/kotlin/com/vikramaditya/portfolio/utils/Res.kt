@@ -20,8 +20,6 @@ object Res {
         // Headings (Titles and Section Headers)
         PRIMARY_HEADING_TEXT(Color.rgb(r = 33, g = 150, b = 243)),
 
-        // Body Text
-        BODY_TEXT_LIGHT(Color.rgb(r = 210, g = 210, b = 210)),
 
         GLASS_BOX_BORDER_COLOR_LIGHT(Color.rgb(0xE9E9E9)),
         GLASS_BOX_BORDER_COLOR_DARK(Color.rgb(0x4E4E4E)),
@@ -39,9 +37,6 @@ object Res {
         SOCIAL_ICON_BACKGROUND_LIGHT(Color.rgb(r = 225, g = 235, b = 255)),
         SOCIAL_ICON_BACKGROUND_DARK(Color.rgb(r = 50, g = 60, b = 100)),
 
-        // Project Titles and Links
-        PROJECT_TITLE_LIGHT(Color.rgb(r = 25, g = 118, b = 210)),
-        PROJECT_TITLE_DARK(Color.rgb(r = 33, g = 150, b = 243)),
 
         // Existing colors (from initial code)
         BLUE(Color.rgb(r = 33, g = 150, b = 243)),

@@ -9,6 +9,7 @@ import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.color
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
+import com.varabyte.kobweb.compose.ui.modifiers.zIndex
 import com.varabyte.kobweb.core.Page
 import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
@@ -18,6 +19,9 @@ import com.vikramaditya.portfolio.sections.MySkillsSection
 import com.vikramaditya.portfolio.sections.ProfileCard
 import com.vikramaditya.portfolio.sections.WhatIDo
 import com.vikramaditya.portfolio.utils.Res
+import com.vikramaditya.portfolio.widgets.Cube3D
+import com.vikramaditya.portfolio.widgets.SectionTitle
+import com.vikramaditya.portfolio.widgets.HeaderItem
 
 
 @Page
@@ -34,18 +38,28 @@ fun HomePage() {
 
         Column(
             modifier = Modifier
+                .zIndex(1)
                 .fillMaxWidth()
-                .color(if(colorMode.isDark) Res.Theme.DARK_THEME_BACKGROUND.color
-                else Res.Theme.LIGHT_THEME_BACKGROUND.color),
+                .color(
+                    if (colorMode.isDark) Res.Theme.DARK_THEME_BACKGROUND.color
+                    else Res.Theme.LIGHT_THEME_BACKGROUND.color
+                ),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceBetween
         ) {
 
 
             ProfileCard(colorMode, breakpoint)
+            SectionTitle("About Me", id = "about-me")
             AboutMe()
+            SectionTitle("What I do?", id = "what-i-do")
             WhatIDo()
+            SectionTitle("My Skills", id = "skills")
             MySkillsSection()
+            SectionTitle(
+                "Tech Stack", id = "tech-stack")
+            Cube3D()
+
 
         }
     }

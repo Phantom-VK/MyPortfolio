@@ -17,6 +17,7 @@ import org.jetbrains.compose.web.css.ms
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.css.rgba
 
+
 val CircularMovingShadowStyle = CssStyle{
     base {
         Modifier

@@ -33,8 +33,7 @@ fun ProfileCard(colorMode: ColorMode, breakpoint: Breakpoint) {
                 .fillMaxWidth()
                 .height(Height.FitContent)
                 .padding(leftRight = 5.percent, topBottom = 10.percent)
-                .gap(24.px)
-                .zIndex(1),
+                .gap(24.px),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = if (breakpoint <= Breakpoint.MD)
                 Arrangement.Center else Arrangement.SpaceBetween
@@ -57,9 +56,9 @@ fun ProfileCard(colorMode: ColorMode, breakpoint: Breakpoint) {
                         .overflow(Overflow.Hidden)
                         .filter(
                             dropShadow(
-                                offsetX = 0.px,    // No horizontal offset
-                                offsetY = 0.px,    // No vertical offset
-                                blurRadius = 20.px, // Larger = more diffuse glow
+                                offsetX = 0.px,
+                                offsetY = 0.px,
+                                blurRadius = 20.px,
                                 color = Res.Theme.THEME_GREEN.color
                             )
                         )
@@ -67,7 +66,7 @@ fun ProfileCard(colorMode: ColorMode, breakpoint: Breakpoint) {
                     Image(
                         modifier = Modifier
                             .fillMaxSize()
-                            .objectFit(ObjectFit.Cover), // Changed to Cover for better cropping
+                            .objectFit(ObjectFit.Cover),
                         src = if(colorMode.isDark) Res.Image.PROFILE_PHOTO_GREEN else Res.Image.PROFILE_PHOTO_REGULAR
                     )
                 }

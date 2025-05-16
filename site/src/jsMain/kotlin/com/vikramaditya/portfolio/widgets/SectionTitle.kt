@@ -9,6 +9,7 @@ import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.color
 import com.varabyte.kobweb.compose.ui.modifiers.fontFamily
 import com.varabyte.kobweb.compose.ui.modifiers.fontWeight
+import com.varabyte.kobweb.compose.ui.modifiers.id
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.toAttrs
@@ -21,9 +22,11 @@ import org.jetbrains.compose.web.dom.Div
 
 @Composable
 fun SectionTitle(
-    sectionTitleText: String
+    sectionTitleText: String,
+    id: String
 ) {
     Row(modifier = Modifier
+        .id(id)
         .padding(10.px)){
         Div(attrs = SubheadlineTextStyle.toAttrs()) {
             SpanText(

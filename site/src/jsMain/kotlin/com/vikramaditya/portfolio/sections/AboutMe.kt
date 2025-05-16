@@ -41,14 +41,12 @@ fun AboutMe() {
 
     Column(
         modifier = Modifier
-            .id("about-me")
-            .zIndex(1)
             .fillMaxSize()
             .padding(10.percent),
         verticalArrangement = Arrangement.SpaceBetween,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        SectionTitle("About Me")
+
 
         // Matching card styling from WhatIDoCard
         Box(

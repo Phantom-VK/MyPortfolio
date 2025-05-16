@@ -2,6 +2,9 @@ package com.vikramaditya.portfolio.sections
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import com.varabyte.kobweb.compose.css.FontSize
 import com.varabyte.kobweb.compose.css.FontWeight
@@ -13,31 +16,18 @@ import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.core.rememberPageContext
-import com.varabyte.kobweb.silk.components.navigation.Link
-import com.varabyte.kobweb.silk.components.navigation.UncoloredLinkVariant
-import com.varabyte.kobweb.silk.components.navigation.UndecoratedLinkVariant
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
-import com.vikramaditya.portfolio.widgets.HangingText
 import com.vikramaditya.portfolio.widgets.ThemeSwitchButton
 import com.vikramaditya.portfolio.utils.Res
+import com.vikramaditya.portfolio.widgets.HeaderItem
 import kotlinx.browser.window
 import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
 
 
-@Composable
-private fun NavLink(path: String, text: String) {
-    Link(path, text, variant = UndecoratedLinkVariant.then(UncoloredLinkVariant))
-}
 
-@Composable
-private fun MenuItems() {
-    NavLink("#home", "Home")
-    NavLink("#skills_and_tools", "Skills & Tools")
-    NavLink("#projects", "Projects")
-    NavLink("#contact_me", "Contact Me")
-}
+
 
 
 
@@ -51,6 +41,7 @@ fun Header(modifier: Modifier){
         Res.Theme.LIGHT_THEME_BACKGROUND.color to Res.Theme.DARK_THEME_BACKGROUND.color
     }
     val ctx = rememberPageContext()
+    var selectedItem by remember { mutableIntStateOf(-1) }
 
     Row(
         modifier = modifier.then(
@@ -81,22 +72,44 @@ fun Header(modifier: Modifier){
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
-                HangingText(
-                    text = "About me!",
-                    onClick = { window.location.href = "#about-me" }
-                )
-                HangingText(
-                    text = "Skills",
-                    onClick = { window.location.href = "#what-i-do" }
-                )
-                HangingText(
-                    text = "Contact Me!",
-                    onClick = { window.location.href = "#contact" }
-                )
-                HangingText(
-                    text = "Resume",
-                    onClick = {ctx.router.navigateTo(Res.String.RESUME_URL) }
-                )
+                HeaderItem(
+                    "About Me",
+                    isOnline = selectedItem == 0
+                ){
+                    window.location.href = "#about-me"
+                    selectedItem = 0
+                }
+                HeaderItem(
+                    "Skills",
+                    isOnline = selectedItem == 1
+                ){
+                    window.location.href = "#skills"
+                    selectedItem = 1
+                }
+                HeaderItem(
+                    "Contact Me",
+                    isOnline = selectedItem == 2
+                ){
+                    window.location.href = "#contact"
+                    selectedItem = 2
+                }
+
+//                HangingText(
+//                    text = "About me!",
+//                    onClick = { window.location.href = "#about-me" }
+//                )
+//                HangingText(
+//                    text = "Skills",
+//                    onClick = { window.location.href = "#what-i-do" }
+//                )
+//                HangingText(
+//                    text = "Contact Me!",
+//                    onClick = { window.location.href = "#contact" }
+//                )
+//                HangingText(
+//                    text = "Resume",
+//                    onClick = {ctx.router.navigateTo(Res.String.RESUME_URL) }
+//                )
 
                 ThemeSwitchButton(
                     colorMode = colorMode,

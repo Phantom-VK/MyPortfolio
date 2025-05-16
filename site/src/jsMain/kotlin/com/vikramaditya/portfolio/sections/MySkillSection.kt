@@ -11,6 +11,7 @@ import com.varabyte.kobweb.compose.ui.styleModifier
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.vikramaditya.portfolio.utils.Res
+import com.vikramaditya.portfolio.widgets.SectionTitle
 import org.jetbrains.compose.web.css.px
 
 data class Skill(val label: String, val percentage: String)
@@ -36,13 +37,7 @@ fun MySkillsSection() {
             },
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        SpanText(
-            "My Skills",
-            modifier = Modifier
-                .fontSize(28.px)
-                .fontWeight(FontWeight.Bold)
-                .color(if (colorMode.isDark) Res.Theme.LIGHT_THEME_BACKGROUND.color else Res.Theme.DARK_THEME_BACKGROUND.color)
-        )
+
 
         Spacer()
 
@@ -51,11 +46,8 @@ fun MySkillsSection() {
                 .fillMaxWidth()
                 .maxWidth(900.px)
                 .padding(16.px)
-                .backgroundColor(
-                    if (colorMode.isDark) Color.rgba(255, 255, 255, 0.05f)
-                    else Color.rgba(0, 0, 0, 0.05f)
-                )
-                .borderRadius(8.px)
+                .borderRadius(7.px)
+                .background(color = Res.Theme.GREY_BACKGROUND.color)
         ) {
             Row(
                 modifier = Modifier
@@ -71,6 +63,7 @@ fun MySkillsSection() {
                             skill.percentage,
                             modifier = Modifier
                                 .fontSize(32.px)
+                                .fontFamily("Share Tech Mono")
                                 .fontWeight(FontWeight.Bold)
                                 .color(Color.rgba(255, 255, 255, 0.8f))
                         )
@@ -78,6 +71,7 @@ fun MySkillsSection() {
                             skill.label,
                             modifier = Modifier
                                 .fontSize(14.px)
+                                .fontFamily("DM Sans")
                                 .margin(top = 4.px)
                                 .fontWeight(FontWeight.Medium)
                                 .color(Color.rgb(0, 255, 128)) // neon green
