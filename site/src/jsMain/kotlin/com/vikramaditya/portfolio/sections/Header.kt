@@ -12,6 +12,7 @@ import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.*
+import com.varabyte.kobweb.core.rememberPageContext
 import com.varabyte.kobweb.silk.components.navigation.Link
 import com.varabyte.kobweb.silk.components.navigation.UncoloredLinkVariant
 import com.varabyte.kobweb.silk.components.navigation.UndecoratedLinkVariant
@@ -49,6 +50,7 @@ fun Header(modifier: Modifier){
     } else {
         Res.Theme.LIGHT_THEME_BACKGROUND.color to Res.Theme.DARK_THEME_BACKGROUND.color
     }
+    val ctx = rememberPageContext()
 
     Row(
         modifier = modifier.then(
@@ -81,15 +83,19 @@ fun Header(modifier: Modifier){
             ) {
                 HangingText(
                     text = "About me!",
-                    onClick = { window.location.href = "#contact" }
+                    onClick = { window.location.href = "#about-me" }
                 )
                 HangingText(
                     text = "Skills",
-                    onClick = { window.location.href = "#contact" }
+                    onClick = { window.location.href = "#what-i-do" }
                 )
                 HangingText(
                     text = "Contact Me!",
                     onClick = { window.location.href = "#contact" }
+                )
+                HangingText(
+                    text = "Resume",
+                    onClick = {ctx.router.navigateTo(Res.String.RESUME_URL) }
                 )
 
                 ThemeSwitchButton(

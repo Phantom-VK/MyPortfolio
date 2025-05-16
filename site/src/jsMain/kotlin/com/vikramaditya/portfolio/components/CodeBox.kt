@@ -141,8 +141,8 @@ fun LanguageButton(language: String, isSelected: Boolean, onClick: (SyntheticMou
     Button(
         modifier = LanguageButtonStyle
             .toModifier()
-            .background(if (isSelected) Res.Theme.PRIMARY_BUTTON.color else Colors.Transparent)
-            .color(if (isSelected) Colors.White else Res.Theme.PRIMARY_BUTTON.color)
+            .background(if (isSelected) Res.Theme.THEME_GREEN.color else Colors.Transparent)
+            .color(if (isSelected) Colors.White else Res.Theme.THEME_GREEN.color)
             .padding(12.px, 16.px)
             .borderRadius(topLeft = 10.px, topRight = 10.px)
             .margin(0.px)

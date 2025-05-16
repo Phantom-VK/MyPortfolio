@@ -34,7 +34,7 @@ fun IconButton(
                 .backdropFilter(blur(2.px))
                 .background(
                     color = if (colorMode.isLight) Color.white
-                    else Res.Theme.PRIMARY_BUTTON.color
+                    else Res.Theme.THEME_GREEN.color
                 )
                 .borderRadius(r = BORDER_RADIUS.px)
                 .cursor(Cursor.Pointer)

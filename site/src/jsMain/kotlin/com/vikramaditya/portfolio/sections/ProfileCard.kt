@@ -29,6 +29,7 @@ fun ProfileCard(colorMode: ColorMode, breakpoint: Breakpoint) {
 
         Row(
             modifier = Modifier
+                .id("home")
                 .fillMaxWidth()
                 .height(Height.FitContent)
                 .padding(leftRight = 5.percent, topBottom = 10.percent)
@@ -59,7 +60,7 @@ fun ProfileCard(colorMode: ColorMode, breakpoint: Breakpoint) {
                                 offsetX = 0.px,    // No horizontal offset
                                 offsetY = 0.px,    // No vertical offset
                                 blurRadius = 20.px, // Larger = more diffuse glow
-                                color = Res.Theme.PRIMARY_BUTTON.color
+                                color = Res.Theme.THEME_GREEN.color
                             )
                         )
                 ) {

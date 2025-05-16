@@ -16,15 +16,15 @@
 
     // Physics-based animations
     val ThreadSwingAnimation = Keyframes {
-        0.percent { Modifier.transform { rotate((-3).deg) } }
+        0.percent { Modifier.transform { rotate((-10).deg) } }
         50.percent { Modifier.transform { rotate(0.deg) } }
-        100.percent { Modifier.transform { rotate(3.deg) } }
+        100.percent { Modifier.transform { rotate(10.deg) } }
     }
 
     val ThreadWaveAnimation = Keyframes {
-        0.percent { Modifier.transform { translateX((-1).px) } }
-        50.percent { Modifier.transform { translateX(1.px) } }
-        100.percent { Modifier.transform { translateX((-1).px) } }
+        0.percent { Modifier.transform { translateX((-4).px) } }
+        50.percent { Modifier.transform { translateX(0.px) } }
+        100.percent { Modifier.transform { translateX((-4).px) } }
     }
 
     val ThreadStretchAnimation = Keyframes {

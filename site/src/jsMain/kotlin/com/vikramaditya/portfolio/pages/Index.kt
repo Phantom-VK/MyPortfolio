@@ -12,13 +12,12 @@ import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.core.Page
 import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
-import com.vikramaditya.portfolio.components.HangingText
 import com.vikramaditya.portfolio.layouts.PageLayout
 import com.vikramaditya.portfolio.sections.AboutMe
+import com.vikramaditya.portfolio.sections.MySkillsSection
 import com.vikramaditya.portfolio.sections.ProfileCard
 import com.vikramaditya.portfolio.sections.WhatIDo
 import com.vikramaditya.portfolio.utils.Res
-import kotlinx.browser.window
 
 
 @Page
@@ -42,9 +41,11 @@ fun HomePage() {
             verticalArrangement = Arrangement.SpaceBetween
         ) {
 
+
             ProfileCard(colorMode, breakpoint)
             AboutMe()
             WhatIDo()
+            MySkillsSection()
 
         }
     }

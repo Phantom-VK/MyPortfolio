@@ -66,8 +66,8 @@ fun HangingText(
             text = text,
             modifier = Modifier
                 .padding(10.px, 20.px)
-                .backgroundColor(if(colorMode.isLight) Res.Theme.PRIMARY_BUTTON.color else Colors.White)
-                .color(if(colorMode.isDark) Res.Theme.PRIMARY_BUTTON.color else Colors.White)
+                .backgroundColor(if(colorMode.isLight) Res.Theme.THEME_GREEN.color else Colors.White)
+                .color(if(colorMode.isDark) Res.Theme.THEME_GREEN.color else Colors.White)
                 .borderRadius(Res.Dimens.BORDER_RADIUS.px)
                 .fontFamily("DM Sans")
                 .fontWeight(FontWeight.Bold)

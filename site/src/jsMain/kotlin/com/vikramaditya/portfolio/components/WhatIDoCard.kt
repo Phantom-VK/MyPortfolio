@@ -2,7 +2,6 @@ package com.vikramaditya.portfolio.components
 
 import androidx.compose.runtime.Composable
 import androidx.compose.web.events.SyntheticMouseEvent
-import com.varabyte.kobweb.compose.css.ScrollSnapAlign
 import com.varabyte.kobweb.compose.css.TextAlign
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Box
@@ -16,6 +15,8 @@ import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.vikramaditya.portfolio.utils.Res
 import org.jetbrains.compose.web.css.*
+import com.varabyte.kobweb.compose.ui.graphics.Colors
+
 
 @Composable
 fun WhatIDoCard(iconImage:String, description:String, isSelected:Boolean, onClick: (SyntheticMouseEvent) -> Unit = {  }){
@@ -50,12 +51,10 @@ fun WhatIDoCard(iconImage:String, description:String, isSelected:Boolean, onClic
                     .textAlign(TextAlign.Start)
                     .fontFamily("DM Sans")
                     .fontSize(2.5.em)
-                    .color(if(colorMode.isDark) Res.Theme.GLASS_BOX_BORDER_COLOR_DARK.color else Color.white)
+                    .color(if(colorMode.isDark) Res.Theme.GLASS_BOX_BORDER_COLOR_LIGHT.color else Colors.White)
             )
 
         }
-
-
 
         HorizontalDivider(
             modifier = Modifier
@@ -64,7 +63,8 @@ fun WhatIDoCard(iconImage:String, description:String, isSelected:Boolean, onClic
                 .borderTop(
                     3.px, LineStyle.Ridge
                 )
-                .color(if(isSelected) Res.Theme.PRIMARY_BUTTON.color else Color.transparent)
+                .color(if(isSelected) Res.Theme.THEME_GREEN_NEON.color else Colors.Transparent)
+
         )
 
     }

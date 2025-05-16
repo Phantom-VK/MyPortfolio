@@ -21,16 +21,15 @@ object Res {
         PRIMARY_HEADING_TEXT(Color.rgb(r = 33, g = 150, b = 243)),
 
         // Body Text
-        BODY_TEXT_DARK(Color.rgb(r = 33, g = 33, b = 33)),
         BODY_TEXT_LIGHT(Color.rgb(r = 210, g = 210, b = 210)),
 
         GLASS_BOX_BORDER_COLOR_LIGHT(Color.rgb(0xE9E9E9)),
         GLASS_BOX_BORDER_COLOR_DARK(Color.rgb(0x4E4E4E)),
 
         // Buttons (e.g., Social Media Buttons)
-        PRIMARY_BUTTON(Color.rgb(r = 39, g = 174, b = 96)),
-        BUTTON_HOVER_LIGHT(Color.rgb(r = 0, g = 188, b = 212)),
-        BUTTON_HOVER_DARK(Color.rgb(r = 38, g = 198, b = 218)),
+        THEME_GREEN(Color.rgb(r = 39, g = 174, b = 96)),
+        THEME_GREEN_NEON(Color.rgb(44, 255, 5)),
+
 
         // Borders
         CARD_BORDER_LIGHT(Color.rgb(r = 180, g = 180, b = 200)),
@@ -183,15 +182,7 @@ fun profilePage() {
 }"""
 
         const val ABOUT_ME = """
-            I’m an IT student who’s deeply passionate about computers, technology, and the craft of coding — not just the trends. 
-   I don’t box myself into a niche — whether it’s AI, app development, or system tools, if it involves building and solving, I’m all in.
-                   Proficient in Python, Java, and Kotlin (Jetpack Compose), I’ve worked on, from Android apps to automation scripts. 
-                            I also design clean, functional UIs using Figma to ensure user-first thinking in everything I create.
-                      As Co-Lead of Google Developer Group (GDG) and Vice President of SWAG Devs Club, I lead with initiative 
-                            and community spirit — organizing, mentoring, and contributing meaningfully to campus tech culture.
-                  I’m not driven by hype. I love code, I love solving problems, and I’m always ready to work on something different.
-                  
-                                                                Aiming to lead, inspire and drive transformative change!
+ I’m an IT student who’s deeply passionate about computers, technology, and the craft of coding — not just the trends. I don’t box myself into a niche — whether it’s AI, app development, or system tools, if it involves building and solving, I’m all in.  Proficient in Python, Java, and Kotlin (Jetpack Compose), I’ve worked on, from Android apps to automation scripts. I also design clean, functional UIs using Figma to ensure user-first thinking in everything I create. As Co-Lead of Google Developer Group and community spirit — organizing, mentoring, and contributing meaningfully to campus tech culture.I’m not driven by hype. I love code, I love solving problems, and I’m always ready to work on something different.Aiming to lead, inspire and drive transformative change!
         """
 
 

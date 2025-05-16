@@ -12,7 +12,6 @@ import com.varabyte.kobweb.compose.ui.modifiers.transition
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.selectors.hover
 import com.vikramaditya.portfolio.utils.Res
-import org.jetbrains.compose.web.css.AnimationTimingFunction
 import org.jetbrains.compose.web.css.LineStyle
 import org.jetbrains.compose.web.css.ms
 import org.jetbrains.compose.web.css.px
@@ -61,7 +60,7 @@ val CircularMovingShadowStyle = CssStyle{
                         offsetX = (-10).px, // Shift left
                         offsetY = 10.px,
                         blurRadius = 20.px,
-                        color = Res.Theme.PRIMARY_BUTTON.color
+                        color = Res.Theme.THEME_GREEN.color
                     )
                 }
             )
