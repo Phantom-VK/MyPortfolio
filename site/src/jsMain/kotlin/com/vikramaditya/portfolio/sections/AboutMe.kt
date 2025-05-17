@@ -70,22 +70,13 @@ fun AboutMe() {
                     .fontFamily("VT323")
                     .fontSize(fontSize)
             )
+
+
+
         }
 
+
     }
 }
 
 
-@Composable
-fun GreenButton(text: String, onClick: (SyntheticMouseEvent) -> Unit) {
-    Button(
-        onClick = onClick,
-        modifier = Modifier
-            .backgroundColor(Res.Theme.THEME_GREEN.color)
-            .color(Res.Theme.LIGHT_THEME_BACKGROUND.color)
-            .padding(12.px, 24.px)
-            .borderRadius(6.px)
-    ) {
-        SpanText(text)
-    }
-}

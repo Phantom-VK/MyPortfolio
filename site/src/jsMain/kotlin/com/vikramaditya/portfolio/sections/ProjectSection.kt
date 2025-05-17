@@ -73,19 +73,16 @@ fun ProjectSection(){
         )
 
         ProjectCard(
-            title = "Id Card Generator",
-            description = "Web Application to generate ID Card for SGGSIE&T,Nanded.",
-            imageUrl = "images/projectthumbnails/sggsidcard.png",
-            mainTechStack = "Python",
-            otherTechStack = "Flask, Firebase",
+            title = "Figma Designs",
+            description = "Designed unique and visually compelling interfaces from scratch in Figma, focusing on clean UX and aesthetic UI.",
+            imageUrl = "images/projectthumbnails/figma.png",
+            mainTechStack = "Figma",
+            otherTechStack = "",
             iconsList = listOf(
-                Res.Logo.PYTHON_LOGO,
-                Res.Logo.FIREBASE_LOGO,
-                Res.Logo.FLASK_LOGO,
-                Res.Logo.PYCHARM_LOGO
+                Res.Logo.FIGMA_LOGO
             ),
             onClick = {
-                ctx.router.navigateTo("https://github.com/Phantom-VK/sggs-id")
+                ctx.router.navigateTo("https://www.figma.com/files/team/1234540862577380109/user/1219532462863680561?fuid=1219532462863680561")
             }
         )
         ProjectCard(
@@ -106,7 +103,7 @@ fun ProjectSection(){
         ProjectCard(
             title = "Customer Care Chatbot",
             description = "A Customer Care chatbot for banks",
-            imageUrl = "https://seeklogo.com/images/C/chatbot-logo-7F87FAB230-seeklogo.com.png",
+            imageUrl = "images/projectthumbnails/chatbot.jpg",
             mainTechStack = "Python",
             otherTechStack = "Transformers, Torch, Flask",
             iconsList = listOf(

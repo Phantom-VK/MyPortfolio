@@ -33,13 +33,14 @@ val ProjectCardSTyle = CssStyle {
                     ).toImage()
                 )
             )
-            .backdropFilter(blur(5.px))
+            .backdropFilter(blur(5.px),
+                    brightness(0.9))
             .transition(Transition.of("all", 0.5.s))
     }
     hover {
         Modifier
             .boxShadow(blurRadius = 40.px, spreadRadius = 7.px, color = Res.Theme.THEME_GREEN.color)
             .transform { scale(1.05) }
-            .filter(brightness(1.3))
+            .filter(brightness(1.2))
     }
 }

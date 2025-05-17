@@ -1,6 +1,7 @@
 package com.vikramaditya.portfolio.sections
 
 import androidx.compose.runtime.Composable
+import androidx.compose.web.events.SyntheticMouseEvent
 import com.varabyte.kobweb.compose.css.Height
 import com.varabyte.kobweb.compose.css.ObjectFit
 import com.varabyte.kobweb.compose.css.Overflow
@@ -11,7 +12,10 @@ import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.*
+import com.varabyte.kobweb.core.rememberPageContext
+import com.varabyte.kobweb.silk.components.forms.Button
 import com.varabyte.kobweb.silk.components.graphics.Image
+import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.style.toModifier
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
@@ -26,6 +30,8 @@ import org.jetbrains.compose.web.css.px
 
 @Composable
 fun ProfileCard(colorMode: ColorMode, breakpoint: Breakpoint) {
+
+    val ctx = rememberPageContext()
 
         Row(
             modifier = Modifier
@@ -65,19 +71,38 @@ fun ProfileCard(colorMode: ColorMode, breakpoint: Breakpoint) {
                 ) {
                     Image(
                         modifier = Modifier
-                            .fillMaxSize()
+                            .size(if (breakpoint >= Breakpoint.LG) 365.px else 265.px)
                             .objectFit(ObjectFit.Cover),
                         src = if(colorMode.isDark) Res.Image.PROFILE_PHOTO_GREEN else Res.Image.PROFILE_PHOTO_REGULAR
                     )
+
+                    GreenButton(text = "Resume", modifier = Modifier.align(Alignment.BottomCenter)){
+                        ctx.router.navigateTo(Res.String.RESUME_URL)
+                    }
+
                 }
             }
 
 
         }
 
+}
 
+@Composable
+fun GreenButton(modifier: Modifier,text: String, onClick: (SyntheticMouseEvent) -> Unit) {
+    Button(
+        onClick = onClick,
+        modifier = modifier.then(
+            Modifier
+                .backgroundColor(Res.Theme.THEME_GREEN.color)
+                .color(Res.Theme.LIGHT_THEME_BACKGROUND.color)
+                .padding(12.px, 24.px)
+                .borderRadius(6.px)
+        )
 
-
+    ) {
+        SpanText(text)
+    }
 }
 
 @Composable

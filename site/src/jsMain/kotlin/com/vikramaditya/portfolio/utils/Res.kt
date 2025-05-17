@@ -52,7 +52,7 @@ object Res {
 
     object Icon {
         const val EMAIL_LIGHT = "images/icons/mail.svg"
-        const val EMAIL_DARK = "mail_light.svg"
+        const val EMAIL_DARK = "images/icons/mail_dark.svg"
         const val PORTAL_STAR = "images/tools/portal_star.svg"
         const val PORTAL_STAR_DARK = "images/tools/polar_star_dark.svg"
         const val GITHUB = "images/icons/github.svg"
@@ -70,7 +70,7 @@ object Res {
     }
 
     object Image {
-        const val PROFILE_PHOTO_GREEN = "mypfpgreen.jpeg"
+        const val PROFILE_PHOTO_GREEN = "mypfpgreen.png"
         const val PROFILE_PHOTO_REGULAR = "mypfpregular.jpeg"
         const val NAVIGATION_ARROW = "images/Navigation_Arrow.svg"
         const val CUSTOM_CURSOR_DARK = "images/Custom_Cursor_Dark.svg"
@@ -96,8 +96,8 @@ object Res {
         const val C_LOGO = "images/skills/C.svg"
         const val FLASK_LOGO = "images/skills/Flask.svg"
         const val DJANGO_LOGO = "images/skills/Django.svg"
-        const val KOBWEB_LOGO = "images/tools/Kobweb.png"
-        const val PYTORCH_LOGO = "images/tools/Pytorch.png"
+        const val KOBWEB_LOGO = "images/tools/kobweb.png"
+        const val PYTORCH_LOGO = "images/tools/PyTorch.svg"
     }
 
     object String {

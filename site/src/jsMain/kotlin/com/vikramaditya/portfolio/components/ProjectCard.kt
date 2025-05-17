@@ -14,6 +14,7 @@ import com.varabyte.kobweb.compose.foundation.layout.Spacer
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Color
+import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.compose.ui.styleModifier
 import com.varabyte.kobweb.compose.ui.toAttrs
@@ -22,6 +23,7 @@ import com.varabyte.kobweb.silk.components.layout.SimpleGrid
 import com.varabyte.kobweb.silk.components.layout.numColumns
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.toModifier
+import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.vikramaditya.portfolio.styles.MatrixGreen
 import com.vikramaditya.portfolio.styles.ProjectCardSTyle
 import com.vikramaditya.portfolio.utils.Res
@@ -30,7 +32,6 @@ import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.dom.Img
 
-val MatrixPurple = Color.rgba(168, 158, 201, 0.5f)
 
 
 @Composable
@@ -43,6 +44,7 @@ fun ProjectCard(
     iconsList: List<String>,
     onClick: (SyntheticMouseEvent) -> Unit
 ) {
+    val colorMode = ColorMode.current
     Box(
         modifier = ProjectCardSTyle.toModifier()
             .onClick { evt -> onClick(evt) }
@@ -79,7 +81,10 @@ fun ProjectCard(
                 Modifier
                     .margin(top = 4.px)
                     .fontFamily("VT323")
-                    .color(MatrixPurple)
+                    .color(if (colorMode.isDark)
+                        Res.Theme.GLASS_BOX_BORDER_COLOR_LIGHT.color
+                    else
+                        Colors.White)
             )
             Spacer()
 
@@ -99,7 +104,10 @@ fun ProjectCard(
                 SpanText(
                     otherTechStack,
                     Modifier
-                        .color(MatrixPurple)
+                        .color(if (colorMode.isDark)
+                            Res.Theme.GLASS_BOX_BORDER_COLOR_LIGHT.color
+                        else
+                            Colors.White)
                         .fontFamily("VT323")
                 )
             }

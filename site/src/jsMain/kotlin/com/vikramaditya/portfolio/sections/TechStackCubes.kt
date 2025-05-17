@@ -29,34 +29,34 @@ fun TechStackCubes(){
             icons = listOf(
                 Res.Logo.KOTLIN_LOGO,
                 Res.Logo.JAVA_LOGO,
-                Res.Logo.GIT_LOGO,
-                Res.Logo.VSCODE_LOGO,
-                Res.Logo.UBUNTU_LOGO,
-                Res.Logo.MYSQL_LOGO
-            ),
-            modifier = Modifier.margin(right = 5.cssRem)
-        )
-
-        Cube3D(
-            icons = listOf(
+                Res.Logo.MYSQL_LOGO,
                 Res.Logo.PYTHON_LOGO,
-                Res.Logo.DJANGO_LOGO,
-                Res.Logo.FLASK_LOGO,
-                Res.Logo.ANDROID_LOGO,
-                Res.Logo.FIGMA_LOGO,
-                Res.Logo.INTELLIJ_LOGO
-            ),
-            modifier = Modifier.margin(right = 5.cssRem)
-        )
-
-        Cube3D(
-            icons = listOf(
                 Res.Logo.C_LOGO,
                 Res.Logo.CPP_LOGO,
+            ),
+            modifier = Modifier.margin(right = 5.cssRem)
+        )
+
+        Cube3D(
+            icons = listOf(
+                Res.Logo.VSCODE_LOGO,
+                Res.Logo.UBUNTU_LOGO,
+                Res.Logo.ANDROID_LOGO,
+                Res.Logo.FIGMA_LOGO,
+                Res.Logo.INTELLIJ_LOGO,
+                Res.Logo.PYCHARM_LOGO
+            ),
+            modifier = Modifier.margin(right = 5.cssRem)
+        )
+
+        Cube3D(
+            icons = listOf(
+                Res.Logo.GIT_LOGO,
+                Res.Logo.DJANGO_LOGO,
                 Res.Logo.FIREBASE_LOGO,
-                Res.Logo.PYCHARM_LOGO,
                 Res.Logo.CMP_LOGO,
-                Res.Logo.GITHUB_LOGO
+                Res.Logo.GITHUB_LOGO,
+                Res.Logo.FLASK_LOGO
             )
         )
     }

@@ -1,0 +1,94 @@
+package com.vikramaditya.portfolio.sections
+
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import com.varabyte.kobweb.compose.css.*
+import com.varabyte.kobweb.compose.foundation.layout.*
+import com.varabyte.kobweb.compose.ui.Alignment
+import com.varabyte.kobweb.compose.ui.Modifier
+import com.varabyte.kobweb.compose.ui.graphics.Color
+import com.varabyte.kobweb.compose.ui.graphics.Colors
+import com.varabyte.kobweb.compose.ui.modifiers.*
+import com.varabyte.kobweb.silk.components.graphics.Image
+import com.varabyte.kobweb.silk.components.text.SpanText
+import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
+import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
+import com.varabyte.kobweb.silk.theme.colors.ColorMode
+import com.vikramaditya.portfolio.components.ContactMeButton
+import com.vikramaditya.portfolio.utils.Res
+import kotlinx.browser.window
+import org.jetbrains.compose.web.css.*
+
+@Composable
+fun Footer() {
+    val breakpoint = rememberBreakpoint()
+    val isMobile = breakpoint <= Breakpoint.SM
+
+    Column(
+        modifier = Modifier
+            .id("contact")
+            .fillMaxWidth()
+            .padding(topBottom = 1.cssRem, leftRight = 4.cssRem)
+            .backgroundColor(Color.rgba(0, 255, 65, 0.06f))
+            .borderTop(1.px, LineStyle.Solid, Res.Theme.THEME_GREEN_NEON.color),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        if (isMobile) {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(1.cssRem),
+            ) {
+                ContactMeButton(email = Res.String.MY_EMAIL)
+
+                MadeWithKobweb()
+            }
+        } else {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                ContactMeButton(email = Res.String.MY_EMAIL)
+
+                MadeWithKobweb()
+            }
+        }
+    }
+}
+
+@Composable
+private fun MadeWithKobweb() {
+    val colorMode by ColorMode.currentState
+    Row(
+        modifier = Modifier
+            .borderRadius(8.px)
+            .padding(leftRight = 1.cssRem, topBottom = 0.5.cssRem)
+            .cursor(Cursor.Pointer)
+            .onClick {
+                window.open("https://kobweb.varabyte.com/", "_blank")
+            },
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center
+    ) {
+        SpanText(
+            "Built with",
+            Modifier
+                .margin(right = 8.px)
+                .fontFamily("Share Tech Mono")
+                .fontWeight(FontWeight.Bold)
+                .fontSize(1.5.em)
+                .color(if (colorMode.isDark)
+                    Res.Theme.THEME_GREEN_NEON.color
+                else
+                    Res.Theme.GREY_BACKGROUND.color
+                )
+        )
+        Image(
+            src = Res.Logo.KOBWEB_LOGO,
+            modifier = Modifier.
+            height(40.px)
+                .width(Width.FitContent)
+        )
+    }
+}

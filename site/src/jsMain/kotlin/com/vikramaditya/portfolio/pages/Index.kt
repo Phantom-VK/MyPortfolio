@@ -4,22 +4,22 @@ package com.vikramaditya.portfolio.pages
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
-import com.varabyte.kobweb.compose.css.Height
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Column
-import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
-import com.varabyte.kobweb.compose.ui.modifiers.*
+import com.varabyte.kobweb.compose.ui.modifiers.color
+import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
+import com.varabyte.kobweb.compose.ui.modifiers.zIndex
 import com.varabyte.kobweb.core.Page
 import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
+import com.vikramaditya.portfolio.components.ContactMeButton
 import com.vikramaditya.portfolio.layouts.PageLayout
 import com.vikramaditya.portfolio.sections.*
 import com.vikramaditya.portfolio.utils.Res
-import com.vikramaditya.portfolio.widgets.Cube3D
 import com.vikramaditya.portfolio.widgets.SectionTitle
-import org.jetbrains.compose.web.css.cssRem
+import kotlinx.browser.document
 
 
 @Page
@@ -27,6 +27,8 @@ import org.jetbrains.compose.web.css.cssRem
 fun HomePage() {
     var colorMode by ColorMode.currentState
     val breakpoint = rememberBreakpoint()
+
+
 
 
 
@@ -51,12 +53,14 @@ fun HomePage() {
             AboutMe()
             SectionTitle("What I do?", id = "what-i-do")
             WhatIDo()
-            SectionTitle("My Skills", id = "skills")
+            SectionTitle("Programming Language Proficiency", id = "languages")
             MySkillsSection()
-            SectionTitle("Tech Stack", id = "tech-stack")
+            SectionTitle("Tools & Technologies", id = "tech-stack")
             TechStackCubes()
-            SectionTitle("Project", id = "projects")
+            SectionTitle("Projects", id = "projects")
             ProjectSection()
+            Footer()
+
 
         }
     }

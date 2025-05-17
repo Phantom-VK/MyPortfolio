@@ -1,11 +1,6 @@
 package com.vikramaditya.portfolio.sections
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import com.varabyte.kobweb.compose.css.FontSize
 import com.varabyte.kobweb.compose.css.FontWeight
 import com.varabyte.kobweb.compose.css.TextAlign
@@ -15,31 +10,23 @@ import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
-import com.varabyte.kobweb.compose.ui.graphics.lightened
 import com.varabyte.kobweb.compose.ui.modifiers.*
-import com.varabyte.kobweb.core.rememberPageContext
 import com.varabyte.kobweb.silk.components.text.SpanText
-import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
-import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
-import com.vikramaditya.portfolio.widgets.ThemeSwitchButton
 import com.vikramaditya.portfolio.utils.Res
 import com.vikramaditya.portfolio.widgets.HeaderItem
+import com.vikramaditya.portfolio.widgets.ThemeSwitchButton
 import kotlinx.browser.document
 import kotlinx.browser.window
-import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
 import org.w3c.dom.SMOOTH
 import org.w3c.dom.ScrollBehavior
 import org.w3c.dom.ScrollToOptions
 
-
 @Composable
 fun Header(modifier: Modifier) {
     var colorMode by ColorMode.currentState
-    val ctx = rememberPageContext()
-    var selectedItem by remember { mutableIntStateOf(-1) }
 
     val (bgColor, textColor) = if (colorMode.isDark) {
         Res.Theme.DARK_THEME_BACKGROUND.color to Res.Theme.LIGHT_THEME_BACKGROUND.color
@@ -47,8 +34,24 @@ fun Header(modifier: Modifier) {
         Res.Theme.LIGHT_THEME_BACKGROUND.color to Res.Theme.DARK_THEME_BACKGROUND.color
     }
 
-    val breakpoint = rememberBreakpoint()
-    val isMobile = breakpoint <= Breakpoint.SM
+    var scrollY by remember { mutableStateOf(0.0) }
+    var currentSection by remember { mutableStateOf("") }
+
+    LaunchedEffect(Unit) {
+        window.addEventListener("scroll", {
+            scrollY = document.documentElement?.scrollTop ?: 0.0
+
+            val sections = listOf("","about-me", "languages", "projects", "contact")
+            val sectionOffsets = sections.associateWith { id ->
+                document.getElementById(id)?.getBoundingClientRect()?.top?.plus(window.scrollY) ?: Double.MAX_VALUE
+            }
+
+            currentSection = sectionOffsets.minByOrNull { (id, top) ->
+                val distance = kotlin.math.abs(scrollY - top)
+                if (distance < 500) distance else Double.MAX_VALUE
+            }?.key ?: ""
+        })
+    }
 
     Row(
         modifier = modifier
@@ -56,9 +59,8 @@ fun Header(modifier: Modifier) {
             .backdropFilter(blur(4.px))
             .padding(leftRight = 5.percent),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = if (isMobile) Arrangement.Center else Arrangement.SpaceBetween
+        horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        // Left Branding / Name
         SpanText(
             text = "Hi, I am ${Res.String.NAME}",
             modifier = Modifier
@@ -67,39 +69,31 @@ fun Header(modifier: Modifier) {
                 .fontSize(FontSize.XLarge)
                 .fontWeight(FontWeight.Bold)
                 .textAlign(TextAlign.Start)
+                .onClick {
+                    document.documentElement?.scroll(ScrollToOptions(top = 0.0, behavior = ScrollBehavior.SMOOTH))
+                }
         )
 
-        // Navigation Items + Theme Switch
         Row(
-            modifier = Modifier
-                .padding(left = if (isMobile) 0.px else 2.cssRem)
-                .width(Width.FitContent),
+            modifier = Modifier.width(Width.FitContent),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ) {
-
-            HeaderItem("Home", isOnline = selectedItem == 4) {
+            HeaderItem("Home", isOnline = currentSection == "") {
                 document.documentElement?.scroll(ScrollToOptions(top = 0.0, behavior = ScrollBehavior.SMOOTH))
-                selectedItem = 4
             }
-            HeaderItem("About Me", isOnline = selectedItem == 0) {
+            HeaderItem("About Me", isOnline = currentSection == "about-me") {
                 window.location.href = "#about-me"
-                selectedItem = 0
             }
-
-            HeaderItem("Skills", isOnline = selectedItem == 1) {
-                window.location.href = "#skills"
-                selectedItem = 1
+            HeaderItem("Skills", isOnline = currentSection == "languages") {
+                window.location.href = "#languages"
             }
-
-            HeaderItem("Projects", isOnline = selectedItem == 2) {
+            HeaderItem("Projects", isOnline = currentSection == "projects") {
                 window.location.href = "#projects"
-                selectedItem = 2
             }
 
-            HeaderItem("Contact Me", isOnline = selectedItem == 3) {
+            HeaderItem("Contact Me", isOnline = currentSection == "contact") {
                 window.location.href = "#contact"
-                selectedItem = 3
             }
 
             ThemeSwitchButton(
@@ -111,7 +105,3 @@ fun Header(modifier: Modifier) {
 }
 
 
-//                HangingText(
-//                    text = "Resume",
-//                    onClick = {ctx.router.navigateTo(Res.String.RESUME_URL) }
-//                )

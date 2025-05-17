@@ -15,6 +15,7 @@ import com.varabyte.kobweb.silk.style.toModifier
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.vikramaditya.portfolio.components.BackToTopButton
 import com.vikramaditya.portfolio.components.MatrixRainAnimation
+import com.vikramaditya.portfolio.sections.Footer
 import com.vikramaditya.portfolio.sections.Header
 import com.vikramaditya.portfolio.utils.Res
 import kotlinx.browser.document
@@ -43,8 +44,6 @@ fun PageLayout(
     LaunchedEffect(title) {
         document.title = "Vikramaditya Khupse - $title"
     }
-
-
 
     Box(
         modifier = Modifier
@@ -84,9 +83,8 @@ fun PageLayout(
         ) {
             content()
             BackToTopButton()
+
         }
-
-
 
     }
 }

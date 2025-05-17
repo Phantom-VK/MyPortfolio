@@ -11,7 +11,6 @@ import com.varabyte.kobweb.compose.ui.styleModifier
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.vikramaditya.portfolio.utils.Res
-import com.vikramaditya.portfolio.widgets.SectionTitle
 import org.jetbrains.compose.web.css.px
 
 data class Skill(val label: String, val percentage: String)
@@ -21,15 +20,12 @@ fun MySkillsSection() {
     val skills = listOf(
         Skill("PYTHON", "80%"),
         Skill("JAVA", "70%"),
-        Skill("Kotlin", "50%"),
-        Skill("C/C++", "30%")
+        Skill("Kotlin", "60%"),
+        Skill("C/C++", "50%")
     )
-
-    val colorMode = ColorMode.current
 
     Column(
         modifier = Modifier
-            .id("my-skills")
             .fillMaxWidth()
             .padding(topBottom = 48.px)
             .styleModifier {
