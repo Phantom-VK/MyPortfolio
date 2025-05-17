@@ -1,24 +1,30 @@
 package com.vikramaditya.portfolio.components
 
 import androidx.compose.runtime.Composable
+import androidx.compose.web.events.SyntheticMouseEvent
 import com.varabyte.kobweb.compose.css.FontWeight
+import com.varabyte.kobweb.compose.css.MixBlendMode
 import com.varabyte.kobweb.compose.css.ObjectFit
+import com.varabyte.kobweb.compose.css.mixBlendMode
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.Row
+import com.varabyte.kobweb.compose.foundation.layout.Spacer
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Color
-import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
+import com.varabyte.kobweb.compose.ui.styleModifier
 import com.varabyte.kobweb.compose.ui.toAttrs
+import com.varabyte.kobweb.silk.components.graphics.Image
+import com.varabyte.kobweb.silk.components.layout.SimpleGrid
+import com.varabyte.kobweb.silk.components.layout.numColumns
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.toModifier
 import com.vikramaditya.portfolio.styles.MatrixGreen
 import com.vikramaditya.portfolio.styles.ProjectCardSTyle
 import com.vikramaditya.portfolio.utils.Res
-import org.jetbrains.compose.web.css.LineStyle
 import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
@@ -27,36 +33,55 @@ import org.jetbrains.compose.web.dom.Img
 val MatrixPurple = Color.rgba(168, 158, 201, 0.5f)
 
 
-
 @Composable
 fun ProjectCard(
     title: String,
     description: String,
     imageUrl: String,
-    price: String,
-    duration: String,
-    creator: String,
-    creatorImage: String
+    mainTechStack: String,
+    otherTechStack: String,
+    iconsList: List<String>,
+    onClick: (SyntheticMouseEvent) -> Unit
 ) {
     Box(
         modifier = ProjectCardSTyle.toModifier()
+            .onClick { evt -> onClick(evt) }
     ) {
         Column(
-            modifier = Modifier.width(100.percent),
-            horizontalAlignment = Alignment.Start
+            modifier = Modifier
+                .width(100.percent)
+                .fillMaxHeight()
+                .padding(1.cssRem),
+            horizontalAlignment = Alignment.Start,
+            verticalArrangement = Arrangement.Top
         ) {
             Img(
                 src = imageUrl,
                 attrs = Modifier
                     .width(100.percent)
-                    .height(250.px)
+                    .maxHeight(250.px)
                     .objectFit(ObjectFit.Cover)
                     .borderRadius(0.5.cssRem)
                     .toAttrs()
             )
 
-            SpanText(title, Modifier.margin(top = 8.px).fontWeight(FontWeight.Bold).color(MatrixGreen))
-            SpanText(description, Modifier.margin(top = 4.px).color(MatrixPurple))
+            SpanText(
+                title,
+                Modifier
+                    .margin(top = 8.px)
+                    .fontFamily("Share Tech Mono")
+                    .fontWeight(FontWeight.Bold)
+                    .color(MatrixGreen)
+            )
+
+            SpanText(
+                description,
+                Modifier
+                    .margin(top = 4.px)
+                    .fontFamily("VT323")
+                    .color(MatrixPurple)
+            )
+            Spacer()
 
             Row(
                 Modifier
@@ -64,51 +89,54 @@ fun ProjectCard(
                     .fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    SpanText("◘", Modifier.margin(right = 8.px).color(MatrixGreen))
-                    SpanText(price, Modifier.color(MatrixGreen).fontWeight(FontWeight.Bold))
-                }
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    SpanText("◷", Modifier.margin(right = 8.px).color(MatrixPurple))
-                    SpanText(duration, Modifier.color(MatrixPurple))
-                }
+                SpanText(
+                    mainTechStack,
+                    Modifier
+                        .color(MatrixGreen)
+                        .fontFamily("VT323")
+                        .fontWeight(FontWeight.Bold)
+                )
+                SpanText(
+                    otherTechStack,
+                    Modifier
+                        .color(MatrixPurple)
+                        .fontFamily("VT323")
+                )
             }
 
-            Hr1()
 
-            Row(
-                modifier = Modifier.margin(top = 4.px),
-                verticalAlignment = Alignment.CenterVertically
+            CustomHorizontalDivider()
+
+            // ✅ Logo Grid
+            SimpleGrid(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 8.px),
+                numColumns = numColumns(base = 3, sm = 4, md = 5)
             ) {
-                Box(
-                    modifier = Modifier
-                        .padding(right = 8.px)
-                        .border(1.px, LineStyle.Solid, Color.rgba(255, 255, 255, 0.13f))
-                        .boxShadow(inset = true, blurRadius = 4.px, color = Color.rgba(0, 0, 0, 0.67f))
-                        .borderRadius(50.percent)
-                        .padding(4.px)
-                ) {
-                    Img(
-                        src = creatorImage,
-                        attrs = Modifier
-                            .size(32.px)
-                            .borderRadius(50.percent)
-                            .border(1.px, LineStyle.Solid, Color.rgba(255, 255, 255, 0.13f))
-                            .objectFit(ObjectFit.Cover)
-                            .toAttrs()
+                iconsList.forEach { icon ->
+                    Image(
+                        src = icon,
+                        modifier = Modifier
+                            .size(24.px)
+                            .styleModifier {
+                                mixBlendMode(MixBlendMode.Normal)
+                            }
                     )
                 }
-
-                SpanText(buildString {
-                    append("Creation of ")
-                    append(creator)
-                }, Modifier.color(MatrixPurple))
             }
+
         }
+
+
+
+
     }
 }
+
+
 @Composable
-fun Hr1() {
+fun CustomHorizontalDivider() {
     Box(
         modifier = Modifier
             .margin(top = 8.px, bottom = 8.px)

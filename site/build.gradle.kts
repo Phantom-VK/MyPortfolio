@@ -33,13 +33,6 @@ kobweb {
                 )
 
 
-//                link {
-//                    rel = "stylesheet"
-//                    href = RoutePrefix("/MyPortfolio").prependTo("/highlight/js/styles/atom-one-dark.css")
-//                }
-//                script {
-//                    src = RoutePrefix("/MyPortfolio").prependTo("/highlight/js/highlight.min.js")
-//                }
             }
         }
     }

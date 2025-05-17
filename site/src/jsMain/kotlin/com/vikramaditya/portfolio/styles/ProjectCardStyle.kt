@@ -1,6 +1,5 @@
 package com.vikramaditya.portfolio.styles
 
-import androidx.compose.runtime.getValue
 import com.varabyte.kobweb.compose.css.Background
 import com.varabyte.kobweb.compose.css.Transition
 import com.varabyte.kobweb.compose.css.functions.blur
@@ -21,8 +20,8 @@ val MatrixBgDark = Color.rgb(0x0d0d0d)
 val ProjectCardSTyle = CssStyle {
     base {
         Modifier
-            .maxWidth(300.px)
-            .margin(topBottom = 5.cssRem)
+            .maxWidth(280.px)
+            .margin(topBottom = 3.cssRem)
             .border(1.px, LineStyle.Solid, Res.Theme.THEME_GREEN_NEON.color)
             .borderRadius(0.7.cssRem)
             .background(
@@ -36,11 +35,10 @@ val ProjectCardSTyle = CssStyle {
             )
             .backdropFilter(blur(5.px))
             .transition(Transition.of("all", 0.5.s))
-            .padding(1.cssRem)
     }
     hover {
         Modifier
-            .boxShadow(blurRadius = 50.px, spreadRadius = 10.px, color = Res.Theme.THEME_GREEN_NEON.color)
+            .boxShadow(blurRadius = 40.px, spreadRadius = 7.px, color = Res.Theme.THEME_GREEN.color)
             .transform { scale(1.05) }
             .filter(brightness(1.3))
     }

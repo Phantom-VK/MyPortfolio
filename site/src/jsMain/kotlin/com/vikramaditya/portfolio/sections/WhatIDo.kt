@@ -47,8 +47,6 @@ fun WhatIDo(){
         verticalArrangement = Arrangement.SpaceBetween,
         horizontalAlignment = Alignment.CenterHorizontally){
 
-
-
         SimpleGrid(
             numColumns = numColumns(base = 1, sm = 1, md = 3),
             modifier = Modifier.fillMaxWidth()

@@ -2,6 +2,7 @@ package com.vikramaditya.portfolio.layouts
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import com.varabyte.kobweb.compose.css.Cursor
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.ColumnScope
@@ -14,6 +15,7 @@ import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.vikramaditya.portfolio.components.BackToTopButton
+import com.vikramaditya.portfolio.components.MatrixCursorFollower
 import com.vikramaditya.portfolio.components.MatrixRainAnimation
 import com.vikramaditya.portfolio.sections.Header
 import com.vikramaditya.portfolio.utils.Res
@@ -49,6 +51,7 @@ fun PageLayout(
     Box(
         modifier = Modifier
             .fillMaxSize()
+            .cursor(Cursor.None)
             .styleModifier {
                 property("cursor", "url('${
                     if (colorMode.isDark) Res.Image.CUSTOM_CURSOR_DARK
@@ -56,6 +59,7 @@ fun PageLayout(
                 }'), auto")
             }
     ) {
+//        MatrixCursorFollower()
 
         MatrixRainAnimation(
             Modifier.fillMaxSize()

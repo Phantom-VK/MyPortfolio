@@ -87,11 +87,18 @@ fun Header(modifier: Modifier){
                     selectedItem = 1
                 }
                 HeaderItem(
-                    "Contact Me",
+                    "Projects",
                     isOnline = selectedItem == 2
                 ){
-                    window.location.href = "#contact"
+                    window.location.href = "#projects"
                     selectedItem = 2
+                }
+                HeaderItem(
+                    "Contact Me",
+                    isOnline = selectedItem == 3
+                ){
+                    window.location.href = "#contact"
+                    selectedItem = 3
                 }
 
 //                HangingText(
