@@ -22,12 +22,15 @@ import com.varabyte.kobweb.compose.ui.modifiers.fontSize
 import com.varabyte.kobweb.compose.ui.modifiers.height
 import com.varabyte.kobweb.compose.ui.modifiers.id
 import com.varabyte.kobweb.compose.ui.modifiers.margin
+import com.varabyte.kobweb.compose.ui.modifiers.maxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.compose.ui.modifiers.textAlign
 import com.varabyte.kobweb.compose.ui.modifiers.zIndex
 import com.varabyte.kobweb.silk.components.layout.SimpleGrid
 import com.varabyte.kobweb.silk.components.layout.numColumns
 import com.varabyte.kobweb.silk.components.text.SpanText
+import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
+import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.vikramaditya.portfolio.components.WhatIDoCard
 import com.vikramaditya.portfolio.utils.Res
@@ -37,81 +40,72 @@ import org.jetbrains.compose.web.css.em
 import org.jetbrains.compose.web.css.percent
 
 @Composable
-fun WhatIDo(){
-
+fun WhatIDo() {
     val colorMode by ColorMode.currentState
+    val breakpoint = rememberBreakpoint()
 
     Column(
         modifier = Modifier
-        .fillMaxSize(),
-        verticalArrangement = Arrangement.SpaceBetween,
-        horizontalAlignment = Alignment.CenterHorizontally){
-
+            .fillMaxWidth()
+            .padding(topBottom = 2.cssRem),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         SimpleGrid(
-            numColumns = numColumns(base = 1, sm = 1, md = 3),
-            modifier = Modifier.fillMaxWidth()
-                .padding(5.percent)
-                .height(Height.FitContent)
-                .id("what_i_do_grid")
-        ){
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(leftRight = 2.cssRem)
+                .maxWidth(100.cssRem),
+            numColumns = numColumns(
+                base = 1,
+                sm = 1,
+                md = 2,
+                lg = 3
+            )
+        ) {
             WhatIDoCard(
                 iconImage = Res.Icon.HEXAWEB,
                 description = "Software Development",
                 backContent = {
                     SpanText(
-                        text = "Developed many softwares with different tech stack",
+                        text = "Developed software projects spanning domains like utilities, automation, and educational tools.",
                         modifier = Modifier
                             .textAlign(TextAlign.Center)
                             .fontFamily("JetBrains Mono")
-                            .fontSize(1.3.em)
-                            .color(
-                                if (colorMode.isDark)
-                                    Res.Theme.GLASS_BOX_BORDER_COLOR_LIGHT.color
-                                else Colors.White
-                            )
+                            .fontSize(if (breakpoint >= Breakpoint.MD) 1.3.em else 1.1.em)
+                            .color(if (colorMode.isDark) Res.Theme.GLASS_BOX_BORDER_COLOR_LIGHT.color else Colors.White)
                     )
                 }
             )
-            Spacer()
+
             WhatIDoCard(
                 iconImage = Res.Icon.DEV,
                 description = "App Development",
                 backContent = {
                     SpanText(
-                        text = "Developed many android apps using kotlin and jetpack compose",
+                        text = "Engineered Android apps using Kotlin and Jetpack Compose with an emphasis on clean architecture and UI performance.",
                         modifier = Modifier
                             .textAlign(TextAlign.Center)
                             .fontFamily("JetBrains Mono")
-                            .fontSize(1.3.em)
-                            .color(
-                                if (colorMode.isDark)
-                                    Res.Theme.GLASS_BOX_BORDER_COLOR_LIGHT.color
-                                else Colors.White
-                            )
+                            .fontSize(if (breakpoint >= Breakpoint.MD) 1.3.em else 1.1.em)
+                            .color(if (colorMode.isDark) Res.Theme.GLASS_BOX_BORDER_COLOR_LIGHT.color else Colors.White)
                     )
                 }
             )
-            Spacer()
+
             WhatIDoCard(
                 iconImage = Res.Icon.CUBOID,
-                description = "UI/UX And Software Design",
+                description = "UI/UX and Software Design",
                 backContent = {
                     SpanText(
-                        text = "Created many designs in figma and made software architectures",
+                        text = "Designed intuitive UIs in Figma and planned system-level architecture for seamless development.",
                         modifier = Modifier
                             .textAlign(TextAlign.Center)
                             .fontFamily("JetBrains Mono")
-                            .fontSize(1.3.em)
-                            .color(
-                                if (colorMode.isDark)
-                                    Res.Theme.GLASS_BOX_BORDER_COLOR_LIGHT.color
-                                else Colors.White
-                            )
+                            .fontSize(if (breakpoint >= Breakpoint.MD) 1.3.em else 1.1.em)
+                            .color(if (colorMode.isDark) Res.Theme.GLASS_BOX_BORDER_COLOR_LIGHT.color else Colors.White)
                     )
                 }
             )
         }
     }
-
-
 }

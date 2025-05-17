@@ -30,114 +30,39 @@ import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.dom.Div
 
 @Composable
-fun Cube3D() {
+fun Cube3D(
+    icons: List<String>,
+    modifier: Modifier = Modifier
+) {
+    Box(
+        modifier = modifier
+            .alignSelf(AlignSelf.Center)
+            .padding(topBottom = 4.percent)
+    ) {
+        Div(ContainerStyle.toModifier().toAttrs()) {
+            Div(BoxCardStyle.toModifier().toAttrs()) {
+                val faceStyles = listOf(
+                    FrontStyle, BackStyle, RightStyle, LeftStyle, TopStyle, BottomStyle
+                )
 
-    Box (
-        modifier =
-            Modifier
-                .alignSelf(AlignSelf.Center)
-                .padding(topBottom = 4.percent)
-    ){
+                for (i in faceStyles.indices) {
+                    val iconSrc = icons.getOrNull(i) ?: continue
 
-        Div(
-            attrs = ContainerStyle.toModifier()
-                .toAttrs()
-        ) {
-            Div(
-                attrs = BoxCardStyle.toModifier()
-                    .toAttrs()
-            ) {
-                // Front face
-                Div(
-                    attrs = FaceStyle.toModifier()
-                        .then(FrontStyle.toModifier())
-                        .toAttrs()
-                ) {
-                    Image(
-                        src = Res.Logo.KOTLIN_LOGO,
-                        modifier = Modifier.size(100.px)
-                            .styleModifier {
+                    Div(
+                        attrs = FaceStyle.toModifier()
+                            .then(faceStyles[i].toModifier())
+                            .toAttrs()
+                    ) {
+                        Image(
+                            src = iconSrc,
+                            modifier = Modifier.size(100.px).styleModifier {
                                 mixBlendMode(MixBlendMode.Normal)
                             }
-                    )
-                }
-
-                // Back face
-                Div(
-                    attrs = FaceStyle.toModifier()
-                        .then(BackStyle.toModifier())
-                        .toAttrs()
-                ) {
-                    Image(
-                        src = Res.Logo.PYTHON_LOGO,
-                        modifier = Modifier.size(100.px)
-                            .styleModifier {
-                                mixBlendMode(MixBlendMode.Normal)
-                            }
-                    )
-                }
-
-                // Right face
-                Div(
-                    attrs = FaceStyle.toModifier()
-                        .then(RightStyle.toModifier())
-                        .toAttrs()
-                ) {
-                    Image(
-                        src = Res.Logo.ANDROID_LOGO,
-                        modifier = Modifier.size(100.px)
-                            .styleModifier {
-                                mixBlendMode(MixBlendMode.Normal)
-                            }
-                    )
-                }
-
-                // Left face
-                Div(
-                    attrs = FaceStyle.toModifier()
-                        .then(LeftStyle.toModifier())
-                        .toAttrs()
-                ) {
-                    Image(
-                        src = Res.Logo.MYSQL_LOGO,
-                        modifier = Modifier.size(100.px)
-                            .styleModifier {
-                                mixBlendMode(MixBlendMode.Normal)
-                            }
-                    )
-                }
-
-                // Top face
-                Div(
-                    attrs = FaceStyle.toModifier()
-                        .then(TopStyle.toModifier())
-                        .toAttrs()
-                ) {
-                    Image(
-                        src = Res.Logo.GIT_LOGO,
-                        modifier = Modifier.size(100.px)
-                            .styleModifier {
-                                mixBlendMode(MixBlendMode.Normal)
-                            }
-                    )
-                }
-
-                // Bottom face
-                Div(
-                    attrs = FaceStyle.toModifier()
-                        .then(BottomStyle.toModifier())
-                        .toAttrs()
-                ) {
-                    Image(
-                        src = Res.Logo.JAVA_LOGO,
-                        modifier = Modifier.size(100.px)
-                            .styleModifier {
-                                mixBlendMode(MixBlendMode.Normal)
-                            }
-                    )
+                        )
+                    }
                 }
             }
         }
     }
-
 }
+

@@ -23,30 +23,49 @@ fun ProjectSection(){
         ProjectCard(
             title = "Vyom Assist",
             description = "Business Analytics-Based Appointment Management System.",
-            imageUrl = "https://images.unsplash.com/photo-1621075160523-b936ad96132a?auto=format&fit=crop&w=1170&q=80",
+            imageUrl = "images/projectthumbnails/vyomassist.png",
             mainTechStack = "Kotlin-Jetpack Compose",
             otherTechStack = "PHP, SQL",
             iconsList = listOf(
                 Res.Logo.KOTLIN_LOGO,
                 Res.Logo.ANDROID_LOGO,
                 Res.Logo.FIREBASE_LOGO,
-                Res.Logo.MYSQL_LOGO
+                Res.Logo.MYSQL_LOGO,
+                Res.Logo.FIGMA_LOGO
             ),
             onClick = {
                 ctx.router.navigateTo("https://github.com/Phantom-VK/Vyom-Assist")
             }
         )
+
         ProjectCard(
-            title = "IP Utils",
-            description = "Multiplatform educational software to showcase detailed information of a particular IP address.",
-            imageUrl = "https://images.unsplash.com/photo-1621075160523-b936ad96132a?auto=format&fit=crop&w=1170&q=80",
-            mainTechStack = "Kotlin Multiplatform",
-            otherTechStack = "Compose Multiplatform",
+            title = "AirSage AI",
+            description = "Android application that visualizes live gas readings (CO, CO₂, NH₃, NOx, etc.) transmitted from a physical hardware device. ",
+            imageUrl = "images/projectthumbnails/airsage.png",
+            mainTechStack = "Kotlin-Jetpack Compose",
+            otherTechStack = "Kotlin, Jetpack Compose, Firebase, Retrofit",
             iconsList = listOf(
                 Res.Logo.KOTLIN_LOGO,
                 Res.Logo.ANDROID_LOGO,
-                Res.Logo.INTELLIJ_LOGO,
-                Res.Logo.GIT_LOGO
+                Res.Logo.FIREBASE_LOGO,
+                Res.Logo.MYSQL_LOGO,
+                Res.Logo.FIGMA_LOGO
+            ),
+            onClick = {
+                ctx.router.navigateTo("https://github.com/Phantom-VK/AirSageAi")
+            }
+        )
+        ProjectCard(
+            title = "IP Utils",
+            description = "Multiplatform educational software to showcase detailed information of a particular IP address.",
+            imageUrl = "images/projectthumbnails/iputils.png",
+            mainTechStack = "Kotlin Multiplatform",
+            otherTechStack = "Compose Multiplatform",
+            iconsList = listOf(
+                Res.Logo.CMP_LOGO,
+                Res.Logo.KOTLIN_LOGO,
+                Res.Logo.ANDROID_LOGO,
+                Res.Logo.INTELLIJ_LOGO
             ),
             onClick = {
                 ctx.router.navigateTo("https://github.com/Phantom-VK/IPUtils")
@@ -56,12 +75,14 @@ fun ProjectSection(){
         ProjectCard(
             title = "Id Card Generator",
             description = "Web Application to generate ID Card for SGGSIE&T,Nanded.",
-            imageUrl = "https://images.unsplash.com/photo-1621075160523-b936ad96132a?auto=format&fit=crop&w=1170&q=80",
+            imageUrl = "images/projectthumbnails/sggsidcard.png",
             mainTechStack = "Python",
             otherTechStack = "Flask, Firebase",
             iconsList = listOf(
                 Res.Logo.PYTHON_LOGO,
-                Res.Logo.FIREBASE_LOGO
+                Res.Logo.FIREBASE_LOGO,
+                Res.Logo.FLASK_LOGO,
+                Res.Logo.PYCHARM_LOGO
             ),
             onClick = {
                 ctx.router.navigateTo("https://github.com/Phantom-VK/sggs-id")
@@ -70,14 +91,13 @@ fun ProjectSection(){
         ProjectCard(
             title = "SRT Slicer",
             description = "A powerful tool to generate word-level timestamps from SRT subtitle files with advanced customization options. ",
-            imageUrl = "https://images.unsplash.com/photo-1621075160523-b936ad96132a?auto=format&fit=crop&w=1170&q=80",
+            imageUrl = "images/projectthumbnails/srtslicer.png",
             mainTechStack = "Python",
             otherTechStack = "Inno Setup",
             iconsList = listOf(
                 Res.Logo.PYTHON_LOGO,
-                Res.Logo.ANDROID_LOGO,
-                Res.Logo.FIREBASE_LOGO,
-                Res.Logo.MYSQL_LOGO
+                Res.Logo.PYCHARM_LOGO
+
             ),
             onClick = {
                 ctx.router.navigateTo("https://github.com/Phantom-VK/SRTSlicer")
@@ -86,17 +106,46 @@ fun ProjectSection(){
         ProjectCard(
             title = "Customer Care Chatbot",
             description = "A Customer Care chatbot for banks",
-            imageUrl = "https://images.unsplash.com/photo-1621075160523-b936ad96132a?auto=format&fit=crop&w=1170&q=80",
+            imageUrl = "https://seeklogo.com/images/C/chatbot-logo-7F87FAB230-seeklogo.com.png",
             mainTechStack = "Python",
             otherTechStack = "Transformers, Torch, Flask",
             iconsList = listOf(
                 Res.Logo.PYTHON_LOGO,
-                Res.Logo.ANDROID_LOGO,
-                Res.Logo.FIREBASE_LOGO,
-                Res.Logo.MYSQL_LOGO
+                Res.Logo.PYCHARM_LOGO,
+                Res.Logo.PYTORCH_LOGO
             ),
             onClick = {
                 ctx.router.navigateTo("https://github.com/Phantom-VK/CustomerCare-Chatbot")
+            }
+        )
+        ProjectCard(
+            title = "Credit Checker",
+            description = "A utility python project for studios and companies , to check if a particular channel has given them right credits or not in each video of the channel. ",
+            imageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqtpKHYwjMNEl4NZmecZZNkUcFC3xsJ9AjzilzMyy56kJMPCVDGs0KUoI13D8-m-8z34k&usqp=CAU",
+            mainTechStack = "Python",
+            otherTechStack = "Pandas, Requests",
+            iconsList = listOf(
+                Res.Logo.PYTHON_LOGO,
+                Res.Logo.PYCHARM_LOGO
+            ),
+            onClick = {
+                ctx.router.navigateTo("https://github.com/Phantom-VK/CreditChekcr")
+            }
+        )
+
+        ProjectCard(
+            title = "Portfolio",
+            description = "Portfolio Website using Kobweb framework, Kotlin language only.",
+            imageUrl = "images/projectthumbnails/portfolio.png",
+            mainTechStack = "Kobweb",
+            otherTechStack = "Kotlin",
+            iconsList = listOf(
+                Res.Logo.KOTLIN_LOGO,
+                Res.Logo.INTELLIJ_LOGO,
+                Res.Logo.CMP_LOGO
+            ),
+            onClick = {
+                ctx.router.navigateTo("https://github.com/Phantom-VK/MyPortfolio")
             }
         )
     }

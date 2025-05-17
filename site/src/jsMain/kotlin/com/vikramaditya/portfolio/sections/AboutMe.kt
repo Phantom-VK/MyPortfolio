@@ -34,9 +34,9 @@ fun AboutMe() {
     val breakpoint = rememberBreakpoint()
 
     val fontSize = when (breakpoint) {
-        Breakpoint.SM, Breakpoint.XL -> 20.px
-        Breakpoint.MD -> 24.px
-        else -> 25.px
+        Breakpoint.SM, Breakpoint.XL -> 24.px
+        Breakpoint.MD -> 28.px
+        else -> 30.px
     }
 
     Column(

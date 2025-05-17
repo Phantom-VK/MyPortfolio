@@ -26,7 +26,7 @@ private val sharedModifier3 = Modifier
 val CardStyle = CssStyle {
     base {
         Modifier
-            .width(450.px)
+            .width(470.px)
             .height(200.px)
             .cursor(Cursor.Pointer)
             .styleModifier {

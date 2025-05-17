@@ -7,15 +7,13 @@ import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.ColumnScope
 import com.varabyte.kobweb.compose.ui.Modifier
-import com.varabyte.kobweb.compose.ui.graphics.Color
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.compose.ui.styleModifier
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
-import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
+import com.varabyte.kobweb.silk.style.toModifier
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.vikramaditya.portfolio.components.BackToTopButton
-import com.vikramaditya.portfolio.components.MatrixCursorFollower
 import com.vikramaditya.portfolio.components.MatrixRainAnimation
 import com.vikramaditya.portfolio.sections.Header
 import com.vikramaditya.portfolio.utils.Res
@@ -59,31 +57,10 @@ fun PageLayout(
                 }'), auto")
             }
     ) {
-//        MatrixCursorFollower()
 
         MatrixRainAnimation(
             Modifier.fillMaxSize()
         )
-
-
-        // Background overlay
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .backgroundColor(if (colorMode.isDark) Color.rgba(0, 0, 0, 0.3f)
-                else Color.rgba(255, 255, 255, 0.8f))
-        )
-
-        // Main content (below header)
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(top = 80.px) // Adjust based on header height
-        ) {
-            content()
-            BackToTopButton()
-        }
-
         // Fixed header (top layer)
         Box(
             modifier = Modifier
@@ -97,6 +74,19 @@ fun PageLayout(
             )
 
         }
+
+
+        // Main content (below header)
+        Column(
+            modifier = PageContentStyle.toModifier()
+                .fillMaxSize()
+                .padding(top = 80.px) // Adjust based on header height
+        ) {
+            content()
+            BackToTopButton()
+        }
+
+
 
     }
 }

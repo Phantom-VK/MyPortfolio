@@ -63,7 +63,6 @@ object Res {
         const val LINKEDIN_LIGHT = "images/icons/linkedin_light.svg"
         const val SUN = "images/icons/sun.svg"
         const val MOON = "images/icons/moon.svg"
-
         const val DEV = "images/icons/dev.svg"
         const val HEXAWEB = "images/icons/hexaweb.svg"
         const val CUBOID = "images/icons/cuboid.svg"
@@ -76,11 +75,14 @@ object Res {
         const val NAVIGATION_ARROW = "images/Navigation_Arrow.svg"
         const val CUSTOM_CURSOR_DARK = "images/Custom_Cursor_Dark.svg"
         const val CUSTOM_CURSOR_LIGHT = "images/Custom_Cursor_Light.svg"
-        const val PAGE_BACKGROUND = "images/page_background.jpg"
 
     }
     object Logo{
-        const val ANDROID_LOGO = "images/tools/Android.svg"
+        const val ANDROID_LOGO = "images/tools/Android.png"
+        const val GITHUB_LOGO = "images/tools/GitHub.svg"
+        const val PYCHARM_LOGO = "images/tools/PyCharm.svg"
+        const val UBUNTU_LOGO = "images/tools/Ubuntu.svg"
+        const val CMP_LOGO = "images/skills/cmp.svg"
         const val FIGMA_LOGO = "images/tools/Figma.svg"
         const val FIREBASE_LOGO = "images/tools/Firebase.svg"
         const val GIT_LOGO = "images/tools/Git.svg"
@@ -90,6 +92,12 @@ object Res {
         const val KOTLIN_LOGO = "images/skills/Kotlin.svg"
         const val PYTHON_LOGO = "images/skills/python.svg"
         const val MYSQL_LOGO = "images/skills/mysql.svg"
+        const val CPP_LOGO = "images/skills/Cpp.svg"
+        const val C_LOGO = "images/skills/C.svg"
+        const val FLASK_LOGO = "images/skills/Flask.svg"
+        const val DJANGO_LOGO = "images/skills/Django.svg"
+        const val KOBWEB_LOGO = "images/tools/Kobweb.png"
+        const val PYTORCH_LOGO = "images/tools/Pytorch.png"
     }
 
     object String {
