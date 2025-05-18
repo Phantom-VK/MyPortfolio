@@ -29,9 +29,6 @@ fun HomePage() {
     val breakpoint = rememberBreakpoint()
 
 
-
-
-
     PageLayout(
         title = "Home"
     ) {

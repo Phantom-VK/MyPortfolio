@@ -43,19 +43,26 @@ fun Header(modifier: Modifier) {
 
     LaunchedEffect(Unit) {
         window.addEventListener("scroll", {
-            scrollY = document.documentElement?.scrollTop ?: 0.0
+            val scrollY = (document.documentElement?.scrollTop ?: 0.0).toDouble()
+            val scrollHeight = (document.documentElement?.scrollHeight ?: 0).toDouble()
+            val clientHeight = (document.documentElement?.clientHeight ?: 0).toDouble()
 
+            val atBottom = scrollY + clientHeight >= scrollHeight - 50
             val sections = listOf("", "about-me", "languages", "projects", "contact")
             val sectionOffsets = sections.associateWith { id ->
                 document.getElementById(id)?.getBoundingClientRect()?.top?.plus(window.scrollY) ?: Double.MAX_VALUE
             }
 
-            currentSection = sectionOffsets.minByOrNull { (_, top) ->
-                val distance = kotlin.math.abs(scrollY - top)
-                if (distance < 500) distance else Double.MAX_VALUE
-            }?.key ?: ""
+            currentSection = when {
+                atBottom -> "contact"
+                else -> sectionOffsets.minByOrNull { (_, top) ->
+                    val distance = kotlin.math.abs(scrollY - top)
+                    if (distance < 500) distance else Double.MAX_VALUE
+                }?.key ?: ""
+            }
         })
     }
+
 
     Column(
         modifier = modifier
@@ -93,21 +100,29 @@ fun Header(modifier: Modifier) {
                 document.documentElement?.scroll(ScrollToOptions(top = 0.0, behavior = ScrollBehavior.SMOOTH))
             }
             HeaderItem("About Me", isOnline = currentSection == "about-me") {
-                window.location.href = "#about-me"
+                scrollToSection("about-me")
             }
             HeaderItem("Skills", isOnline = currentSection == "languages") {
-                window.location.href = "#languages"
+                scrollToSection("languages")
             }
             HeaderItem("Projects", isOnline = currentSection == "projects") {
-                window.location.href = "#projects"
+                scrollToSection("projects")
             }
             HeaderItem("Contact Me", isOnline = currentSection == "contact") {
-                window.location.href = "#contact"
+                scrollToSection("contact")
             }
             ThemeSwitchButton(
                 colorMode = colorMode,
                 onClick = { colorMode = colorMode.opposite }
             )
         }
+    }
+}
+
+fun scrollToSection(id: String) {
+    val element = document.getElementById(id)
+    val offsetTop = element?.getBoundingClientRect()?.top?.plus(window.scrollY)
+    offsetTop?.let {
+        window.scroll(ScrollToOptions(top = it, behavior = ScrollBehavior.SMOOTH))
     }
 }
