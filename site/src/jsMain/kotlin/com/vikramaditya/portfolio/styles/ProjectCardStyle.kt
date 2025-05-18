@@ -27,9 +27,9 @@ val ProjectCardSTyle = CssStyle {
             .background(
                 Background.of(
                     linearGradient(
-                        0.deg,
                         MatrixBgDark,
-                        Color.rgba(0, 0, 0, 0.7f)
+                        Color.rgba(0, 0, 0, 0.7f),
+                        0.deg
                     ).toImage()
                 )
             )

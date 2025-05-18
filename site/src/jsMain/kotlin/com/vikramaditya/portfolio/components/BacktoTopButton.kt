@@ -40,7 +40,6 @@ import com.varabyte.kobweb.compose.ui.modifiers.visibility
 import com.varabyte.kobweb.compose.ui.modifiers.zIndex
 import com.varabyte.kobweb.compose.ui.styleModifier
 import com.varabyte.kobweb.silk.style.animation.Keyframes
-import com.varabyte.kobweb.silk.components.animation.toAnimation
 import com.varabyte.kobweb.silk.style.selectors.hover
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.toModifier

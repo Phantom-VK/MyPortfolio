@@ -1,6 +1,6 @@
 site:
   title: "MyPortfolio"
-  routePrefix: "MyPortfolio"
+  basePath: "MyPortfolio"
 
 server:
   files:

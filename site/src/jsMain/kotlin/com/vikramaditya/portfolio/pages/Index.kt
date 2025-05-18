@@ -12,6 +12,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.color
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.zIndex
 import com.varabyte.kobweb.core.Page
+import com.varabyte.kobweb.framework.annotations.DelicateApi
 import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.vikramaditya.portfolio.layouts.PageLayout
@@ -20,6 +21,7 @@ import com.vikramaditya.portfolio.utils.Res
 import com.vikramaditya.portfolio.widgets.SectionTitle
 
 
+@OptIn(DelicateApi::class)
 @Page
 @Composable
 fun HomePage() {

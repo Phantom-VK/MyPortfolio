@@ -1,8 +1,10 @@
 package com.vikramaditya.portfolio.sections
 
 import androidx.compose.runtime.Composable
+import com.varabyte.kobweb.compose.css.JustifyItems
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
+import com.varabyte.kobweb.compose.ui.modifiers.justifyItems
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.core.rememberPageContext
 import com.varabyte.kobweb.silk.components.layout.SimpleGrid
@@ -17,7 +19,10 @@ fun ProjectSection(){
 
 
     SimpleGrid(
-        modifier = Modifier.fillMaxWidth().padding( 2.cssRem),
+        modifier = Modifier
+            .fillMaxWidth()
+            .justifyItems(JustifyItems.Center)
+            .padding( 2.cssRem),
         numColumns = numColumns(base = 1, sm = 1, md = 2, lg = 4)
     ) {
         ProjectCard(

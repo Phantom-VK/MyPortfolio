@@ -6,27 +6,31 @@ import com.varabyte.kobweb.compose.css.FontWeight
 import com.varabyte.kobweb.compose.css.TextAlign
 import com.varabyte.kobweb.compose.css.Width
 import com.varabyte.kobweb.compose.css.functions.blur
-import com.varabyte.kobweb.compose.foundation.layout.Arrangement
-import com.varabyte.kobweb.compose.foundation.layout.Row
+import com.varabyte.kobweb.compose.foundation.layout.*
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.*
+import com.varabyte.kobweb.framework.annotations.DelicateApi
 import com.varabyte.kobweb.silk.components.text.SpanText
+import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
+import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.vikramaditya.portfolio.utils.Res
 import com.vikramaditya.portfolio.widgets.HeaderItem
 import com.vikramaditya.portfolio.widgets.ThemeSwitchButton
 import kotlinx.browser.document
 import kotlinx.browser.window
-import org.jetbrains.compose.web.css.percent
-import org.jetbrains.compose.web.css.px
+import org.jetbrains.compose.web.css.*
 import org.w3c.dom.SMOOTH
 import org.w3c.dom.ScrollBehavior
 import org.w3c.dom.ScrollToOptions
 
+@OptIn(DelicateApi::class)
 @Composable
 fun Header(modifier: Modifier) {
     var colorMode by ColorMode.currentState
+    val breakpoint = rememberBreakpoint()
+    val isMobile = breakpoint <= Breakpoint.SM
 
     val (bgColor, textColor) = if (colorMode.isDark) {
         Res.Theme.DARK_THEME_BACKGROUND.color to Res.Theme.LIGHT_THEME_BACKGROUND.color
@@ -41,43 +45,49 @@ fun Header(modifier: Modifier) {
         window.addEventListener("scroll", {
             scrollY = document.documentElement?.scrollTop ?: 0.0
 
-            val sections = listOf("","about-me", "languages", "projects", "contact")
+            val sections = listOf("", "about-me", "languages", "projects", "contact")
             val sectionOffsets = sections.associateWith { id ->
                 document.getElementById(id)?.getBoundingClientRect()?.top?.plus(window.scrollY) ?: Double.MAX_VALUE
             }
 
-            currentSection = sectionOffsets.minByOrNull { (id, top) ->
+            currentSection = sectionOffsets.minByOrNull { (_, top) ->
                 val distance = kotlin.math.abs(scrollY - top)
                 if (distance < 500) distance else Double.MAX_VALUE
             }?.key ?: ""
         })
     }
 
-    Row(
+    Column(
         modifier = modifier
             .fillMaxWidth()
             .backdropFilter(blur(4.px))
-            .padding(leftRight = 5.percent),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceBetween
+            .padding(leftRight = 4.percent)
     ) {
-        SpanText(
-            text = "Hi, I am ${Res.String.NAME}",
-            modifier = Modifier
-                .fontFamily("Share Tech Mono")
-                .color(textColor)
-                .fontSize(FontSize.XLarge)
-                .fontWeight(FontWeight.Bold)
-                .textAlign(TextAlign.Start)
-                .onClick {
-                    document.documentElement?.scroll(ScrollToOptions(top = 0.0, behavior = ScrollBehavior.SMOOTH))
-                }
-        )
-
+        // Top Row: Branding
         Row(
-            modifier = Modifier.width(Width.FitContent),
+            modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center
+            horizontalArrangement =  Arrangement.Center
+        ) {
+            SpanText(
+                text = "Hi, I am ${Res.String.NAME}",
+                modifier = Modifier
+                    .fontFamily("Share Tech Mono")
+                    .color(textColor)
+                    .fontSize(FontSize.XLarge)
+                    .fontWeight(FontWeight.Bold)
+                    .textAlign(TextAlign.Center)
+                    .onClick {
+                        document.documentElement?.scroll(ScrollToOptions(top = 0.0, behavior = ScrollBehavior.SMOOTH))
+                    }
+            )
+        }
+
+        // Bottom Row: Navigation
+        Row(
+            modifier = Modifier.fillMaxWidth().padding(top = 8.px),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceEvenly
         ) {
             HeaderItem("Home", isOnline = currentSection == "") {
                 document.documentElement?.scroll(ScrollToOptions(top = 0.0, behavior = ScrollBehavior.SMOOTH))
@@ -91,11 +101,9 @@ fun Header(modifier: Modifier) {
             HeaderItem("Projects", isOnline = currentSection == "projects") {
                 window.location.href = "#projects"
             }
-
             HeaderItem("Contact Me", isOnline = currentSection == "contact") {
                 window.location.href = "#contact"
             }
-
             ThemeSwitchButton(
                 colorMode = colorMode,
                 onClick = { colorMode = colorMode.opposite }
@@ -103,5 +111,3 @@ fun Header(modifier: Modifier) {
         }
     }
 }
-
-
