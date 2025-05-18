@@ -49,7 +49,7 @@ fun WhatIDoCard(
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(5.percent),
+                        .padding(4.percent),
                     verticalArrangement = Arrangement.SpaceBetween,
                     horizontalAlignment = Alignment.Start
                 ) {

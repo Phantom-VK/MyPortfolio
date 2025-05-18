@@ -1,4 +1,4 @@
-package com.vikramaditya.portfolio.components
+package com.vikramaditya.portfolio.widgets
 
 import androidx.compose.runtime.*
 import androidx.compose.web.events.SyntheticMouseEvent

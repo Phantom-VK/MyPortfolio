@@ -26,24 +26,12 @@ private val sharedModifier3 = Modifier
 val CardStyle = CssStyle {
     base {
         Modifier
-            .width(100.percent)
-            .maxWidth(470.px)
+            .fillMaxWidth()
             .height(200.px)
             .cursor(Cursor.Pointer)
             .styleModifier {
                 property("perspective", "1000px")
             }
-    }
-    Breakpoint.MD {
-        Modifier
-            .width(100.percent)
-            .maxWidth(400.px)
-    }
-    Breakpoint.SM {
-        Modifier
-            .width(100.percent)
-            .maxWidth(340.px)
-            .height(180.px)
     }
     cssRule(":hover .card-inner") {
         Modifier

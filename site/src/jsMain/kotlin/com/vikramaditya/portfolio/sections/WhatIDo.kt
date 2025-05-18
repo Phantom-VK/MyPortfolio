@@ -62,9 +62,9 @@ fun WhatIDo() {
         SimpleGrid(
             modifier = Modifier
                 .fillMaxWidth()
+                .gap(10.percent)
                 .padding(leftRight = 2.cssRem)
-                .justifyItems(JustifyItems.Center)
-                .maxWidth(100.cssRem),
+                .justifyItems(JustifyItems.Center),
             numColumns = numColumns(
                 base = 1,
                 sm = 1,

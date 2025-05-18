@@ -9,8 +9,8 @@ import com.varabyte.kobweb.compose.ui.graphics.Color
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.compose.ui.styleModifier
 import com.varabyte.kobweb.silk.components.text.SpanText
-import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.vikramaditya.portfolio.utils.Res
+import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
 
 data class Skill(val label: String, val percentage: String)
@@ -24,9 +24,11 @@ fun MySkillsSection() {
         Skill("C/C++", "50%")
     )
 
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
+            .margin(topBottom = 2.percent)
             .padding(topBottom = 48.px)
             .styleModifier {
                 property("text-align", "center")
@@ -34,8 +36,6 @@ fun MySkillsSection() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
-
-        Spacer()
 
         Box(
             modifier = Modifier

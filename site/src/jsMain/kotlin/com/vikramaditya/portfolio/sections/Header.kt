@@ -4,7 +4,6 @@ import androidx.compose.runtime.*
 import com.varabyte.kobweb.compose.css.FontSize
 import com.varabyte.kobweb.compose.css.FontWeight
 import com.varabyte.kobweb.compose.css.TextAlign
-import com.varabyte.kobweb.compose.css.Width
 import com.varabyte.kobweb.compose.css.functions.blur
 import com.varabyte.kobweb.compose.foundation.layout.*
 import com.varabyte.kobweb.compose.ui.Alignment
@@ -16,7 +15,7 @@ import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.vikramaditya.portfolio.utils.Res
-import com.vikramaditya.portfolio.widgets.HeaderItem
+import com.vikramaditya.portfolio.components.HeaderItem
 import com.vikramaditya.portfolio.widgets.ThemeSwitchButton
 import kotlinx.browser.document
 import kotlinx.browser.window
@@ -74,7 +73,7 @@ fun Header(modifier: Modifier) {
         Row(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement =  Arrangement.Center
+            horizontalArrangement = Arrangement.Center
         ) {
             SpanText(
                 text = "Hi, I am ${Res.String.NAME}",
@@ -96,19 +95,39 @@ fun Header(modifier: Modifier) {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            HeaderItem("Home", isOnline = currentSection == "") {
+            HeaderItem(
+                "Home",
+                isOnline = currentSection == "",
+                breakpoint = breakpoint
+            ) {
                 document.documentElement?.scroll(ScrollToOptions(top = 0.0, behavior = ScrollBehavior.SMOOTH))
             }
-            HeaderItem("About Me", isOnline = currentSection == "about-me") {
+            HeaderItem(
+                "About Me",
+                isOnline = currentSection == "about-me",
+                breakpoint = breakpoint
+            ) {
                 scrollToSection("about-me")
             }
-            HeaderItem("Skills", isOnline = currentSection == "languages") {
+            HeaderItem(
+                "Skills", isOnline = currentSection == "languages",
+
+                breakpoint = breakpoint
+            ) {
                 scrollToSection("languages")
             }
-            HeaderItem("Projects", isOnline = currentSection == "projects") {
+            HeaderItem(
+                "Projects", isOnline = currentSection == "projects",
+
+                breakpoint = breakpoint
+            ) {
                 scrollToSection("projects")
             }
-            HeaderItem("Contact Me", isOnline = currentSection == "contact") {
+            HeaderItem(
+                "Contact Me", isOnline = currentSection == "contact",
+
+                breakpoint = breakpoint
+            ) {
                 scrollToSection("contact")
             }
             ThemeSwitchButton(
