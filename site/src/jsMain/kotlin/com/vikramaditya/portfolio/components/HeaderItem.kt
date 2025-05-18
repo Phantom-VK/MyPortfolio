@@ -36,9 +36,9 @@ fun HeaderItem(
         verticalArrangement = Arrangement.Center,
         modifier = Modifier
             .padding(
-                when (breakpoint) {
-                    Breakpoint.SM -> 8.px
-                    Breakpoint.MD -> 12.px
+                topBottom = when (breakpoint) {
+                    Breakpoint.SM -> 5.px
+                    Breakpoint.MD -> 10.px
                     else -> 16.px
                 }
             )
@@ -46,6 +46,13 @@ fun HeaderItem(
         Box(
             modifier = HeaderItemStyle.toModifier().then(
                 Modifier
+                    .size(
+                        when (breakpoint) {
+                            Breakpoint.SM -> 24.px
+                            Breakpoint.MD -> 36.px
+                            else -> 48.px
+                        }
+                    )
                     .onClick { evt -> onClick(evt) }
             )
         ) {
@@ -53,7 +60,7 @@ fun HeaderItem(
                 modifier = Modifier
                     .size(
                         when (breakpoint) {
-                            Breakpoint.SM -> 8.px
+                            Breakpoint.SM -> 5.px
                             Breakpoint.MD -> 10.px
                             else -> 12.px
                         }
@@ -87,15 +94,15 @@ fun HeaderItem(
             label,
             modifier = Modifier
                 .margin(top = when (breakpoint) {
-                    Breakpoint.SM -> 4.px
-                    Breakpoint.MD -> 6.px
+                    Breakpoint.SM -> 3.px
+                    Breakpoint.MD -> 5.px
                     else -> 8.px
                 })
                 .fontFamily("Share Tech Mono")
                 .fontSize(
                     when (breakpoint) {
-                        Breakpoint.SM -> 10.px
-                        Breakpoint.MD -> 12.px
+                        Breakpoint.SM -> 5.px
+                        Breakpoint.MD -> 10.px
                         else -> 14.px
                     }
                 )

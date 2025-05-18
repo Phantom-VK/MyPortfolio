@@ -33,7 +33,7 @@ fun AboutMe() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(10.percent),
+            .padding(5.percent),
         verticalArrangement = Arrangement.SpaceBetween,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {

@@ -8,15 +8,21 @@ import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Color
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.compose.ui.styleModifier
+import com.varabyte.kobweb.framework.annotations.DelicateApi
 import com.varabyte.kobweb.silk.components.text.SpanText
+import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
+import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import com.vikramaditya.portfolio.utils.Res
+import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
 
 data class Skill(val label: String, val percentage: String)
 
+@OptIn(DelicateApi::class)
 @Composable
 fun MySkillsSection() {
+    val breakpoint = rememberBreakpoint()
     val skills = listOf(
         Skill("PYTHON", "80%"),
         Skill("JAVA", "70%"),
@@ -28,8 +34,11 @@ fun MySkillsSection() {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .margin(topBottom = 2.percent)
-            .padding(topBottom = 48.px)
+            .padding(5.percent)
+            .margin(top = when(breakpoint){
+                Breakpoint.SM -> 10.cssRem
+                else -> 2.cssRem
+            })
             .styleModifier {
                 property("text-align", "center")
             },
@@ -40,8 +49,7 @@ fun MySkillsSection() {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .maxWidth(900.px)
-                .padding(16.px)
+                .padding(20.px)
                 .borderRadius(7.px)
                 .background(color = Res.Theme.GREY_BACKGROUND.color)
         ) {

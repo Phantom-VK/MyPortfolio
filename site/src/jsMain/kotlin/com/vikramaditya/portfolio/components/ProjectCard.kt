@@ -3,6 +3,7 @@ package com.vikramaditya.portfolio.components
 import androidx.compose.runtime.Composable
 import androidx.compose.web.events.SyntheticMouseEvent
 import com.varabyte.kobweb.compose.css.FontWeight
+import com.varabyte.kobweb.compose.css.JustifyItems
 import com.varabyte.kobweb.compose.css.MixBlendMode
 import com.varabyte.kobweb.compose.css.ObjectFit
 import com.varabyte.kobweb.compose.css.mixBlendMode
@@ -115,10 +116,11 @@ fun ProjectCard(
 
             CustomHorizontalDivider()
 
-            // ✅ Logo Grid
+            // Logo Grid
             SimpleGrid(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .justifyItems(JustifyItems.Center)
                     .padding(top = 8.px),
                 numColumns = numColumns(base = 3, sm = 4, md = 5)
             ) {
@@ -127,9 +129,7 @@ fun ProjectCard(
                         src = icon,
                         modifier = Modifier
                             .size(24.px)
-                            .styleModifier {
-                                mixBlendMode(MixBlendMode.Normal)
-                            }
+                            .mixBlendMode(MixBlendMode.Normal)
                     )
                 }
             }

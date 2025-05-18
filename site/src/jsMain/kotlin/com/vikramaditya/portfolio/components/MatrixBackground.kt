@@ -9,6 +9,8 @@ import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.toModifier
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import kotlinx.browser.window
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.Canvas
 import org.w3c.dom.HTMLCanvasElement
@@ -45,31 +47,29 @@ fun MatrixRainAnimation(modifier: Modifier = Modifier) {
         val columns = canvas.width / fontSize
         val drops = IntArray(columns) { Random.nextInt(canvas.height / fontSize) }
 
-        fun draw() {
-            ctx.fillStyle = if (colorMode.isDark) "rgba(0, 0, 0, 0.05)" else "rgba(255, 255, 255, 0.05)"
-            ctx.fillRect(0.0, 0.0, canvas.width.toDouble(), canvas.height.toDouble())
+        launch {
+            while (true) {
+                ctx.fillStyle = if (colorMode.isDark) "rgba(0, 0, 0, 0.05)" else "rgba(255, 255, 255, 0.05)"
+                ctx.fillRect(0.0, 0.0, canvas.width.toDouble(), canvas.height.toDouble())
 
-            // Theme-aware text color
-            ctx.fillStyle = if (colorMode.isDark) "#0F0" else "#006400"
-            ctx.font = "${fontSize}px DM Sans"
+                ctx.fillStyle = if (colorMode.isDark) "#0F0" else "#006400"
+                ctx.font = "${fontSize}px DM Sans"
 
-            for (i in drops.indices) {
-                val text = letters.random().toString()
-                ctx.fillText(text, i * fontSize.toDouble(), drops[i] * fontSize.toDouble())
+                for (i in drops.indices) {
+                    val text = letters.random().toString()
+                    ctx.fillText(text, i * fontSize.toDouble(), drops[i] * fontSize.toDouble())
 
-                if (drops[i] * fontSize > canvas.height && Random.nextDouble() > 0.975) {
-                    drops[i] = 0
+                    if (drops[i] * fontSize > canvas.height && Random.nextDouble() > 0.975) {
+                        drops[i] = 0
+                    }
+                    drops[i]++
                 }
-                drops[i]++
-            }
 
-            window.requestAnimationFrame {
-
-                draw()
+                delay(50L)
             }
         }
 
-        draw()
+
 
 
     }

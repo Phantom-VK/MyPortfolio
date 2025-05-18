@@ -43,6 +43,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.top
 import com.varabyte.kobweb.compose.ui.modifiers.transform
 import com.varabyte.kobweb.compose.ui.modifiers.transformStyle
 import com.varabyte.kobweb.compose.ui.modifiers.transition
+import com.varabyte.kobweb.compose.ui.modifiers.width
 import com.varabyte.kobweb.compose.ui.styleModifier
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.animation.Keyframes
@@ -194,7 +195,9 @@ val FaceStyle = CssStyle {
 val FrontStyle = CssStyle.base {
     Modifier
         .transform { translateZ(100.px) }
-        .border { color(MatrixGreen) }
+        .border {
+            width(1.5.px)
+            color(MatrixGreen) }
 }
 
 val BackStyle = CssStyle.base {
@@ -203,7 +206,9 @@ val BackStyle = CssStyle.base {
             translateZ((-100).px)
             rotateY(180.deg)
         }
-        .border { color(MatrixGlow1) }
+        .border {
+            width(1.5.px)
+            color(MatrixGlow1) }
 }
 
 val RightStyle = CssStyle.base {
@@ -212,7 +217,9 @@ val RightStyle = CssStyle.base {
             translateX(100.px)
             rotateY(90.deg)
         }
-        .border { color(MatrixGlow2) }
+        .border {
+            width(1.5.px)
+            color(MatrixGlow2) }
 }
 
 val LeftStyle = CssStyle.base {
@@ -221,7 +228,9 @@ val LeftStyle = CssStyle.base {
             translateX((-100).px)
             rotateY((-90).deg)
         }
-        .border { color(MatrixGlow3) }
+        .border {
+            width(1.5.px)
+            color(MatrixGlow3) }
 }
 
 val TopStyle = CssStyle.base {
@@ -230,7 +239,9 @@ val TopStyle = CssStyle.base {
             translateY((-100).px)
             rotateX(90.deg)
         }
-        .border { color(MatrixNeonGreen) }
+        .border {
+            width(1.5.px)
+            color(MatrixNeonGreen) }
 }
 
 val BottomStyle = CssStyle.base {
@@ -239,7 +250,9 @@ val BottomStyle = CssStyle.base {
             translateY(100.px)
             rotateX((-90).deg)
         }
-        .border { color(MatrixGreen) }
+        .border {
+            width(1.5.px)
+            color(MatrixGreen) }
 }
 
 val Rotate3d = Keyframes {

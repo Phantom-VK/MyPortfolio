@@ -29,7 +29,6 @@ import org.w3c.dom.ScrollToOptions
 fun Header(modifier: Modifier) {
     var colorMode by ColorMode.currentState
     val breakpoint = rememberBreakpoint()
-    val isMobile = breakpoint <= Breakpoint.SM
 
     val (bgColor, textColor) = if (colorMode.isDark) {
         Res.Theme.DARK_THEME_BACKGROUND.color to Res.Theme.LIGHT_THEME_BACKGROUND.color
@@ -42,11 +41,11 @@ fun Header(modifier: Modifier) {
 
     LaunchedEffect(Unit) {
         window.addEventListener("scroll", {
-            val scrollY = (document.documentElement?.scrollTop ?: 0.0).toDouble()
+            val scrollY = (document.documentElement?.scrollTop ?: 0.0)
             val scrollHeight = (document.documentElement?.scrollHeight ?: 0).toDouble()
             val clientHeight = (document.documentElement?.clientHeight ?: 0).toDouble()
 
-            val atBottom = scrollY + clientHeight >= scrollHeight - 50
+            val atBottom = scrollY + clientHeight >= scrollHeight - 60
             val sections = listOf("", "about-me", "languages", "projects", "contact")
             val sectionOffsets = sections.associateWith { id ->
                 document.getElementById(id)?.getBoundingClientRect()?.top?.plus(window.scrollY) ?: Double.MAX_VALUE
@@ -91,7 +90,7 @@ fun Header(modifier: Modifier) {
 
         // Bottom Row: Navigation
         Row(
-            modifier = Modifier.fillMaxWidth().padding(top = 8.px),
+            modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {

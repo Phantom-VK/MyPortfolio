@@ -22,6 +22,7 @@ import kotlinx.browser.document
 import org.jetbrains.compose.web.css.Position
 import org.jetbrains.compose.web.css.cssRem
 import com.varabyte.kobweb.compose.ui.graphics.Color
+import com.vikramaditya.portfolio.components.MatrixCursor
 import org.jetbrains.compose.web.css.px
 
 val PageContentStyle = CssStyle {
@@ -50,19 +51,20 @@ fun PageLayout(
         modifier = Modifier
             .fillMaxSize()
             .cursor(Cursor.None)
-            .styleModifier {
-                property("cursor", "url('${
-                    if (colorMode.isDark) Res.Image.CUSTOM_CURSOR_DARK
-                    else Res.Image.CUSTOM_CURSOR_LIGHT
-                }'), auto")
-            }
+//            .styleModifier {
+//                property("cursor", "url('${
+//                    if (colorMode.isDark) Res.Image.CUSTOM_CURSOR_DARK
+//                    else Res.Image.CUSTOM_CURSOR_LIGHT
+//                }'), auto")
+//            }
     ) {
-        // ✅ Matrix Rain Background
+        //  Matrix Rain Background
         MatrixRainAnimation(
             Modifier.fillMaxSize()
         )
+        MatrixCursor()
 
-        // ✅ Overlay Layer (faint black for dark mode, white for light)
+        // ✅Overlay Layer (faint black for dark mode, white for light)
         Box(
             modifier = Modifier
                 .id("overlay")
@@ -70,13 +72,13 @@ fun PageLayout(
                 .zIndex(1)
                 .backgroundColor(
                     if (colorMode.isDark)
-                        Color.rgba(0, 0, 0, 0.4f)
+                        Color.rgba(0, 0, 0, 0.5f)
                     else
-                       Color.rgba(255, 255, 255, 0.4f)
+                       Color.rgba(255, 255, 255, 0.5f)
                 )
         )
 
-        // ✅ Fixed Header (above everything)
+        // Fixed Header (above everything)
         Box(
             modifier = Modifier
                 .position(Position.Fixed)
@@ -88,7 +90,7 @@ fun PageLayout(
             )
         }
 
-        // ✅ Main Content Layer
+        // Main Content Layer
         Column(
             modifier = PageContentStyle.toModifier()
                 .fillMaxSize()
