@@ -94,7 +94,7 @@ object Res {
     object String {
         const val NAME = "Vikramaditya"
         const val MY_EMAIL = "mailto:vikramadityakhupse@gmail.com"
-        const val RESUME_URL = "https://drive.google.com/file/d/15d60D12-CgiQoxtlycWp-bU4JC_In3mp/view?usp=sharing"
+        const val RESUME_URL = "https://drive.google.com/file/d/1eif_tRGq_AAp6lrQIOIuiG4XDEb8nEms/view?usp=sharing"
         const val PYTHON_CODE = """def profile_page():
 
     def about_me():
