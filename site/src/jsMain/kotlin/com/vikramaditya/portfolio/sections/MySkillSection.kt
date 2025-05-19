@@ -2,6 +2,7 @@ package com.vikramaditya.portfolio.sections
 
 import androidx.compose.runtime.Composable
 import com.varabyte.kobweb.compose.css.FontWeight
+import com.varabyte.kobweb.compose.css.TextAlign
 import com.varabyte.kobweb.compose.foundation.layout.*
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
@@ -22,7 +23,6 @@ data class Skill(val label: String, val percentage: String)
 @OptIn(DelicateApi::class)
 @Composable
 fun MySkillsSection() {
-    val breakpoint = rememberBreakpoint()
     val skills = listOf(
         Skill("PYTHON", "80%"),
         Skill("JAVA", "70%"),
@@ -35,13 +35,7 @@ fun MySkillsSection() {
         modifier = Modifier
             .fillMaxWidth()
             .padding(5.percent)
-            .margin(top = when(breakpoint){
-                Breakpoint.SM -> 10.cssRem
-                else -> 2.cssRem
-            })
-            .styleModifier {
-                property("text-align", "center")
-            },
+            .textAlign(TextAlign.Center),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
@@ -50,7 +44,7 @@ fun MySkillsSection() {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(20.px)
-                .borderRadius(7.px)
+                .borderRadius(Res.Dimens.BORDER_RADIUS.px)
                 .background(color = Res.Theme.GREY_BACKGROUND.color)
         ) {
             Row(

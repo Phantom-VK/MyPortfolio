@@ -9,6 +9,7 @@ import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Color
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
+import com.varabyte.kobweb.framework.annotations.DelicateApi
 import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
@@ -19,6 +20,7 @@ import com.vikramaditya.portfolio.utils.Res
 import kotlinx.browser.window
 import org.jetbrains.compose.web.css.*
 
+@OptIn(DelicateApi::class)
 @Composable
 fun Footer() {
     val breakpoint = rememberBreakpoint()
@@ -64,7 +66,6 @@ private fun MadeWithKobweb() {
         modifier = Modifier
             .borderRadius(8.px)
             .padding(leftRight = 1.cssRem, topBottom = 0.5.cssRem)
-            .cursor(Cursor.Pointer)
             .onClick {
                 window.open("https://kobweb.varabyte.com/", "_blank")
             },

@@ -1,6 +1,7 @@
 package com.vikramaditya.portfolio.styles
 
 import com.varabyte.kobweb.compose.css.AnimationIterationCount
+import com.varabyte.kobweb.compose.css.BackfaceVisibility
 import com.varabyte.kobweb.compose.css.Background
 import com.varabyte.kobweb.compose.css.BoxSizing
 import com.varabyte.kobweb.compose.css.Cursor
@@ -17,6 +18,7 @@ import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.alignItems
 import com.varabyte.kobweb.compose.ui.modifiers.animation
+import com.varabyte.kobweb.compose.ui.modifiers.backfaceVisibility
 import com.varabyte.kobweb.compose.ui.modifiers.background
 import com.varabyte.kobweb.compose.ui.modifiers.backgroundColor
 import com.varabyte.kobweb.compose.ui.modifiers.border
@@ -132,9 +134,7 @@ val FaceStyle = CssStyle {
             .fontSize(1.5.cssRem)
             .fontWeight(FontWeight.Bold)
             .fontFamily("Share Tech Mono", "monospace")
-            .styleModifier {
-                property("backface-visibility", "hidden")
-            }
+            .backfaceVisibility(BackfaceVisibility.Hidden)
             .borderRadius(8.px)
             .backgroundColor(MatrixBlack)
             .border(2.px, LineStyle.Solid, Res.Theme.THEME_GREEN.color)

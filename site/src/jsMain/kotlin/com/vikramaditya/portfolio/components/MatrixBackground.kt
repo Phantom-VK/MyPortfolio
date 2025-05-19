@@ -32,7 +32,7 @@ val MatrixStyle = CssStyle {
 fun MatrixRainAnimation(modifier: Modifier = Modifier) {
     var colorMode by ColorMode.currentState
     val canvasRef = remember { mutableStateOf<HTMLCanvasElement?>(null) }
-    val letters = "アァイィウヴエェオカガキギクグケゲコゴサザシジスズセゼソゾタダチッヂヅテデトドナニヌネノハバパヒビピフブプヘベペホボポマミムメモヤユヨラリルレロワヲンABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+    val letters = "アイウエオカキグケゲゴザジズゼゾダチッヂヅデドナニネバビピプペボポマミムメモヤラリルレヲンABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
     LaunchedEffect(canvasRef.value) {
         val canvas = canvasRef.value ?: return@LaunchedEffect

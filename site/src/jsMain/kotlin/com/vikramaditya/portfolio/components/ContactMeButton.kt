@@ -32,7 +32,6 @@ fun ContactMeButton(email: String, modifier: Modifier = Modifier) {
             .border(1.px, LineStyle.Solid, borderColor)
             .padding(leftRight = 1.cssRem, topBottom = 0.5.cssRem)
             .backgroundColor(bgColor)
-            .cursor(Cursor.Pointer)
             .onClick {
                 window.open(email, "_blank")
             }

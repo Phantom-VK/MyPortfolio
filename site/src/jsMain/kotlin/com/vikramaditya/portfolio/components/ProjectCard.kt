@@ -64,7 +64,7 @@ fun ProjectCard(
                     .width(100.percent)
                     .maxHeight(250.px)
                     .objectFit(ObjectFit.Cover)
-                    .borderRadius(0.5.cssRem)
+                    .borderRadius(Res.Dimens.BORDER_RADIUS.px)
                     .toAttrs()
             )
 

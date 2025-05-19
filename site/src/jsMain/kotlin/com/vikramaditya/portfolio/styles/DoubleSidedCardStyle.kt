@@ -28,7 +28,6 @@ val CardStyle = CssStyle {
         Modifier
             .fillMaxWidth()
             .height(200.px)
-            .cursor(Cursor.Pointer)
             .styleModifier {
                 property("perspective", "1000px")
             }

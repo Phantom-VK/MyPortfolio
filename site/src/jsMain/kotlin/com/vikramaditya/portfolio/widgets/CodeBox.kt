@@ -23,7 +23,8 @@ import com.varabyte.kobweb.compose.ui.graphics.Color
 
 
 @Composable
-fun CodeBox(colorMode: ColorMode) {
+fun CodeBox() {
+    val colorMode by ColorMode.currentState
     var selectedLang by remember { mutableStateOf("language-python") }
     var typedText by remember { mutableStateOf("") }
     var isTyping by remember { mutableStateOf(false) }
@@ -141,6 +142,7 @@ fun LanguageButton(language: String, isSelected: Boolean, onClick: (SyntheticMou
     Button(
         modifier = LanguageButtonStyle
             .toModifier()
+            .cursor(Cursor.None)
             .background(if (isSelected) Res.Theme.THEME_GREEN.color else Colors.Transparent)
             .color(if (isSelected) Colors.White else Res.Theme.THEME_GREEN.color)
             .padding(12.px, 16.px)

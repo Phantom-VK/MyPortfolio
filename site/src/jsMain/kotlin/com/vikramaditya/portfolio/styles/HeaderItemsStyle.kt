@@ -10,7 +10,7 @@ val HeaderItemStyle = CssStyle {
     base {
         Modifier
             .borderRadius(50.percent)
-            .backgroundColor(Color.rgba(30, 30, 30, a = 0.4f))
+            .backgroundColor(Color.rgba(30, 30, 30, a = 0.6f))
             .display(DisplayStyle.Flex)
             .alignItems(AlignItems.Center)
             .justifyContent(JustifyContent.Center)

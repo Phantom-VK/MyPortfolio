@@ -46,6 +46,7 @@ import org.jetbrains.compose.web.css.JustifyContent
 import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.em
 import org.jetbrains.compose.web.css.percent
+import org.jetbrains.compose.web.css.px
 
 @OptIn(DelicateApi::class)
 @Composable
@@ -56,7 +57,17 @@ fun WhatIDo() {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(topBottom = 2.cssRem),
+            .padding(top = 2.cssRem)
+            .margin(
+
+                bottom = when (breakpoint) {
+                    Breakpoint.SM -> 10.cssRem
+                    Breakpoint.MD -> 4.cssRem
+                    Breakpoint.XL -> 4.cssRem
+                    else -> 10.cssRem
+                }
+            ),
+
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         SimpleGrid(

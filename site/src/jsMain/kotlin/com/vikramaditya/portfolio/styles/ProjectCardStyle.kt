@@ -23,7 +23,7 @@ val ProjectCardSTyle = CssStyle {
             .maxWidth(280.px)
             .margin(topBottom = 3.cssRem)
             .border(1.px, LineStyle.Solid, Res.Theme.THEME_GREEN_NEON.color)
-            .borderRadius(0.7.cssRem)
+            .borderRadius(Res.Dimens.BORDER_RADIUS.px)
             .background(
                 Background.of(
                     linearGradient(

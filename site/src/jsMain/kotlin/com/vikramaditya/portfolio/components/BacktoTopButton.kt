@@ -64,7 +64,6 @@ fun BackToTopButton() {
             .backgroundColor(Colors.Transparent)
             .padding(4.px)
             .zIndex(5)
-            .cursor(Cursor.Pointer)
             .pointerEvents(if (show) PointerEvents.Auto else PointerEvents.None)
             .visibility(if (show) Visibility.Visible else Visibility.Hidden)
             .onClick {

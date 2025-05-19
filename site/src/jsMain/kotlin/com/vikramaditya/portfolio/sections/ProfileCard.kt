@@ -3,6 +3,7 @@ package com.vikramaditya.portfolio.sections
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.web.events.SyntheticMouseEvent
+import com.varabyte.kobweb.compose.css.Cursor
 import com.varabyte.kobweb.compose.css.Height
 import com.varabyte.kobweb.compose.css.ObjectFit
 import com.varabyte.kobweb.compose.css.Overflow
@@ -15,27 +16,30 @@ import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.core.rememberPageContext
+import com.varabyte.kobweb.framework.annotations.DelicateApi
 import com.varabyte.kobweb.silk.components.forms.Button
 import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.style.toModifier
+import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
-import com.vikramaditya.portfolio.widgets.CodeBox
 import com.vikramaditya.portfolio.components.IconButton
 import com.vikramaditya.portfolio.components.SocialIcon
 import com.vikramaditya.portfolio.styles.SocialIconStyle
 import com.vikramaditya.portfolio.utils.Res
+import com.vikramaditya.portfolio.widgets.CodeBox
 import org.jetbrains.compose.web.css.AlignSelf
 import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
 
+@OptIn(DelicateApi::class)
 @Composable
-fun ProfileCard(colorMode: ColorMode, breakpoint: Breakpoint) {
+fun ProfileCard() {
+    val colorMode by ColorMode.currentState
+    val breakpoint = rememberBreakpoint()
     val ctx = rememberPageContext()
     val isMobile = breakpoint <= Breakpoint.MD
-
-
 
     if (isMobile) {
         Column(
@@ -48,10 +52,9 @@ fun ProfileCard(colorMode: ColorMode, breakpoint: Breakpoint) {
         ) {
             // Profile Image on top
             ProfileImage()
-
             // Code box below image
-            CodeBox(colorMode = colorMode)
-            SocialLinks(colorMode, breakpoint)
+            CodeBox()
+            SocialLinks()
         }
     } else {
         // Desktop or Tablet layout: Row-based
@@ -69,14 +72,14 @@ fun ProfileCard(colorMode: ColorMode, breakpoint: Breakpoint) {
                 modifier = Modifier
                     .fillMaxWidth(if (breakpoint >= Breakpoint.LG) 70.percent else 100.percent)
             ) {
-                CodeBox(colorMode = colorMode)
-                SocialLinks(colorMode, breakpoint)
+                CodeBox()
+                SocialLinks()
             }
 
             Box(
                 modifier = Modifier
                     .size(if (breakpoint >= Breakpoint.LG) 380.px else 280.px)
-                    .borderRadius(12.px)
+                    .borderRadius(Res.Dimens.BORDER_RADIUS.px)
                     .overflow(Overflow.Hidden)
                     .filter(
                         dropShadow(
@@ -108,20 +111,20 @@ fun ProfileImage() {
     Box(
         modifier = Modifier
             .size(260.px)
-            .borderRadius(12.px)
+            .borderRadius(Res.Dimens.BORDER_RADIUS.px)
             .overflow(Overflow.Hidden)
             .filter(
                 dropShadow(
                     offsetX = 0.px,
                     offsetY = 0.px,
-                    blurRadius = 20.px,
+                    blurRadius = 10.px,
                     color = Res.Theme.THEME_GREEN.color
                 )
             )
     ) {
         Image(
             modifier = Modifier
-                .size(245.px)
+                .size(260.px)
                 .objectFit(ObjectFit.Cover),
             src = if (colorMode.isDark) Res.Image.PROFILE_PHOTO_GREEN else Res.Image.PROFILE_PHOTO_REGULAR
         )
@@ -130,6 +133,7 @@ fun ProfileImage() {
             ctx.router.navigateTo(Res.String.RESUME_URL)
         }
     }
+
 }
 
 
@@ -139,10 +143,11 @@ fun GreenButton(modifier: Modifier,text: String, onClick: (SyntheticMouseEvent) 
         onClick = onClick,
         modifier = modifier.then(
             Modifier
+                .cursor(Cursor.None)
                 .backgroundColor(Res.Theme.THEME_GREEN.color)
                 .color(Res.Theme.LIGHT_THEME_BACKGROUND.color)
                 .padding(12.px, 24.px)
-                .borderRadius(6.px)
+                .borderRadius(Res.Dimens.BORDER_RADIUS.px)
         )
 
     ) {
@@ -150,8 +155,11 @@ fun GreenButton(modifier: Modifier,text: String, onClick: (SyntheticMouseEvent) 
     }
 }
 
+@OptIn(DelicateApi::class)
 @Composable
- fun SocialLinks(colorMode: ColorMode, breakpoint: Breakpoint) {
+ fun SocialLinks() {
+     val colorMode by ColorMode.currentState
+    val breakpoint = rememberBreakpoint()
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -166,7 +174,7 @@ fun GreenButton(modifier: Modifier,text: String, onClick: (SyntheticMouseEvent) 
             else it.name.contains("Light")
         }.forEach {
             IconButton(
-                modifier = SocialIconStyle.toModifier(),
+                modifier = SocialIconStyle.toModifier().cursor(Cursor.None),
                 colorMode = colorMode,
                 icon = it.icon,
                 link = it.link

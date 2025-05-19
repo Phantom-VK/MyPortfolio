@@ -25,9 +25,10 @@ fun AboutMe() {
     val breakpoint = rememberBreakpoint()
 
     val fontSize = when (breakpoint) {
-        Breakpoint.SM, Breakpoint.XL -> 24.px
+        Breakpoint.SM ->15.px
         Breakpoint.MD -> 28.px
-        else -> 30.px
+        Breakpoint.XL -> 30.px
+        else -> 24.px
     }
 
     Column(
@@ -40,7 +41,7 @@ fun AboutMe() {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .borderRadius(7.px)
+                .borderRadius(Res.Dimens.BORDER_RADIUS.px)
                 .background(color = Res.Theme.GREY_BACKGROUND.color)
                 .padding(3.percent)
         ) {
@@ -49,7 +50,7 @@ fun AboutMe() {
                     "I’m an IT student who’s deeply passionate about computers, technology, and the craft of coding.",
                     modifier = Modifier
                         .fillMaxWidth()
-                        .textAlign(TextAlign.Justify)
+                        .textAlign(TextAlign.Center)
                         .color(
                             if (colorMode.isDark)
                                 Res.Theme.GLASS_BOX_BORDER_COLOR_LIGHT.color
@@ -63,7 +64,7 @@ fun AboutMe() {
                     "I explore domains like AI, apps, and systems — wherever problem-solving thrives.",
                     modifier = Modifier
                         .fillMaxWidth()
-                        .textAlign(TextAlign.Justify)
+                        .textAlign(TextAlign.Center)
                         .color(
                             if (colorMode.isDark)
                                 Res.Theme.GLASS_BOX_BORDER_COLOR_LIGHT.color
@@ -78,7 +79,7 @@ fun AboutMe() {
                     "As Co-Lead of GDG on campus, I contribute through mentoring, organizing events, and driving change.",
                     modifier = Modifier
                         .fillMaxWidth()
-                        .textAlign(TextAlign.Justify)
+                        .textAlign(TextAlign.Center)
                         .color(
                             if (colorMode.isDark)
                                 Res.Theme.GLASS_BOX_BORDER_COLOR_LIGHT.color

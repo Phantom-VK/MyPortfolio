@@ -37,9 +37,9 @@ fun HeaderItem(
         modifier = Modifier
             .padding(
                 topBottom = when (breakpoint) {
-                    Breakpoint.SM -> 5.px
-                    Breakpoint.MD -> 10.px
-                    else -> 16.px
+                    Breakpoint.SM -> 2.px
+                    Breakpoint.MD -> 6.px
+                    else -> 10.px
                 }
             )
     ) {
@@ -48,9 +48,9 @@ fun HeaderItem(
                 Modifier
                     .size(
                         when (breakpoint) {
-                            Breakpoint.SM -> 24.px
-                            Breakpoint.MD -> 36.px
-                            else -> 48.px
+                            Breakpoint.SM -> 20.px
+                            Breakpoint.MD -> 34.px
+                            else -> 46.px
                         }
                     )
                     .onClick { evt -> onClick(evt) }
@@ -60,9 +60,9 @@ fun HeaderItem(
                 modifier = Modifier
                     .size(
                         when (breakpoint) {
-                            Breakpoint.SM -> 5.px
-                            Breakpoint.MD -> 10.px
-                            else -> 12.px
+                            Breakpoint.SM -> 3.px
+                            Breakpoint.MD -> 8.px
+                            else -> 10.px
                         }
                     )
                     .borderRadius(50.percent)
@@ -71,8 +71,8 @@ fun HeaderItem(
                             BoxShadow.of(
                                 color = MatrixGlow1,
                                 blurRadius = when (breakpoint) {
-                                    Breakpoint.SM -> 3.px
-                                    else -> 5.px
+                                    Breakpoint.SM -> 2.px
+                                    else -> 4.px
                                 },
                                 spreadRadius = when (breakpoint) {
                                     Breakpoint.SM -> 1.px

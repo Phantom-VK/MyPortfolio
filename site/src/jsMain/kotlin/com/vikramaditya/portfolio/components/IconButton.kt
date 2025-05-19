@@ -37,7 +37,6 @@ fun IconButton(
                     else Res.Theme.THEME_GREEN.color
                 )
                 .borderRadius(r = BORDER_RADIUS.px)
-                .cursor(Cursor.Pointer)
                 .border(
                     width = 1.px,
                     style = LineStyle.Solid,

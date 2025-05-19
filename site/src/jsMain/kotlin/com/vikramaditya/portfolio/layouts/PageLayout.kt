@@ -8,21 +8,21 @@ import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.ColumnScope
 import com.varabyte.kobweb.compose.ui.Modifier
+import com.varabyte.kobweb.compose.ui.graphics.Color
 import com.varabyte.kobweb.compose.ui.modifiers.*
-import com.varabyte.kobweb.compose.ui.styleModifier
+import com.varabyte.kobweb.framework.annotations.DelicateApi
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.style.toModifier
+import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.vikramaditya.portfolio.components.BackToTopButton
+import com.vikramaditya.portfolio.components.MatrixCursor
 import com.vikramaditya.portfolio.components.MatrixRainAnimation
 import com.vikramaditya.portfolio.sections.Header
-import com.vikramaditya.portfolio.utils.Res
 import kotlinx.browser.document
 import org.jetbrains.compose.web.css.Position
 import org.jetbrains.compose.web.css.cssRem
-import com.varabyte.kobweb.compose.ui.graphics.Color
-import com.vikramaditya.portfolio.components.MatrixCursor
 import org.jetbrains.compose.web.css.px
 
 val PageContentStyle = CssStyle {
@@ -36,12 +36,14 @@ val PageContentStyle = CssStyle {
     }
 }
 
+@OptIn(DelicateApi::class)
 @Composable
 fun PageLayout(
     title: String,
     content: @Composable ColumnScope.() -> Unit
 ) {
     val colorMode by ColorMode.currentState
+    val breakpoint = rememberBreakpoint()
 
     LaunchedEffect(title) {
         document.title = "Vikramaditya Khupse - $title"
@@ -62,7 +64,11 @@ fun PageLayout(
         MatrixRainAnimation(
             Modifier.fillMaxSize()
         )
-        MatrixCursor()
+
+        if(breakpoint > Breakpoint.SM){
+            MatrixCursor()
+        }
+
 
         // ✅Overlay Layer (faint black for dark mode, white for light)
         Box(

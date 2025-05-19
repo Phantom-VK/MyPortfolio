@@ -6,7 +6,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Column
-import com.varabyte.kobweb.compose.foundation.layout.Spacer
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.color
@@ -14,7 +13,6 @@ import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.zIndex
 import com.varabyte.kobweb.core.Page
 import com.varabyte.kobweb.framework.annotations.DelicateApi
-import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.vikramaditya.portfolio.layouts.PageLayout
 import com.vikramaditya.portfolio.sections.*
@@ -27,8 +25,6 @@ import com.vikramaditya.portfolio.widgets.SectionTitle
 @Composable
 fun HomePage() {
     var colorMode by ColorMode.currentState
-    val breakpoint = rememberBreakpoint()
-
 
     PageLayout(
         title = "Home"
@@ -45,8 +41,7 @@ fun HomePage() {
             verticalArrangement = Arrangement.SpaceBetween
         ) {
 
-
-            ProfileCard(colorMode, breakpoint)
+            ProfileCard()
             SectionTitle("About Me", id = "about-me")
             AboutMe()
             SectionTitle("What I do?", id = "what-i-do")
