@@ -1,0 +1,11 @@
+2025-05-21 13:53:36.989 [main] DEBUG io.ktor.server.Application - Java Home: /usr/lib/jvm
+2025-05-21 13:53:36.991 [main] DEBUG io.ktor.server.Application - Class Loader: jdk.internal.loader.ClassLoaders$AppClassLoader@639fee48: [file:/home/vikramaditya/WebProjects/MyPortfolio/site/.kobweb/server/server.jar!/okio]
+2025-05-21 13:53:36.999 [main] INFO  io.ktor.server.Application - Initializing server engine for Kobweb project "vikramadityakhupse"
+2025-05-21 13:53:37.001 [main] WARN  io.ktor.server.Application - API jar specified but does not exist! Please fix conf.yaml, updating the path (or removing the value if you aren't declaring API endpoints). Invalid path: "build/libs/portfolio.jar"
+2025-05-21 13:53:37.056 [main] INFO  io.ktor.server.Application - CORS: No hosts registered.
+2025-05-21 13:53:37.070 [main] INFO  io.ktor.server.Application - Application started in 0.211 seconds.
+2025-05-21 13:53:37.168 [main] INFO  io.ktor.server.Application - Responding at http://0.0.0.0:8080
+2025-05-21 13:53:41.029 [eventLoopGroupProxy-4-1] DEBUG io.ktor.server.Application - Served fallback index.html file in response to "/"
+2025-05-21 13:53:42.280 [DefaultDispatcher-worker-2] DEBUG io.ktor.server.Application - Client connected and is requesting kobweb status events.
+2025-05-21 13:54:34.578 [kotlinx.coroutines.DefaultExecutor] INFO  io.ktor.server.Application - Kobweb server shutting down...
+2025-05-21 13:54:36.704 [kotlinx.coroutines.DefaultExecutor] INFO  io.ktor.server.Application - Server finished shutting down.
