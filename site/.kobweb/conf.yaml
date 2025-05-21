@@ -1,6 +1,6 @@
 site:
-  title: "vikramadityakhupse"
-  basePath: "vikramadityakhupse"
+  title: "MyPortfolio"
+  basePath: "MyPortfolio"
 
 server:
   files:
