@@ -10,6 +10,7 @@ import com.varabyte.kobweb.compose.css.Overflow
 import com.varabyte.kobweb.compose.css.TransformStyle
 import com.varabyte.kobweb.compose.css.Transition
 import com.varabyte.kobweb.compose.css.TransitionTimingFunction
+import com.varabyte.kobweb.compose.css.UserSelect
 import com.varabyte.kobweb.compose.css.functions.LinearGradient
 import com.varabyte.kobweb.compose.css.functions.linearGradient
 import com.varabyte.kobweb.compose.css.functions.toImage
@@ -45,6 +46,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.top
 import com.varabyte.kobweb.compose.ui.modifiers.transform
 import com.varabyte.kobweb.compose.ui.modifiers.transformStyle
 import com.varabyte.kobweb.compose.ui.modifiers.transition
+import com.varabyte.kobweb.compose.ui.modifiers.userSelect
 import com.varabyte.kobweb.compose.ui.modifiers.width
 import com.varabyte.kobweb.compose.ui.styleModifier
 import com.varabyte.kobweb.silk.style.CssStyle
@@ -80,18 +82,20 @@ val MatrixGlow3 = Color.rgb(0x00ffcc)
 val AllStyle = CssStyle.base {
     Modifier
         .margin(0.px)
+        .userSelect(UserSelect.None)
         .padding(0.px)
         .boxSizing(BoxSizing.BorderBox)
 }
 val BodyStyle = CssStyle.base {
     Modifier
         .minHeight(100.vh)
+        .userSelect(UserSelect.None)
         .display(DisplayStyle.Flex)
         .justifyContent(JustifyContent.Center)
         .alignItems(AlignItems.Center)
         .backgroundColor(MatrixBlack)
         .color(MatrixWhiteText)
-        .fontFamily("Share Tech Mono", "monospace") // use VT323 or Source Code Pro optionally
+        .fontFamily("Share Tech Mono", "monospace")
         .styleModifier {
             property("perspective", "1000px")
         }
@@ -100,6 +104,7 @@ val BodyStyle = CssStyle.base {
 val ContainerStyle = CssStyle.base {
     Modifier
         .display(DisplayStyle.Flex)
+        .userSelect(UserSelect.None)
         .justifyContent(JustifyContent.Center)
         .alignItems(AlignItems.Center)
         .transformStyle(TransformStyle.Preserve3d)
@@ -108,6 +113,7 @@ val BoxCardStyle = CssStyle {
     base {
         Modifier
             .position(Position.Relative)
+            .userSelect(UserSelect.None)
             .transformStyle(TransformStyle.Preserve3d)
             .transition(Transition.of("transform", 1.s, TransitionTimingFunction.Ease))
             .cursor(Cursor.Pointer)
@@ -128,6 +134,7 @@ val FaceStyle = CssStyle {
     base {
         Modifier
             .position(Position.Absolute)
+            .userSelect(UserSelect.None)
             .display(DisplayStyle.Flex)
             .justifyContent(JustifyContent.Center)
             .alignItems(AlignItems.Center)
@@ -292,3 +299,4 @@ val Rotate3d = Keyframes {
             }
     }
 }
+

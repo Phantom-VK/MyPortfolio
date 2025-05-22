@@ -76,7 +76,7 @@ fun AboutMe() {
                         .padding(top = 8.px)
                 )
                 SpanText(
-                    "As Co-Lead of GDG on campus, I contribute through mentoring, organizing events, and driving change.",
+                    "As Co-Lead of GDG on campus SGGSIE&T, I contribute through mentoring, organizing events, and driving change.",
                     modifier = Modifier
                         .fillMaxWidth()
                         .textAlign(TextAlign.Center)
