@@ -1,10 +1,8 @@
 [![version: 0.22.0](https://img.shields.io/badge/kobweb-0.22.0-blue)](COMPATIBILITY.md)
 [![kotlin: 2.1.21](https://img.shields.io/badge/kotlin-2.1.21-blue?logo=kotlin)](COMPATIBILITY.md)
-<br>
 <a href="https://kobweb.varabyte.com/docs">
 ![User Guide docs](https://img.shields.io/badge/User_Guide-royalblue?logo=readthedocs)
 </a>
-<br>
 [![Varabyte Discord](https://img.shields.io/discord/886036660767305799.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/5NZ2GKV5Cs)
 [![Kotlin Slack](https://img.shields.io/badge/%23Kobweb-4A154B?logo=slack&logoColor=white)](https://kotlinlang.slack.com/archives/C04RTD72RQ8)
 [![Bluesky](https://img.shields.io/badge/Bluesky-0285FF?logo=bluesky&logoColor=fff)](https://bsky.app/profile/bitspittle.bsky.social)
