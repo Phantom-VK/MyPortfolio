@@ -5,6 +5,8 @@
 </a>
 [![Varabyte Discord](https://img.shields.io/discord/886036660767305799.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/5NZ2GKV5Cs)
 
+# My personal portfolio website made with 100% Kotlin
+
 # K🕸️bweb
 
 
