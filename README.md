@@ -1,3 +1,16 @@
+[![version: 0.22.0](https://img.shields.io/badge/kobweb-0.22.0-blue)](COMPATIBILITY.md)
+[![kotlin: 2.1.21](https://img.shields.io/badge/kotlin-2.1.21-blue?logo=kotlin)](COMPATIBILITY.md)
+<a href="https://kobweb.varabyte.com/docs">
+![User Guide docs](https://img.shields.io/badge/User_Guide-royalblue?logo=readthedocs)
+</a>
+[![Varabyte Discord](https://img.shields.io/discord/886036660767305799.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/5NZ2GKV5Cs)
+
+
+# Personal Portfolio Website made with 100% Kotlin
+
+# K🕸️bweb
+
+
 This is a [Kobweb](https://github.com/varabyte/kobweb) project bootstrapped with the `app/empty` template.
 
 This template is useful if you already know what you're doing and just want a clean slate. By default, it
