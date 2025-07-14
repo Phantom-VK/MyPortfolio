@@ -1798,3 +1798,5 @@ Caused by: io.netty.channel.StacklessClosedChannelException: null
 	at io.netty.channel.AbstractChannel$AbstractUnsafe.write(Object, ChannelPromise)(Unknown Source)
 2025-05-22 11:13:44.798 [eventLoopGroupProxy-4-9] DEBUG io.ktor.server.Application - Served fallback index.html file in response to "/"
 2025-05-22 11:13:45.629 [DefaultDispatcher-worker-8] DEBUG io.ktor.server.Application - Client connected and is requesting kobweb status events.
+2025-05-22 11:14:06.685 [kotlinx.coroutines.DefaultExecutor] INFO  io.ktor.server.Application - Kobweb server shutting down...
+2025-05-22 11:14:08.817 [kotlinx.coroutines.DefaultExecutor] INFO  io.ktor.server.Application - Server finished shutting down.
