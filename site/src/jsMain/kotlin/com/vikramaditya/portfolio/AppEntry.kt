@@ -1,31 +1,17 @@
 package com.vikramaditya.portfolio
 
-import androidx.compose.runtime.*
-import com.varabyte.kobweb.compose.ui.modifiers.*
+import androidx.compose.runtime.Composable
 import com.varabyte.kobweb.core.App
 import com.varabyte.kobweb.silk.SilkApp
-import com.varabyte.kobweb.silk.components.layout.Surface
-import com.varabyte.kobweb.silk.style.common.SmoothColorStyle
-import com.varabyte.kobweb.silk.style.toModifier
-import com.vikramaditya.portfolio.utils.Res
-import kotlinx.coroutines.delay
-import org.jetbrains.compose.web.css.*
-import kotlin.math.PI
-import kotlin.math.cos
-import kotlin.math.sin
 
-
+/**
+ * Root entry point required by Kobweb. It boots Silk (the UI toolkit) and lets
+ * the generated router render any @Page composables we define.
+ */
 @App
 @Composable
 fun AppEntry(content: @Composable () -> Unit) {
     SilkApp {
-
-
-        Surface(SmoothColorStyle.toModifier()
-            .minHeight(100.vh)) {
-            content()
-        }
+        content()
     }
 }
-
-

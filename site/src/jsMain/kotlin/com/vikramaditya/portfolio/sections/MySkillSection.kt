@@ -24,10 +24,12 @@ data class Skill(val label: String, val percentage: String)
 @Composable
 fun MySkillsSection() {
     val skills = listOf(
-        Skill("PYTHON", "80%"),
+        Skill("PYTHON", "90%"),
         Skill("JAVA", "70%"),
-        Skill("Kotlin", "60%"),
-        Skill("C/C++", "50%")
+        Skill("KOTLIN", "60%"),
+        Skill("LLMs & NLP", "70%"),
+        Skill("FASTAPI / DOCKER", "80%"),
+        Skill("AWS (EC2/S3/ECR)", "70%")
     )
 
 
@@ -72,7 +74,7 @@ fun MySkillsSection() {
                                 .fontFamily("DM Sans")
                                 .margin(top = 4.px)
                                 .fontWeight(FontWeight.Medium)
-                                .color(Color.rgb(0, 255, 128)) // neon green
+                                .color(Color.rgb(0, 255, 128))
                         )
                     }
                 }

@@ -95,81 +95,48 @@ object Res {
         const val NAME = "Vikramaditya"
         const val MY_EMAIL = "mailto:vikramadityakhupse@gmail.com"
         const val RESUME_URL = "https://drive.google.com/drive/folders/1izi_woduWACltXpALTIlfUNDmbEKJurJ?usp=sharing"
-        const val PYTHON_CODE = """def profile_page():
+        const val PYTHON_CODE = """class Profile:
+    def __init__(self):
+        self.name = "Vikramaditya Khupse"
+        self.focus = ["Full Stack", "AI/ML", "DevOps & Cloud"]
+        self.primary_stack = ["Python", "Transformers", "LangGraph", "FastAPI"]
+        self.secondary = ["Java", "Kotlin", "Compose", "Docker", "GitHub Actions", "AWS"]
 
-    def about_me():
-        print("Hello there!! I am Vikramaditya Khupse")
-        print("Ambitious Student | Programmer | Tech Enthusiast")
+    def ship(self):
+        return "Build ML-heavy products, automate pipelines, deliver to cloud."
 
-    on_a_journey = True
-    while on_a_journey:
-        return  "to lead, learn, inspire, and drive meaningful change in tech"
-
-    with strong_skills in ("Python", "Java", "Kotlin - Jetpack Compose")
-
-    for to_dive in new_technologies:
-        with full dedication
-        if especially:
-            if it spark my curiosity:
-                print("Embracing every challenge as an opportunity to grow and innovate.")
- """
-        const val JAVA_CODE = """public class ProfilePage {
-
-    public static void aboutMe() {
-        System.out.println("Hello there!! I am Vikramaditya Khupse");
-        System.out.println("Ambitious Student | Programmer | Tech Enthusiast");
-    }
-
-    public static String journey() {
-        boolean onAJourney = true;
-        while (onAJourney) {
-            return "to lead, learn, inspire, and drive meaningful change in tech";
-        }
-        return ""; 
-    }
-
-    public static void diveIntoTechnologies() {
-        String[] strongSkills = {"Python", "Java", "Kotlin - Jetpack Compose"};
-
-        for (String technology : strongSkills) {
-            boolean especially = technology.contains("spark curiosity");
-            if (especially) {
-                System.out.println("Embracing every challenge as an opportunity to grow and innovate.");
+me = Profile()
+print(me.ship())"""
+        const val JAVA_CODE = """public record Experience(
+    String role,
+    String company,
+    String period,
+    String[] highlights
+) {
+    public static Experience current() {
+        return new Experience(
+            "Associate Software Engineer (Intern)",
+            "Better Software",
+            "Oct 2025 – Present",
+            new String[]{
+                "CI/CD with GitHub Actions + Docker",
+                "Multi-cloud releases across AWS & DigitalOcean",
+                "Reliable, monitored deployments"
             }
-        }
-    }
-
-    public static void main(String[] args) {
-        aboutMe();
-        System.out.println(journey());
-        diveIntoTechnologies();
-    }
-}
-"""
-        const val KOBWEB_CODE = """
-fun profilePage() {
-    fun aboutMe() {
-        println("Hello there!! I am Vikramaditya Khupse")
-        println("Ambitious Student | Programmer | Tech Enthusiast")
-    }
-
-    var onAJourney = true
-    while (onAJourney) {
-        return "to lead, learn, inspire, and drive meaningful change in tech"
-    }
-
-    val strongSkills = listOf("Python", "Java", "Kotlin - Jetpack Compose")
-
-    for (toDive in newTechnologies) {
-        with(fullDedication) {
-            if (especially) {
-                if (it.sparksCuriosity()) {
-                    println("Embracing every challenge as an opportunity to grow and innovate.")
-                }
-            }
-        }
+        );
     }
 }"""
+        const val KOBWEB_CODE = """
+data class Project(val name: String, val impact: String)
+
+val projects = listOf(
+    Project("HR Chacha", "80% automated candidate screening with LLMs"),
+    Project("Phishing Detection", "97% accuracy, CI/CD to AWS"),
+    Project("Vyom Assist", "₹1L hackathon win, AI customer support")
+)
+
+fun headline() = "Full-stack + AI/ML builder shipping to production."
+"""
 
 
 
@@ -187,4 +154,3 @@ fun profilePage() {
 
 
 }
-

@@ -47,7 +47,7 @@ fun AboutMe() {
         ) {
             Column(modifier = Modifier.fillMaxWidth()) {
                 SpanText(
-                    "I’m an IT student who’s deeply passionate about computers, technology, and the craft of coding.",
+                    "Final-year IT engineer building ML-heavy products, full-stack services, and cloud-native systems.",
                     modifier = Modifier
                         .fillMaxWidth()
                         .textAlign(TextAlign.Center)
@@ -61,7 +61,7 @@ fun AboutMe() {
                         .fontSize(fontSize)
                 )
                 SpanText(
-                    "I explore domains like AI, apps, and systems — wherever problem-solving thrives.",
+                    "Primary stack: Python (Transformers, LangGraph, TensorFlow/Keras, scikit-learn) plus Java/Kotlin for services and frontend.",
                     modifier = Modifier
                         .fillMaxWidth()
                         .textAlign(TextAlign.Center)
@@ -76,7 +76,7 @@ fun AboutMe() {
                         .padding(top = 8.px)
                 )
                 SpanText(
-                    "As Co-Lead of GDG on campus SGGSIE&T, I contribute through mentoring, organizing events, and driving change.",
+                    "Hands-on with FastAPI, Docker, GitHub Actions CI/CD, and AWS (EC2/S3/ECR). Team-first builder who enjoys mentoring and leading ship-to-prod efforts.",
                     modifier = Modifier
                         .fillMaxWidth()
                         .textAlign(TextAlign.Center)

@@ -44,6 +44,8 @@ fun HomePage() {
             ProfileCard()
             SectionTitle("About Me", id = "about-me")
             AboutMe()
+            SectionTitle("Experience", id = "experience")
+            ExperienceSection()
             SectionTitle("What I do?", id = "what-i-do")
             WhatIDo()
             SectionTitle("Programming Language Proficiency", id = "languages")
@@ -60,5 +62,3 @@ fun HomePage() {
 
 
 }
-
-

@@ -27,10 +27,10 @@ fun ProjectSection(){
     ) {
         ProjectCard(
             title = "Vyom Assist",
-            description = "Business Analytics-Based Appointment Management System.",
+            description = "AI-powered banking support system; special winner @ PSB iDEA Hackathon 2025 (₹1,00,000).",
             imageUrl = "images/projectthumbnails/vyomassist.png",
             mainTechStack = "Kotlin-Jetpack Compose",
-            otherTechStack = "PHP, SQL",
+            otherTechStack = "Android, Firebase, Hackathon build",
             iconsList = listOf(
                 Res.Logo.KOTLIN_LOGO,
                 Res.Logo.ANDROID_LOGO,
@@ -44,50 +44,47 @@ fun ProjectSection(){
         )
 
         ProjectCard(
-            title = "AirSage AI",
-            description = "Android application that visualizes live gas readings (CO, CO₂, NH₃, NOx, etc.) transmitted from a physical hardware device. ",
-            imageUrl = "images/projectthumbnails/airsage.png",
-            mainTechStack = "Kotlin-Jetpack Compose",
-            otherTechStack = "Kotlin, Jetpack Compose, Firebase, Retrofit",
+            title = "Production ML: Phishing Detection",
+            description = "End-to-end ML pipeline with 97% accuracy, automated ETL, drift checks, and CI/CD to AWS.",
+            imageUrl = "images/projectthumbnails/chatbot.jpg",
+            mainTechStack = "Python · FastAPI",
+            otherTechStack = "AWS, Docker, GitHub Actions",
             iconsList = listOf(
-                Res.Logo.KOTLIN_LOGO,
-                Res.Logo.ANDROID_LOGO,
-                Res.Logo.FIREBASE_LOGO,
-                Res.Logo.MYSQL_LOGO,
-                Res.Logo.FIGMA_LOGO
+                Res.Logo.PYTHON_LOGO,
+                Res.Logo.PYCHARM_LOGO,
+                Res.Logo.GITHUB_LOGO
             ),
             onClick = {
-                ctx.router.navigateTo("https://github.com/Phantom-VK/AirSageAi")
+                ctx.router.navigateTo("https://github.com/Phantom-VK")
             }
         )
         ProjectCard(
-            title = "IP Utils",
-            description = "Multiplatform educational software to showcase detailed information of a particular IP address.",
-            imageUrl = "images/projectthumbnails/iputils.png",
-            mainTechStack = "Kotlin Multiplatform",
-            otherTechStack = "Compose Multiplatform",
+            title = "AgentTuring Math Tutor",
+            description = "Developed AI-powered tutoring agent with RAG + MCP for math problem solving and web retrieval.",
+            imageUrl = "images/projectthumbnails/chatbot.jpg",
+            mainTechStack = "AI-ML",
+            otherTechStack = "LangGraph, Qdrant,Tavily MCP, LLM, FastAPI",
             iconsList = listOf(
-                Res.Logo.CMP_LOGO,
-                Res.Logo.KOTLIN_LOGO,
-                Res.Logo.ANDROID_LOGO,
-                Res.Logo.INTELLIJ_LOGO
+                Res.Logo.PYTHON_LOGO,
+                Res.Logo.PYCHARM_LOGO,
             ),
             onClick = {
-                ctx.router.navigateTo("https://github.com/Phantom-VK/IPUtils")
+                ctx.router.navigateTo("https://github.com/Phantom-VK/agentturing")
             }
         )
 
         ProjectCard(
-            title = "Figma Designs",
-            description = "Designed unique and visually compelling interfaces from scratch in Figma, focusing on clean UX and aesthetic UI.",
-            imageUrl = "images/projectthumbnails/figma.png",
-            mainTechStack = "Figma",
-            otherTechStack = "",
+            title = "HR Chacha - AI-Powered Hiring Assistant",
+            description = "LLM-driven hiring assistant automating 80% candidate screening with role-specific Q&A.",
+            imageUrl = "images/projectthumbnails/chatbot.jpg",
+            mainTechStack = "AI-ML",
+            otherTechStack = "Python, Streamlit, FastAPI, MongoDB, AWS",
             iconsList = listOf(
-                Res.Logo.FIGMA_LOGO
+                Res.Logo.PYTHON_LOGO,
+                Res.Logo.PYCHARM_LOGO
             ),
             onClick = {
-                ctx.router.navigateTo("https://www.figma.com/files/team/1234540862577380109/user/1219532462863680561?fuid=1219532462863680561")
+                ctx.router.navigateTo("https://github.com/phantom-vk/HRChacha")
             }
         )
         ProjectCard(
@@ -105,36 +102,6 @@ fun ProjectSection(){
                 ctx.router.navigateTo("https://github.com/Phantom-VK/SRTSlicer")
             }
         )
-        ProjectCard(
-            title = "Customer Care Chatbot",
-            description = "A Customer Care chatbot for banks",
-            imageUrl = "images/projectthumbnails/chatbot.jpg",
-            mainTechStack = "Python",
-            otherTechStack = "Transformers, Torch, Flask",
-            iconsList = listOf(
-                Res.Logo.PYTHON_LOGO,
-                Res.Logo.PYCHARM_LOGO,
-                Res.Logo.PYTORCH_LOGO
-            ),
-            onClick = {
-                ctx.router.navigateTo("https://github.com/Phantom-VK/CustomerCare-Chatbot")
-            }
-        )
-        ProjectCard(
-            title = "Credit Checker",
-            description = "A utility python project for studios and companies , to check if a particular channel has given them right credits or not in each video of the channel. ",
-            imageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqtpKHYwjMNEl4NZmecZZNkUcFC3xsJ9AjzilzMyy56kJMPCVDGs0KUoI13D8-m-8z34k&usqp=CAU",
-            mainTechStack = "Python",
-            otherTechStack = "Pandas, Requests",
-            iconsList = listOf(
-                Res.Logo.PYTHON_LOGO,
-                Res.Logo.PYCHARM_LOGO
-            ),
-            onClick = {
-                ctx.router.navigateTo("https://github.com/Phantom-VK/CreditChekcr")
-            }
-        )
-
         ProjectCard(
             title = "Portfolio",
             description = "Portfolio Website using Kobweb framework, Kotlin language only.",
