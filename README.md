@@ -1,5 +1,5 @@
-[![version: 0.22.0](https://img.shields.io/badge/kobweb-0.22.0-blue)](COMPATIBILITY.md)
-[![kotlin: 2.1.21](https://img.shields.io/badge/kotlin-2.1.21-blue?logo=kotlin)](COMPATIBILITY.md)
+[![version: 0.23.3](https://img.shields.io/badge/kobweb-0.23.3-blue)](COMPATIBILITY.md)
+[![kotlin: 2.2.20](https://img.shields.io/badge/kotlin-2.2.20-blue?logo=kotlin)](COMPATIBILITY.md)
 <a href="https://kobweb.varabyte.com/docs">
 ![User Guide docs](https://img.shields.io/badge/User_Guide-royalblue?logo=readthedocs)
 </a>
