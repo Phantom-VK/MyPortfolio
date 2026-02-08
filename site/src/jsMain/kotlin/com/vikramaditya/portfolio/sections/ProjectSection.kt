@@ -46,7 +46,7 @@ fun ProjectSection(){
         ProjectCard(
             title = "Production ML: Phishing Detection",
             description = "End-to-end ML pipeline with 97% accuracy, automated ETL, drift checks, and CI/CD to AWS.",
-            imageUrl = "images/projectthumbnails/chatbot.jpg",
+            imageUrl = "images/projectthumbnails/mlpipeline.jpg",
             mainTechStack = "Python · FastAPI",
             otherTechStack = "AWS, Docker, GitHub Actions",
             iconsList = listOf(
@@ -61,7 +61,7 @@ fun ProjectSection(){
         ProjectCard(
             title = "AgentTuring Math Tutor",
             description = "Developed AI-powered tutoring agent with RAG + MCP for math problem solving and web retrieval.",
-            imageUrl = "images/projectthumbnails/chatbot.jpg",
+            imageUrl = "images/projectthumbnails/agentturing.png",
             mainTechStack = "AI-ML",
             otherTechStack = "LangGraph, Qdrant,Tavily MCP, LLM, FastAPI",
             iconsList = listOf(
@@ -76,7 +76,7 @@ fun ProjectSection(){
         ProjectCard(
             title = "HR Chacha - AI-Powered Hiring Assistant",
             description = "LLM-driven hiring assistant automating 80% candidate screening with role-specific Q&A.",
-            imageUrl = "images/projectthumbnails/chatbot.jpg",
+            imageUrl = "images/projectthumbnails/hrchacha.jpg",
             mainTechStack = "AI-ML",
             otherTechStack = "Python, Streamlit, FastAPI, MongoDB, AWS",
             iconsList = listOf(
@@ -100,6 +100,21 @@ fun ProjectSection(){
             ),
             onClick = {
                 ctx.router.navigateTo("https://github.com/Phantom-VK/SRTSlicer")
+            }
+        )
+        ProjectCard(
+            title = "ICRS – Intelligent College Redressal System",
+            description = "AI-powered grievance platform with RAG + pgvector semantic search, role-based React/Spring portals, JWT security, and email notifications.",
+            imageUrl = "images/projectthumbnails/chatbot.jpg",
+            mainTechStack = "Java Spring Boot · React · PostgreSQL + pgvector",
+            otherTechStack = "RAG, JWT auth, email notifications",
+            iconsList = listOf(
+                Res.Logo.JAVA_LOGO,
+                Res.Logo.INTELLIJ_LOGO,
+                Res.Logo.GITHUB_LOGO
+            ),
+            onClick = {
+                ctx.router.navigateTo("https://github.com/Phantom-VK/icrs")
             }
         )
         ProjectCard(
