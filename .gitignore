@@ -3,6 +3,9 @@
 build
 out
 kotlin-js-store
+/site/.kobweb/server/
+/site/.kobweb/site/
+*.hprof
 
 # IntelliJ ignores
 *.iml
