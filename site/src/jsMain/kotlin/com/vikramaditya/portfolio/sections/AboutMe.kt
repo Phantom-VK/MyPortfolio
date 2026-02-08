@@ -47,7 +47,7 @@ fun AboutMe() {
         ) {
             Column(modifier = Modifier.fillMaxWidth()) {
                 SpanText(
-                    "Final-year IT engineer building ML-heavy products, full-stack services, and cloud-native systems.",
+                    "Final-year IT engineer building AI/ML applications, full-stack services, and cloud-native systems.",
                     modifier = Modifier
                         .fillMaxWidth()
                         .textAlign(TextAlign.Center)
@@ -61,7 +61,7 @@ fun AboutMe() {
                         .fontSize(fontSize)
                 )
                 SpanText(
-                    "Primary stack: Python (Transformers, LangGraph, TensorFlow/Keras, scikit-learn) plus Java/Kotlin for services and frontend.",
+                    "Primary stack: Python (AI/ML, TensorFlow/Keras, scikit-learn, Gen AI) plus Java/Kotlin for services and frontend.",
                     modifier = Modifier
                         .fillMaxWidth()
                         .textAlign(TextAlign.Center)
@@ -76,7 +76,7 @@ fun AboutMe() {
                         .padding(top = 8.px)
                 )
                 SpanText(
-                    "Hands-on with FastAPI, Docker, GitHub Actions CI/CD, and AWS (EC2/S3/ECR). Team-first builder who enjoys mentoring and leading ship-to-prod efforts.",
+                    "Hands-on with FastAPI, Docker, GitHub Actions CI/CD, and AWS cloud. It's passion, more than a career choice.",
                     modifier = Modifier
                         .fillMaxWidth()
                         .textAlign(TextAlign.Center)
