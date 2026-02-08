@@ -86,20 +86,14 @@ fun PageLayout(
 //                }'), auto")
 //            }
     ) {
-        //  Matrix Rain Background (disabled on small screens for perf)
-        if (breakpoint > Breakpoint.SM) {
-            MatrixRainAnimation(
-                Modifier.fillMaxSize()
-            )
-        } else {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(
-                        Color.rgba(12, 16, 24, 0.9f)
-                    )
-            )
-        }
+        //  Matrix Rain Background (lighter settings on small screens)
+        val isMobile = breakpoint <= Breakpoint.SM
+        MatrixRainAnimation(
+            modifier = Modifier.fillMaxSize(),
+            fontSizePx = if (isMobile) 22 else 16,
+            frameDelayMs = if (isMobile) 70 else 50,
+            trailAlpha = if (isMobile) 0.08 else 0.05
+        )
 
         if(breakpoint > Breakpoint.SM){
             MatrixCursor()
@@ -141,7 +135,7 @@ fun PageLayout(
                             property("width", "${scrollProgress * 100}%")
                             property(
                                 "background",
-                                "linear-gradient(90deg, #22d3ee 0%, #7c3aed 50%, #f97316 100%)"
+                                "linear-gradient(90deg, #ffffff 0%, #5cf0c5 55%, #00ff41 100%)"
                             )
                             property("transition", "width 120ms ease-out")
                         }

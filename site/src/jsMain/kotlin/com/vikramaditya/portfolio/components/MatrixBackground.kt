@@ -14,6 +14,7 @@ import kotlinx.coroutines.launch
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.Canvas
 import org.w3c.dom.HTMLCanvasElement
+import kotlin.math.max
 import kotlin.random.Random
 
 @CssName("matrix-canvas")
@@ -29,7 +30,12 @@ val MatrixStyle = CssStyle {
 }
 
 @Composable
-fun MatrixRainAnimation(modifier: Modifier = Modifier) {
+fun MatrixRainAnimation(
+    modifier: Modifier = Modifier,
+    fontSizePx: Int = 16,
+    frameDelayMs: Long = 50,
+    trailAlpha: Double = 0.05
+) {
     var colorMode by ColorMode.currentState
     val canvasRef = remember { mutableStateOf<HTMLCanvasElement?>(null) }
     val letters = "アイウエオカキグケゲゴザジズゼゾダチッヂヅデドナニネバビピプペボポマミムメモヤラリルレヲンABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
@@ -43,13 +49,14 @@ fun MatrixRainAnimation(modifier: Modifier = Modifier) {
         canvas.width = window.innerWidth
         canvas.height = window.innerHeight
 
-        val fontSize = 16
-        val columns = canvas.width / fontSize
+        val fontSize = fontSizePx
+        val columns = max(1, canvas.width / fontSize)
         val drops = IntArray(columns) { Random.nextInt(canvas.height / fontSize) }
 
         launch {
             while (true) {
-                ctx.fillStyle = if (colorMode.isDark) "rgba(0, 0, 0, 0.05)" else "rgba(255, 255, 255, 0.05)"
+                val fade = trailAlpha.coerceIn(0.01, 0.2)
+                ctx.fillStyle = if (colorMode.isDark) "rgba(0, 0, 0, $fade)" else "rgba(255, 255, 255, $fade)"
                 ctx.fillRect(0.0, 0.0, canvas.width.toDouble(), canvas.height.toDouble())
 
                 ctx.fillStyle = if (colorMode.isDark) "#0F0" else "#006400"
@@ -65,7 +72,7 @@ fun MatrixRainAnimation(modifier: Modifier = Modifier) {
                     drops[i]++
                 }
 
-                delay(50L)
+                delay(frameDelayMs)
             }
         }
 
@@ -85,4 +92,3 @@ fun MatrixRainAnimation(modifier: Modifier = Modifier) {
             }
     )
 }
-
