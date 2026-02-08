@@ -46,7 +46,7 @@ fun ProjectSection(){
         ProjectCard(
             title = "Production ML: Phishing Detection",
             description = "End-to-end ML pipeline with 97% accuracy, automated ETL, drift checks, and CI/CD to AWS.",
-            imageUrl = "images/projectthumbnails/mlpipeline.jpg",
+            imageUrl = "images/projectthumbnails/mlpipeline.png",
             mainTechStack = "Python · FastAPI",
             otherTechStack = "AWS, Docker, GitHub Actions",
             iconsList = listOf(
@@ -76,7 +76,7 @@ fun ProjectSection(){
         ProjectCard(
             title = "HR Chacha - AI-Powered Hiring Assistant",
             description = "LLM-driven hiring assistant automating 80% candidate screening with role-specific Q&A.",
-            imageUrl = "images/projectthumbnails/hrchacha.jpg",
+            imageUrl = "images/projectthumbnails/hrchacha.png",
             mainTechStack = "AI-ML",
             otherTechStack = "Python, Streamlit, FastAPI, MongoDB, AWS",
             iconsList = listOf(
