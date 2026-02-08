@@ -9,6 +9,7 @@ import com.varabyte.kobweb.compose.css.functions.toImage
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Color
 import com.varabyte.kobweb.compose.ui.modifiers.*
+import com.varabyte.kobweb.compose.ui.styleModifier
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.selectors.hover
 import com.vikramaditya.portfolio.utils.Res
@@ -35,12 +36,28 @@ val ProjectCardSTyle = CssStyle {
             )
             .backdropFilter(blur(5.px),
                     brightness(0.9))
-            .transition(Transition.of("all", 0.5.s))
+            .boxShadow(
+                offsetX = 0.px,
+                offsetY = 10.px,
+                blurRadius = 32.px,
+                color = Color.rgba(0, 0, 0, 0.35f)
+            )
+            .transition(Transition.of("transform", 0.35.s), Transition.of("box-shadow", 0.35.s))
+            .styleModifier {
+                property("overflow", "hidden")
+            }
     }
     hover {
         Modifier
-            .boxShadow(blurRadius = 40.px, spreadRadius = 7.px, color = Res.Theme.THEME_GREEN.color)
-            .transform { scale(1.05) }
+            .boxShadow(
+                blurRadius = 45.px,
+                spreadRadius = 6.px,
+                color = Res.Theme.THEME_GREEN.color
+            )
+            .transform {
+                translateY((-6).px)
+                scale(1.04)
+            }
             .filter(brightness(1.2))
     }
 }

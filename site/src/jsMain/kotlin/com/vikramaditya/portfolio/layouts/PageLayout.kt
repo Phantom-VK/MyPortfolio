@@ -1,8 +1,12 @@
 package com.vikramaditya.portfolio.layouts
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import com.varabyte.kobweb.compose.css.Cursor
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
@@ -10,6 +14,7 @@ import com.varabyte.kobweb.compose.foundation.layout.ColumnScope
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Color
 import com.varabyte.kobweb.compose.ui.modifiers.*
+import com.varabyte.kobweb.compose.ui.styleModifier
 import com.varabyte.kobweb.framework.annotations.DelicateApi
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
@@ -21,9 +26,12 @@ import com.vikramaditya.portfolio.components.MatrixCursor
 import com.vikramaditya.portfolio.components.MatrixRainAnimation
 import com.vikramaditya.portfolio.sections.Header
 import kotlinx.browser.document
+import kotlinx.browser.window
 import org.jetbrains.compose.web.css.Position
 import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.px
+import org.jetbrains.compose.web.css.percent
+import kotlin.math.max
 
 val PageContentStyle = CssStyle {
     base {
@@ -44,9 +52,27 @@ fun PageLayout(
 ) {
     val colorMode by ColorMode.currentState
     val breakpoint = rememberBreakpoint()
+    var scrollProgress by remember { mutableStateOf(0f) }
 
     LaunchedEffect(title) {
         document.title = "Vikramaditya Khupse - $title"
+    }
+
+    DisposableEffect(Unit) {
+        val listener: (org.w3c.dom.events.Event) -> Unit = {
+            val root = (document.documentElement ?: document.body) as? org.w3c.dom.HTMLElement
+            if (root != null) {
+                val scrollTop = root.scrollTop.toDouble()
+                val scrollHeight = root.scrollHeight.toDouble()
+                val clientHeight = root.clientHeight.toDouble()
+                val denominator = max(1.0, scrollHeight - clientHeight)
+                scrollProgress = (scrollTop / denominator).toFloat().coerceIn(0f, 1f)
+            }
+        }
+        window.addEventListener("scroll", listener)
+        onDispose {
+            window.removeEventListener("scroll", listener)
+        }
     }
 
     Box(
@@ -60,10 +86,20 @@ fun PageLayout(
 //                }'), auto")
 //            }
     ) {
-        //  Matrix Rain Background
-        MatrixRainAnimation(
-            Modifier.fillMaxSize()
-        )
+        //  Matrix Rain Background (disabled on small screens for perf)
+        if (breakpoint > Breakpoint.SM) {
+            MatrixRainAnimation(
+                Modifier.fillMaxSize()
+            )
+        } else {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(
+                        Color.rgba(12, 16, 24, 0.9f)
+                    )
+            )
+        }
 
         if(breakpoint > Breakpoint.SM){
             MatrixCursor()
@@ -91,6 +127,27 @@ fun PageLayout(
                 .zIndex(3)
                 .fillMaxWidth()
         ) {
+            // scroll progress indicator
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(4.px)
+                    .backgroundColor(Color.rgba(0, 0, 0, 0.2f))
+            ) {
+                Box(
+                    modifier = Modifier
+                        .height(100.percent)
+                        .styleModifier {
+                            property("width", "${scrollProgress * 100}%")
+                            property(
+                                "background",
+                                "linear-gradient(90deg, #22d3ee 0%, #7c3aed 50%, #f97316 100%)"
+                            )
+                            property("transition", "width 120ms ease-out")
+                        }
+                )
+            }
+
             Header(
                 modifier = Modifier.fillMaxWidth()
             )

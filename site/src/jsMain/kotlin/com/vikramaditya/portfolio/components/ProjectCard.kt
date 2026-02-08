@@ -65,7 +65,14 @@ fun ProjectCard(
                     .maxHeight(250.px)
                     .objectFit(ObjectFit.Cover)
                     .borderRadius(Res.Dimens.BORDER_RADIUS.px)
-                    .toAttrs()
+                    .boxShadow(
+                        blurRadius = 10.px,
+                        color = Color.rgba(0, 0, 0, 0.35f)
+                    )
+                    .toAttrs {
+                        attr("loading", "lazy")
+                        attr("decoding", "async")
+                    }
             )
 
             SpanText(
@@ -153,4 +160,3 @@ fun CustomHorizontalDivider() {
             .backgroundColor(Res.Theme.MATRIX_GLOW.color)
     )
 }
-
