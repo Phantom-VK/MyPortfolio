@@ -8,8 +8,10 @@ import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
+import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.background
 import com.varabyte.kobweb.compose.ui.modifiers.borderRadius
+import com.varabyte.kobweb.compose.ui.modifiers.color
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.fontSize
 import com.varabyte.kobweb.compose.ui.modifiers.fontWeight
@@ -17,8 +19,8 @@ import com.varabyte.kobweb.compose.ui.modifiers.margin
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.compose.ui.modifiers.textAlign
 import com.varabyte.kobweb.compose.ui.modifiers.width
-import com.varabyte.kobweb.compose.ui.modifiers.color
 import com.varabyte.kobweb.silk.components.text.SpanText
+import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.vikramaditya.portfolio.utils.Res
 import org.jetbrains.compose.web.css.em
 import org.jetbrains.compose.web.css.percent
@@ -53,6 +55,9 @@ private fun ExperienceCard(
     period: String,
     highlights: List<String>
 ) {
+    val colorMode = ColorMode.current
+    val bodyColor = if (colorMode.isDark) Res.Theme.GLASS_BOX_BORDER_COLOR_LIGHT.color else Colors.White
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -65,6 +70,7 @@ private fun ExperienceCard(
             modifier = Modifier
                 .fontWeight(FontWeight.Bold)
                 .fontSize(1.2.em)
+                .color(bodyColor)
         )
         SpanText(
             text = period,
@@ -91,11 +97,13 @@ private fun ExperienceCard(
                         modifier = Modifier
                             .width(12.px)
                             .textAlign(TextAlign.Center)
+                            .color(bodyColor)
                     )
                     SpanText(
                         text = item,
                         modifier = Modifier
                             .margin(left = 8.px)
+                            .color(bodyColor)
                     )
                 }
             }
