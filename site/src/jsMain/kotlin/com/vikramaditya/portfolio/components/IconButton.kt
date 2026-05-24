@@ -76,10 +76,10 @@ enum class SocialIcon(
     ),
     Instagram(
         icon = Res.Icon.INSTAGRAM,
-        link = "https://www.instagram.com/_the_vikramaditya_"
+        link = "https://www.instagram.com/_vikramaditya__"
     ),
     InstagramLight(
         icon = Res.Icon.INSTAGRAM_LIGHT,
-        link = "https://www.instagram.com/_the_vikramaditya_"
+        link = "https://www.instagram.com/_vikramaditya__"
     )
 }
