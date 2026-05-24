@@ -26,10 +26,7 @@ fun MySkillsSection() {
     val skills = listOf(
         Skill("PYTHON", "80%"),
         Skill("JAVA", "70%"),
-        Skill("KOTLIN", "50%"),
-        Skill("LLMs & NLP", "60%"),
-        Skill("FASTAPI / DOCKER", "60%"),
-        Skill("AWS (EC2/S3/ECR)", "5q0%")
+        Skill("KOTLIN", "50%")
     )
 
 

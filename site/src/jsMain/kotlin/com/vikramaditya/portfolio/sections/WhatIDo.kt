@@ -85,10 +85,10 @@ fun WhatIDo() {
         ) {
             WhatIDoCard(
                 iconImage = Res.Icon.HEXAWEB,
-                description = "Full-Stack Systems",
+                description = "Full Stack Systems & DevOps",
                 backContent = {
                     SpanText(
-                        text = "Design and ship web backends and UIs end-to-end with Kotlin/Java and Python APIs, focusing on reliable data flows and clean UX.",
+                        text = "Build Python full stack systems end-to-end, with hands-on Java work and desktop app development using Python.",
                         modifier = Modifier
                             .textAlign(TextAlign.Center)
                             .fontFamily("JetBrains Mono")
@@ -100,10 +100,10 @@ fun WhatIDo() {
 
             WhatIDoCard(
                 iconImage = Res.Icon.DEV,
-                description = "AI / ML & LLM Apps",
+                description = "AI/ML Applications",
                 backContent = {
                     SpanText(
-                        text = "Build and deploy LLM-powered assistants and ML pipelines (Transformers, LangGraph, scikit-learn) with real-time APIs.",
+                        text = "End-to-end AI/ML projects and Agentic AI automations.",
                         modifier = Modifier
                             .textAlign(TextAlign.Center)
                             .fontFamily("JetBrains Mono")
@@ -115,10 +115,10 @@ fun WhatIDo() {
 
             WhatIDoCard(
                 iconImage = Res.Icon.CUBOID,
-                description = "DevOps & Cloud",
+                description = "Android Development",
                 backContent = {
                     SpanText(
-                        text = "Automate CI/CD with GitHub Actions + Docker; deploy to AWS (EC2/S3/ECR) and manage multi-environment releases.",
+                        text = "Android development with the latest tech stack, Kotlin and Jetpack Compose.",
                         modifier = Modifier
                             .textAlign(TextAlign.Center)
                             .fontFamily("JetBrains Mono")

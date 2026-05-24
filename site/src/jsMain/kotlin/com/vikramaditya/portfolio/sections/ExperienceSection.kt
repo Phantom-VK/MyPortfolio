@@ -38,7 +38,7 @@ fun ExperienceSection() {
         ExperienceCard(
             role = "Associate Software Engineer (Intern)",
             company = "Better Software",
-            period = "Oct 2025 – Present",
+            period = "Oct 2025 – Feb 2026",
             highlights = listOf(
                 "Architected CI/CD pipelines with GitHub Actions + Docker to automate build, test, and deploy.",
                 "Built multi-cloud release workflows across AWS and DigitalOcean with environment-specific rollouts.",
