@@ -78,6 +78,7 @@ fun ProfileCard() {
     }
 }
 
+@OptIn(DelicateApi::class)
 @Composable
 fun ProfileImage(isMobile: Boolean) {
     val colorMode by ColorMode.currentState
