@@ -62,7 +62,7 @@ fun PageLayout(
         val listener: (org.w3c.dom.events.Event) -> Unit = {
             val root = (document.documentElement ?: document.body) as? org.w3c.dom.HTMLElement
             if (root != null) {
-                val scrollTop = root.scrollTop.toDouble()
+                val scrollTop = root.scrollTop
                 val scrollHeight = root.scrollHeight.toDouble()
                 val clientHeight = root.clientHeight.toDouble()
                 val denominator = max(1.0, scrollHeight - clientHeight)

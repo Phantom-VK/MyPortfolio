@@ -42,15 +42,15 @@ fun Header(modifier: Modifier) {
         Res.Theme.LIGHT_THEME_BACKGROUND.color to Res.Theme.DARK_THEME_BACKGROUND.color
     }
 
-    var scrollY by remember { mutableStateOf(window.scrollY.toDouble()) }
-    var lastScrollY by remember { mutableStateOf(window.scrollY.toDouble()) }
+    var scrollY by remember { mutableStateOf(window.scrollY) }
+    var lastScrollY by remember { mutableStateOf(window.scrollY) }
     var showHeader by remember { mutableStateOf(true) }
     var currentSection by remember { mutableStateOf("") }
 
     // Scroll listener to toggle header visibility
     LaunchedEffect(Unit) {
         window.addEventListener("scroll", {
-            scrollY = window.scrollY.toDouble()
+            scrollY = window.scrollY
 
             // Direction logic
             showHeader = scrollY < lastScrollY || scrollY < 100
