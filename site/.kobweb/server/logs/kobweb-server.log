@@ -1,14 +1,212 @@
-2026-05-24 10:36:21.567 [main] DEBUG io.ktor.server.Application - Java Home: /usr/lib/jvm
-2026-05-24 10:36:21.568 [main] DEBUG io.ktor.server.Application - Class Loader: jdk.internal.loader.ClassLoaders$AppClassLoader@30946e09: [file:/home/vikramaditya/WebProjects/MyPortfolio/site/.kobweb/server/server.jar!/okio/]
-2026-05-24 10:36:21.586 [main] INFO  io.ktor.server.Application - Initializing server engine for Kobweb project "MyPortfolio"
-2026-05-24 10:36:21.588 [main] WARN  io.ktor.server.Application - API jar specified but does not exist! Please fix conf.yaml, updating the path (or removing the value if you aren't declaring API endpoints). Invalid path: "build/libs/portfolio.jar"
-2026-05-24 10:36:21.665 [main] INFO  io.ktor.server.Application - CORS: No hosts registered.
-2026-05-24 10:36:21.676 [main] INFO  io.ktor.server.Application - Application started in 0.249 seconds.
-2026-05-24 10:36:21.757 [main] INFO  io.ktor.server.Application - Responding at http://0.0.0.0:8080
-2026-05-24 10:36:33.083 [DefaultDispatcher-worker-3] DEBUG io.ktor.server.Application - Served fallback index.html file in response to "/"
-2026-05-24 10:36:33.641 [DefaultDispatcher-worker-1] DEBUG io.ktor.server.Application - Client connected and is requesting kobweb status events.
-2026-05-24 10:38:12.921 [kotlinx.coroutines.DefaultExecutor] INFO  io.ktor.server.Application - Kobweb server shutting down...
-2026-05-24 10:38:14.040 [DefaultDispatcher-worker-4] DEBUG io.ktor.server.Application - Stopped sending kobweb status events, probably because client disconnected or server is shutting down. (JobCancellationException: Job was cancelled)
-2026-05-24 10:38:14.042 [DefaultDispatcher-worker-4] DEBUG io.ktor.server.Application - 200 OK: GET - /api/kobweb-status. Exception class kotlinx.coroutines.JobCancellationException: Job was cancelled
-kotlinx.coroutines.JobCancellationException: Job was cancelled
-2026-05-24 10:38:14.045 [kotlinx.coroutines.DefaultExecutor] INFO  io.ktor.server.Application - Server finished shutting down.
+2026-05-24 11:17:45.008 [main] DEBUG io.ktor.server.Application - Java Home: /usr/lib/jvm
+2026-05-24 11:17:45.014 [main] DEBUG io.ktor.server.Application - Class Loader: jdk.internal.loader.ClassLoaders$AppClassLoader@30946e09: [file:/home/vikramaditya/WebProjects/MyPortfolio/site/.kobweb/server/server.jar!/okio/]
+2026-05-24 11:17:45.031 [main] INFO  io.ktor.server.Application - Initializing server engine for Kobweb project "MyPortfolio"
+2026-05-24 11:17:45.033 [main] WARN  io.ktor.server.Application - API jar specified but does not exist! Please fix conf.yaml, updating the path (or removing the value if you aren't declaring API endpoints). Invalid path: "build/libs/portfolio.jar"
+2026-05-24 11:17:45.107 [main] INFO  io.ktor.server.Application - CORS: No hosts registered.
+2026-05-24 11:17:45.118 [main] INFO  io.ktor.server.Application - Application started in 0.238 seconds.
+2026-05-24 11:17:45.224 [main] INFO  io.ktor.server.Application - Responding at http://0.0.0.0:8080
+2026-05-24 11:17:52.279 [DefaultDispatcher-worker-3] DEBUG io.ktor.server.Application - Served fallback index.html file in response to "/"
+2026-05-24 11:17:52.825 [DefaultDispatcher-worker-1] DEBUG io.ktor.server.Application - Client connected and is requesting kobweb status events.
+2026-05-24 11:19:22.835 [DefaultDispatcher-worker-11] DEBUG io.ktor.server.Application - Stopped sending kobweb status events, probably because client disconnected or server is shutting down. (JobCancellationException: Parent job is Cancelling)
+2026-05-24 11:19:22.837 [DefaultDispatcher-worker-11] DEBUG io.ktor.server.Application - 200 OK: GET - /api/kobweb-status. Exception class kotlinx.coroutines.JobCancellationException: Parent job is Cancelling
+kotlinx.coroutines.JobCancellationException: Parent job is Cancelling
+Caused by: io.ktor.utils.io.ClosedWriteChannelException: Cannot write to channel
+	at io.ktor.utils.io.ByteChannel$writeBuffer$1.invoke(ByteChannel.kt:54)
+	at io.ktor.utils.io.ByteChannel$writeBuffer$1.invoke(ByteChannel.kt:54)
+	at io.ktor.utils.io.CloseToken.wrapCause(CloseToken.kt:21)
+	at io.ktor.utils.io.CloseToken.throwOrNull(CloseToken.kt:26)
+	at io.ktor.utils.io.ByteChannel.getWriteBuffer(ByteChannel.kt:54)
+	at io.ktor.utils.io.ByteWriteChannelOperationsKt.writeStringUtf8(ByteWriteChannelOperations.kt:102)
+	at io.ktor.server.sse.DefaultServerSSESession.writeSSE(DefaultServerSSESession.kt:34)
+	at io.ktor.server.sse.DefaultServerSSESession.send(DefaultServerSSESession.kt:22)
+	at io.ktor.server.sse.ServerSSESessionKt$heartbeat$2.invokeSuspend(ServerSSESession.kt:170)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:34)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+	at kotlinx.coroutines.internal.LimitedDispatcher$Worker.run(LimitedDispatcher.kt:124)
+	at kotlinx.coroutines.scheduling.TaskImpl.run(Tasks.kt:89)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler.runSafely(CoroutineScheduler.kt:586)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.executeTask(CoroutineScheduler.kt:820)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker(CoroutineScheduler.kt:717)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run(CoroutineScheduler.kt:704)
+Caused by: io.ktor.util.cio.ChannelWriteException: Cannot write to channel
+	at io.ktor.server.netty.cio.NettyHttpResponsePipeline.respondWithFailure(NettyHttpResponsePipeline.kt:100)
+	at io.ktor.server.netty.cio.NettyHttpResponsePipeline.respondWithBodyAndTrailerMessage(NettyHttpResponsePipeline.kt:253)
+	at io.ktor.server.netty.cio.NettyHttpResponsePipeline.access$respondWithBodyAndTrailerMessage(NettyHttpResponsePipeline.kt:24)
+	at io.ktor.server.netty.cio.NettyHttpResponsePipeline$respondWithBodyAndTrailerMessage$1.invokeSuspend(NettyHttpResponsePipeline.kt)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:34)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+	at io.netty.util.concurrent.AbstractEventExecutor.runTask(AbstractEventExecutor.java:148)
+	at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:141)
+	at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:535)
+	at io.netty.channel.SingleThreadIoEventLoop.run(SingleThreadIoEventLoop.java:201)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:1195)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+Caused by: io.netty.channel.StacklessClosedChannelException: null
+	at io.netty.channel.AbstractChannel$AbstractUnsafe.write(Object, ChannelPromise)(Unknown Source)
+2026-05-24 11:29:47.960 [eventLoopGroupProxy-4-7] DEBUG io.ktor.server.Application - Served fallback index.html file in response to "/"
+2026-05-24 11:29:48.535 [DefaultDispatcher-worker-11] DEBUG io.ktor.server.Application - Client connected and is requesting kobweb status events.
+2026-05-24 11:30:26.381 [eventLoopGroupProxy-4-8] DEBUG io.ktor.server.Application - Served fallback index.html file in response to "/"
+2026-05-24 11:30:26.893 [DefaultDispatcher-worker-3] DEBUG io.ktor.server.Application - Client connected and is requesting kobweb status events.
+2026-05-24 11:31:18.539 [DefaultDispatcher-worker-11] DEBUG io.ktor.server.Application - Stopped sending kobweb status events, probably because client disconnected or server is shutting down. (JobCancellationException: Parent job is Cancelling)
+2026-05-24 11:31:18.540 [DefaultDispatcher-worker-11] DEBUG io.ktor.server.Application - 200 OK: GET - /api/kobweb-status. Exception class kotlinx.coroutines.JobCancellationException: Parent job is Cancelling
+kotlinx.coroutines.JobCancellationException: Parent job is Cancelling
+Caused by: io.ktor.utils.io.ClosedWriteChannelException: Cannot write to channel
+	at io.ktor.utils.io.ByteChannel$writeBuffer$1.invoke(ByteChannel.kt:54)
+	at io.ktor.utils.io.ByteChannel$writeBuffer$1.invoke(ByteChannel.kt:54)
+	at io.ktor.utils.io.CloseToken.wrapCause(CloseToken.kt:21)
+	at io.ktor.utils.io.CloseToken.throwOrNull(CloseToken.kt:26)
+	at io.ktor.utils.io.ByteChannel.getWriteBuffer(ByteChannel.kt:54)
+	at io.ktor.utils.io.ByteWriteChannelOperationsKt.writeStringUtf8(ByteWriteChannelOperations.kt:102)
+	at io.ktor.server.sse.DefaultServerSSESession.writeSSE(DefaultServerSSESession.kt:34)
+	at io.ktor.server.sse.DefaultServerSSESession.send(DefaultServerSSESession.kt:22)
+	at io.ktor.server.sse.ServerSSESessionKt$heartbeat$2.invokeSuspend(ServerSSESession.kt:170)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:34)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+	at kotlinx.coroutines.internal.LimitedDispatcher$Worker.run(LimitedDispatcher.kt:124)
+	at kotlinx.coroutines.scheduling.TaskImpl.run(Tasks.kt:89)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler.runSafely(CoroutineScheduler.kt:586)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.executeTask(CoroutineScheduler.kt:820)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker(CoroutineScheduler.kt:717)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run(CoroutineScheduler.kt:704)
+Caused by: io.ktor.util.cio.ChannelWriteException: Cannot write to channel
+	at io.ktor.server.netty.cio.NettyHttpResponsePipeline.respondWithFailure(NettyHttpResponsePipeline.kt:100)
+	at io.ktor.server.netty.cio.NettyHttpResponsePipeline.respondWithBodyAndTrailerMessage(NettyHttpResponsePipeline.kt:253)
+	at io.ktor.server.netty.cio.NettyHttpResponsePipeline.access$respondWithBodyAndTrailerMessage(NettyHttpResponsePipeline.kt:24)
+	at io.ktor.server.netty.cio.NettyHttpResponsePipeline$respondWithBodyAndTrailerMessage$1.invokeSuspend(NettyHttpResponsePipeline.kt)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:34)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+	at io.netty.util.concurrent.AbstractEventExecutor.runTask(AbstractEventExecutor.java:148)
+	at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:141)
+	at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:535)
+	at io.netty.channel.SingleThreadIoEventLoop.run(SingleThreadIoEventLoop.java:201)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:1195)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+Caused by: io.netty.channel.StacklessClosedChannelException: null
+	at io.netty.channel.AbstractChannel$AbstractUnsafe.write(Object, ChannelPromise)(Unknown Source)
+2026-05-24 11:31:23.169 [eventLoopGroupProxy-4-9] DEBUG io.ktor.server.Application - Served fallback index.html file in response to "/"
+2026-05-24 11:31:23.648 [DefaultDispatcher-worker-11] DEBUG io.ktor.server.Application - Client connected and is requesting kobweb status events.
+2026-05-24 11:31:36.551 [DefaultDispatcher-worker-8] DEBUG io.ktor.server.Application - Stopped sending kobweb status events, probably because client disconnected or server is shutting down. (ClosedWriteChannelException: Cannot write to channel)
+2026-05-24 11:31:45.692 [eventLoopGroupProxy-4-12] DEBUG io.ktor.server.Application - Served fallback index.html file in response to "/"
+2026-05-24 11:31:46.175 [DefaultDispatcher-worker-11] DEBUG io.ktor.server.Application - Client connected and is requesting kobweb status events.
+2026-05-24 11:32:01.453 [eventLoopGroupProxy-4-2] DEBUG io.ktor.server.Application - Served fallback index.html file in response to "/"
+2026-05-24 11:32:01.934 [DefaultDispatcher-worker-9] DEBUG io.ktor.server.Application - Client connected and is requesting kobweb status events.
+2026-05-24 11:32:23.650 [DefaultDispatcher-worker-4] DEBUG io.ktor.server.Application - Stopped sending kobweb status events, probably because client disconnected or server is shutting down. (JobCancellationException: Parent job is Cancelling)
+2026-05-24 11:32:23.651 [DefaultDispatcher-worker-4] DEBUG io.ktor.server.Application - 200 OK: GET - /api/kobweb-status. Exception class kotlinx.coroutines.JobCancellationException: Parent job is Cancelling
+kotlinx.coroutines.JobCancellationException: Parent job is Cancelling
+Caused by: io.ktor.utils.io.ClosedWriteChannelException: Cannot write to channel
+	at io.ktor.utils.io.ByteChannel$writeBuffer$1.invoke(ByteChannel.kt:54)
+	at io.ktor.utils.io.ByteChannel$writeBuffer$1.invoke(ByteChannel.kt:54)
+	at io.ktor.utils.io.CloseToken.wrapCause(CloseToken.kt:21)
+	at io.ktor.utils.io.CloseToken.throwOrNull(CloseToken.kt:26)
+	at io.ktor.utils.io.ByteChannel.getWriteBuffer(ByteChannel.kt:54)
+	at io.ktor.utils.io.ByteWriteChannelOperationsKt.writeStringUtf8(ByteWriteChannelOperations.kt:102)
+	at io.ktor.server.sse.DefaultServerSSESession.writeSSE(DefaultServerSSESession.kt:34)
+	at io.ktor.server.sse.DefaultServerSSESession.send(DefaultServerSSESession.kt:22)
+	at io.ktor.server.sse.ServerSSESessionKt$heartbeat$2.invokeSuspend(ServerSSESession.kt:170)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:34)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+	at kotlinx.coroutines.internal.LimitedDispatcher$Worker.run(LimitedDispatcher.kt:124)
+	at kotlinx.coroutines.scheduling.TaskImpl.run(Tasks.kt:89)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler.runSafely(CoroutineScheduler.kt:586)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.executeTask(CoroutineScheduler.kt:820)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker(CoroutineScheduler.kt:717)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run(CoroutineScheduler.kt:704)
+Caused by: io.ktor.util.cio.ChannelWriteException: Cannot write to channel
+	at io.ktor.server.netty.cio.NettyHttpResponsePipeline.respondWithFailure(NettyHttpResponsePipeline.kt:100)
+	at io.ktor.server.netty.cio.NettyHttpResponsePipeline.respondWithBodyAndTrailerMessage(NettyHttpResponsePipeline.kt:253)
+	at io.ktor.server.netty.cio.NettyHttpResponsePipeline.access$respondWithBodyAndTrailerMessage(NettyHttpResponsePipeline.kt:24)
+	at io.ktor.server.netty.cio.NettyHttpResponsePipeline$respondWithBodyAndTrailerMessage$1.invokeSuspend(NettyHttpResponsePipeline.kt)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:34)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+	at io.netty.util.concurrent.AbstractEventExecutor.runTask(AbstractEventExecutor.java:148)
+	at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:141)
+	at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:535)
+	at io.netty.channel.SingleThreadIoEventLoop.run(SingleThreadIoEventLoop.java:201)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:1195)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+Caused by: io.netty.channel.StacklessClosedChannelException: null
+	at io.netty.channel.AbstractChannel$AbstractUnsafe.write(Object, ChannelPromise)(Unknown Source)
+2026-05-24 11:32:46.176 [DefaultDispatcher-worker-4] DEBUG io.ktor.server.Application - Stopped sending kobweb status events, probably because client disconnected or server is shutting down. (JobCancellationException: Parent job is Cancelling)
+2026-05-24 11:32:46.177 [DefaultDispatcher-worker-4] DEBUG io.ktor.server.Application - 200 OK: GET - /api/kobweb-status. Exception class kotlinx.coroutines.JobCancellationException: Parent job is Cancelling
+kotlinx.coroutines.JobCancellationException: Parent job is Cancelling
+Caused by: io.ktor.utils.io.ClosedWriteChannelException: Cannot write to channel
+	at io.ktor.utils.io.ByteChannel$writeBuffer$1.invoke(ByteChannel.kt:54)
+	at io.ktor.utils.io.ByteChannel$writeBuffer$1.invoke(ByteChannel.kt:54)
+	at io.ktor.utils.io.CloseToken.wrapCause(CloseToken.kt:21)
+	at io.ktor.utils.io.CloseToken.throwOrNull(CloseToken.kt:26)
+	at io.ktor.utils.io.ByteChannel.getWriteBuffer(ByteChannel.kt:54)
+	at io.ktor.utils.io.ByteWriteChannelOperationsKt.writeStringUtf8(ByteWriteChannelOperations.kt:102)
+	at io.ktor.server.sse.DefaultServerSSESession.writeSSE(DefaultServerSSESession.kt:34)
+	at io.ktor.server.sse.DefaultServerSSESession.send(DefaultServerSSESession.kt:22)
+	at io.ktor.server.sse.ServerSSESessionKt$heartbeat$2.invokeSuspend(ServerSSESession.kt:170)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:34)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+	at kotlinx.coroutines.internal.LimitedDispatcher$Worker.run(LimitedDispatcher.kt:124)
+	at kotlinx.coroutines.scheduling.TaskImpl.run(Tasks.kt:89)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler.runSafely(CoroutineScheduler.kt:586)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.executeTask(CoroutineScheduler.kt:820)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker(CoroutineScheduler.kt:717)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run(CoroutineScheduler.kt:704)
+Caused by: io.ktor.util.cio.ChannelWriteException: Cannot write to channel
+	at io.ktor.server.netty.cio.NettyHttpResponsePipeline.respondWithFailure(NettyHttpResponsePipeline.kt:100)
+	at io.ktor.server.netty.cio.NettyHttpResponsePipeline.respondWithBodyAndTrailerMessage(NettyHttpResponsePipeline.kt:253)
+	at io.ktor.server.netty.cio.NettyHttpResponsePipeline.access$respondWithBodyAndTrailerMessage(NettyHttpResponsePipeline.kt:24)
+	at io.ktor.server.netty.cio.NettyHttpResponsePipeline$respondWithBodyAndTrailerMessage$1.invokeSuspend(NettyHttpResponsePipeline.kt)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:34)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+	at io.netty.util.concurrent.AbstractEventExecutor.runTask(AbstractEventExecutor.java:148)
+	at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:141)
+	at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:535)
+	at io.netty.channel.SingleThreadIoEventLoop.run(SingleThreadIoEventLoop.java:201)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:1195)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+Caused by: io.netty.channel.StacklessClosedChannelException: null
+	at io.netty.channel.AbstractChannel$AbstractUnsafe.write(Object, ChannelPromise)(Unknown Source)
+2026-05-24 11:33:10.812 [eventLoopGroupProxy-4-3] DEBUG io.ktor.server.Application - Served fallback index.html file in response to "/"
+2026-05-24 11:33:11.275 [DefaultDispatcher-worker-3] DEBUG io.ktor.server.Application - Client connected and is requesting kobweb status events.
+2026-05-24 11:34:01.937 [DefaultDispatcher-worker-3] DEBUG io.ktor.server.Application - Stopped sending kobweb status events, probably because client disconnected or server is shutting down. (JobCancellationException: Parent job is Cancelling)
+2026-05-24 11:34:01.939 [DefaultDispatcher-worker-3] DEBUG io.ktor.server.Application - 200 OK: GET - /api/kobweb-status. Exception class kotlinx.coroutines.JobCancellationException: Parent job is Cancelling
+kotlinx.coroutines.JobCancellationException: Parent job is Cancelling
+Caused by: io.ktor.utils.io.ClosedWriteChannelException: Cannot write to channel
+	at io.ktor.utils.io.ByteChannel$writeBuffer$1.invoke(ByteChannel.kt:54)
+	at io.ktor.utils.io.ByteChannel$writeBuffer$1.invoke(ByteChannel.kt:54)
+	at io.ktor.utils.io.CloseToken.wrapCause(CloseToken.kt:21)
+	at io.ktor.utils.io.CloseToken.throwOrNull(CloseToken.kt:26)
+	at io.ktor.utils.io.ByteChannel.getWriteBuffer(ByteChannel.kt:54)
+	at io.ktor.utils.io.ByteWriteChannelOperationsKt.writeStringUtf8(ByteWriteChannelOperations.kt:102)
+	at io.ktor.server.sse.DefaultServerSSESession.writeSSE(DefaultServerSSESession.kt:34)
+	at io.ktor.server.sse.DefaultServerSSESession.send(DefaultServerSSESession.kt:22)
+	at io.ktor.server.sse.ServerSSESessionKt$heartbeat$2.invokeSuspend(ServerSSESession.kt:170)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:34)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+	at kotlinx.coroutines.internal.LimitedDispatcher$Worker.run(LimitedDispatcher.kt:124)
+	at kotlinx.coroutines.scheduling.TaskImpl.run(Tasks.kt:89)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler.runSafely(CoroutineScheduler.kt:586)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.executeTask(CoroutineScheduler.kt:820)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker(CoroutineScheduler.kt:717)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run(CoroutineScheduler.kt:704)
+Caused by: io.ktor.util.cio.ChannelWriteException: Cannot write to channel
+	at io.ktor.server.netty.cio.NettyHttpResponsePipeline.respondWithFailure(NettyHttpResponsePipeline.kt:100)
+	at io.ktor.server.netty.cio.NettyHttpResponsePipeline.respondWithBodyAndTrailerMessage(NettyHttpResponsePipeline.kt:253)
+	at io.ktor.server.netty.cio.NettyHttpResponsePipeline.access$respondWithBodyAndTrailerMessage(NettyHttpResponsePipeline.kt:24)
+	at io.ktor.server.netty.cio.NettyHttpResponsePipeline$respondWithBodyAndTrailerMessage$1.invokeSuspend(NettyHttpResponsePipeline.kt)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:34)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+	at io.netty.util.concurrent.AbstractEventExecutor.runTask(AbstractEventExecutor.java:148)
+	at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:141)
+	at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:535)
+	at io.netty.channel.SingleThreadIoEventLoop.run(SingleThreadIoEventLoop.java:201)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:1195)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+Caused by: io.netty.channel.StacklessClosedChannelException: null
+	at io.netty.channel.AbstractChannel$AbstractUnsafe.write(Object, ChannelPromise)(Unknown Source)

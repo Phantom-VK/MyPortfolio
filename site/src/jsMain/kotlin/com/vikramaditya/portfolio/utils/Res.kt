@@ -89,6 +89,9 @@ object Res {
         const val DJANGO_LOGO = "images/skills/Django.svg"
         const val KOBWEB_LOGO = "images/tools/kobweb.png"
         const val PYTORCH_LOGO = "images/tools/PyTorch.svg"
+        const val LANGGRAPH_LOGO = "images/tools/langgraph-color.svg"
+        const val CHATGPT_LOGO = "images/icons/chatgpt.png"
+        const val POSTGRESQL_LOGO = "images/tools/postgre.png"
     }
 
     object String {

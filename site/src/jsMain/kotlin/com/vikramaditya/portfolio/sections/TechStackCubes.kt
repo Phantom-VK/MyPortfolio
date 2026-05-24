@@ -28,12 +28,12 @@ fun TechStackCubes(){
     ) {
         Cube3D(
             icons = listOf(
+                Res.Logo.LANGGRAPH_LOGO,
                 Res.Logo.KOTLIN_LOGO,
-                Res.Logo.C_LOGO,
-                Res.Logo.MYSQL_LOGO,
+                Res.Logo.CHATGPT_LOGO,
                 Res.Logo.PYTHON_LOGO,
                 Res.Logo.JAVA_LOGO,
-                Res.Logo.CPP_LOGO,
+                Res.Logo.POSTGRESQL_LOGO,
             )
         )
 
@@ -51,9 +51,9 @@ fun TechStackCubes(){
         Cube3D(
             icons = listOf(
                 Res.Logo.CMP_LOGO,
-                Res.Logo.DJANGO_LOGO,
-                Res.Logo.GIT_LOGO,
                 Res.Logo.FIREBASE_LOGO,
+                Res.Logo.GIT_LOGO,
+                Res.Logo.DJANGO_LOGO,
                 Res.Logo.GITHUB_LOGO,
                 Res.Logo.FLASK_LOGO
             )
