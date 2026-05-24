@@ -15,6 +15,7 @@ import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.*
+import com.varabyte.kobweb.compose.ui.styleModifier
 import com.varabyte.kobweb.core.rememberPageContext
 import com.varabyte.kobweb.framework.annotations.DelicateApi
 import com.varabyte.kobweb.silk.components.forms.Button
@@ -30,15 +31,14 @@ import com.vikramaditya.portfolio.styles.SocialIconStyle
 import com.vikramaditya.portfolio.utils.Res
 import com.vikramaditya.portfolio.widgets.CodeBox
 import org.jetbrains.compose.web.css.AlignSelf
+import org.jetbrains.compose.web.css.Position
 import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
 
 @OptIn(DelicateApi::class)
 @Composable
 fun ProfileCard() {
-    val colorMode by ColorMode.currentState
     val breakpoint = rememberBreakpoint()
-    val ctx = rememberPageContext()
     val isMobile = breakpoint <= Breakpoint.MD
 
     if (isMobile) {
@@ -50,14 +50,11 @@ fun ProfileCard() {
                 .gap(24.px),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Profile Image on top
-            ProfileImage()
-            // Code box below image
+            ProfileImage(isMobile = true)
             CodeBox()
             SocialLinks()
         }
     } else {
-        // Desktop or Tablet layout: Row-based
         Row(
             modifier = Modifier
                 .id("home")
@@ -76,64 +73,62 @@ fun ProfileCard() {
                 SocialLinks()
             }
 
-            Box(
-                modifier = Modifier
-                    .size(if (breakpoint >= Breakpoint.LG) 380.px else 280.px)
-                    .borderRadius(Res.Dimens.BORDER_RADIUS.px)
-                    .overflow(Overflow.Hidden)
-                    .filter(
-                        dropShadow(
-                            offsetX = 0.px,
-                            offsetY = 0.px,
-                            blurRadius = 20.px,
-                            color = Res.Theme.THEME_GREEN.color
-                        )
-                    )
-            ) {
-                Image(
-                    modifier = Modifier
-                        .size(if (breakpoint >= Breakpoint.LG) 365.px else 265.px)
-                        .objectFit(ObjectFit.Cover),
-                    src = if (colorMode.isDark) Res.Image.PROFILE_PHOTO_GREEN else Res.Image.PROFILE_PHOTO_REGULAR
-                )
-
-                GreenButton(text = "Resume", modifier = Modifier.align(Alignment.BottomCenter)) {
-                    ctx.router.navigateTo(Res.String.RESUME_URL)
-                }
-            }
+            ProfileImage(isMobile = false)
         }
     }
 }
+
 @Composable
-fun ProfileImage() {
+fun ProfileImage(isMobile: Boolean) {
     val colorMode by ColorMode.currentState
     val ctx = rememberPageContext()
+    val breakpoint = rememberBreakpoint()
+    val containerSize = when {
+        isMobile -> 260.px
+        breakpoint >= Breakpoint.LG -> 380.px
+        else -> 280.px
+    }
+    val imageSize = when {
+        isMobile -> 260.px
+        breakpoint >= Breakpoint.LG -> 365.px
+        else -> 265.px
+    }
     Box(
         modifier = Modifier
-            .size(260.px)
+            .size(containerSize)
             .borderRadius(Res.Dimens.BORDER_RADIUS.px)
             .overflow(Overflow.Hidden)
             .filter(
                 dropShadow(
                     offsetX = 0.px,
                     offsetY = 0.px,
-                    blurRadius = 10.px,
+                    blurRadius = if (isMobile) 10.px else 20.px,
                     color = Res.Theme.THEME_GREEN.color
                 )
             )
     ) {
         Image(
             modifier = Modifier
-                .size(260.px)
-                .objectFit(ObjectFit.Cover),
+                .size(imageSize)
+                .objectFit(if (isMobile) ObjectFit.Cover else ObjectFit.Contain)
+                .styleModifier {
+                    if (isMobile) {
+                        property("object-position", "center top")
+                    }
+                },
             src = if (colorMode.isDark) Res.Image.PROFILE_PHOTO_GREEN else Res.Image.PROFILE_PHOTO_REGULAR
         )
 
-        GreenButton(text = "Resume", modifier = Modifier.align(Alignment.BottomCenter)) {
+        GreenButton(
+            text = "Resume",
+            modifier = Modifier
+                .position(Position.Absolute)
+                .align(Alignment.BottomCenter)
+                .margin(bottom = 12.px)
+        ) {
             ctx.router.navigateTo(Res.String.RESUME_URL)
         }
     }
-
 }
 
 

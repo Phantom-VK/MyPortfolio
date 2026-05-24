@@ -64,7 +64,7 @@ object Res {
 
     object Image {
         const val PROFILE_PHOTO_GREEN = "mypfpgreen.png"
-        const val PROFILE_PHOTO_REGULAR = "mypfpregular.jpeg"
+        const val PROFILE_PHOTO_REGULAR = "mypfpregular.png"
 
 
     }
