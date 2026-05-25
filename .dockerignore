@@ -7,7 +7,10 @@
 .codex
 build
 site/build
-site/.kobweb
+site/.kobweb/server
+site/.kobweb/site
+site/.kobweb/system
 visit-notifier/build
 visit-notifier/.env
 **/*.log
+**/*.hprof
