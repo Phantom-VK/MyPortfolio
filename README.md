@@ -116,8 +116,8 @@ Use the Docker service type for `visit-notifier` only.
 
 Set these values in Render:
 
-- `Root Directory`: leave blank, or set it to the repository root
-- `Dockerfile Path`: `visit-notifier/Dockerfile`
+- `Root Directory`: leave blank
+- `Dockerfile Path`: `Dockerfile`
 - `PORT`: `10000`
 - `ALLOWED_ORIGINS`: your frontend origin(s), comma-separated
 - `SMTP_HOST`: `smtp.gmail.com`
