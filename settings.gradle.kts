@@ -14,3 +14,4 @@ dependencyResolutionManagement {
 rootProject.name = "portfolio"
 
 include(":site")
+include(":visit-notifier")

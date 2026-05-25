@@ -25,6 +25,7 @@ import com.vikramaditya.portfolio.components.BackToTopButton
 import com.vikramaditya.portfolio.components.MatrixCursor
 import com.vikramaditya.portfolio.components.MatrixRainAnimation
 import com.vikramaditya.portfolio.sections.Header
+import com.vikramaditya.portfolio.utils.VisitReporter
 import kotlinx.browser.document
 import kotlinx.browser.window
 import org.jetbrains.compose.web.css.Position
@@ -53,6 +54,8 @@ fun PageLayout(
     val colorMode by ColorMode.currentState
     val breakpoint = rememberBreakpoint()
     var scrollProgress by remember { mutableStateOf(0f) }
+
+    VisitReporter(colorMode)
 
     LaunchedEffect(title) {
         document.title = "Vikramaditya Khupse - $title"

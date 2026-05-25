@@ -64,3 +64,68 @@ kobweb run --env prod --notty
 Kobweb also supports exporting to a static layout which is compatible with static hosting providers, such as GitHub
 Pages, Netlify, Firebase, any presumably all the others. You can read more about that approach here:
 https://bitspittle.dev/blog/2022/staticdeploy
+
+## Visit Notification Service
+
+This repo now contains a separate backend service in `visit-notifier/` for visit email notifications. The frontend stays
+static on GitHub Pages and sends one `POST /api/visit` request per browser session.
+
+### Frontend config
+
+Set the backend base URL at build time:
+
+```bash
+./gradlew :site:kobwebExport -PkobwebExportLayout=STATIC -PkobwebEnvironment=PROD -PvisitNotifyApiBaseUrl=https://your-backend.example.com
+```
+
+For local frontend development, the visit reporter falls back to `http://localhost:8787` when the site runs on
+`localhost` and no explicit `visitNotifyApiBaseUrl` is provided.
+
+### Backend config
+
+Copy `visit-notifier/.env.example` to `visit-notifier/.env` for local development, or into your host's runtime environment
+settings for deployment. Required runtime variables:
+
+```bash
+ALLOWED_ORIGINS=https://<your-gh-pages-domain>,https://<your-custom-domain>
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USERNAME=your-gmail-address@gmail.com
+SMTP_APP_PASSWORD=your-app-password
+VISIT_NOTIFY_TO=you@example.com
+VISIT_NOTIFY_FROM=your-gmail-address@gmail.com
+```
+
+Run the backend locally with:
+
+```bash
+./gradlew :visit-notifier:run
+```
+
+The backend now reads configuration from process environment variables and also from a local `.env` file. Process
+environment variables take precedence over `.env` values.
+
+Endpoints:
+
+- `GET /health`
+- `POST /api/visit`
+
+### Render deployment
+
+Use the Docker service type for `visit-notifier` only.
+
+Set these values in Render:
+
+- `Root Directory`: leave blank, or set it to the repository root
+- `Dockerfile Path`: `visit-notifier/Dockerfile`
+- `PORT`: `10000`
+- `ALLOWED_ORIGINS`: your frontend origin(s), comma-separated
+- `SMTP_HOST`: `smtp.gmail.com`
+- `SMTP_PORT`: `587`
+- `SMTP_USERNAME`: your Gmail address
+- `SMTP_APP_PASSWORD`: your Gmail app password
+- `VISIT_NOTIFY_TO`: the inbox that should receive the visit emails
+- `VISIT_NOTIFY_FROM`: usually the same as `SMTP_USERNAME`
+
+After deploy, Render will give you a service URL like `https://your-service.onrender.com`. Put that in the GitHub
+variable `VISIT_NOTIFY_API_BASE_URL` before you next export or deploy the frontend.

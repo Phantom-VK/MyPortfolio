@@ -1,5 +1,6 @@
 import com.varabyte.kobweb.gradle.application.util.configAsKobwebApplication
 import kotlinx.html.link
+import kotlinx.html.meta
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 
 plugins {
@@ -11,6 +12,10 @@ plugins {
 
 group = "com.vikramaditya.portfolio"
 version = "1.0-SNAPSHOT"
+
+val visitNotifyApiBaseUrl = providers.gradleProperty("visitNotifyApiBaseUrl")
+    .orElse(providers.environmentVariable("VISIT_NOTIFY_API_BASE_URL"))
+    .orElse("")
 
 kobweb {
     app {
@@ -32,7 +37,12 @@ kobweb {
                     rel = "stylesheet"
                 )
 
-
+                visitNotifyApiBaseUrl.orNull
+                    ?.trim()
+                    ?.takeIf { it.isNotEmpty() }
+                    ?.let { apiBaseUrl ->
+                        meta(name = "visit-notify-api-base-url", content = apiBaseUrl)
+                    }
             }
         }
     }
@@ -50,12 +60,14 @@ kotlin {
             implementation(libs.compose.runtime)
         }
 
-        jsMain.dependencies {
-            implementation(libs.compose.html.core)
-            implementation(libs.kobweb.core)
-            implementation(libs.kobweb.silk)
-            implementation(libs.silk.icons.fa)
-            implementation(libs.kobwebx.markdown)
+        jsMain {
+            dependencies {
+                implementation(libs.compose.html.core)
+                implementation(libs.kobweb.core)
+                implementation(libs.kobweb.silk)
+                implementation(libs.silk.icons.fa)
+                implementation(libs.kobwebx.markdown)
+            }
         }
     }
 }

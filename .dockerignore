@@ -1,0 +1,13 @@
+.git
+.github
+.idea
+.gradle
+.kotlin
+.agents
+.codex
+build
+site/build
+site/.kobweb
+visit-notifier/build
+visit-notifier/.env
+**/*.log
