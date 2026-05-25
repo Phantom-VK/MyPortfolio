@@ -7,7 +7,7 @@ WORKDIR /workspace
 COPY . .
 
 RUN chmod +x ./gradlew
-RUN ./gradlew :visit-notifier:installDist --no-daemon
+RUN ./gradlew :visit-notifier:jar --no-daemon
 
 FROM eclipse-temurin:17-jre
 
@@ -16,7 +16,7 @@ WORKDIR /app
 ENV PORT=10000
 EXPOSE 10000
 
-COPY --from=builder /workspace/visit-notifier/build/install/visit-notifier /app
+COPY --from=builder /workspace/visit-notifier/build/libs/visit-notifier-1.0-SNAPSHOT-all.jar /app/visit-notifier.jar
 
 # Render injects PORT at runtime; the app also respects a local .env for dev.
-CMD ["sh", "-c", "exec /app/bin/visit-notifier"]
+CMD ["java", "-jar", "/app/visit-notifier.jar"]
