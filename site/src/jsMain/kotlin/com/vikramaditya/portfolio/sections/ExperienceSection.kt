@@ -36,15 +36,28 @@ fun ExperienceSection() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         ExperienceCard(
-            role = "Associate Software Engineer (Intern)",
-            company = "Better Software",
-            period = "Oct 2025 – Feb 2026",
+            role = "Agentic AI Automation Intern",
+            company = "Emplay Analytics Inc",
+            period = "Jun 2026 – Present · Remote",
             highlights = listOf(
-                "Architected CI/CD pipelines with GitHub Actions + Docker to automate build, test, and deploy.",
-                "Built multi-cloud release workflows across AWS and DigitalOcean with environment-specific rollouts.",
-                "Hardened delivery with monitoring hooks and automated checks for production safety."
+                "Building and testing AI workflows using LLMs, RAG, and agentic orchestration frameworks.",
+                "Supporting enterprise client delivery across Sales, Procurement, and Marketing use cases.",
+                "Prompt engineering, data validation with SQL, and UAT for AI copilot deployments."
             )
         )
+
+        Column(modifier = Modifier.margin(top = 16.px).fillMaxWidth()) {
+            ExperienceCard(
+                role = "Associate Software Engineer (Intern)",
+                company = "Better Software",
+                period = "Oct 2025 – Feb 2026",
+                highlights = listOf(
+                    "Architected CI/CD pipelines with GitHub Actions + Docker to automate build, test, and deploy.",
+                    "Built multi-cloud release workflows across AWS and DigitalOcean with environment-specific rollouts.",
+                    "Hardened delivery with monitoring hooks and automated checks for production safety."
+                )
+            )
+        }
     }
 }
 
@@ -93,7 +106,7 @@ private fun ExperienceCard(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     SpanText(
-                        text = "•",
+                        text = "\u2022",
                         modifier = Modifier
                             .width(12.px)
                             .textAlign(TextAlign.Center)
