@@ -76,7 +76,7 @@ fun AboutMe() {
                         .padding(top = 8.px)
                 )
                 SpanText(
-                    text = "I like to develop all kinds of stuff on computers. I hate web development though, (HTML, CSS, JS...). Currently my main focus is on AI/ML applications, which includes GenAI and Agentic AI, along with full stack development.",
+                    text = "I like to develop all kinds of stuff on computers. I hate web development though, (HTML, CSS, JS...). Currently interning at Emplay Analytics as an Agentic AI Automation Engineer, building enterprise AI copilots with LLMs and agentic workflows. My main focus areas are AI/ML applications, GenAI, Agentic AI, and full stack development.",
                     modifier = Modifier
                         .fillMaxWidth()
                         .textAlign(TextAlign.Center)
