@@ -39,6 +39,7 @@ fun ExperienceSection() {
             role = "Agentic AI Automation Intern",
             company = "Emplay Analytics Inc",
             period = "Jun 2026 – Present · Remote",
+            location = "Dublin, California, USA",
             highlights = listOf(
                 "Building and testing AI workflows using LLMs, RAG, and agentic orchestration frameworks.",
                 "Supporting enterprise client delivery across Sales, Procurement, and Marketing use cases.",
@@ -51,6 +52,7 @@ fun ExperienceSection() {
                 role = "Associate Software Engineer (Intern)",
                 company = "Better Software",
                 period = "Oct 2025 – Feb 2026",
+                location = "Rajasthan, India",
                 highlights = listOf(
                     "Architected CI/CD pipelines with GitHub Actions + Docker to automate build, test, and deploy.",
                     "Built multi-cloud release workflows across AWS and DigitalOcean with environment-specific rollouts.",
@@ -66,6 +68,7 @@ private fun ExperienceCard(
     role: String,
     company: String,
     period: String,
+    location: String,
     highlights: List<String>
 ) {
     val colorMode = ColorMode.current
@@ -85,13 +88,24 @@ private fun ExperienceCard(
                 .fontSize(1.2.em)
                 .color(bodyColor)
         )
-        SpanText(
-            text = period,
-            modifier = Modifier
-                .margin(top = 6.px)
-                .fontWeight(FontWeight.Medium)
-                .color(Res.Theme.THEME_GREEN.color)
-        )
+        Row(
+            modifier = Modifier.margin(top = 6.px).fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            SpanText(
+                text = period,
+                modifier = Modifier
+                    .fontWeight(FontWeight.Medium)
+                    .color(Res.Theme.THEME_GREEN.color)
+            )
+            SpanText(
+                text = "📍 $location",
+                modifier = Modifier
+                    .fontSize(0.85.em)
+                    .color(bodyColor)
+            )
+        }
 
         Column(
             modifier = Modifier
