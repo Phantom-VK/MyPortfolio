@@ -18,7 +18,7 @@ class VisitHandler(
     private val deduper: VisitDeduper,
     private val rateLimiter: RateLimiter,
     private val clock: Clock = Clock.systemUTC(),
-    private val json: Json = Json { ignoreUnknownKeys = false },
+    private val json: Json = Json { ignoreUnknownKeys = true },
     private val logger: Logger = Logger.getLogger(VisitHandler::class.java.name),
 ) {
     fun handleVisit(exchange: HttpExchange) {
@@ -40,6 +40,7 @@ class VisitHandler(
     private fun handlePreflight(exchange: HttpExchange) {
         val origin = exchange.requestHeaders.getFirst("Origin")
         if (!isOriginAllowed(origin)) {
+            logger.warning("preflight_rejected origin=$origin")
             respond(exchange, HttpURLConnection.HTTP_FORBIDDEN, "origin_not_allowed")
             return
         }
@@ -51,12 +52,16 @@ class VisitHandler(
     private fun handlePost(exchange: HttpExchange) {
         val origin = exchange.requestHeaders.getFirst("Origin")
         if (!isOriginAllowed(origin)) {
+            logger.warning("post_rejected_origin origin=$origin")
             respond(exchange, HttpURLConnection.HTTP_FORBIDDEN, "origin_not_allowed")
             return
         }
 
         val metadata = extractRequestMetadata(exchange)
+        logger.info("visit_received ip=${metadata.ip} origin=$origin")
+
         if (!rateLimiter.allow(metadata.ip)) {
+            logger.warning("visit_rate_limited ip=${metadata.ip}")
             withCors(exchange.responseHeaders, origin)
             respond(exchange, 429, "rate_limited")
             return
@@ -65,29 +70,36 @@ class VisitHandler(
         val rawBody = try {
             readRequestBody(exchange, config.maxPayloadBytes)
         } catch (_: PayloadTooLargeException) {
+            logger.warning("visit_payload_too_large ip=${metadata.ip}")
             withCors(exchange.responseHeaders, origin)
             respond(exchange, HttpURLConnection.HTTP_BAD_REQUEST, "payload_too_large")
             return
         }
 
+        logger.info("visit_body_received ip=${metadata.ip} bytes=${rawBody.length}")
+
         val payload = try {
             json.decodeFromString<VisitPayload>(rawBody)
-        } catch (_: SerializationException) {
+        } catch (e: SerializationException) {
+            logger.warning("visit_parse_failed ip=${metadata.ip} error=${e.message} body=$rawBody")
             withCors(exchange.responseHeaders, origin)
             respond(exchange, HttpURLConnection.HTTP_BAD_REQUEST, "invalid_json")
             return
         }
 
+        logger.info("visit_parsed ip=${metadata.ip} path=${payload.path} session=${payload.sessionId} lat=${payload.latitude} lon=${payload.longitude}")
+
         try {
             VisitValidator.validate(payload)
         } catch (validationError: VisitValidationException) {
+            logger.warning("visit_validation_failed ip=${metadata.ip} error=${validationError.message}")
             withCors(exchange.responseHeaders, origin)
             respond(exchange, HttpURLConnection.HTTP_BAD_REQUEST, validationError.message ?: "invalid_payload")
             return
         }
 
         if (!deduper.shouldProcess(payload.sessionId, payload.path)) {
-            logger.info("visit_suppressed ip=${metadata.ip} path=${payload.path}")
+            logger.info("visit_suppressed ip=${metadata.ip} path=${payload.path} session=${payload.sessionId}")
             withCors(exchange.responseHeaders, origin)
             respond(exchange, HttpURLConnection.HTTP_ACCEPTED, "duplicate_suppressed")
             return
@@ -101,12 +113,12 @@ class VisitHandler(
 
         try {
             emailSender.sendVisitNotification(visit)
-            logger.info("visit_accepted ip=${metadata.ip} path=${payload.path}")
+            logger.info("visit_accepted ip=${metadata.ip} path=${payload.path} has_location=${payload.latitude != null}")
             withCors(exchange.responseHeaders, origin)
             respond(exchange, HttpURLConnection.HTTP_ACCEPTED, "accepted")
         } catch (sendError: Exception) {
             deduper.release(payload.sessionId, payload.path)
-            logger.log(Level.SEVERE, "visit_send_failed ip=${metadata.ip} path=${payload.path}", sendError)
+            logger.log(Level.SEVERE, "visit_send_failed ip=${metadata.ip} path=${payload.path} error=${sendError.message}", sendError)
             withCors(exchange.responseHeaders, origin)
             respond(exchange, HttpURLConnection.HTTP_INTERNAL_ERROR, "send_failed")
         }
@@ -145,9 +157,7 @@ class VisitHandler(
             val read = input.read(buffer)
             if (read < 0) break
             total += read
-            if (total > maxBytes) {
-                throw PayloadTooLargeException()
-            }
+            if (total > maxBytes) throw PayloadTooLargeException()
             output.write(buffer, 0, read)
         }
         return output.toString(StandardCharsets.UTF_8)

@@ -19,15 +19,28 @@ fun VisitReporter(colorMode: ColorMode) {
     LaunchedEffect(colorMode) {
         runCatching {
             val storage = window.sessionStorage
-            if (storage.getItem(VisitFlagKey) != null) return@runCatching
+            if (storage.getItem(VisitFlagKey) != null) {
+                console.log("[VisitReporter] already reported this session, skipping")
+                return@runCatching
+            }
 
-            val apiBaseUrl = resolveApiBaseUrl() ?: return@runCatching
+            val apiBaseUrl = resolveApiBaseUrl()
+            if (apiBaseUrl == null) {
+                console.warn("[VisitReporter] no API base URL resolved, aborting")
+                return@runCatching
+            }
+
             val sessionId = storage.getItem(VisitSessionIdKey) ?: generateSessionId().also {
                 storage.setItem(VisitSessionIdKey, it)
             }
 
-            // Try to get precise location via Geolocation API (consent-based)
+            console.log("[VisitReporter] requesting geolocation...")
             val geoResult = requestGeolocation()
+            if (geoResult != null) {
+                console.log("[VisitReporter] geolocation granted: lat=${geoResult.latitude} lon=${geoResult.longitude} acc=${geoResult.accuracy}m")
+            } else {
+                console.log("[VisitReporter] geolocation not available or denied, proceeding without location")
+            }
 
             val payload = js("({})")
             payload.path = window.location.pathname
@@ -45,16 +58,30 @@ fun VisitReporter(colorMode: ColorMode) {
             payload.longitude = geoResult?.longitude
             payload.locationAccuracy = geoResult?.accuracy
 
+            val jsonBody = js("JSON.stringify(payload)") as String
+            console.log("[VisitReporter] sending payload to $apiBaseUrl/api/visit")
+            console.log("[VisitReporter] payload: $jsonBody")
+
             storage.setItem(VisitFlagKey, "1")
 
-            window.fetch(
+            val response = window.fetch(
                 input = "$apiBaseUrl/api/visit",
                 init = RequestInit(
                     method = "POST",
                     headers = Headers().apply { append("Content-Type", "application/json") },
-                    body = js("JSON.stringify(payload)") as String,
+                    body = jsonBody,
                 )
-            )
+            ).await()
+
+            console.log("[VisitReporter] server responded: ${response.status} ${response.statusText}")
+            if (!response.ok) {
+                val body = response.text().await()
+                console.warn("[VisitReporter] non-OK response body: $body")
+                // Remove flag so it can retry next session if server rejected
+                storage.removeItem(VisitFlagKey)
+            }
+        }.onFailure { err ->
+            console.error("[VisitReporter] uncaught error: ${err.message}")
         }
     }
 }
@@ -64,51 +91,69 @@ private data class GeoResult(val latitude: Double, val longitude: Double, val ac
 /**
  * Requests geolocation with a consent prompt.
  * Returns null silently if denied, unavailable, or timed out.
+ * Uses a single getCurrentPosition call with a window callback to bridge JS -> coroutine.
  */
 private suspend fun requestGeolocation(): GeoResult? {
     return suspendCancellableCoroutine { cont ->
-        val geo = js("navigator.geolocation")
-        if (geo == null || geo == undefined) {
+        // Check API availability first
+        val geoAvailable = js("typeof navigator !== 'undefined' && !!navigator.geolocation") as Boolean
+        if (!geoAvailable) {
+            console.log("[VisitReporter] geolocation API not available")
             cont.resume(null)
             return@suspendCancellableCoroutine
         }
-        val options = js("({})")
-        options.enableHighAccuracy = true
-        options.timeout = 8000
-        options.maximumAge = 0
 
-        js("""
-            navigator.geolocation.getCurrentPosition(
-                function(pos) { kotlinCallback(pos.coords.latitude, pos.coords.longitude, pos.coords.accuracy); },
-                function(err) { kotlinCallback(null, null, null); },
-                options
-            );
-        """)
-        // The JS bridge above won't directly invoke the coroutine; use a simpler callback wrapper:
-        runCatching {
-            window.asDynamic().geolocationCallback = { lat: Double?, lon: Double?, acc: Double? ->
-                if (lat != null && lon != null && acc != null) {
-                    cont.resume(GeoResult(lat, lon, acc))
-                } else {
-                    cont.resume(null)
-                }
+        // Generate a unique callback name to avoid conflicts
+        val cbName = "_vr_geo_cb_${(1..8).joinToString("") { ('a'..'z').random().toString() }}"
+
+        var resumed = false
+        fun resumeOnce(result: GeoResult?) {
+            if (!resumed) {
+                resumed = true
+                // Clean up the global callback
+                js("delete window[cbName]")
+                cont.resume(result)
             }
+        }
+
+        window.asDynamic()[cbName] = { lat: Double?, lon: Double?, acc: Double? ->
+            if (lat != null && lon != null && acc != null) {
+                resumeOnce(GeoResult(lat, lon, acc))
+            } else {
+                resumeOnce(null)
+            }
+        }
+
+        runCatching {
             js("""
-                navigator.geolocation.getCurrentPosition(
-                    function(pos) {
-                        window.geolocationCallback(
-                            pos.coords.latitude,
-                            pos.coords.longitude,
-                            pos.coords.accuracy
-                        );
-                    },
-                    function(err) {
-                        window.geolocationCallback(null, null, null);
-                    },
-                    { enableHighAccuracy: true, timeout: 8000, maximumAge: 0 }
-                );
+                (function(name) {
+                    navigator.geolocation.getCurrentPosition(
+                        function(pos) {
+                            window[name](
+                                pos.coords.latitude,
+                                pos.coords.longitude,
+                                pos.coords.accuracy
+                            );
+                        },
+                        function(err) {
+                            console.warn('[VisitReporter] geolocation error code=' + err.code + ' msg=' + err.message);
+                            window[name](null, null, null);
+                        },
+                        { enableHighAccuracy: true, timeout: 8000, maximumAge: 0 }
+                    );
+                })(cbName);
             """)
-        }.onFailure { cont.resume(null) }
+        }.onFailure { err ->
+            console.error("[VisitReporter] getCurrentPosition threw: ${err.message}")
+            resumeOnce(null)
+        }
+
+        cont.invokeOnCancellation {
+            if (!resumed) {
+                resumed = true
+                js("delete window[cbName]")
+            }
+        }
     }
 }
 
@@ -133,8 +178,9 @@ private fun resolveTimezone(): String? {
 }
 
 private fun generateSessionId(): String {
-    val cryptoUuid = runCatching { js("window.crypto && window.crypto.randomUUID ? window.crypto.randomUUID() : null") as String? }
-        .getOrNull()
+    val cryptoUuid = runCatching {
+        js("window.crypto && window.crypto.randomUUID ? window.crypto.randomUUID() : null") as String?
+    }.getOrNull()
     if (!cryptoUuid.isNullOrBlank()) return cryptoUuid
     val randomPart = (1..4).joinToString("") { Random.nextInt(0, 65536).toString(16).padStart(4, '0') }
     return "session-$randomPart"
