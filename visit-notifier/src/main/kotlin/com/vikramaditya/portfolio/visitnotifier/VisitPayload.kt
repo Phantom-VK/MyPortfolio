@@ -15,6 +15,9 @@ data class VisitPayload(
     val screenHeight: Int? = null,
     val colorMode: String? = null,
     val sessionId: String,
+    val latitude: Double? = null,
+    val longitude: Double? = null,
+    val locationAccuracy: Double? = null,
 )
 
 data class RequestMetadata(

@@ -44,24 +44,33 @@ class SmtpEmailSender(
         val viewport = "${payload.viewportWidth ?: "unknown"} x ${payload.viewportHeight ?: "unknown"}"
         val screen = "${payload.screenWidth ?: "unknown"} x ${payload.screenHeight ?: "unknown"}"
 
+        val locationLine = if (payload.latitude != null && payload.longitude != null) {
+            val lat = "%.6f".format(payload.latitude)
+            val lon = "%.6f".format(payload.longitude)
+            val acc = payload.locationAccuracy?.let { "±%.0fm".format(it) } ?: ""
+            val mapsUrl = "https://maps.google.com/?q=$lat,$lon"
+            "$lat, $lon $acc\n            Maps     : $mapsUrl"
+        } else {
+            "(not shared)"
+        }
+
         return """
             A portfolio visit was recorded.
 
-            Timestamp: ${visit.receivedAtIso}
-            IP: ${metadata.ip}
-            Path: ${payload.path}
-            Referrer: ${payload.referrer ?: "(none)"}
-            User-Agent: ${payload.userAgent ?: metadata.userAgentHeader ?: "(unknown)"}
-            Language: ${payload.language ?: "(unknown)"}
-            Timezone: ${payload.timezone ?: "(unknown)"}
-            Viewport: $viewport
-            Screen: $screen
-            Color mode: ${payload.colorMode ?: "(unknown)"}
-            Session ID: ${payload.sessionId}
-            Origin: ${metadata.origin ?: "(unknown)"}
-            Host: ${metadata.host ?: "(unknown)"}
-            X-Forwarded-For: ${metadata.forwardedFor ?: "(none)"}
-            Real-IP Header: ${metadata.realIp ?: "(none)"}
+            Timestamp  : ${visit.receivedAtIso}
+            IP         : ${metadata.ip}
+            Path       : ${payload.path}
+            Referrer   : ${payload.referrer ?: "(direct)"}
+            User-Agent : ${payload.userAgent ?: metadata.userAgentHeader ?: "(unknown)"}
+            Language   : ${payload.language ?: "(unknown)"}
+            Timezone   : ${payload.timezone ?: "(unknown)"}
+            Viewport   : $viewport
+            Screen     : $screen
+            Color mode : ${payload.colorMode ?: "(unknown)"}
+            Session ID : ${payload.sessionId}
+            Origin     : ${metadata.origin ?: "(unknown)"}
+            X-Fwd-For  : ${metadata.forwardedFor ?: "(none)"}
+            Location   : $locationLine
         """.trimIndent()
     }
 }

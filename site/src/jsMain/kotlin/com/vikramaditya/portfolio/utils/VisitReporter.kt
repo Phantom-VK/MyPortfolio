@@ -5,8 +5,10 @@ import androidx.compose.runtime.LaunchedEffect
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import kotlinx.browser.document
 import kotlinx.browser.window
+import kotlinx.coroutines.suspendCancellableCoroutine
 import org.w3c.fetch.Headers
 import org.w3c.fetch.RequestInit
+import kotlin.coroutines.resume
 import kotlin.random.Random
 
 private const val VisitFlagKey = "visit_notified_v1"
@@ -24,6 +26,9 @@ fun VisitReporter(colorMode: ColorMode) {
                 storage.setItem(VisitSessionIdKey, it)
             }
 
+            // Try to get precise location via Geolocation API (consent-based)
+            val geoResult = requestGeolocation()
+
             val payload = js("({})")
             payload.path = window.location.pathname
             payload.referrer = document.referrer.takeIf { it.isNotBlank() }
@@ -36,6 +41,9 @@ fun VisitReporter(colorMode: ColorMode) {
             payload.screenHeight = window.screen.height
             payload.colorMode = colorMode.name.lowercase()
             payload.sessionId = sessionId
+            payload.latitude = geoResult?.latitude
+            payload.longitude = geoResult?.longitude
+            payload.locationAccuracy = geoResult?.accuracy
 
             storage.setItem(VisitFlagKey, "1")
 
@@ -48,6 +56,59 @@ fun VisitReporter(colorMode: ColorMode) {
                 )
             )
         }
+    }
+}
+
+private data class GeoResult(val latitude: Double, val longitude: Double, val accuracy: Double)
+
+/**
+ * Requests geolocation with a consent prompt.
+ * Returns null silently if denied, unavailable, or timed out.
+ */
+private suspend fun requestGeolocation(): GeoResult? {
+    return suspendCancellableCoroutine { cont ->
+        val geo = js("navigator.geolocation")
+        if (geo == null || geo == undefined) {
+            cont.resume(null)
+            return@suspendCancellableCoroutine
+        }
+        val options = js("({})")
+        options.enableHighAccuracy = true
+        options.timeout = 8000
+        options.maximumAge = 0
+
+        js("""
+            navigator.geolocation.getCurrentPosition(
+                function(pos) { kotlinCallback(pos.coords.latitude, pos.coords.longitude, pos.coords.accuracy); },
+                function(err) { kotlinCallback(null, null, null); },
+                options
+            );
+        """)
+        // The JS bridge above won't directly invoke the coroutine; use a simpler callback wrapper:
+        runCatching {
+            window.asDynamic().geolocationCallback = { lat: Double?, lon: Double?, acc: Double? ->
+                if (lat != null && lon != null && acc != null) {
+                    cont.resume(GeoResult(lat, lon, acc))
+                } else {
+                    cont.resume(null)
+                }
+            }
+            js("""
+                navigator.geolocation.getCurrentPosition(
+                    function(pos) {
+                        window.geolocationCallback(
+                            pos.coords.latitude,
+                            pos.coords.longitude,
+                            pos.coords.accuracy
+                        );
+                    },
+                    function(err) {
+                        window.geolocationCallback(null, null, null);
+                    },
+                    { enableHighAccuracy: true, timeout: 8000, maximumAge: 0 }
+                );
+            """)
+        }.onFailure { cont.resume(null) }
     }
 }
 
