@@ -5,6 +5,7 @@ import androidx.compose.runtime.LaunchedEffect
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import kotlinx.browser.document
 import kotlinx.browser.window
+import kotlinx.coroutines.await
 import kotlinx.coroutines.suspendCancellableCoroutine
 import org.w3c.fetch.Headers
 import org.w3c.fetch.RequestInit
@@ -62,8 +63,6 @@ fun VisitReporter(colorMode: ColorMode) {
             console.log("[VisitReporter] sending payload to $apiBaseUrl/api/visit")
             console.log("[VisitReporter] payload: $jsonBody")
 
-            storage.setItem(VisitFlagKey, "1")
-
             val response = window.fetch(
                 input = "$apiBaseUrl/api/visit",
                 init = RequestInit(
@@ -74,11 +73,12 @@ fun VisitReporter(colorMode: ColorMode) {
             ).await()
 
             console.log("[VisitReporter] server responded: ${response.status} ${response.statusText}")
-            if (!response.ok) {
+            if (response.ok) {
+                // Only mark as reported after a confirmed successful response
+                storage.setItem(VisitFlagKey, "1")
+            } else {
                 val body = response.text().await()
                 console.warn("[VisitReporter] non-OK response body: $body")
-                // Remove flag so it can retry next session if server rejected
-                storage.removeItem(VisitFlagKey)
             }
         }.onFailure { err ->
             console.error("[VisitReporter] uncaught error: ${err.message}")
@@ -110,7 +110,6 @@ private suspend fun requestGeolocation(): GeoResult? {
         fun resumeOnce(result: GeoResult?) {
             if (!resumed) {
                 resumed = true
-                // Clean up the global callback
                 js("delete window[cbName]")
                 cont.resume(result)
             }
