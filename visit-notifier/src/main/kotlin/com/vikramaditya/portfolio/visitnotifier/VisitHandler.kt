@@ -5,6 +5,7 @@ import com.sun.net.httpserver.HttpExchange
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.json.Json
 import java.io.ByteArrayOutputStream
+import java.io.IOException
 import java.net.HttpURLConnection
 import java.nio.charset.StandardCharsets
 import java.time.Clock
@@ -50,15 +51,16 @@ class VisitHandler(
     }
 
     private fun handlePost(exchange: HttpExchange) {
+        // Log immediately — before any check — so even cold-start buffering doesn't lose this line
         val origin = exchange.requestHeaders.getFirst("Origin")
+        val metadata = extractRequestMetadata(exchange)
+        logger.info("visit_received ip=${metadata.ip} origin=$origin")
+
         if (!isOriginAllowed(origin)) {
-            logger.warning("post_rejected_origin origin=$origin")
+            logger.warning("post_rejected_origin ip=${metadata.ip} origin=$origin")
             respond(exchange, HttpURLConnection.HTTP_FORBIDDEN, "origin_not_allowed")
             return
         }
-
-        val metadata = extractRequestMetadata(exchange)
-        logger.info("visit_received ip=${metadata.ip} origin=$origin")
 
         if (!rateLimiter.allow(metadata.ip)) {
             logger.warning("visit_rate_limited ip=${metadata.ip}")
@@ -87,7 +89,10 @@ class VisitHandler(
             return
         }
 
-        logger.info("visit_parsed ip=${metadata.ip} path=${payload.path} session=${payload.sessionId} lat=${payload.latitude} lon=${payload.longitude}")
+        logger.info(
+            "visit_parsed ip=${metadata.ip} path=${payload.path} " +
+            "session=${payload.sessionId} lat=${payload.latitude} lon=${payload.longitude}"
+        )
 
         try {
             VisitValidator.validate(payload)
@@ -111,17 +116,32 @@ class VisitHandler(
             receivedAtIso = Instant.now(clock).toString(),
         )
 
-        try {
+        // --- Step 1: Send email (true failure = release dedup + 500) ---
+        val emailSent = try {
             emailSender.sendVisitNotification(visit)
-            logger.info("visit_accepted ip=${metadata.ip} path=${payload.path} has_location=${payload.latitude != null}")
-            withCors(exchange.responseHeaders, origin)
-            respond(exchange, HttpURLConnection.HTTP_ACCEPTED, "accepted")
+            logger.info(
+                "visit_email_sent ip=${metadata.ip} path=${payload.path} " +
+                "has_location=${payload.latitude != null}"
+            )
+            true
         } catch (sendError: Exception) {
             deduper.release(payload.sessionId, payload.path)
-            logger.log(Level.SEVERE, "visit_send_failed ip=${metadata.ip} path=${payload.path} error=${sendError.message}", sendError)
+            logger.log(
+                Level.SEVERE,
+                "visit_email_failed ip=${metadata.ip} path=${payload.path} error=${sendError.message}",
+                sendError
+            )
             withCors(exchange.responseHeaders, origin)
-            respond(exchange, HttpURLConnection.HTTP_INTERNAL_ERROR, "send_failed")
+            safeRespond(exchange, HttpURLConnection.HTTP_INTERNAL_ERROR, "send_failed", metadata.ip)
+            false
         }
+
+        if (!emailSent) return
+
+        // --- Step 2: Write HTTP response (broken pipe here is NOT a real failure) ---
+        logger.info("visit_accepted ip=${metadata.ip} path=${payload.path} has_location=${payload.latitude != null}")
+        withCors(exchange.responseHeaders, origin)
+        safeRespond(exchange, HttpURLConnection.HTTP_ACCEPTED, "accepted", metadata.ip)
     }
 
     private fun extractRequestMetadata(exchange: HttpExchange): RequestMetadata {
@@ -161,6 +181,29 @@ class VisitHandler(
             output.write(buffer, 0, read)
         }
         return output.toString(StandardCharsets.UTF_8)
+    }
+
+    /**
+     * Writes the HTTP response, swallowing broken-pipe / client-disconnect IOExceptions.
+     * These happen when the browser timed out (e.g. Render cold start) but the email
+     * was already sent — they are NOT real failures and must not trigger dedup release.
+     */
+    private fun safeRespond(
+        exchange: HttpExchange,
+        status: Int,
+        body: String,
+        ip: String,
+        contentType: String = "text/plain; charset=utf-8",
+    ) {
+        try {
+            respond(exchange, status, body, contentType)
+            logger.info("visit_response_sent ip=$ip status=$status")
+        } catch (e: IOException) {
+            // Client disconnected (e.g. cold-start timeout) — email was already sent, this is benign
+            logger.warning("visit_response_broken_pipe ip=$ip status=$status — client disconnected, email was already delivered")
+        } catch (e: Exception) {
+            logger.warning("visit_response_error ip=$ip status=$status error=${e.message}")
+        }
     }
 
     private fun isOriginAllowed(origin: String?): Boolean {
