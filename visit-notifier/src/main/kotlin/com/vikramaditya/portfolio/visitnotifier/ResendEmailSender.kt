@@ -14,8 +14,8 @@ import java.util.logging.Logger
  * Sends visit notification emails via the Resend HTTP API (https://resend.com).
  * Uses port 443 (HTTPS) — works on Render free tier unlike SMTP port 587 which is blocked.
  *
- * Required env var: RESEND_API_KEY
- * Optional env vars (falls back to AppConfig SMTP fields for from/to):
+ * Required env vars:
+ *   RESEND_API_KEY
  *   VISIT_NOTIFY_FROM  — must be a verified sender domain in Resend
  *   VISIT_NOTIFY_TO    — recipient email
  */
@@ -36,15 +36,7 @@ class ResendEmailSender(
         val apiKey = config.resendApiKey
         val payload = visit.payload
 
-        val hasLocation = payload.latitude != null && payload.longitude != null
-        logger.info(
-            "resend_building_email path=${payload.path} " +
-            "has_location=$hasLocation " +
-            "lat=${payload.latitude} lon=${payload.longitude} acc=${payload.locationAccuracy}"
-        )
-
         val emailBody = buildBody(visit)
-        logger.info("resend_email_body_built path=${payload.path} chars=${emailBody.length}")
 
         val requestBody = buildJsonObject {
             put("from", config.visitNotifyFrom)
@@ -97,16 +89,6 @@ class ResendEmailSender(
         val viewport = "${payload.viewportWidth ?: "unknown"} x ${payload.viewportHeight ?: "unknown"}"
         val screen = "${payload.screenWidth ?: "unknown"} x ${payload.screenHeight ?: "unknown"}"
 
-        val locationLine = if (payload.latitude != null && payload.longitude != null) {
-            val lat = "%.6f".format(payload.latitude)
-            val lon = "%.6f".format(payload.longitude)
-            val acc = payload.locationAccuracy?.let { " (±${ "%.0f".format(it) }m accuracy)" } ?: ""
-            val mapsUrl = "https://maps.google.com/?q=$lat,$lon"
-            "$lat, $lon$acc\nMaps       : $mapsUrl"
-        } else {
-            "(not shared — user denied or browser blocked)"
-        }
-
         return """
             A portfolio visit was recorded.
 
@@ -123,7 +105,6 @@ class ResendEmailSender(
             Session ID : ${payload.sessionId}
             Origin     : ${metadata.origin ?: "(unknown)"}
             X-Fwd-For  : ${metadata.forwardedFor ?: "(none)"}
-            Location   : $locationLine
         """.trimIndent()
     }
 }

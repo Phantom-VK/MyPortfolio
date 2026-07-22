@@ -6,15 +6,19 @@ import com.varabyte.kobweb.compose.css.PointerEvents
 import com.varabyte.kobweb.compose.css.functions.blur
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.ui.Modifier
+import com.varabyte.kobweb.compose.ui.modifiers.ariaLabel
 import com.varabyte.kobweb.compose.ui.modifiers.backdropFilter
 import com.varabyte.kobweb.compose.ui.modifiers.background
 import com.varabyte.kobweb.compose.ui.modifiers.border
 import com.varabyte.kobweb.compose.ui.modifiers.borderRadius
 import com.varabyte.kobweb.compose.ui.modifiers.cursor
 import com.varabyte.kobweb.compose.ui.modifiers.onClick
+import com.varabyte.kobweb.compose.ui.modifiers.onKeyDown
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.compose.ui.modifiers.pointerEvents
+import com.varabyte.kobweb.compose.ui.modifiers.role
 import com.varabyte.kobweb.compose.ui.modifiers.size
+import com.varabyte.kobweb.compose.ui.modifiers.tabIndex
 import com.varabyte.kobweb.compose.ui.styleModifier
 import com.varabyte.kobweb.framework.annotations.DelicateApi
 import com.varabyte.kobweb.silk.components.graphics.Image
@@ -59,11 +63,22 @@ fun ThemeSwitchButton(
             .background(bgColor)
             .borderRadius(Res.Dimens.BORDER_RADIUS.px)
             .border(width = 1.px, style = LineStyle.Solid, color = borderColor)
+            .role("button")
+            .tabIndex(0)
+            .ariaLabel(if (colorMode.isLight) "Switch to dark mode" else "Switch to light mode")
             .onClick { onClick() }
+            .onKeyDown { event ->
+                val key = event.nativeEvent.asDynamic().key as? String
+                if (key == "Enter" || key == " ") {
+                    event.preventDefault()
+                    onClick()
+                }
+            }
     ) {
         Image(
             modifier = Modifier.size(iconSize),
-            src = if (colorMode.isLight) Res.Icon.SUN else Res.Icon.MOON
+            src = if (colorMode.isLight) Res.Icon.SUN else Res.Icon.MOON,
+            alt = ""
         )
     }
 }

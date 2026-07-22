@@ -89,10 +89,7 @@ class VisitHandler(
             return
         }
 
-        logger.info(
-            "visit_parsed ip=${metadata.ip} path=${payload.path} " +
-            "session=${payload.sessionId} lat=${payload.latitude} lon=${payload.longitude}"
-        )
+        logger.info("visit_parsed ip=${metadata.ip} path=${payload.path} session=${payload.sessionId}")
 
         try {
             VisitValidator.validate(payload)
@@ -119,10 +116,7 @@ class VisitHandler(
         // --- Step 1: Send email (true failure = release dedup + 500) ---
         val emailSent = try {
             emailSender.sendVisitNotification(visit)
-            logger.info(
-                "visit_email_sent ip=${metadata.ip} path=${payload.path} " +
-                "has_location=${payload.latitude != null}"
-            )
+            logger.info("visit_email_sent ip=${metadata.ip} path=${payload.path}")
             true
         } catch (sendError: Exception) {
             deduper.release(payload.sessionId, payload.path)
@@ -139,7 +133,7 @@ class VisitHandler(
         if (!emailSent) return
 
         // --- Step 2: Write HTTP response (broken pipe here is NOT a real failure) ---
-        logger.info("visit_accepted ip=${metadata.ip} path=${payload.path} has_location=${payload.latitude != null}")
+        logger.info("visit_accepted ip=${metadata.ip} path=${payload.path}")
         withCors(exchange.responseHeaders, origin)
         safeRespond(exchange, HttpURLConnection.HTTP_ACCEPTED, "accepted", metadata.ip)
     }

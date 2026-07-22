@@ -70,12 +70,25 @@ fun Footer() {
 @Composable
 private fun MadeWithKobweb() {
     val colorMode by ColorMode.currentState
+
+    fun openKobwebSite() {
+        window.open("https://kobweb.varabyte.com/", "_blank")
+    }
+
     Row(
         modifier = Modifier
             .borderRadius(8.px)
             .padding(leftRight = 1.cssRem, topBottom = 0.5.cssRem)
-            .onClick {
-                window.open("https://kobweb.varabyte.com/", "_blank")
+            .role("link")
+            .tabIndex(0)
+            .ariaLabel("Built with Kobweb — opens in new tab")
+            .onClick { openKobwebSite() }
+            .onKeyDown { event ->
+                val key = event.nativeEvent.asDynamic().key as? String
+                if (key == "Enter" || key == " ") {
+                    event.preventDefault()
+                    openKobwebSite()
+                }
             },
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
@@ -95,6 +108,7 @@ private fun MadeWithKobweb() {
         )
         Image(
             src = Res.Logo.KOBWEB_LOGO,
+            alt = "",
             modifier = Modifier.height(40.px)
                 .width(Width.FitContent)
                 .margin(left = 1.cssRem)

@@ -9,11 +9,6 @@ data class AppConfig(
     val allowedOrigins: Set<String>,
     // Resend HTTP API (replaces SMTP — works on Render free tier)
     val resendApiKey: String,
-    // SMTP fields kept for reference / local fallback logging but not used in production
-    val smtpHost: String,
-    val smtpPort: Int,
-    val smtpUsername: String,
-    val smtpAppPassword: String,
     val visitNotifyTo: String,
     val visitNotifyFrom: String,
     val rateLimitWindowSeconds: Long,
@@ -37,10 +32,6 @@ data class AppConfig(
                     .filter { it.isNotEmpty() }
                     .toSet(),
                 resendApiKey = mergedEnv.require("RESEND_API_KEY"),
-                smtpHost = mergedEnv["SMTP_HOST"]?.ifBlank { null } ?: "smtp.gmail.com",
-                smtpPort = mergedEnv["SMTP_PORT"]?.toIntOrNull() ?: 587,
-                smtpUsername = mergedEnv["SMTP_USERNAME"] ?: "",
-                smtpAppPassword = mergedEnv["SMTP_APP_PASSWORD"] ?: "",
                 visitNotifyTo = mergedEnv.require("VISIT_NOTIFY_TO"),
                 visitNotifyFrom = mergedEnv.require("VISIT_NOTIFY_FROM"),
                 rateLimitWindowSeconds = mergedEnv["VISIT_RATE_LIMIT_WINDOW_SECONDS"]?.toLongOrNull() ?: 60L,

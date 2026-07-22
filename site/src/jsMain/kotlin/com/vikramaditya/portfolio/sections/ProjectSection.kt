@@ -28,7 +28,7 @@ fun ProjectSection(){
         ProjectCard(
             title = "Vyom Assist",
             description = "AI-powered banking support system; special winner @ PSB iDEA Hackathon 2025 (₹1,00,000).",
-            imageUrl = "images/projectthumbnails/vyomassist.png",
+            imageUrl = "images/projectthumbnails/vyomassist.webp",
             mainTechStack = "Kotlin-Jetpack Compose",
             otherTechStack = "Android, Firebase, Hackathon build",
             iconsList = listOf(
@@ -46,7 +46,7 @@ fun ProjectSection(){
         ProjectCard(
             title = "Production ML: Phishing Detection",
             description = "End-to-end ML pipeline with 97% accuracy, automated ETL, drift checks, and CI/CD to AWS.",
-            imageUrl = "images/projectthumbnails/mlpipeline.png",
+            imageUrl = "images/projectthumbnails/mlpipeline.webp",
             mainTechStack = "Python · FastAPI",
             otherTechStack = "AWS, Docker, GitHub Actions",
             iconsList = listOf(
@@ -61,7 +61,7 @@ fun ProjectSection(){
         ProjectCard(
             title = "AgentTuring Math Tutor",
             description = "Developed AI-powered tutoring agent with RAG + MCP for math problem solving and web retrieval.",
-            imageUrl = "images/projectthumbnails/agentturing.png",
+            imageUrl = "images/projectthumbnails/agentturing.webp",
             mainTechStack = "AI-ML",
             otherTechStack = "LangGraph, Qdrant,Tavily MCP, LLM, FastAPI",
             iconsList = listOf(
@@ -76,7 +76,7 @@ fun ProjectSection(){
         ProjectCard(
             title = "HR Chacha - AI-Powered Hiring Assistant",
             description = "LLM-driven hiring assistant automating 80% candidate screening with role-specific Q&A.",
-            imageUrl = "images/projectthumbnails/hrchacha.png",
+            imageUrl = "images/projectthumbnails/hrchacha.webp",
             mainTechStack = "AI-ML",
             otherTechStack = "Python, Streamlit, FastAPI, MongoDB, AWS",
             iconsList = listOf(
@@ -90,7 +90,7 @@ fun ProjectSection(){
         ProjectCard(
             title = "SRT Slicer",
             description = "A powerful tool to generate word-level timestamps from SRT subtitle files with advanced customization options. ",
-            imageUrl = "images/projectthumbnails/srtslicer.png",
+            imageUrl = "images/projectthumbnails/srtslicer.webp",
             mainTechStack = "Python",
             otherTechStack = "Inno Setup",
             iconsList = listOf(
@@ -105,7 +105,7 @@ fun ProjectSection(){
         ProjectCard(
             title = "ICRS – Intelligent College Redressal System",
             description = "AI-powered grievance platform with RAG + pgvector semantic search, role-based React/Spring portals, JWT security, and email notifications.",
-            imageUrl = "images/projectthumbnails/chatbot.jpg",
+            imageUrl = "images/projectthumbnails/chatbot.webp",
             mainTechStack = "Java Spring Boot · React · PostgreSQL + pgvector",
             otherTechStack = "RAG, JWT auth, email notifications",
             iconsList = listOf(
@@ -120,7 +120,7 @@ fun ProjectSection(){
         ProjectCard(
             title = "Portfolio",
             description = "Portfolio Website using Kobweb framework, Kotlin language only.",
-            imageUrl = "images/projectthumbnails/portfolio.png",
+            imageUrl = "images/projectthumbnails/portfolio.webp",
             mainTechStack = "Kobweb",
             otherTechStack = "Kotlin",
             iconsList = listOf(

@@ -16,9 +16,6 @@ object VisitValidator {
         requireDimension(payload.viewportHeight, "viewportHeight")
         requireDimension(payload.screenWidth, "screenWidth")
         requireDimension(payload.screenHeight, "screenHeight")
-        requireLatitude(payload.latitude)
-        requireLongitude(payload.longitude)
-        requireAccuracy(payload.locationAccuracy)
     }
 
     private fun requireStartsWithSlash(path: String) {
@@ -39,20 +36,5 @@ object VisitValidator {
         if (value !in 0..20_000) {
             throw VisitValidationException("$field must be between 0 and 20000")
         }
-    }
-
-    private fun requireLatitude(value: Double?) {
-        if (value == null) return
-        if (value !in -90.0..90.0) throw VisitValidationException("latitude must be between -90 and 90")
-    }
-
-    private fun requireLongitude(value: Double?) {
-        if (value == null) return
-        if (value !in -180.0..180.0) throw VisitValidationException("longitude must be between -180 and 180")
-    }
-
-    private fun requireAccuracy(value: Double?) {
-        if (value == null) return
-        if (value < 0.0 || value > 100_000.0) throw VisitValidationException("locationAccuracy must be between 0 and 100000")
     }
 }

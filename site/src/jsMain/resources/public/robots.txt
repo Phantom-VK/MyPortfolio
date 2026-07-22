@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://phantom-vk.github.io/MyPortfolio/sitemap.xml

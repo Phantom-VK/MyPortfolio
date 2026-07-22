@@ -56,6 +56,15 @@ fun BackToTopButton() {
 
     val show = scroll != null && scroll!! > 400.0
 
+    fun scrollToTop() {
+        document.documentElement?.scroll(
+            ScrollToOptions(
+                top = 0.0,
+                behavior = ScrollBehavior.SMOOTH
+            )
+        )
+    }
+
     Column(
         modifier = Modifier
             .position(Position.Fixed)
@@ -66,13 +75,16 @@ fun BackToTopButton() {
             .zIndex(5)
             .pointerEvents(if (show) PointerEvents.Auto else PointerEvents.None)
             .visibility(if (show) Visibility.Visible else Visibility.Hidden)
-            .onClick {
-                document.documentElement?.scroll(
-                    ScrollToOptions(
-                        top = 0.0,
-                        behavior = ScrollBehavior.SMOOTH
-                    )
-                )
+            .role("button")
+            .tabIndex(if (show) 0 else -1)
+            .ariaLabel("Back to top")
+            .onClick { scrollToTop() }
+            .onKeyDown { event ->
+                val key = event.nativeEvent.asDynamic().key as? String
+                if (key == "Enter" || key == " ") {
+                    event.preventDefault()
+                    scrollToTop()
+                }
             },
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
@@ -84,6 +96,7 @@ fun BackToTopButton() {
             SpanText(
                 char,
                 modifier = HoverPulseStyle.toModifier()
+                    .ariaHidden()
                     .color(if(colormode.isDark) Res.Theme.THEME_GREEN_NEON.color else Res.Theme.GREY_BACKGROUND.color)
                     .fontFamily("Share Tech Mono")
                     .fontSize(1.em)

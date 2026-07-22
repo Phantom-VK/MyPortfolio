@@ -56,7 +56,8 @@ fun WhatIDoCard(
                     Image(
                         width = 50,
                         height = 50,
-                        src = iconImage
+                        src = iconImage,
+                        alt = ""
                     )
 
                     SpanText(

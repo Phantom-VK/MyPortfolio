@@ -1,6 +1,7 @@
 package com.vikramaditya.portfolio.sections
 
 import androidx.compose.runtime.Composable
+import com.varabyte.kobweb.compose.css.FontWeight
 import com.varabyte.kobweb.compose.css.TextAlign
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Box
@@ -9,6 +10,7 @@ import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
+import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.framework.annotations.DelicateApi
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
@@ -17,6 +19,8 @@ import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
+import org.jetbrains.compose.web.dom.H1
+import org.jetbrains.compose.web.dom.Text
 
 @OptIn(DelicateApi::class)
 @Composable
@@ -46,10 +50,10 @@ fun AboutMe() {
                 .padding(3.percent)
         ) {
             Column(modifier = Modifier.fillMaxWidth()) {
-                SpanText(
-                    "Hello, I am Vikramaditya. IT Engineer.",
-                    modifier = Modifier
+                H1(
+                    attrs = Modifier
                         .fillMaxWidth()
+                        .margin(0.px)
                         .textAlign(TextAlign.Center)
                         .color(
                             if (colorMode.isDark)
@@ -59,7 +63,11 @@ fun AboutMe() {
                         )
                         .fontFamily("VT323")
                         .fontSize(fontSize)
-                )
+                        .fontWeight(FontWeight.Normal)
+                        .toAttrs()
+                ) {
+                    Text("Hello, I am Vikramaditya. IT Engineer.")
+                }
                 SpanText(
                     "I love computers and make them work for me.",
                     modifier = Modifier

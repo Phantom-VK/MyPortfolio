@@ -8,6 +8,7 @@ import com.varabyte.kobweb.silk.style.CssName
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.toModifier
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
+import kotlinx.browser.document
 import kotlinx.browser.window
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -16,6 +17,9 @@ import org.jetbrains.compose.web.dom.Canvas
 import org.w3c.dom.HTMLCanvasElement
 import kotlin.math.max
 import kotlin.random.Random
+
+private fun prefersReducedMotion(): Boolean =
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches
 
 @CssName("matrix-canvas")
 val MatrixStyle = CssStyle {
@@ -44,8 +48,6 @@ fun MatrixRainAnimation(
         val canvas = canvasRef.value ?: return@LaunchedEffect
         val ctx = canvas.getContext("2d") as? org.w3c.dom.CanvasRenderingContext2D ?: return@LaunchedEffect
 
-        println("Canvas is ready. Starting animation.")
-
         canvas.width = window.innerWidth
         canvas.height = window.innerHeight
 
@@ -53,32 +55,42 @@ fun MatrixRainAnimation(
         val columns = max(1, canvas.width / fontSize)
         val drops = IntArray(columns) { Random.nextInt(canvas.height / fontSize) }
 
-        launch {
-            while (true) {
-                val fade = trailAlpha.coerceIn(0.01, 0.2)
-                ctx.fillStyle = if (colorMode.isDark) "rgba(0, 0, 0, $fade)" else "rgba(255, 255, 255, $fade)"
-                ctx.fillRect(0.0, 0.0, canvas.width.toDouble(), canvas.height.toDouble())
+        fun drawFrame() {
+            val fade = trailAlpha.coerceIn(0.01, 0.2)
+            ctx.fillStyle = if (colorMode.isDark) "rgba(0, 0, 0, $fade)" else "rgba(255, 255, 255, $fade)"
+            ctx.fillRect(0.0, 0.0, canvas.width.toDouble(), canvas.height.toDouble())
 
-                ctx.fillStyle = if (colorMode.isDark) "#0F0" else "#006400"
-                ctx.font = "${fontSize}px DM Sans"
+            ctx.fillStyle = if (colorMode.isDark) "#0F0" else "#006400"
+            ctx.font = "${fontSize}px JetBrains Mono"
 
-                for (i in drops.indices) {
-                    val text = letters.random().toString()
-                    ctx.fillText(text, i * fontSize.toDouble(), drops[i] * fontSize.toDouble())
+            for (i in drops.indices) {
+                val text = letters.random().toString()
+                ctx.fillText(text, i * fontSize.toDouble(), drops[i] * fontSize.toDouble())
 
-                    if (drops[i] * fontSize > canvas.height && Random.nextDouble() > 0.975) {
-                        drops[i] = 0
-                    }
-                    drops[i]++
+                if (drops[i] * fontSize > canvas.height && Random.nextDouble() > 0.975) {
+                    drops[i] = 0
                 }
-
-                delay(frameDelayMs)
+                drops[i]++
             }
         }
 
+        if (prefersReducedMotion()) {
+            // Respect reduced-motion preference: draw a single static frame, no loop.
+            drawFrame()
+            return@LaunchedEffect
+        }
 
-
-
+        launch {
+            while (true) {
+                if (document.asDynamic().hidden as Boolean) {
+                    // Tab is hidden — skip rendering work but keep polling so we resume promptly.
+                    delay(500)
+                    continue
+                }
+                drawFrame()
+                delay(frameDelayMs)
+            }
+        }
     }
 
     Canvas(

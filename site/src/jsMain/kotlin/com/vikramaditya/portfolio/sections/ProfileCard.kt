@@ -117,7 +117,8 @@ fun ProfileImage(isMobile: Boolean) {
                         property("object-position", "center top")
                     }
                 },
-            src = if (colorMode.isDark) Res.Image.PROFILE_PHOTO_GREEN else Res.Image.PROFILE_PHOTO_REGULAR
+            src = if (colorMode.isDark) Res.Image.PROFILE_PHOTO_GREEN else Res.Image.PROFILE_PHOTO_REGULAR,
+            alt = "Photo of Vikramaditya Khupse"
         )
 
         GreenButton(
@@ -173,7 +174,8 @@ fun GreenButton(modifier: Modifier,text: String, onClick: (SyntheticMouseEvent) 
                 modifier = SocialIconStyle.toModifier().cursor(Cursor.None),
                 colorMode = colorMode,
                 icon = it.icon,
-                link = it.link
+                link = it.link,
+                label = it.label
             )
         }
     }

@@ -10,8 +10,9 @@ import com.varabyte.kobweb.compose.ui.modifiers.color
 import com.varabyte.kobweb.compose.ui.modifiers.fontFamily
 import com.varabyte.kobweb.compose.ui.modifiers.fontWeight
 import com.varabyte.kobweb.compose.ui.modifiers.id
+import com.varabyte.kobweb.compose.ui.modifiers.margin
 import com.varabyte.kobweb.compose.ui.modifiers.padding
-import com.varabyte.kobweb.silk.components.text.SpanText
+import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.silk.style.toAttrs
 import com.varabyte.kobweb.silk.style.toModifier
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
@@ -19,6 +20,8 @@ import com.vikramaditya.portfolio.styles.SectionTitleStyle
 import com.vikramaditya.portfolio.styles.SubheadlineTextStyle
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.dom.Div
+import org.jetbrains.compose.web.dom.H2
+import org.jetbrains.compose.web.dom.Text
 
 @Composable
 fun SectionTitle(
@@ -29,20 +32,22 @@ fun SectionTitle(
         .id(id)
         .padding(10.px)){
         Div(attrs = SubheadlineTextStyle.toAttrs()) {
-            SpanText(
-                text = sectionTitleText,
-                modifier = SectionTitleStyle.toModifier()
+            H2(
+                attrs = SectionTitleStyle.toModifier()
                     .align(Alignment.Bottom)
                     .fontFamily("Share Tech Mono")
                     .fontWeight(FontWeight.Bold)
+                    .margin(0.px)
                     .color(
                         when (ColorMode.current) {
                             ColorMode.LIGHT -> Colors.Black
                             ColorMode.DARK -> Colors.White
                         }
                     )
-
-            )
+                    .toAttrs()
+            ) {
+                Text(sectionTitleText)
+            }
         }
 
     }

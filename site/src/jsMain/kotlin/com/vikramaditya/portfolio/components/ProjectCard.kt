@@ -1,7 +1,6 @@
 package com.vikramaditya.portfolio.components
 
 import androidx.compose.runtime.Composable
-import androidx.compose.web.events.SyntheticMouseEvent
 import com.varabyte.kobweb.compose.css.FontWeight
 import com.varabyte.kobweb.compose.css.JustifyItems
 import com.varabyte.kobweb.compose.css.MixBlendMode
@@ -43,12 +42,22 @@ fun ProjectCard(
     mainTechStack: String,
     otherTechStack: String,
     iconsList: List<String>,
-    onClick: (SyntheticMouseEvent) -> Unit
+    onClick: () -> Unit
 ) {
     val colorMode = ColorMode.current
     Box(
         modifier = ProjectCardSTyle.toModifier()
-            .onClick { evt -> onClick(evt) }
+            .role("link")
+            .tabIndex(0)
+            .ariaLabel("View project: $title")
+            .onClick { onClick() }
+            .onKeyDown { event ->
+                val key = event.nativeEvent.asDynamic().key as? String
+                if (key == "Enter" || key == " ") {
+                    event.preventDefault()
+                    onClick()
+                }
+            }
     ) {
         Column(
             modifier = Modifier
@@ -70,6 +79,7 @@ fun ProjectCard(
                         color = Color.rgba(0, 0, 0, 0.35f)
                     )
                     .toAttrs {
+                        attr("alt", "Screenshot of $title")
                         attr("loading", "lazy")
                         attr("decoding", "async")
                     }
@@ -134,6 +144,7 @@ fun ProjectCard(
                 iconsList.forEach { icon ->
                     Image(
                         src = icon,
+                        alt = "",
                         modifier = Modifier
                             .size(24.px)
                             .mixBlendMode(MixBlendMode.Normal)

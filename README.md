@@ -1,23 +1,21 @@
-[![version: 0.23.3](https://img.shields.io/badge/kobweb-0.23.3-blue)](COMPATIBILITY.md)
-[![kotlin: 2.2.20](https://img.shields.io/badge/kotlin-2.2.20-blue?logo=kotlin)](COMPATIBILITY.md)
+![version: 0.24.0](https://img.shields.io/badge/kobweb-0.24.0-blue)
+![kotlin: 2.3.10](https://img.shields.io/badge/kotlin-2.3.10-blue?logo=kotlin)
 <a href="https://kobweb.varabyte.com/docs">
 ![User Guide docs](https://img.shields.io/badge/User_Guide-royalblue?logo=readthedocs)
 </a>
-[![Varabyte Discord](https://img.shields.io/discord/886036660767305799.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/5NZ2GKV5Cs)
 
+# Personal Portfolio Website — 100% Kotlin
 
-# Personal Portfolio Website made with 100% Kotlin
+A single-page "Matrix" hacker-green themed portfolio built with [Kobweb](https://github.com/varabyte/kobweb)
+(Compose HTML + Silk). Statically exported and deployed to GitHub Pages.
 
-# K🕸️bweb
+The repo has two modules:
 
-
-This is a [Kobweb](https://github.com/varabyte/kobweb) project bootstrapped with the `app/empty` template.
-
-This template is useful if you already know what you're doing and just want a clean slate. By default, it
-just creates a blank home page (which prints to the console so you can confirm it's working)
-
-If you are still learning, consider instantiating the `app` template (or one of the examples) to see actual,
-working projects.
+- **`site/`** — the Kobweb frontend (Compose HTML/Silk). Exported to static HTML/JS/CSS via `kobwebExport`
+  and served from GitHub Pages.
+- **`visit-notifier/`** — a small standalone JVM backend (plain `com.sun.net.httpserver.HttpServer`, no
+  framework) that receives one `POST /api/visit` per browser session and emails the owner via the
+  [Resend](https://resend.com) HTTP API. Deployed separately (e.g. Render).
 
 ## Getting Started
 
@@ -88,13 +86,14 @@ settings for deployment. Required runtime variables:
 
 ```bash
 ALLOWED_ORIGINS=https://<your-gh-pages-domain>,https://<your-custom-domain>
-SMTP_HOST=smtp.gmail.com
-SMTP_PORT=587
-SMTP_USERNAME=your-gmail-address@gmail.com
-SMTP_APP_PASSWORD=your-app-password
+RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxx
 VISIT_NOTIFY_TO=you@example.com
-VISIT_NOTIFY_FROM=your-gmail-address@gmail.com
+VISIT_NOTIFY_FROM=notifications@yourdomain.com
 ```
+
+Emails are sent via the [Resend](https://resend.com) HTTP API (port 443), not SMTP — this is what lets the
+backend run on Render's free tier, which blocks outbound SMTP port 587. `VISIT_NOTIFY_FROM` must be a
+verified sender/domain in your Resend account.
 
 Run the backend locally with:
 
@@ -120,12 +119,9 @@ Set these values in Render:
 - `Dockerfile Path`: `Dockerfile`
 - `PORT`: `10000`
 - `ALLOWED_ORIGINS`: your frontend origin(s), comma-separated
-- `SMTP_HOST`: `smtp.gmail.com`
-- `SMTP_PORT`: `587`
-- `SMTP_USERNAME`: your Gmail address
-- `SMTP_APP_PASSWORD`: your Gmail app password
+- `RESEND_API_KEY`: your Resend API key
 - `VISIT_NOTIFY_TO`: the inbox that should receive the visit emails
-- `VISIT_NOTIFY_FROM`: usually the same as `SMTP_USERNAME`
+- `VISIT_NOTIFY_FROM`: a verified sender/domain in your Resend account
 
 After deploy, Render will give you a service URL like `https://your-service.onrender.com`. Put that in the GitHub
 variable `VISIT_NOTIFY_API_BASE_URL` before you next export or deploy the frontend.

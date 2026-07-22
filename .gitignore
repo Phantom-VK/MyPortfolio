@@ -18,8 +18,11 @@ kotlin-js-store
 
 # Kotlin ignores
 .kotlin
-jsMain
-com
-commonMain
-META-INF
+/jsMain
+/com
+/commonMain
+/META-INF
 *.env
+
+# Working documents
+PLAN.md

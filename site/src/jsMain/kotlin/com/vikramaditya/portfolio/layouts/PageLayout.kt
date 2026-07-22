@@ -82,12 +82,6 @@ fun PageLayout(
         modifier = Modifier
             .fillMaxSize()
             .cursor(Cursor.None)
-//            .styleModifier {
-//                property("cursor", "url('${
-//                    if (colorMode.isDark) Res.Image.CUSTOM_CURSOR_DARK
-//                    else Res.Image.CUSTOM_CURSOR_LIGHT
-//                }'), auto")
-//            }
     ) {
         //  Matrix Rain Background (lighter settings on small screens)
         val isMobile = breakpoint <= Breakpoint.SM

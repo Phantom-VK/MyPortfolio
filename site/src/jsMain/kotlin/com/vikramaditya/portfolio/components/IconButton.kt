@@ -24,6 +24,7 @@ fun IconButton(
     colorMode: ColorMode,
     link: String = "",
     icon: String,
+    label: String = "",
     iconSize: CSSSizeValue<CSSUnit.px> = Res.Dimens.ICON_SIZE.px,
     onClick: (() -> Unit)? = null
 ) {
@@ -47,7 +48,8 @@ fun IconButton(
         ) {
             Image(
                 modifier = Modifier.size(iconSize),
-                src = icon
+                src = icon,
+                alt = label
             )
         }
     }
@@ -56,30 +58,37 @@ fun IconButton(
 
 enum class SocialIcon(
     val icon: String,
-    val link: String
+    val link: String,
+    val label: String
 ) {
     Github(
         icon = Res.Icon.GITHUB,
-        link = "https://github.com/Phantom-VK"
+        link = "https://github.com/Phantom-VK",
+        label = "GitHub profile"
     ),
     GithubLight(
         icon = Res.Icon.GITHUB_LIGHT,
-        link = "https://github.com/Phantom-VK"
+        link = "https://github.com/Phantom-VK",
+        label = "GitHub profile"
     ),
     LinkedIn(
         icon = Res.Icon.LINKEDIN,
-        link = "https://www.linkedin.com/in/vikramaditya-khupse-04838a259"
+        link = "https://www.linkedin.com/in/vikramaditya-khupse-04838a259",
+        label = "LinkedIn profile"
     ),
     LinkedInLight(
         icon = Res.Icon.LINKEDIN_LIGHT,
-        link = "https://www.linkedin.com/in/vikramaditya-khupse-04838a259"
+        link = "https://www.linkedin.com/in/vikramaditya-khupse-04838a259",
+        label = "LinkedIn profile"
     ),
     Instagram(
         icon = Res.Icon.INSTAGRAM,
-        link = "https://www.instagram.com/_vikramaditya__"
+        link = "https://www.instagram.com/_vikramaditya__",
+        label = "Instagram profile"
     ),
     InstagramLight(
         icon = Res.Icon.INSTAGRAM_LIGHT,
-        link = "https://www.instagram.com/_vikramaditya__"
+        link = "https://www.instagram.com/_vikramaditya__",
+        label = "Instagram profile"
     )
 }

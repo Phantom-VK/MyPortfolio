@@ -63,8 +63,8 @@ object Res {
     }
 
     object Image {
-        const val PROFILE_PHOTO_GREEN = "mypfpgreen.png"
-        const val PROFILE_PHOTO_REGULAR = "mypfpregular.png"
+        const val PROFILE_PHOTO_GREEN = "mypfpgreen.webp"
+        const val PROFILE_PHOTO_REGULAR = "mypfpregular.webp"
 
 
     }
@@ -143,10 +143,6 @@ fun headline() = "Full-stack + AI/ML builder shipping to production."
 
 
 
-    }
-
-    object Selected{
-        var LANGUAGE = "language-python"
     }
 
     object Dimens {

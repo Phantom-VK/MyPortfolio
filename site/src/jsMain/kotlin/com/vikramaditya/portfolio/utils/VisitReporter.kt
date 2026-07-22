@@ -6,10 +6,8 @@ import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import kotlinx.browser.document
 import kotlinx.browser.window
 import kotlinx.coroutines.await
-import kotlinx.coroutines.suspendCancellableCoroutine
 import org.w3c.fetch.Headers
 import org.w3c.fetch.RequestInit
-import kotlin.coroutines.resume
 import kotlin.random.Random
 
 private const val VisitFlagKey = "visit_notified_v1"
@@ -21,7 +19,6 @@ fun VisitReporter(colorMode: ColorMode) {
         runCatching {
             val storage = window.sessionStorage
             if (storage.getItem(VisitFlagKey) != null) {
-                console.log("[VisitReporter] already reported this session, skipping")
                 return@runCatching
             }
 
@@ -33,14 +30,6 @@ fun VisitReporter(colorMode: ColorMode) {
 
             val sessionId = storage.getItem(VisitSessionIdKey) ?: generateSessionId().also {
                 storage.setItem(VisitSessionIdKey, it)
-            }
-
-            console.log("[VisitReporter] requesting geolocation...")
-            val geoResult = requestGeolocation()
-            if (geoResult != null) {
-                console.log("[VisitReporter] geolocation granted: lat=${geoResult.latitude} lon=${geoResult.longitude} acc=${geoResult.accuracy}m")
-            } else {
-                console.log("[VisitReporter] geolocation not available or denied, proceeding without location")
             }
 
             val payload = js("({})")
@@ -55,13 +44,8 @@ fun VisitReporter(colorMode: ColorMode) {
             payload.screenHeight = window.screen.height
             payload.colorMode = colorMode.name.lowercase()
             payload.sessionId = sessionId
-            payload.latitude = geoResult?.latitude
-            payload.longitude = geoResult?.longitude
-            payload.locationAccuracy = geoResult?.accuracy
 
             val jsonBody = js("JSON.stringify(payload)") as String
-            console.log("[VisitReporter] sending payload to $apiBaseUrl/api/visit")
-            console.log("[VisitReporter] payload: $jsonBody")
 
             val response = window.fetch(
                 input = "$apiBaseUrl/api/visit",
@@ -72,86 +56,15 @@ fun VisitReporter(colorMode: ColorMode) {
                 )
             ).await()
 
-            console.log("[VisitReporter] server responded: ${response.status} ${response.statusText}")
             if (response.ok) {
                 // Only mark as reported after a confirmed successful response
                 storage.setItem(VisitFlagKey, "1")
             } else {
                 val body = response.text().await()
-                console.warn("[VisitReporter] non-OK response body: $body")
+                console.warn("[VisitReporter] non-OK response ${response.status}: $body")
             }
         }.onFailure { err ->
             console.error("[VisitReporter] uncaught error: ${err.message}")
-        }
-    }
-}
-
-private data class GeoResult(val latitude: Double, val longitude: Double, val accuracy: Double)
-
-/**
- * Requests geolocation with a consent prompt.
- * Returns null silently if denied, unavailable, or timed out.
- * Uses a single getCurrentPosition call with a window callback to bridge JS -> coroutine.
- */
-private suspend fun requestGeolocation(): GeoResult? {
-    return suspendCancellableCoroutine { cont ->
-        // Check API availability first
-        val geoAvailable = js("typeof navigator !== 'undefined' && !!navigator.geolocation") as Boolean
-        if (!geoAvailable) {
-            console.log("[VisitReporter] geolocation API not available")
-            cont.resume(null)
-            return@suspendCancellableCoroutine
-        }
-
-        // Generate a unique callback name to avoid conflicts
-        val cbName = "_vr_geo_cb_${(1..8).joinToString("") { ('a'..'z').random().toString() }}"
-
-        var resumed = false
-        fun resumeOnce(result: GeoResult?) {
-            if (!resumed) {
-                resumed = true
-                js("delete window[cbName]")
-                cont.resume(result)
-            }
-        }
-
-        window.asDynamic()[cbName] = { lat: Double?, lon: Double?, acc: Double? ->
-            if (lat != null && lon != null && acc != null) {
-                resumeOnce(GeoResult(lat, lon, acc))
-            } else {
-                resumeOnce(null)
-            }
-        }
-
-        runCatching {
-            js("""
-                (function(name) {
-                    navigator.geolocation.getCurrentPosition(
-                        function(pos) {
-                            window[name](
-                                pos.coords.latitude,
-                                pos.coords.longitude,
-                                pos.coords.accuracy
-                            );
-                        },
-                        function(err) {
-                            console.warn('[VisitReporter] geolocation error code=' + err.code + ' msg=' + err.message);
-                            window[name](null, null, null);
-                        },
-                        { enableHighAccuracy: true, timeout: 8000, maximumAge: 0 }
-                    );
-                })(cbName);
-            """)
-        }.onFailure { err ->
-            console.error("[VisitReporter] getCurrentPosition threw: ${err.message}")
-            resumeOnce(null)
-        }
-
-        cont.invokeOnCancellation {
-            if (!resumed) {
-                resumed = true
-                js("delete window[cbName]")
-            }
         }
     }
 }

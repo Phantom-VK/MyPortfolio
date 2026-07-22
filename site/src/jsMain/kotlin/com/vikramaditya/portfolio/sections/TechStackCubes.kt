@@ -28,34 +28,34 @@ fun TechStackCubes(){
     ) {
         Cube3D(
             icons = listOf(
-                Res.Logo.LANGGRAPH_LOGO,
-                Res.Logo.KOTLIN_LOGO,
-                Res.Logo.CHATGPT_LOGO,
-                Res.Logo.PYTHON_LOGO,
-                Res.Logo.JAVA_LOGO,
-                Res.Logo.POSTGRESQL_LOGO,
+                Res.Logo.LANGGRAPH_LOGO to "LangGraph",
+                Res.Logo.KOTLIN_LOGO to "Kotlin",
+                Res.Logo.CHATGPT_LOGO to "ChatGPT",
+                Res.Logo.PYTHON_LOGO to "Python",
+                Res.Logo.JAVA_LOGO to "Java",
+                Res.Logo.POSTGRESQL_LOGO to "PostgreSQL",
             )
         )
 
         Cube3D(
             icons = listOf(
-                Res.Logo.UBUNTU_LOGO,
-                Res.Logo.VSCODE_LOGO,
-                Res.Logo.ANDROID_LOGO,
-                Res.Logo.FIGMA_LOGO,
-                Res.Logo.INTELLIJ_LOGO,
-                Res.Logo.PYCHARM_LOGO
+                Res.Logo.UBUNTU_LOGO to "Ubuntu",
+                Res.Logo.VSCODE_LOGO to "VS Code",
+                Res.Logo.ANDROID_LOGO to "Android",
+                Res.Logo.FIGMA_LOGO to "Figma",
+                Res.Logo.INTELLIJ_LOGO to "IntelliJ IDEA",
+                Res.Logo.PYCHARM_LOGO to "PyCharm"
             )
         )
 
         Cube3D(
             icons = listOf(
-                Res.Logo.CMP_LOGO,
-                Res.Logo.FIREBASE_LOGO,
-                Res.Logo.GIT_LOGO,
-                Res.Logo.DJANGO_LOGO,
-                Res.Logo.GITHUB_LOGO,
-                Res.Logo.FLASK_LOGO
+                Res.Logo.CMP_LOGO to "Compose Multiplatform",
+                Res.Logo.FIREBASE_LOGO to "Firebase",
+                Res.Logo.GIT_LOGO to "Git",
+                Res.Logo.DJANGO_LOGO to "Django",
+                Res.Logo.GITHUB_LOGO to "GitHub",
+                Res.Logo.FLASK_LOGO to "Flask"
             )
         )
     }

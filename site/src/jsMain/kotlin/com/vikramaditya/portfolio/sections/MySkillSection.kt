@@ -68,7 +68,7 @@ fun MySkillsSection() {
                             skill.label,
                             modifier = Modifier
                                 .fontSize(14.px)
-                                .fontFamily("DM Sans")
+                                .fontFamily("JetBrains Mono")
                                 .margin(top = 4.px)
                                 .fontWeight(FontWeight.Medium)
                                 .color(Color.rgb(0, 255, 128))

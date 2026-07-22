@@ -26,21 +26,33 @@ fun ContactMeButton(email: String, modifier: Modifier = Modifier) {
     val bgColor =  Res.Theme.GREY_BACKGROUND.color
     val borderColor = if (colorMode.isDark) Res.Theme.THEME_GREEN_NEON.color else Res.Theme.GREY_BACKGROUND.color
 
+    fun openEmail() {
+        window.open(email, "_blank")
+    }
+
     Row(
         modifier = modifier
             .borderRadius(8.px)
             .border(1.px, LineStyle.Solid, borderColor)
             .padding(leftRight = 1.cssRem, topBottom = 0.5.cssRem)
             .backgroundColor(bgColor)
-            .onClick {
-                window.open(email, "_blank")
-            }
-                ,
+            .role("link")
+            .tabIndex(0)
+            .ariaLabel("Contact me by email")
+            .onClick { openEmail() }
+            .onKeyDown { event ->
+                val key = event.nativeEvent.asDynamic().key as? String
+                if (key == "Enter" || key == " ") {
+                    event.preventDefault()
+                    openEmail()
+                }
+            },
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
     ) {
         Image(
             src = Res.Icon.EMAIL_DARK,
+            alt = "",
             modifier = Modifier.size(24.px)
         )
         SpanText(

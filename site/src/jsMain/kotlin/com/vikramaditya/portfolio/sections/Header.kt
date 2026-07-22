@@ -3,6 +3,7 @@ package com.vikramaditya.portfolio.sections
 import androidx.compose.runtime.*
 import com.varabyte.kobweb.compose.css.FontSize
 import com.varabyte.kobweb.compose.css.FontWeight
+import com.varabyte.kobweb.compose.css.Overflow
 import com.varabyte.kobweb.compose.css.TextAlign
 import com.varabyte.kobweb.compose.css.Transition
 import com.varabyte.kobweb.compose.css.TransitionProperty
@@ -14,6 +15,7 @@ import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Color
 import com.varabyte.kobweb.compose.ui.modifiers.*
+import com.varabyte.kobweb.compose.ui.styleModifier
 import com.varabyte.kobweb.framework.annotations.DelicateApi
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
@@ -112,10 +114,17 @@ fun Header(modifier: Modifier) {
                 }
             }
 
-            // Navigation Row with animated show/hide
+            // Navigation Row with animated show/hide.
+            // Scrollable on narrow screens: at small breakpoints the nav items + theme
+            // toggle don't all fit in one row, and flexbox silently clips/overflows rather
+            // than wrapping — overflow-x:auto keeps every item reachable instead of hidden.
             Row(
                 modifier = Modifier
-                    .fillMaxWidth(),
+                    .fillMaxWidth()
+                    .overflow(Overflow.Auto, Overflow.Visible)
+                    .styleModifier {
+                        property("-webkit-overflow-scrolling", "touch")
+                    },
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {

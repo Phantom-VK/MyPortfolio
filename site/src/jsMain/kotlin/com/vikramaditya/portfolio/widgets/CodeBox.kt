@@ -5,6 +5,7 @@ import androidx.compose.web.events.SyntheticMouseEvent
 import com.varabyte.kobweb.compose.css.*
 import com.varabyte.kobweb.compose.foundation.layout.*
 import com.varabyte.kobweb.compose.ui.Modifier
+import com.varabyte.kobweb.compose.ui.thenIf
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.compose.ui.styleModifier
@@ -137,14 +138,25 @@ fun CodeBox() {
     }
 }
 
+private fun accentColorFor(displayLanguage: String): Color = when (displayLanguage) {
+    "Python" -> Res.Theme.THEME_GREEN.color
+    "Java" -> Res.Theme.JavaOrange.color
+    "Kotlin" -> Res.Theme.GoogleBlue.color
+    else -> Res.Theme.THEME_GREEN.color
+}
+
 @Composable
 fun LanguageButton(language: String, isSelected: Boolean, onClick: (SyntheticMouseEvent) -> Unit) {
+    val accentColor = accentColorFor(language)
     Button(
         modifier = LanguageButtonStyle
             .toModifier()
             .cursor(Cursor.None)
-            .background(if (isSelected) Res.Theme.THEME_GREEN.color else Colors.Transparent)
-            .color(if (isSelected) Colors.White else Res.Theme.THEME_GREEN.color)
+            .background(if (isSelected) accentColor else Colors.Transparent)
+            .color(if (isSelected) Colors.White else accentColor)
+            .thenIf(isSelected) {
+                Modifier.boxShadow(BoxShadow.of(0.px, 2.px, 8.px, color = accentColor))
+            }
             .padding(12.px, 16.px)
             .borderRadius(topLeft = 10.px, topRight = 10.px)
             .margin(0.px)

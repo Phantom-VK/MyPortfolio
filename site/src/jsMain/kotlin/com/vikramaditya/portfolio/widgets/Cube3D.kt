@@ -31,7 +31,7 @@ import org.jetbrains.compose.web.dom.Div
 
 @Composable
 fun Cube3D(
-    icons: List<String>,
+    icons: List<Pair<String, String>>,
     modifier: Modifier = Modifier
 ) {
     Box(
@@ -46,7 +46,7 @@ fun Cube3D(
                 )
 
                 for (i in faceStyles.indices) {
-                    val iconSrc = icons.getOrNull(i) ?: continue
+                    val (iconSrc, label) = icons.getOrNull(i) ?: continue
 
                     Div(
                         attrs = FaceStyle.toModifier()
@@ -55,6 +55,7 @@ fun Cube3D(
                     ) {
                         Image(
                             src = iconSrc,
+                            alt = label,
                             modifier = Modifier.size(100.px).styleModifier {
                                 mixBlendMode(MixBlendMode.Normal)
                             }
