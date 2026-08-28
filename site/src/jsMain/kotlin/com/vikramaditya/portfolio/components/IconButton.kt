@@ -2,48 +2,32 @@ package com.vikramaditya.portfolio.components
 
 
 import androidx.compose.runtime.Composable
-import com.varabyte.kobweb.compose.css.Cursor
-import com.varabyte.kobweb.compose.css.functions.blur
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.components.navigation.Link
-import com.varabyte.kobweb.silk.theme.colors.ColorMode
+import com.varabyte.kobweb.silk.style.toModifier
+import com.vikramaditya.portfolio.styles.IconButtonStyle
 import com.vikramaditya.portfolio.utils.Res
-import com.vikramaditya.portfolio.utils.Res.Dimens.BORDER_RADIUS
 import org.jetbrains.compose.web.css.CSSSizeValue
 import org.jetbrains.compose.web.css.CSSUnit
-import org.jetbrains.compose.web.css.Color
-import org.jetbrains.compose.web.css.LineStyle
 import org.jetbrains.compose.web.css.px
 
 @Composable
 fun IconButton(
     modifier: Modifier = Modifier,
-    colorMode: ColorMode,
     link: String = "",
     icon: String,
     label: String = "",
-    iconSize: CSSSizeValue<CSSUnit.px> = Res.Dimens.ICON_SIZE.px,
+    iconSize: CSSSizeValue<CSSUnit.px> = 20.px,
     onClick: (() -> Unit)? = null
 ) {
     Link(path = link) {
         Box(
-            modifier = modifier
-                .padding(all = 8.px)
-                .backdropFilter(blur(2.px))
-                .background(
-                    color = if (colorMode.isLight) Color.white
-                    else Res.Theme.THEME_GREEN.color
-                )
-                .borderRadius(r = BORDER_RADIUS.px)
-                .border(
-                    width = 1.px,
-                    style = LineStyle.Solid,
-                    color = if (colorMode.isLight) Res.Theme.CARD_BORDER_LIGHT.color
-                    else Res.Theme.CARD_BORDER_DARK.color
-                )
+            modifier = IconButtonStyle.toModifier()
+                .then(modifier)
+                .ariaLabel(label)
                 .onClick { onClick?.invoke() }
         ) {
             Image(

@@ -1,48 +1,8 @@
 package com.vikramaditya.portfolio.utils
 
 
-import com.varabyte.kobweb.compose.ui.graphics.Color
 
 object Res {
-
-
-    enum class Theme(val color: Color) {
-
-        // Backgrounds
-        DARK_THEME_BACKGROUND(Color.rgb(r = 23, g = 23, b = 23)),
-        LIGHT_THEME_BACKGROUND(Color.rgb(r = 220, g = 220, b = 220)),
-        GREY_BACKGROUND(Color.rgb(r = 40, g = 44, b = 52)),
-
-        // Cards/Containers
-        DARK_CARD_BACKGROUND(Color.rgb(r = 25, g = 25, b = 50)),
-        LIGHT_CARD_BACKGROUND(Color.rgb(r = 230, g = 240, b = 255)),
-
-
-        GLASS_BOX_BORDER_COLOR_LIGHT(Color.rgb(0xE9E9E9)),
-        GLASS_BOX_BORDER_COLOR_DARK(Color.rgb(0x4E4E4E)),
-
-        // Buttons (e.g., Social Media Buttons)
-        THEME_GREEN(Color.rgb(r = 39, g = 174, b = 96)),
-        THEME_GREEN_NEON(Color.rgb(44, 255, 5)),
-        MATRIX_GLOW(Color.rgb(0, 255, 65)),
-
-
-        // Borders
-        CARD_BORDER_LIGHT(Color.rgb(r = 180, g = 180, b = 200)),
-        CARD_BORDER_DARK(Color.rgb(r = 50, g = 50, b = 100)),
-
-        // Icon Colors
-        SOCIAL_ICON_BACKGROUND_LIGHT(Color.rgb(r = 225, g = 235, b = 255)),
-        SOCIAL_ICON_BACKGROUND_DARK(Color.rgb(r = 50, g = 60, b = 100)),
-
-
-        BLUE(Color.rgb(r = 33, g = 150, b = 243)),
-        DARK_BLUE(Color.rgb(r = 34, g = 63, b = 94)),
-        GoogleBlue(Color.rgb(r = 66, g = 103, b = 210)),
-        JavaOrange(Color.rgb(r =255,g = 165 ,b = 0))
-    }
-
-
 
 
     object Icon {
@@ -145,11 +105,6 @@ fun headline() = "Full-stack + AI/ML builder shipping to production."
 
     }
 
-    object Dimens {
-        const val BORDER_RADIUS = 8
-        const val ICON_SIZE = 24
-        const val ICON_SIZE_LG = 32
-    }
 
 
 }

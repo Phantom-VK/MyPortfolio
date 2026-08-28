@@ -3,66 +3,45 @@ package com.vikramaditya.portfolio.widgets
 import androidx.compose.runtime.Composable
 import com.varabyte.kobweb.compose.css.Cursor
 import com.varabyte.kobweb.compose.css.PointerEvents
-import com.varabyte.kobweb.compose.css.functions.blur
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.ui.Modifier
-import com.varabyte.kobweb.compose.ui.modifiers.ariaLabel
-import com.varabyte.kobweb.compose.ui.modifiers.backdropFilter
-import com.varabyte.kobweb.compose.ui.modifiers.background
-import com.varabyte.kobweb.compose.ui.modifiers.border
-import com.varabyte.kobweb.compose.ui.modifiers.borderRadius
-import com.varabyte.kobweb.compose.ui.modifiers.cursor
-import com.varabyte.kobweb.compose.ui.modifiers.onClick
-import com.varabyte.kobweb.compose.ui.modifiers.onKeyDown
-import com.varabyte.kobweb.compose.ui.modifiers.padding
-import com.varabyte.kobweb.compose.ui.modifiers.pointerEvents
-import com.varabyte.kobweb.compose.ui.modifiers.role
-import com.varabyte.kobweb.compose.ui.modifiers.size
-import com.varabyte.kobweb.compose.ui.modifiers.tabIndex
-import com.varabyte.kobweb.compose.ui.styleModifier
-import com.varabyte.kobweb.framework.annotations.DelicateApi
+import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.silk.components.graphics.Image
+import com.varabyte.kobweb.silk.style.CssStyle
+import com.varabyte.kobweb.silk.style.base
 import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
-import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
+import com.varabyte.kobweb.silk.style.toModifier
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
+import com.vikramaditya.portfolio.styles.IconButtonStyle
+import com.vikramaditya.portfolio.styles.ThemeIconStyle
 import com.vikramaditya.portfolio.utils.Res
-import org.jetbrains.compose.web.css.Color
-import org.jetbrains.compose.web.css.LineStyle
+import com.vikramaditya.portfolio.utils.theme.Space
 import org.jetbrains.compose.web.css.px
 
-@OptIn(DelicateApi::class)
+/**
+ * Sizes come from breakpoint blocks rather than `rememberBreakpoint()`, which
+ * also fixes a real bug: the old `when (breakpoint)` matched exact values, so
+ * `Breakpoint.LG` fell through to `else` and got the largest padding of all.
+ */
+val ThemeSwitchStyle = CssStyle {
+    base { Modifier.padding(Space.sm).cursor(Cursor.Pointer).pointerEvents(PointerEvents.Auto) }
+    Breakpoint.MD { Modifier.padding(10.px) }
+}
+
+val ThemeSwitchIconStyle = CssStyle {
+    base { Modifier.size(18.px) }
+    Breakpoint.MD { Modifier.size(22.px) }
+}
+
 @Composable
 fun ThemeSwitchButton(
     colorMode: ColorMode,
     onClick: () -> Unit
 ) {
-    val breakpoint = rememberBreakpoint()
-
-    // Responsive dimensions
-    val padding = when (breakpoint) {
-        Breakpoint.XL, Breakpoint.SM -> 6.px
-        Breakpoint.MD -> 8.px
-        else -> 10.px
-    }
-
-    val iconSize = when (breakpoint) {
-         Breakpoint.SM -> 18.px
-        Breakpoint.XL -> 24.px
-        Breakpoint.MD -> 20.px
-        else -> 22.px
-    }
-
-    val bgColor = if (colorMode.isLight) Color.white else Res.Theme.THEME_GREEN.color
-    val borderColor = if (colorMode.isLight) Res.Theme.CARD_BORDER_LIGHT.color else Res.Theme.CARD_BORDER_DARK.color
-
     Box(
-        modifier = Modifier
-            .pointerEvents(PointerEvents.Auto)
-            .padding(all = padding)
-            .backdropFilter(blur(2.px))
-            .background(bgColor)
-            .borderRadius(Res.Dimens.BORDER_RADIUS.px)
-            .border(width = 1.px, style = LineStyle.Solid, color = borderColor)
+        modifier = IconButtonStyle.toModifier()
+            .then(ThemeIconStyle.toModifier())
+            .then(ThemeSwitchStyle.toModifier())
             .role("button")
             .tabIndex(0)
             .ariaLabel(if (colorMode.isLight) "Switch to dark mode" else "Switch to light mode")
@@ -76,7 +55,7 @@ fun ThemeSwitchButton(
             }
     ) {
         Image(
-            modifier = Modifier.size(iconSize),
+            modifier = ThemeSwitchIconStyle.toModifier(),
             src = if (colorMode.isLight) Res.Icon.SUN else Res.Icon.MOON,
             alt = ""
         )

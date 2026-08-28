@@ -4,24 +4,33 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.web.events.SyntheticMouseEvent
 import com.varabyte.kobweb.compose.css.BoxShadow
-import com.varabyte.kobweb.compose.css.FontWeight
+import com.varabyte.kobweb.compose.css.Transition
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
-import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.style.toModifier
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.vikramaditya.portfolio.styles.HeaderItemStyle
-import com.vikramaditya.portfolio.styles.MatrixGlow1
-import com.vikramaditya.portfolio.utils.Res
+import com.vikramaditya.portfolio.utils.theme.Font
+import com.vikramaditya.portfolio.utils.theme.Space
+import com.vikramaditya.portfolio.utils.theme.Type
+import com.vikramaditya.portfolio.utils.theme.colors
+import com.vikramaditya.portfolio.utils.theme.fontFace
+import com.vikramaditya.portfolio.utils.theme.textStyle
 import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
+import org.jetbrains.compose.web.css.s
 
+/**
+ * A single navigation entry: a status dot over a label.
+ *
+ * @param isOnline whether this is the section currently in view.
+ */
 @Composable
 fun HeaderItem(
     label: String,
@@ -30,84 +39,62 @@ fun HeaderItem(
     onClick: (SyntheticMouseEvent) -> Unit
 ) {
     val colorMode by ColorMode.currentState
+    val c = colors(colorMode)
+
+    // Comparison ladders, not exact matches. `when (breakpoint) { SM -> ...; MD -> ...; else -> ... }`
+    // sent viewports *below* SM into the `else` branch and gave the smallest
+    // screens the largest sizes.
+    val isLarge = breakpoint >= Breakpoint.LG
+    val isMedium = breakpoint >= Breakpoint.MD
+
+    val hitSize = if (isLarge) 46.px else if (isMedium) 34.px else 26.px
+    val dotSize = if (isLarge) 10.px else if (isMedium) 8.px else 6.px
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
-        modifier = Modifier
-            .padding(
-                topBottom = when (breakpoint) {
-                    Breakpoint.SM -> 2.px
-                    Breakpoint.MD -> 6.px
-                    else -> 10.px
-                }
-            )
+        modifier = Modifier.padding(topBottom = if (isMedium) Space.sm else Space.xs)
     ) {
         Box(
             modifier = HeaderItemStyle.toModifier().then(
                 Modifier
-                    .size(
-                        when (breakpoint) {
-                            Breakpoint.SM -> 20.px
-                            Breakpoint.MD -> 34.px
-                            else -> 46.px
-                        }
-                    )
+                    .size(hitSize)
                     .onClick { evt -> onClick(evt) }
             )
         ) {
             Box(
                 modifier = Modifier
-                    .size(
-                        when (breakpoint) {
-                            Breakpoint.SM -> 3.px
-                            Breakpoint.MD -> 8.px
-                            else -> 10.px
-                        }
-                    )
+                    .size(dotSize)
                     .borderRadius(50.percent)
+                    .transition(
+                        Transition.of("background-color", 0.25.s),
+                        Transition.of("box-shadow", 0.25.s),
+                    )
                     .boxShadow(
                         if (isOnline) {
                             BoxShadow.of(
-                                color = MatrixGlow1,
-                                blurRadius = when (breakpoint) {
-                                    Breakpoint.SM -> 2.px
-                                    else -> 4.px
-                                },
-                                spreadRadius = when (breakpoint) {
-                                    Breakpoint.SM -> 1.px
-                                    else -> 2.px
-                                }
+                                color = c.signal,
+                                blurRadius = if (isMedium) 4.px else 2.px,
+                                spreadRadius = if (isMedium) 2.px else 1.px,
                             )
                         } else {
                             BoxShadow.None
                         }
                     )
-                    .backgroundColor(
-                        if (isOnline) Res.Theme.THEME_GREEN_NEON.color
-                        else Res.Theme.CARD_BORDER_LIGHT.color
-                    )
+                    .backgroundColor(if (isOnline) c.signal else c.textSecondary)
             )
         }
 
         SpanText(
             label,
             modifier = Modifier
-                .margin(top = when (breakpoint) {
-                    Breakpoint.SM -> 3.px
-                    Breakpoint.MD -> 5.px
-                    else -> 8.px
-                })
-                .fontFamily("Share Tech Mono")
-                .fontSize(
-                    when (breakpoint) {
-                        Breakpoint.SM -> 5.px
-                        Breakpoint.MD -> 10.px
-                        else -> 14.px
-                    }
-                )
-                .color(if (colorMode.isDark) Colors.White else Res.Theme.DARK_THEME_BACKGROUND.color)
-                .fontWeight(FontWeight.Bold)
+                .margin(top = if (isMedium) Space.sm else Space.xs)
+                // The old ladder bottomed out at 5px, which is not readable at
+                // any size. 12px is the floor of the type scale.
+                .textStyle(if (isLarge) Type.Small else Type.Micro)
+                .fontFace(Font.DISPLAY)
+                .transition(Transition.of("color", 0.25.s))
+                .color(if (isOnline) c.textPrimary else c.textSecondary)
         )
     }
 }

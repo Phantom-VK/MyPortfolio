@@ -1,104 +1,91 @@
 package com.vikramaditya.portfolio.sections
 
 import androidx.compose.runtime.Composable
-import com.varabyte.kobweb.compose.css.FontWeight
-import com.varabyte.kobweb.compose.css.TextAlign
-import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
-import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
+import com.varabyte.kobweb.compose.ui.styleModifier
 import com.varabyte.kobweb.compose.ui.toAttrs
-import com.varabyte.kobweb.framework.annotations.DelicateApi
 import com.varabyte.kobweb.silk.components.text.SpanText
-import com.varabyte.kobweb.silk.theme.colors.ColorMode
-import com.vikramaditya.portfolio.utils.Res
+import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
-import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
-import org.jetbrains.compose.web.css.percent
+import com.varabyte.kobweb.silk.style.toModifier
+import com.varabyte.kobweb.silk.theme.colors.ColorMode
+import com.vikramaditya.portfolio.utils.theme.Font
+import com.vikramaditya.portfolio.utils.theme.Section
+import com.vikramaditya.portfolio.utils.theme.Space
+import com.vikramaditya.portfolio.utils.theme.Type
+import com.vikramaditya.portfolio.utils.theme.colors
+import com.vikramaditya.portfolio.utils.theme.fontFace
+import com.vikramaditya.portfolio.utils.theme.textStyle
+import org.jetbrains.compose.web.css.LineStyle
 import org.jetbrains.compose.web.css.px
-import org.jetbrains.compose.web.dom.H1
+import org.jetbrains.compose.web.dom.P
 import org.jetbrains.compose.web.dom.Text
 
-@OptIn(DelicateApi::class)
+/**
+ * Responsive lead statement. Declarative breakpoints rather than
+ * `rememberBreakpoint()` so this emits static CSS and costs no recomposition.
+ */
+val AboutLeadStyle = CssStyle {
+    base { Modifier.textStyle(Type.Heading) }
+    Breakpoint.MD { Modifier.textStyle(Type.Display) }
+    Breakpoint.LG { Modifier.textStyle(Type.Hero) }
+}
+
+/**
+ * Editorial layout: prose sits directly on the page ground with a hairline rule,
+ * rather than inside a grey card. A card implies elevation, and this section has
+ * none to communicate. Left-aligned, because a centred wall of body copy is
+ * harder to read and every other section was already centred.
+ */
 @Composable
 fun AboutMe() {
-    val colorMode = ColorMode.current
-    val breakpoint = rememberBreakpoint()
-
-    val fontSize = when (breakpoint) {
-        Breakpoint.SM ->15.px
-        Breakpoint.MD -> 28.px
-        Breakpoint.XL -> 30.px
-        else -> 24.px
-    }
+    val c = colors(ColorMode.current)
 
     Column(
         modifier = Modifier
-            .fillMaxSize()
-            .padding(5.percent),
-        verticalArrangement = Arrangement.SpaceBetween,
-        horizontalAlignment = Alignment.CenterHorizontally
+            .fillMaxWidth()
+            .padding(leftRight = Space.lg, topBottom = Section.gapSm),
+        horizontalAlignment = Alignment.Start
     ) {
+        // A `<p>`, not a heading. `SectionTitle` already emits the section's H2,
+        // and the hero owns the page's only H1, so a second H1 here would break
+        // the document outline.
+        P(
+            attrs = AboutLeadStyle.toModifier()
+                .margin(0.px)
+                .fontFace(Font.DISPLAY)
+                .color(c.textPrimary)
+                .styleModifier { property("max-width", "20ch") }
+                .toAttrs()
+        ) {
+            Text("I love computers and make them work for me.")
+        }
+
+        // Hairline rule instead of a card edge: it separates without boxing.
         Box(
             modifier = Modifier
-                .fillMaxSize()
-                .borderRadius(Res.Dimens.BORDER_RADIUS.px)
-                .background(color = Res.Theme.GREY_BACKGROUND.color)
-                .padding(3.percent)
-        ) {
-            Column(modifier = Modifier.fillMaxWidth()) {
-                H1(
-                    attrs = Modifier
-                        .fillMaxWidth()
-                        .margin(0.px)
-                        .textAlign(TextAlign.Center)
-                        .color(
-                            if (colorMode.isDark)
-                                Res.Theme.GLASS_BOX_BORDER_COLOR_LIGHT.color
-                            else
-                                Colors.White
-                        )
-                        .fontFamily("VT323")
-                        .fontSize(fontSize)
-                        .fontWeight(FontWeight.Normal)
-                        .toAttrs()
-                ) {
-                    Text("Hello, I am Vikramaditya. IT Engineer.")
-                }
-                SpanText(
-                    "I love computers and make them work for me.",
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .textAlign(TextAlign.Center)
-                        .color(
-                            if (colorMode.isDark)
-                                Res.Theme.GLASS_BOX_BORDER_COLOR_LIGHT.color
-                            else
-                                Colors.White
-                        )
-                        .fontFamily("VT323")
-                        .fontSize(fontSize)
-                        .padding(top = 8.px)
-                )
-                SpanText(
-                    text = "I like to develop all kinds of stuff on computers. I hate web development though, (HTML, CSS, JS...). Currently interning at Emplay Analytics as an Agentic AI Automation Engineer, building enterprise AI copilots with LLMs and agentic workflows. My main focus areas are AI/ML applications, GenAI, Agentic AI, and full stack development.",
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .textAlign(TextAlign.Center)
-                        .color(
-                            if (colorMode.isDark)
-                                Res.Theme.GLASS_BOX_BORDER_COLOR_LIGHT.color
-                            else
-                                Colors.White
-                        )
-                        .fontFamily("VT323")
-                        .fontSize(fontSize)
-                        .padding(top = 8.px)
-                )
-            }
-        }
+                .margin(topBottom = Space.xl)
+                .height(1.px)
+                .width(96.px)
+                .backgroundColor(c.borderStrong)
+        )
+
+        SpanText(
+            text = "I like to develop all kinds of stuff on computers. I hate web development though, " +
+                "(HTML, CSS, JS...). Currently interning at Emplay Analytics as an Agentic AI Automation " +
+                "Engineer, building enterprise AI copilots with LLMs and agentic workflows. My main focus " +
+                "areas are AI/ML applications, GenAI, Agentic AI, and full stack development.",
+            modifier = Modifier
+                .textStyle(Type.Body)
+                .fontFace(Font.BODY)
+                .color(c.textSecondary)
+                // Reading measure. Body copy past ~70 characters per line gets
+                // hard to track back to the next line.
+                .styleModifier { property("max-width", "68ch") }
+        )
     }
 }

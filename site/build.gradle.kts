@@ -31,7 +31,8 @@ kobweb {
             head.add {
                 meta(name = "description", content = siteDescription)
                 meta(name = "author", content = "Vikramaditya Khupse")
-                meta(name = "theme-color", content = "#171717")
+                // Matches the `surface` token in utils/theme/Tokens.kt.
+                meta(name = "theme-color", content = "#0B0C14")
                 link(rel = "canonical", href = siteUrl)
 
                 meta(content = "Vikramaditya Khupse — Portfolio") { attributes["property"] = "og:title" }
@@ -67,14 +68,53 @@ kobweb {
                     }
                 }
 
+                // Runs before first paint.
+                //
+                // The static export snapshots the page in whichever colour mode
+                // the export browser happened to be in, so the shipped HTML has
+                // one mode hardcoded on <html>. Without this, every visitor whose
+                // preference differs sees that mode flash before Kotlin loads and
+                // corrects it. Silk's own storage key is read here so the script
+                // and the app agree.
+                script {
+                    unsafe {
+                        raw(
+                            """
+                            (function () {
+                              try {
+                                var saved = window.localStorage.getItem('silk-color-mode');
+                                var dark = saved
+                                  ? saved.toUpperCase().indexOf('DARK') >= 0
+                                  : window.matchMedia('(prefers-color-scheme: dark)').matches;
+                                var root = document.documentElement;
+                                root.classList.remove('silk-light', 'silk-dark');
+                                root.classList.add(dark ? 'silk-dark' : 'silk-light');
+                              } catch (e) { /* private mode, blocked storage: keep the exported default */ }
+                            })();
+                            """.trimIndent()
+                        )
+                    }
+                }
+
                 style {
                     unsafe {
                         raw(
                             """
+                            html.silk-dark { color-scheme: dark; }
+                            html.silk-light { color-scheme: light; }
+
+                            /* Painted before any Kotlin runs, so the page never
+                               flashes the browser's default white. */
+                            html.silk-dark, html.silk-dark body { background-color: #0B0C14; }
+                            html.silk-light, html.silk-light body { background-color: #DCDCDC; }
+
                             :focus-visible {
                               outline: 2px solid #00ff41;
                               outline-offset: 2px;
                             }
+                            /* #00ff41 sits at 2.3:1 on the light ground, under the
+                               3:1 floor for a focus indicator. */
+                            .silk-light :focus-visible { outline-color: #00761f; }
                             @media (prefers-reduced-motion: reduce) {
                               *, *::before, *::after {
                                 animation-duration: 0.001ms !important;

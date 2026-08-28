@@ -1,83 +1,112 @@
 package com.vikramaditya.portfolio.components
 
 
-import androidx.compose.runtime.*
-import com.varabyte.kobweb.compose.css.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import com.varabyte.kobweb.compose.css.PointerEvents
+import com.varabyte.kobweb.compose.css.Transition
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
-import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
-import com.varabyte.kobweb.framework.annotations.DelicateApi
+import com.varabyte.kobweb.compose.ui.styleModifier
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.CssStyle
-import com.varabyte.kobweb.silk.style.animation.Keyframes
+import com.varabyte.kobweb.silk.style.base
 import com.varabyte.kobweb.silk.style.selectors.hover
 import com.varabyte.kobweb.silk.style.toModifier
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
-import com.vikramaditya.portfolio.utils.Res
+import com.vikramaditya.portfolio.utils.theme.Font
+import com.vikramaditya.portfolio.utils.theme.Space
+import com.vikramaditya.portfolio.utils.theme.Type
+import com.vikramaditya.portfolio.utils.theme.colors
+import com.vikramaditya.portfolio.utils.theme.fontFace
+import com.vikramaditya.portfolio.utils.theme.textStyle
 import kotlinx.browser.document
 import kotlinx.browser.window
-import org.jetbrains.compose.web.css.*
+import org.jetbrains.compose.web.css.Position
+import org.jetbrains.compose.web.css.ms
+import org.jetbrains.compose.web.css.px
 import org.w3c.dom.SMOOTH
 import org.w3c.dom.ScrollBehavior
 import org.w3c.dom.ScrollToOptions
+import org.w3c.dom.events.Event
 
-val LetterSpacingPulse = Keyframes {
-    0.percent { Modifier.padding(topBottom = 0.em) }
-    50.percent { Modifier.padding(topBottom = 0.4 .em) }
-    100.percent { Modifier.padding(topBottom = 0.em) }
-}
-val HoverPulseStyle = CssStyle {
+/**
+ * Nudges the column of letters sideways under the cursor.
+ *
+ * The previous version animated vertical padding, which re-laid-out twelve
+ * elements every frame of the hover. `transform` is composited, so this costs
+ * nothing on the main thread.
+ */
+val LetterNudgeStyle = CssStyle {
+    base {
+        Modifier.transition(Transition.of("transform", 200.ms))
+    }
     hover {
-        Modifier.animation(
-            LetterSpacingPulse.toAnimation(
-                duration = 600.ms,
-                timingFunction = AnimationTimingFunction.EaseInOut
-            )
-        )
+        Modifier.transform { translateX((-4).px) }
     }
 }
 
+val BackToTopStyle = CssStyle.base {
+    Modifier
+        .position(Position.Fixed)
+        .right(Space.sm)
+        .bottom(Space.lg)
+        .padding(Space.xs)
+        .zIndex(5)
+        .transition(Transition.of("opacity", 220.ms))
+}
 
-
-@OptIn(DelicateApi::class)
 @Composable
 fun BackToTopButton() {
-    var scroll: Double? by remember { mutableStateOf(null) }
-    val colormode by ColorMode.currentState
+    val c = colors(ColorMode.current)
+    var show by remember { mutableStateOf(false) }
 
-    LaunchedEffect(Unit) {
-        window.addEventListener("scroll", {
-            scroll = document.documentElement?.scrollTop
-        })
+    DisposableEffect(Unit) {
+        var ticking = false
+
+        fun evaluate() {
+            ticking = false
+            val top = document.documentElement?.scrollTop ?: 0.0
+            val next = top > 400.0
+            // Only writes state when the button actually crosses the threshold,
+            // so scrolling does not recompose on every event.
+            if (next != show) show = next
+        }
+
+        val listener: (Event) -> Unit = {
+            if (!ticking) {
+                ticking = true
+                window.requestAnimationFrame { evaluate() }
+            }
+        }
+        window.addEventListener("scroll", listener)
+        evaluate()
+        // The previous version never removed this listener, so every mount
+        // added another one for the life of the page.
+        onDispose { window.removeEventListener("scroll", listener) }
     }
-
-    val show = scroll != null && scroll!! > 400.0
 
     fun scrollToTop() {
         document.documentElement?.scroll(
-            ScrollToOptions(
-                top = 0.0,
-                behavior = ScrollBehavior.SMOOTH
-            )
+            ScrollToOptions(top = 0.0, behavior = ScrollBehavior.SMOOTH)
         )
     }
 
     Column(
-        modifier = Modifier
-            .position(Position.Fixed)
-            .right(8.px)
-            .bottom(16.px)
-            .backgroundColor(Colors.Transparent)
-            .padding(4.px)
-            .zIndex(5)
+        modifier = BackToTopStyle.toModifier()
+            .opacity(if (show) 1f else 0f)
             .pointerEvents(if (show) PointerEvents.Auto else PointerEvents.None)
-            .visibility(if (show) Visibility.Visible else Visibility.Hidden)
             .role("button")
             .tabIndex(if (show) 0 else -1)
             .ariaLabel("Back to top")
+            .ariaHidden(!show)
             .onClick { scrollToTop() }
             .onKeyDown { event ->
                 val key = event.nativeEvent.asDynamic().key as? String
@@ -89,22 +118,16 @@ fun BackToTopButton() {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        val textList = listOf(
-            "↿", "B", "A", "C", "K", "", "T", "O", "", "T", "O", "P"
-        )
-        textList.forEach { char ->
+        listOf("↑", "B", "A", "C", "K", " ", "T", "O", " ", "T", "O", "P").forEach { char ->
             SpanText(
                 char,
-                modifier = HoverPulseStyle.toModifier()
+                modifier = LetterNudgeStyle.toModifier()
                     .ariaHidden()
-                    .color(if(colormode.isDark) Res.Theme.THEME_GREEN_NEON.color else Res.Theme.GREY_BACKGROUND.color)
-                    .fontFamily("Share Tech Mono")
-                    .fontSize(1.em)
-                    .textAlign(TextAlign.Start)
-                    .fontWeight(FontWeight.SemiBold)
-                    .padding(topBottom = 1.px)
+                    .color(c.accent)
+                    .fontFace(Font.DISPLAY)
+                    .textStyle(Type.Micro)
+                    .styleModifier { property("line-height", "1.15") }
             )
         }
     }
 }
-
