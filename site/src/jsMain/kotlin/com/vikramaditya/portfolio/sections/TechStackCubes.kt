@@ -8,6 +8,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.height
 import com.varabyte.kobweb.compose.ui.modifiers.justifyItems
 import com.varabyte.kobweb.compose.ui.modifiers.padding
+import com.varabyte.kobweb.compose.ui.styleModifier
 import com.varabyte.kobweb.silk.components.layout.SimpleGrid
 import com.varabyte.kobweb.silk.components.layout.numColumns
 import com.vikramaditya.portfolio.utils.Res
@@ -22,7 +23,14 @@ fun TechStackCubes(){
             .fillMaxWidth()
             .height(Height.FitContent)
             .justifyItems(JustifyItems.Center)
-            .padding(topBottom = 2.cssRem),
+            .padding(topBottom = 2.cssRem)
+            // Row gap matters most in the single-column mobile layout, where the
+            // three cubes would otherwise stack with only their own internal
+            // padding between them.
+            .styleModifier {
+                property("row-gap", "56px")
+                property("column-gap", "24px")
+            },
         numColumns = numColumns(base = 1, sm = 1, lg = 3)
 
     ) {
@@ -51,11 +59,11 @@ fun TechStackCubes(){
         Cube3D(
             icons = listOf(
                 Res.Logo.CMP_LOGO to "Compose Multiplatform",
-                Res.Logo.FIREBASE_LOGO to "Firebase",
+                Res.Logo.FLASK_LOGO to "Flask",
                 Res.Logo.GIT_LOGO to "Git",
                 Res.Logo.DJANGO_LOGO to "Django",
                 Res.Logo.GITHUB_LOGO to "GitHub",
-                Res.Logo.FLASK_LOGO to "Flask"
+                Res.Logo.FIREBASE_LOGO to "Firebase",
             )
         )
     }

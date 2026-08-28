@@ -1,105 +1,55 @@
 package com.vikramaditya.portfolio.styles
 
-import com.varabyte.kobweb.compose.css.AnimationIterationCount
 import com.varabyte.kobweb.compose.css.BackfaceVisibility
 import com.varabyte.kobweb.compose.css.Background
-import com.varabyte.kobweb.compose.css.BoxSizing
-import com.varabyte.kobweb.compose.css.Cursor
-import com.varabyte.kobweb.compose.css.FontWeight
 import com.varabyte.kobweb.compose.css.Overflow
 import com.varabyte.kobweb.compose.css.TransformStyle
 import com.varabyte.kobweb.compose.css.Transition
-import com.varabyte.kobweb.compose.css.TransitionTimingFunction
 import com.varabyte.kobweb.compose.css.UserSelect
-import com.varabyte.kobweb.compose.css.functions.LinearGradient
 import com.varabyte.kobweb.compose.css.functions.linearGradient
 import com.varabyte.kobweb.compose.css.functions.toImage
-import com.varabyte.kobweb.compose.ui.graphics.Color
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
-import com.varabyte.kobweb.compose.ui.modifiers.alignItems
-import com.varabyte.kobweb.compose.ui.modifiers.animation
-import com.varabyte.kobweb.compose.ui.modifiers.backfaceVisibility
-import com.varabyte.kobweb.compose.ui.modifiers.background
-import com.varabyte.kobweb.compose.ui.modifiers.backgroundColor
-import com.varabyte.kobweb.compose.ui.modifiers.border
-import com.varabyte.kobweb.compose.ui.modifiers.borderRadius
-import com.varabyte.kobweb.compose.ui.modifiers.boxSizing
-import com.varabyte.kobweb.compose.ui.modifiers.color
-import com.varabyte.kobweb.compose.ui.modifiers.content
-import com.varabyte.kobweb.compose.ui.modifiers.cursor
-import com.varabyte.kobweb.compose.ui.modifiers.display
-import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
-import com.varabyte.kobweb.compose.ui.modifiers.fontFamily
-import com.varabyte.kobweb.compose.ui.modifiers.fontSize
-import com.varabyte.kobweb.compose.ui.modifiers.fontWeight
-import com.varabyte.kobweb.compose.ui.modifiers.justifyContent
-import com.varabyte.kobweb.compose.ui.modifiers.left
-import com.varabyte.kobweb.compose.ui.modifiers.margin
-import com.varabyte.kobweb.compose.ui.modifiers.minHeight
-import com.varabyte.kobweb.compose.ui.modifiers.opacity
-import com.varabyte.kobweb.compose.ui.modifiers.overflow
-import com.varabyte.kobweb.compose.ui.modifiers.padding
-import com.varabyte.kobweb.compose.ui.modifiers.position
-import com.varabyte.kobweb.compose.ui.modifiers.size
-import com.varabyte.kobweb.compose.ui.modifiers.top
-import com.varabyte.kobweb.compose.ui.modifiers.transform
-import com.varabyte.kobweb.compose.ui.modifiers.transformStyle
-import com.varabyte.kobweb.compose.ui.modifiers.transition
-import com.varabyte.kobweb.compose.ui.modifiers.userSelect
-import com.varabyte.kobweb.compose.ui.modifiers.width
+import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.compose.ui.styleModifier
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.animation.Keyframes
 import com.varabyte.kobweb.silk.style.base
+import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.style.selectors.after
 import com.varabyte.kobweb.silk.style.selectors.before
-import com.varabyte.kobweb.silk.style.selectors.hover
-import com.vikramaditya.portfolio.utils.Res
+import com.vikramaditya.portfolio.utils.theme.Font
+import com.vikramaditya.portfolio.utils.theme.Radius
+import com.vikramaditya.portfolio.utils.theme.Type
+import com.vikramaditya.portfolio.utils.theme.accentRamp
+import com.vikramaditya.portfolio.utils.theme.colors
+import com.vikramaditya.portfolio.utils.theme.fontFace
+import com.vikramaditya.portfolio.utils.theme.textStyle
 import org.jetbrains.compose.web.css.AlignItems
-import org.jetbrains.compose.web.css.AnimationTimingFunction
 import org.jetbrains.compose.web.css.DisplayStyle
 import org.jetbrains.compose.web.css.JustifyContent
 import org.jetbrains.compose.web.css.LineStyle
 import org.jetbrains.compose.web.css.Position
-import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.deg
 import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.css.s
-import org.jetbrains.compose.web.css.vh
 
-val MatrixBlack = Color.rgb(0x0d0d0d)
-val MatrixWhiteText = Color.rgb(0xccffcc)
-val MatrixGreen = Color.rgb(0x00ff41)
-val MatrixNeonGreen = Color.rgba(0, 255, 65, 0.7f)
-val MatrixGlow1 = Color.rgb(0x39ff14)
-val MatrixGlow2 = Color.rgb(0x00ff9d)
-val MatrixGlow3 = Color.rgb(0x00ffcc)
+/**
+ * CSS 3D tech-stack cube.
+ *
+ * The cube's half-depth must match its half-width or the faces do not meet, so
+ * [CubeHalf] drives both the face translations and the responsive size below.
+ * A cube that is 200px wide but translated by a hardcoded 100px only works at
+ * one breakpoint, which is why the size is a token rather than a literal.
+ */
+const val CUBE_SIZE_SM = 132
+const val CUBE_SIZE_MD = 168
+const val CUBE_SIZE_LG = 200
 
-
-
-val AllStyle = CssStyle.base {
-    Modifier
-        .margin(0.px)
-        .userSelect(UserSelect.None)
-        .padding(0.px)
-        .boxSizing(BoxSizing.BorderBox)
-}
-val BodyStyle = CssStyle.base {
-    Modifier
-        .minHeight(100.vh)
-        .userSelect(UserSelect.None)
-        .display(DisplayStyle.Flex)
-        .justifyContent(JustifyContent.Center)
-        .alignItems(AlignItems.Center)
-        .backgroundColor(MatrixBlack)
-        .color(MatrixWhiteText)
-        .fontFamily("Share Tech Mono", "monospace")
-        .styleModifier {
-            property("perspective", "1000px")
-        }
-}
+private const val CubeHalfSm = CUBE_SIZE_SM / 2
+private const val CubeHalfMd = CUBE_SIZE_MD / 2
+private const val CubeHalfLg = CUBE_SIZE_LG / 2
 
 val ContainerStyle = CssStyle.base {
     Modifier
@@ -108,49 +58,54 @@ val ContainerStyle = CssStyle.base {
         .justifyContent(JustifyContent.Center)
         .alignItems(AlignItems.Center)
         .transformStyle(TransformStyle.Preserve3d)
+        .styleModifier {
+            property("perspective", "900px")
+        }
 }
+
+/**
+ * Rotation is driven imperatively from Kotlin (see `widgets/Cube3D.kt`), so this
+ * style deliberately declares no `transition` on `transform`: a CSS transition
+ * would fight the per-frame writes and produce a permanent lag behind the input.
+ */
 val BoxCardStyle = CssStyle {
     base {
         Modifier
             .position(Position.Relative)
             .userSelect(UserSelect.None)
             .transformStyle(TransformStyle.Preserve3d)
-            .transition(Transition.of("transform", 1.s, TransitionTimingFunction.Ease))
-            .cursor(Cursor.Pointer)
-            .size(200.px)
+            // Default cursor, not grab/grabbing: rotation tracks pointer position
+            // on hover, it isn't a drag gesture, and a grab hand promises an
+            // interaction the cube doesn't have.
+            .size(CUBE_SIZE_SM.px)
     }
-    hover {
-        Modifier
-            .animation(
-                Rotate3d.toAnimation(
-                    duration = 8.s,
-                    timingFunction = AnimationTimingFunction.Linear,
-                    iterationCount = AnimationIterationCount.Infinite
-                )
-            )
-    }
+    Breakpoint.MD { Modifier.size(CUBE_SIZE_MD.px) }
+    Breakpoint.LG { Modifier.size(CUBE_SIZE_LG.px) }
 }
+
 val FaceStyle = CssStyle {
     base {
+        val c = colors(colorMode)
         Modifier
             .position(Position.Absolute)
             .userSelect(UserSelect.None)
             .display(DisplayStyle.Flex)
             .justifyContent(JustifyContent.Center)
             .alignItems(AlignItems.Center)
-            .fontSize(1.5.cssRem)
-            .fontWeight(FontWeight.Bold)
-            .fontFamily("Share Tech Mono", "monospace")
+            .textStyle(Type.Title)
+            .fontFace(Font.DISPLAY)
             .backfaceVisibility(BackfaceVisibility.Hidden)
-            .borderRadius(8.px)
-            .backgroundColor(MatrixBlack)
-            .border(2.px, LineStyle.Solid, Res.Theme.THEME_GREEN.color)
-            .transition(Transition.of("all", 0.3.s, TransitionTimingFunction.Ease))
+            .borderRadius(Radius.default)
+            .backgroundColor(c.surface)
+            .border(1.px, LineStyle.Solid, c.borderStrong)
             .overflow(Overflow.Hidden)
             .fillMaxSize()
     }
 
+    // A sheen that sweeps across the face on hover. Purely decorative, so it is
+    // built from pseudo-elements rather than extra DOM.
     before {
+        val c = colors(colorMode)
         Modifier
             .content("")
             .position(Position.Absolute)
@@ -158,30 +113,32 @@ val FaceStyle = CssStyle {
                 Background.of(
                     image = linearGradient(45.deg) {
                         add(Colors.Transparent)
-                        add(Res.Theme.THEME_GREEN.color)
+                        add(c.accent)
                         add(Colors.Transparent)
                     }.toImage()
                 )
             )
             .top((-100).percent)
             .left((-100).percent)
+            .opacity(0.55)
             .transition(Transition.of("all", 0.5.s))
             .transform { translateZ(20.px) }
             .fillMaxSize()
     }
 
     after {
+        val c = colors(colorMode)
         Modifier
             .content("")
             .position(Position.Absolute)
             .styleModifier {
-                property("inset", "0.px")
+                property("inset", "0")
             }
             .background(
                 Background.of(
                     image = linearGradient(135.deg) {
                         add(Colors.Transparent, 0.percent)
-                        add(Res.Theme.THEME_GREEN.color, 50.percent)
+                        add(c.accent, 50.percent)
                         add(Colors.Transparent, 100.percent)
                     }.toImage()
                 )
@@ -190,113 +147,34 @@ val FaceStyle = CssStyle {
             .transition(Transition.of("opacity", 0.3.s))
     }
 
-    cssRule(":hover::before") {
-        Modifier.top(100.percent).left(100.percent)
-    }
-
-    cssRule(":hover::after") {
-        Modifier.opacity(1)
-    }
+    cssRule(":hover::before") { Modifier.top(100.percent).left(100.percent) }
+    cssRule(":hover::after") { Modifier.opacity(0.65) }
 }
 
-val FrontStyle = CssStyle.base {
-    Modifier
-        .transform { translateZ(100.px) }
-        .border {
-            width(1.5.px)
-            color(MatrixGreen) }
-}
-
-val BackStyle = CssStyle.base {
-    Modifier
-        .transform {
-            translateZ((-100).px)
-            rotateY(180.deg)
-        }
-        .border {
-            width(1.5.px)
-            color(MatrixGlow1) }
-}
-
-val RightStyle = CssStyle.base {
-    Modifier
-        .transform {
-            translateX(100.px)
-            rotateY(90.deg)
-        }
-        .border {
-            width(1.5.px)
-            color(MatrixGlow2) }
-}
-
-val LeftStyle = CssStyle.base {
-    Modifier
-        .transform {
-            translateX((-100).px)
-            rotateY((-90).deg)
-        }
-        .border {
-            width(1.5.px)
-            color(MatrixGlow3) }
-}
-
-val TopStyle = CssStyle.base {
-    Modifier
-        .transform {
-            translateY((-100).px)
-            rotateX(90.deg)
-        }
-        .border {
-            width(1.5.px)
-            color(MatrixNeonGreen) }
-}
-
-val BottomStyle = CssStyle.base {
-    Modifier
-        .transform {
-            translateY(100.px)
-            rotateX((-90).deg)
-        }
-        .border {
-            width(1.5.px)
-            color(MatrixGreen) }
-}
-
-val Rotate3d = Keyframes {
-    0.percent {
+/**
+ * Face placement. Each face is pushed out by half the cube's edge length, so the
+ * translation has to track the responsive size in [BoxCardStyle] step for step.
+ */
+private fun faceStyle(rampIndex: Int, place: Modifier.(Int) -> Modifier) = CssStyle {
+    base {
         Modifier
-            .transform {
-                rotateX(0.deg)
-                rotateY(0.deg)
-            }
+            .border(1.px, LineStyle.Solid, accentRamp(colorMode)[rampIndex])
+            .place(CubeHalfSm)
     }
-    25.percent {
-        Modifier
-            .transform {
-                rotateX(90.deg)
-                rotateY(90.deg)
-            }
-    }
-    50.percent {
-        Modifier
-            .transform {
-                rotateX(180.deg)
-                rotateY(180.deg)
-            }
-    }
-    75.percent {
-        Modifier
-            .transform {
-                rotateX(270.deg)
-                rotateY(270.deg)
-            }
-    }
-    100.percent {
-        Modifier
-            .transform {
-                rotateX(360.deg)
-                rotateY(360.deg)
-            }
-    }
+    Breakpoint.MD { Modifier.place(CubeHalfMd) }
+    Breakpoint.LG { Modifier.place(CubeHalfLg) }
 }
 
+val FrontStyle = faceStyle(0) { h -> transform { translateZ(h.px) } }
+val BackStyle = faceStyle(1) { h -> transform { translateZ((-h).px); rotateY(180.deg) } }
+val RightStyle = faceStyle(2) { h -> transform { translateX(h.px); rotateY(90.deg) } }
+val LeftStyle = faceStyle(3) { h -> transform { translateX((-h).px); rotateY((-90).deg) } }
+val TopStyle = faceStyle(4) { h -> transform { translateY((-h).px); rotateX(90.deg) } }
+val BottomStyle = faceStyle(5) { h -> transform { translateY(h.px); rotateX((-90).deg) } }
+
+/** Face icons scale with the cube, so they keep the same optical margin at every size. */
+val CubeFaceIconStyle = CssStyle {
+    base { Modifier.size((CUBE_SIZE_SM * 0.5).px) }
+    Breakpoint.MD { Modifier.size((CUBE_SIZE_MD * 0.5).px) }
+    Breakpoint.LG { Modifier.size((CUBE_SIZE_LG * 0.5).px) }
+}

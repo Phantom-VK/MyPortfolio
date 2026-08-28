@@ -7,7 +7,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import com.varabyte.kobweb.compose.css.Cursor
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.ColumnScope
@@ -22,16 +21,16 @@ import com.varabyte.kobweb.silk.style.toModifier
 import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.vikramaditya.portfolio.components.BackToTopButton
-import com.vikramaditya.portfolio.components.MatrixCursor
 import com.vikramaditya.portfolio.components.MatrixRainAnimation
 import com.vikramaditya.portfolio.sections.Header
 import com.vikramaditya.portfolio.utils.VisitReporter
+import com.vikramaditya.portfolio.utils.theme.colors
 import kotlinx.browser.document
 import kotlinx.browser.window
 import org.jetbrains.compose.web.css.Position
 import org.jetbrains.compose.web.css.cssRem
-import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.css.percent
+import org.jetbrains.compose.web.css.px
 import kotlin.math.max
 
 val PageContentStyle = CssStyle {
@@ -53,6 +52,7 @@ fun PageLayout(
 ) {
     val colorMode by ColorMode.currentState
     val breakpoint = rememberBreakpoint()
+    val c = colors(colorMode)
     var scrollProgress by remember { mutableStateOf(0f) }
 
     VisitReporter(colorMode)
@@ -62,67 +62,65 @@ fun PageLayout(
     }
 
     DisposableEffect(Unit) {
-        val listener: (org.w3c.dom.events.Event) -> Unit = {
+        var ticking = false
+
+        fun evaluate() {
+            ticking = false
             val root = (document.documentElement ?: document.body) as? org.w3c.dom.HTMLElement
             if (root != null) {
-                val scrollTop = root.scrollTop
-                val scrollHeight = root.scrollHeight.toDouble()
-                val clientHeight = root.clientHeight.toDouble()
-                val denominator = max(1.0, scrollHeight - clientHeight)
-                scrollProgress = (scrollTop / denominator).toFloat().coerceIn(0f, 1f)
+                val denominator = max(1.0, root.scrollHeight.toDouble() - root.clientHeight.toDouble())
+                val next = (root.scrollTop / denominator).toFloat().coerceIn(0f, 1f)
+                // Only write state when the rendered percentage actually changes,
+                // so a scroll does not recompose on every event.
+                if ((next * 1000).toInt() != (scrollProgress * 1000).toInt()) scrollProgress = next
+            }
+        }
+
+        val listener: (org.w3c.dom.events.Event) -> Unit = {
+            if (!ticking) {
+                ticking = true
+                window.requestAnimationFrame { evaluate() }
             }
         }
         window.addEventListener("scroll", listener)
-        onDispose {
-            window.removeEventListener("scroll", listener)
-        }
+        evaluate()
+        onDispose { window.removeEventListener("scroll", listener) }
     }
 
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .cursor(Cursor.None)
-    ) {
-        //  Matrix Rain Background (lighter settings on small screens)
+    // No `cursor: none` here any more. The custom matrix cursor it existed for is
+    // gone: it recomposed on every mouse move, never removed its listener, and
+    // replacing the system cursor hurts anyone relying on pointer affordances.
+    Box(modifier = Modifier.fillMaxSize().backgroundColor(c.surface)) {
         val isMobile = breakpoint <= Breakpoint.SM
         MatrixRainAnimation(
             modifier = Modifier.fillMaxSize(),
             fontSizePx = if (isMobile) 22 else 16,
-            frameDelayMs = if (isMobile) 70 else 50,
             trailAlpha = if (isMobile) 0.08 else 0.05
         )
 
-        if(breakpoint > Breakpoint.SM){
-            MatrixCursor()
-        }
-
-
-        // ✅Overlay Layer (faint black for dark mode, white for light)
+        // Scrim over the rain, so glyphs read as texture rather than competing
+        // with the content above them.
         Box(
             modifier = Modifier
                 .id("overlay")
                 .fillMaxSize()
                 .zIndex(1)
                 .backgroundColor(
-                    if (colorMode.isDark)
-                        Color.rgba(0, 0, 0, 0.5f)
-                    else
-                       Color.rgba(255, 255, 255, 0.5f)
+                    if (colorMode.isDark) Color.rgba(11, 12, 20, 0.72f)
+                    else Color.rgba(220, 220, 220, 0.80f)
                 )
         )
 
-        // Fixed Header (above everything)
         Box(
             modifier = Modifier
                 .position(Position.Fixed)
                 .zIndex(3)
                 .fillMaxWidth()
         ) {
-            // scroll progress indicator
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(4.px)
+                    .height(3.px)
                     .backgroundColor(Color.rgba(0, 0, 0, 0.2f))
             ) {
                 Box(
@@ -130,21 +128,15 @@ fun PageLayout(
                         .height(100.percent)
                         .styleModifier {
                             property("width", "${scrollProgress * 100}%")
-                            property(
-                                "background",
-                                "linear-gradient(90deg, #ffffff 0%, #5cf0c5 55%, #00ff41 100%)"
-                            )
+                            property("background-color", c.signal.toString())
                             property("transition", "width 120ms ease-out")
                         }
                 )
             }
 
-            Header(
-                modifier = Modifier.fillMaxWidth()
-            )
+            Header(modifier = Modifier.fillMaxWidth())
         }
 
-        // Main Content Layer
         Column(
             modifier = PageContentStyle.toModifier()
                 .fillMaxSize()

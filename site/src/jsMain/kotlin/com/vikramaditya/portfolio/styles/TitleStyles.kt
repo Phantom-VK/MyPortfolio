@@ -1,36 +1,36 @@
 package com.vikramaditya.portfolio.styles
 
-import com.varabyte.kobweb.compose.css.FontSize
-import com.varabyte.kobweb.compose.css.TextAlign
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.color
-import com.varabyte.kobweb.compose.ui.modifiers.fontSize
-import com.varabyte.kobweb.compose.ui.modifiers.textAlign
-import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
+import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
+import com.varabyte.kobweb.compose.ui.styleModifier
 import com.varabyte.kobweb.silk.style.CssStyle
-import com.varabyte.kobweb.silk.theme.colors.palette.color
-import com.varabyte.kobweb.silk.theme.colors.palette.toPalette
-import org.jetbrains.compose.web.css.cssRem
+import com.varabyte.kobweb.silk.style.base
+import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
+import com.vikramaditya.portfolio.utils.theme.Type
+import com.vikramaditya.portfolio.utils.theme.colors
+import com.vikramaditya.portfolio.utils.theme.textStyle
 
-val SubheadlineTextStyle = CssStyle {
+val SubheadlineTextStyle = CssStyle.base {
     Modifier
-        .fontSize(1.cssRem)
-        .textAlign(TextAlign.Start)
-        .color(colorMode.toPalette().color.toRgb())
+        .fillMaxWidth()
+        .color(colors(colorMode).textSecondary)
 }
 
-
+/**
+ * Section headings.
+ *
+ * `scroll-margin-top` is what makes anchor navigation land correctly under the
+ * fixed 80px header. Doing it here lets the browser handle the offset for
+ * `scrollIntoView`, hash links, and back/forward restoration alike, instead of
+ * re-deriving it in JavaScript at one call site.
+ */
 val SectionTitleStyle = CssStyle {
     base {
-        Modifier.fontSize(FontSize.Large)
+        Modifier
+            .textStyle(Type.Heading)
+            .color(colors(colorMode).textPrimary)
+            .styleModifier { property("scroll-margin-top", "104px") }
     }
-    Breakpoint.SM {
-        Modifier.fontSize(FontSize.Large)
-    }
-    Breakpoint.MD {
-        Modifier.fontSize(FontSize.XLarge)
-    }
-    Breakpoint.LG {
-        Modifier.fontSize(FontSize.XXLarge)
-    }
+    Breakpoint.MD { Modifier.textStyle(Type.Display) }
 }

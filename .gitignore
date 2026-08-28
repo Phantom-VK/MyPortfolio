@@ -26,3 +26,5 @@ kotlin-js-store
 
 # Working documents
 PLAN.md
+# Tooling output
+/graphify-out/

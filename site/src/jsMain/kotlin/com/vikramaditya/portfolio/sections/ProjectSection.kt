@@ -1,138 +1,154 @@
 package com.vikramaditya.portfolio.sections
 
 import androidx.compose.runtime.Composable
-import com.varabyte.kobweb.compose.css.JustifyItems
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
-import com.varabyte.kobweb.compose.ui.modifiers.justifyItems
 import com.varabyte.kobweb.compose.ui.modifiers.padding
+import com.varabyte.kobweb.compose.ui.styleModifier
+import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.core.rememberPageContext
-import com.varabyte.kobweb.silk.components.layout.SimpleGrid
-import com.varabyte.kobweb.silk.components.layout.numColumns
+import com.varabyte.kobweb.silk.style.CssStyle
+import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
+import com.varabyte.kobweb.silk.style.toModifier
 import com.vikramaditya.portfolio.components.ProjectCard
 import com.vikramaditya.portfolio.utils.Res
-import org.jetbrains.compose.web.css.cssRem
+import com.vikramaditya.portfolio.utils.theme.Section
+import com.vikramaditya.portfolio.utils.theme.Space
+import org.jetbrains.compose.web.dom.Div
+
+private data class Project(
+    val title: String,
+    val description: String,
+    val imageUrl: String,
+    val mainTechStack: String,
+    val otherTechStack: String,
+    val icons: List<String>,
+    val href: String,
+)
+
+private val projects = listOf(
+    Project(
+        title = "NoRefund",
+        description = "Offline desktop app that counts tokens and estimates LLM API cost across 21 models before you spend a cent — analysis never leaves your machine.",
+        imageUrl = "images/projectthumbnails/norefund.png",
+        mainTechStack = "React · TypeScript",
+        otherTechStack = "Python, pywebview, Vite",
+        icons = listOf(
+            Res.Logo.REACT_LOGO,
+            Res.Logo.TYPESCRIPT_LOGO,
+            Res.Logo.PYTHON_LOGO,
+            Res.Logo.VITE_LOGO,
+            Res.Logo.GITHUB_LOGO,
+        ),
+        href = "https://github.com/Phantom-VK/NoRefund",
+    ),
+    Project(
+        title = "RFPilot",
+        description = "Agentic Map→Reduce→Consolidate pipeline that turns messy RFP PDFs and HTML bids into clean, structured JSON.",
+        imageUrl = "images/projectthumbnails/rfpilot.png",
+        mainTechStack = "Python",
+        otherTechStack = "Docling, DeepSeek, asyncio",
+        icons = listOf(Res.Logo.PYTHON_LOGO, Res.Logo.DEEPSEEK_LOGO, Res.Logo.PYCHARM_LOGO, Res.Logo.GITHUB_LOGO),
+        href = "https://github.com/Phantom-VK/RFPilot",
+    ),
+    Project(
+        title = "VR-ETL",
+        description = "Vectorless, agentic RAG over long reports — a PageIndex tree, LangGraph orchestration, and streamed answers with citations, no vector database.",
+        imageUrl = "images/projectthumbnails/vretl.png",
+        mainTechStack = "FastAPI · LangGraph",
+        otherTechStack = "PageIndex, DeepSeek, Sympy",
+        icons = listOf(
+            Res.Logo.FASTAPI_LOGO,
+            Res.Logo.LANGGRAPH_LOGO,
+            Res.Logo.DEEPSEEK_LOGO,
+            Res.Logo.PYTHON_LOGO,
+            Res.Logo.GITHUB_LOGO,
+        ),
+        href = "https://github.com/Phantom-VK/VR-ETL",
+    ),
+    Project(
+        title = "Production ML: Phishing Detection",
+        description = "End-to-end ML pipeline with 97% accuracy, automated ETL, drift checks, and CI/CD to AWS.",
+        imageUrl = "images/projectthumbnails/mlpipeline.webp",
+        mainTechStack = "Python · FastAPI",
+        otherTechStack = "AWS, Docker, GitHub Actions",
+        icons = listOf(Res.Logo.PYTHON_LOGO, Res.Logo.PYCHARM_LOGO, Res.Logo.GITHUB_LOGO),
+        href = "https://github.com/Phantom-VK",
+    ),
+    Project(
+        title = "AgentTuring Math Tutor",
+        description = "AI-powered tutoring agent with RAG + MCP for math problem solving and web retrieval.",
+        imageUrl = "images/projectthumbnails/agentturing.webp",
+        mainTechStack = "AI/ML",
+        otherTechStack = "LangGraph, Qdrant, Tavily MCP, FastAPI",
+        icons = listOf(Res.Logo.PYTHON_LOGO, Res.Logo.PYCHARM_LOGO),
+        href = "https://github.com/Phantom-VK/agentturing",
+    ),
+    Project(
+        title = "ICRS",
+        description = "AI grievance platform with RAG + pgvector semantic search, role-based React/Spring portals, and JWT security.",
+        imageUrl = "images/projectthumbnails/icrs.png",
+        mainTechStack = "Spring Boot · React",
+        otherTechStack = "PostgreSQL + pgvector, RAG, JWT",
+        icons = listOf(Res.Logo.JAVA_LOGO, Res.Logo.INTELLIJ_LOGO, Res.Logo.GITHUB_LOGO),
+        href = "https://github.com/Phantom-VK/icrs",
+    ),
+)
+
+/**
+ * Featured lead tile plus a grid. A uniform four-up grid gave every project the
+ * same weight; the lead tile says which one to look at first.
+ */
+val ProjectGridStyle = CssStyle {
+    base {
+        Modifier.fillMaxWidth().styleModifier {
+            property("display", "grid")
+            property("grid-template-columns", "1fr")
+            property("gap", "16px")
+        }
+    }
+    Breakpoint.MD {
+        Modifier.styleModifier {
+            property("grid-template-columns", "repeat(2, 1fr)")
+            property("gap", "20px")
+        }
+    }
+    Breakpoint.LG {
+        Modifier.styleModifier {
+            property("grid-template-columns", "repeat(3, 1fr)")
+            property("gap", "24px")
+        }
+    }
+}
+
+val ProjectFeaturedStyle = CssStyle {
+    base { Modifier }
+    Breakpoint.MD { Modifier.styleModifier { property("grid-column", "span 2") } }
+    Breakpoint.LG { Modifier.styleModifier { property("grid-column", "span 3") } }
+}
 
 @Composable
-fun ProjectSection(){
+fun ProjectSection() {
     val ctx = rememberPageContext()
 
-
-    SimpleGrid(
-        modifier = Modifier
-            .fillMaxWidth()
-            .justifyItems(JustifyItems.Center)
-            .padding( 2.cssRem),
-        numColumns = numColumns(base = 1, sm = 1, md = 2, lg = 4)
+    Div(
+        attrs = ProjectGridStyle.toModifier()
+            .padding(leftRight = Space.lg, topBottom = Section.gapSm)
+            .toAttrs()
     ) {
-        ProjectCard(
-            title = "Vyom Assist",
-            description = "AI-powered banking support system; special winner @ PSB iDEA Hackathon 2025 (₹1,00,000).",
-            imageUrl = "images/projectthumbnails/vyomassist.webp",
-            mainTechStack = "Kotlin-Jetpack Compose",
-            otherTechStack = "Android, Firebase, Hackathon build",
-            iconsList = listOf(
-                Res.Logo.KOTLIN_LOGO,
-                Res.Logo.ANDROID_LOGO,
-                Res.Logo.FIREBASE_LOGO,
-                Res.Logo.MYSQL_LOGO,
-                Res.Logo.FIGMA_LOGO
-            ),
-            onClick = {
-                ctx.router.navigateTo("https://github.com/Phantom-VK/Vyom-Assist")
-            }
-        )
-
-        ProjectCard(
-            title = "Production ML: Phishing Detection",
-            description = "End-to-end ML pipeline with 97% accuracy, automated ETL, drift checks, and CI/CD to AWS.",
-            imageUrl = "images/projectthumbnails/mlpipeline.webp",
-            mainTechStack = "Python · FastAPI",
-            otherTechStack = "AWS, Docker, GitHub Actions",
-            iconsList = listOf(
-                Res.Logo.PYTHON_LOGO,
-                Res.Logo.PYCHARM_LOGO,
-                Res.Logo.GITHUB_LOGO
-            ),
-            onClick = {
-                ctx.router.navigateTo("https://github.com/Phantom-VK")
-            }
-        )
-        ProjectCard(
-            title = "AgentTuring Math Tutor",
-            description = "Developed AI-powered tutoring agent with RAG + MCP for math problem solving and web retrieval.",
-            imageUrl = "images/projectthumbnails/agentturing.webp",
-            mainTechStack = "AI-ML",
-            otherTechStack = "LangGraph, Qdrant,Tavily MCP, LLM, FastAPI",
-            iconsList = listOf(
-                Res.Logo.PYTHON_LOGO,
-                Res.Logo.PYCHARM_LOGO,
-            ),
-            onClick = {
-                ctx.router.navigateTo("https://github.com/Phantom-VK/agentturing")
-            }
-        )
-
-        ProjectCard(
-            title = "HR Chacha - AI-Powered Hiring Assistant",
-            description = "LLM-driven hiring assistant automating 80% candidate screening with role-specific Q&A.",
-            imageUrl = "images/projectthumbnails/hrchacha.webp",
-            mainTechStack = "AI-ML",
-            otherTechStack = "Python, Streamlit, FastAPI, MongoDB, AWS",
-            iconsList = listOf(
-                Res.Logo.PYTHON_LOGO,
-                Res.Logo.PYCHARM_LOGO
-            ),
-            onClick = {
-                ctx.router.navigateTo("https://github.com/phantom-vk/HRChacha")
-            }
-        )
-        ProjectCard(
-            title = "SRT Slicer",
-            description = "A powerful tool to generate word-level timestamps from SRT subtitle files with advanced customization options. ",
-            imageUrl = "images/projectthumbnails/srtslicer.webp",
-            mainTechStack = "Python",
-            otherTechStack = "Inno Setup",
-            iconsList = listOf(
-                Res.Logo.PYTHON_LOGO,
-                Res.Logo.PYCHARM_LOGO
-
-            ),
-            onClick = {
-                ctx.router.navigateTo("https://github.com/Phantom-VK/SRTSlicer")
-            }
-        )
-        ProjectCard(
-            title = "ICRS – Intelligent College Redressal System",
-            description = "AI-powered grievance platform with RAG + pgvector semantic search, role-based React/Spring portals, JWT security, and email notifications.",
-            imageUrl = "images/projectthumbnails/chatbot.webp",
-            mainTechStack = "Java Spring Boot · React · PostgreSQL + pgvector",
-            otherTechStack = "RAG, JWT auth, email notifications",
-            iconsList = listOf(
-                Res.Logo.JAVA_LOGO,
-                Res.Logo.INTELLIJ_LOGO,
-                Res.Logo.GITHUB_LOGO
-            ),
-            onClick = {
-                ctx.router.navigateTo("https://github.com/Phantom-VK/icrs")
-            }
-        )
-        ProjectCard(
-            title = "Portfolio",
-            description = "Portfolio Website using Kobweb framework, Kotlin language only.",
-            imageUrl = "images/projectthumbnails/portfolio.webp",
-            mainTechStack = "Kobweb",
-            otherTechStack = "Kotlin",
-            iconsList = listOf(
-                Res.Logo.KOTLIN_LOGO,
-                Res.Logo.INTELLIJ_LOGO,
-                Res.Logo.CMP_LOGO
-            ),
-            onClick = {
-                ctx.router.navigateTo("https://github.com/Phantom-VK/MyPortfolio")
-            }
-        )
+        projects.forEachIndexed { index, project ->
+            val isFeatured = index == 0
+            ProjectCard(
+                title = project.title,
+                description = project.description,
+                imageUrl = project.imageUrl,
+                mainTechStack = project.mainTechStack,
+                otherTechStack = project.otherTechStack,
+                iconsList = project.icons,
+                modifier = if (isFeatured) ProjectFeaturedStyle.toModifier() else Modifier,
+                featured = isFeatured,
+                onClick = { ctx.router.navigateTo(project.href) },
+            )
+        }
     }
-
-
 }

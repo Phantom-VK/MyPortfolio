@@ -1,99 +1,107 @@
 package com.vikramaditya.portfolio.sections
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import com.varabyte.kobweb.compose.css.Height
-import com.varabyte.kobweb.compose.css.JustifyItems
 import com.varabyte.kobweb.compose.css.TextAlign
-import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Column
-import com.varabyte.kobweb.compose.foundation.layout.Spacer
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
-import com.varabyte.kobweb.compose.ui.graphics.Colors
-import com.varabyte.kobweb.compose.ui.modifiers.alignContent
 import com.varabyte.kobweb.compose.ui.modifiers.color
-import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
-import com.varabyte.kobweb.compose.ui.modifiers.fontFamily
-import com.varabyte.kobweb.compose.ui.modifiers.fontSize
-import com.varabyte.kobweb.compose.ui.modifiers.gap
-import com.varabyte.kobweb.compose.ui.modifiers.height
-import com.varabyte.kobweb.compose.ui.modifiers.id
-import com.varabyte.kobweb.compose.ui.modifiers.justifyContent
-import com.varabyte.kobweb.compose.ui.modifiers.justifyItems
-import com.varabyte.kobweb.compose.ui.modifiers.margin
-import com.varabyte.kobweb.compose.ui.modifiers.maxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.compose.ui.modifiers.textAlign
-import com.varabyte.kobweb.compose.ui.modifiers.zIndex
-import com.varabyte.kobweb.framework.annotations.DelicateApi
-import com.varabyte.kobweb.silk.components.layout.SimpleGrid
-import com.varabyte.kobweb.silk.components.layout.numColumns
+import com.varabyte.kobweb.compose.ui.styleModifier
+import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.silk.components.text.SpanText
+import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
-import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
+import com.varabyte.kobweb.silk.style.toModifier
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.vikramaditya.portfolio.components.WhatIDoCard
 import com.vikramaditya.portfolio.utils.Res
-import com.vikramaditya.portfolio.widgets.SectionTitle
-import org.jetbrains.compose.web.css.AlignContent
-import org.jetbrains.compose.web.css.JustifyContent
-import org.jetbrains.compose.web.css.cssRem
-import org.jetbrains.compose.web.css.em
-import org.jetbrains.compose.web.css.percent
-import org.jetbrains.compose.web.css.px
+import com.vikramaditya.portfolio.utils.theme.Font
+import com.vikramaditya.portfolio.utils.theme.Section
+import com.vikramaditya.portfolio.utils.theme.Space
+import com.vikramaditya.portfolio.utils.theme.Type
+import com.vikramaditya.portfolio.utils.theme.colors
+import com.vikramaditya.portfolio.utils.theme.fontFace
+import com.vikramaditya.portfolio.utils.theme.textStyle
+import org.jetbrains.compose.web.dom.Div
 
-@OptIn(DelicateApi::class)
+/**
+ * Asymmetric bento rather than three equal cards.
+ *
+ * Phones stack. At MD the lead card takes the full width above a pair. At LG it
+ * becomes a tall left column beside two stacked wide cards, so the section has a
+ * shape no other section on the page repeats.
+ */
+val WhatIDoGridStyle = CssStyle {
+    base {
+        Modifier.fillMaxWidth().styleModifier {
+            property("display", "grid")
+            property("grid-template-columns", "1fr")
+            property("gap", "16px")
+        }
+    }
+    Breakpoint.MD {
+        Modifier.styleModifier {
+            property("grid-template-columns", "repeat(2, 1fr)")
+            property("gap", "20px")
+        }
+    }
+    Breakpoint.LG {
+        Modifier.styleModifier {
+            property("grid-template-columns", "1fr 1.35fr")
+            property("grid-template-rows", "200px 200px")
+            property("gap", "24px")
+        }
+    }
+}
+
+/** Wide at MD, tall at LG. Everything else auto-places around it. */
+val BentoLeadStyle = CssStyle {
+    base { Modifier }
+    Breakpoint.MD {
+        Modifier.styleModifier { property("grid-column", "span 2") }
+    }
+    Breakpoint.LG {
+        Modifier.styleModifier {
+            property("grid-column", "1 / 2")
+            property("grid-row", "1 / 3")
+        }
+    }
+}
+
 @Composable
 fun WhatIDo() {
-    val colorMode by ColorMode.currentState
-    val breakpoint = rememberBreakpoint()
+    val c = colors(ColorMode.current)
+
+    @Composable
+    fun back(text: String) {
+        SpanText(
+            text = text,
+            modifier = Modifier
+                .textAlign(TextAlign.Start)
+                .fontFace(Font.BODY)
+                .textStyle(Type.Small)
+                .color(c.textSecondary)
+        )
+    }
 
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(top = 2.cssRem)
-            .margin(
-
-                bottom = when (breakpoint) {
-                    Breakpoint.SM -> 10.cssRem
-                    Breakpoint.MD -> 4.cssRem
-                    Breakpoint.XL -> 4.cssRem
-                    else -> 10.cssRem
-                }
-            ),
-
+            .padding(leftRight = Space.lg, topBottom = Section.gapSm),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        SimpleGrid(
-            modifier = Modifier
-                .fillMaxWidth()
-                .gap(10.percent)
-                .padding(leftRight = 2.cssRem)
-                .justifyItems(JustifyItems.Center),
-            numColumns = numColumns(
-                base = 1,
-                sm = 1,
-                md = 2,
-                lg = 3
-            )
-        ) {
+        Div(attrs = WhatIDoGridStyle.toModifier().toAttrs()) {
             WhatIDoCard(
                 iconImage = Res.Icon.HEXAWEB,
                 description = "Full Stack Systems & DevOps",
+                modifier = BentoLeadStyle.toModifier(),
                 backContent = {
-                    SpanText(
-                        text = "Build Python full stack systems end-to-end, with hands-on Java work and desktop app development using Python.",
-                        modifier = Modifier
-                            .textAlign(TextAlign.Center)
-                            .fontFamily("JetBrains Mono")
-                            .fontSize(if (breakpoint >= Breakpoint.MD) 1.3.em else 1.1.em)
-                            .color(if (colorMode.isDark) Res.Theme.GLASS_BOX_BORDER_COLOR_LIGHT.color else Colors.White)
+                    back(
+                        "Build Python full stack systems end-to-end, with hands-on Java work " +
+                            "and desktop app development using Python."
                     )
                 }
             )
@@ -101,30 +109,14 @@ fun WhatIDo() {
             WhatIDoCard(
                 iconImage = Res.Icon.DEV,
                 description = "AI/ML Applications",
-                backContent = {
-                    SpanText(
-                        text = "End-to-end AI/ML projects and Agentic AI automations.",
-                        modifier = Modifier
-                            .textAlign(TextAlign.Center)
-                            .fontFamily("JetBrains Mono")
-                            .fontSize(if (breakpoint >= Breakpoint.MD) 1.3.em else 1.1.em)
-                            .color(if (colorMode.isDark) Res.Theme.GLASS_BOX_BORDER_COLOR_LIGHT.color else Colors.White)
-                    )
-                }
+                backContent = { back("End-to-end AI/ML projects and Agentic AI automations.") }
             )
 
             WhatIDoCard(
                 iconImage = Res.Icon.CUBOID,
                 description = "Android Development",
                 backContent = {
-                    SpanText(
-                        text = "Android development with the latest tech stack, Kotlin and Jetpack Compose.",
-                        modifier = Modifier
-                            .textAlign(TextAlign.Center)
-                            .fontFamily("JetBrains Mono")
-                            .fontSize(if (breakpoint >= Breakpoint.MD) 1.3.em else 1.1.em)
-                            .color(if (colorMode.isDark) Res.Theme.GLASS_BOX_BORDER_COLOR_LIGHT.color else Colors.White)
-                    )
+                    back("Android development with the latest tech stack, Kotlin and Jetpack Compose.")
                 }
             )
         }
