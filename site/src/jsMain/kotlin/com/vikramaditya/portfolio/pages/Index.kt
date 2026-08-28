@@ -57,13 +57,13 @@ fun HomePage() {
             RevealedSection("About Me", id = "about-me") { AboutMe() }
             RevealedSection("Experience", id = "experience") { ExperienceSection() }
             RevealedSection("What I do?", id = "what-i-do") { WhatIDo() }
-
+            RevealedSection("Achievements", id = "achievements", animateBody = false) { AchievementsSection() }
             // The cube and carousel bodies are not wrapped: both run their own
             // 3D scenes, and an ancestor mid-transition would flatten them.
             RevealedSection("Tools & Technologies", id = "tech-stack", animateBody = false) { TechStackCubes() }
 
             RevealedSection("Projects", id = "projects") { ProjectSection() }
-            RevealedSection("Achievements", id = "achievements", animateBody = false) { AchievementsSection() }
+
 
             Footer()
         }
