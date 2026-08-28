@@ -52,6 +52,11 @@ object Res {
         const val LANGGRAPH_LOGO = "images/tools/langgraph-color.svg"
         const val CHATGPT_LOGO = "images/icons/chatgpt.png"
         const val POSTGRESQL_LOGO = "images/tools/postgre.png"
+        const val REACT_LOGO = "images/skills/React.svg"
+        const val TYPESCRIPT_LOGO = "images/skills/TypeScript.svg"
+        const val FASTAPI_LOGO = "images/tools/FastAPI.svg"
+        const val VITE_LOGO = "images/tools/Vite.svg"
+        const val DEEPSEEK_LOGO = "images/tools/DeepSeek.svg"
     }
 
     object String {
