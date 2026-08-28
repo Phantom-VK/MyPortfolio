@@ -33,5 +33,35 @@ data class Achievement(
  * height does not change when the first entry is added.
  */
 object AchievementsData {
-    val items: List<Achievement> = emptyList()
+    val items: List<Achievement> = listOf(
+        Achievement(
+            id = "hackfusion-bog",
+            title = "HackFusion — Felicitated by Board of Governance",
+            issuer = "HackFusion National Hackathon",
+            caption = "Served as Vice President and co-organizer; felicitated by the Board of Governance.",
+            imageUrl = "images/achievements/BOG_hackfusion_pic.jpeg",
+        ),
+        Achievement(
+            id = "psb-idea-hackathon",
+            title = "PSBs iDEA Hackathon — Winner, ₹1,00,000",
+            issuer = "Union Bank of India · PSBs Hackathon Series",
+            year = "2025",
+            caption = "Led the team to win the Special Category, awarded a ₹1 lakh prize.",
+            imageUrl = "images/achievements/PSB_Hackathon_win.jpeg",
+        ),
+        Achievement(
+            id = "ieee-rcsm-paper",
+            title = "Published Paper — IEEE RCSM 2025",
+            issuer = "IEEE Madhya Pradesh Section · MANIT Bhopal",
+            year = "2025",
+            caption = "Presented at the 1st International Conference on Recent Trends in Computing and Smart Mobility, MANIT Bhopal.",
+            imageUrl = "images/achievements/ResearchPaper1.jpeg",
+        ),
+        Achievement(
+            id = "best-performer-club",
+            title = "Best Performer Club of the Year",
+            caption = "Won against clubs a decade older, just two years after founding.",
+            imageUrl = "images/achievements/WellPerformerClubPic.jpeg",
+        ),
+    )
 }

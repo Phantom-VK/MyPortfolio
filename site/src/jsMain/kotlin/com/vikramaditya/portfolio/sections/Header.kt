@@ -31,7 +31,7 @@ import org.jetbrains.compose.web.css.*
 import org.w3c.dom.events.Event
 
 /** Anchor ids in page order. Scroll-spy walks this, so a new section must be added here. */
-private val NAV_SECTIONS = listOf("home", "about-me", "languages", "projects", "achievements", "contact")
+private val NAV_SECTIONS = listOf("home", "about-me", "projects", "achievements", "contact")
 
 @OptIn(DelicateApi::class)
 @Composable
@@ -136,9 +136,6 @@ fun Header(modifier: Modifier) {
                 }
                 HeaderItem("About", isOnline = currentSection == "about-me", breakpoint = breakpoint) {
                     scrollToSection("about-me")
-                }
-                HeaderItem("Skills", isOnline = currentSection == "languages", breakpoint = breakpoint) {
-                    scrollToSection("languages")
                 }
                 HeaderItem("Projects", isOnline = currentSection == "projects", breakpoint = breakpoint) {
                     scrollToSection("projects")

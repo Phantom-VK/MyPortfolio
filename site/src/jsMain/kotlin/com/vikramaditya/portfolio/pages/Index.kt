@@ -57,7 +57,6 @@ fun HomePage() {
             RevealedSection("About Me", id = "about-me") { AboutMe() }
             RevealedSection("Experience", id = "experience") { ExperienceSection() }
             RevealedSection("What I do?", id = "what-i-do") { WhatIDo() }
-            RevealedSection("Programming Language Proficiency", id = "languages") { MySkillsSection() }
 
             // The cube and carousel bodies are not wrapped: both run their own
             // 3D scenes, and an ancestor mid-transition would flatten them.

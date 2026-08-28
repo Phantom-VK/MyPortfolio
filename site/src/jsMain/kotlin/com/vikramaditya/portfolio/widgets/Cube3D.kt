@@ -34,31 +34,38 @@ import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.dom.Div
 import org.w3c.dom.HTMLElement
 import org.w3c.dom.events.Event
-import kotlin.math.abs
 
 /**
- * Resting orientation. Not square-on: a slight tilt shows three faces at once,
- * so the shape reads as a cube before anyone touches it.
+ * Resting tilt on X. Not square-on: a slight tilt shows three faces at once, so
+ * the shape reads as a cube before anyone touches it. Y has no rest value — it
+ * spins continuously, see [SPIN_DEG_PER_SEC].
  */
 private const val REST_X = -18.0
-private const val REST_Y = 26.0
 
-/** How far the pointer can push the cube away from rest, in degrees. */
-private const val TILT_X = 26.0
-private const val TILT_Y = 34.0
+/** Continuous idle spin around Y, in degrees/second — this is what makes the full 360 happen on its own, with no pointer input required (so it also works on touch). */
+private const val SPIN_DEG_PER_SEC = 22.0
+
+/** Spin speeds up under the pointer, on top of the constant idle spin. */
+private const val HOVER_SPIN_MULTIPLIER = 2.4
+
+/** How far the pointer can additionally tilt the cube away from its spin path, in degrees. */
+private const val TILT_X = 22.0
+private const val TILT_Y = 30.0
 
 private const val SUB_STEP = 1.0 / 240.0
 private const val DT_CLAMP = 0.064
-private const val REST_VELOCITY = 0.35
-private const val REST_DELTA = 0.05
 
 /**
- * Drives cube rotation with a spring instead of an 8-second linear loop.
+ * Drives cube rotation with a continuous spin plus a spring-driven pointer tilt
+ * layered on top, instead of the old hover-only spring that only ever nudged the
+ * cube a few degrees off rest and never completed a revolution.
  *
- * The old rotation was hover-only, constant-speed, and endless: motion with no
- * cause. This one tracks the pointer, so the cube turns *because* you moved,
- * and springs back to rest when you leave. Per-frame transforms are written
- * straight onto the element, never through Compose state.
+ * The spin never stops — that's what "rotates fully" means here, and it's also
+ * what makes the cube work on touch devices, which never fire `pointermove`.
+ * Hovering (or, on desktop, moving the pointer across the face) both speeds the
+ * spin up and adds an extra tilt, so the interaction still feels responsive.
+ * Per-frame transforms are written straight onto the element, never through
+ * Compose state.
  */
 private class CubeController(
     /** The stable, unrotated box that receives pointer events and defines the frame. */
@@ -66,12 +73,14 @@ private class CubeController(
     /** The rotating cube. Transforms are written here. */
     private val el: HTMLElement,
 ) {
-    private val rotX = SpringState().apply { x = REST_X }
-    private val rotY = SpringState().apply { x = REST_Y }
+    private var spinY = 0.0
+    private val tiltX = SpringState()
+    private val tiltY = SpringState()
     private val spring = Spring(dampingRatio = 0.72, response = 0.42)
 
-    private var targetX = REST_X
-    private var targetY = REST_Y
+    private var targetTiltX = 0.0
+    private var targetTiltY = 0.0
+    private var hovering = false
     private var rafHandle = 0
     private var lastTime = 0.0
     private var lastTransform = ""
@@ -86,60 +95,46 @@ private class CubeController(
             // Normalised to -1..1 from the cube's centre.
             val nx = ((d.clientX.unsafeCast<Double>() - rect.left) / rect.width) * 2.0 - 1.0
             val ny = ((d.clientY.unsafeCast<Double>() - rect.top) / rect.height) * 2.0 - 1.0
-            targetY = REST_Y + nx * TILT_Y
-            targetX = REST_X - ny * TILT_X
-            start()
+            targetTiltY = nx * TILT_Y
+            targetTiltX = -ny * TILT_X
+            hovering = true
         }
     }
 
     private val onPointerLeave: (Event) -> Unit = {
-        targetX = REST_X
-        targetY = REST_Y
-        start()
+        targetTiltX = 0.0
+        targetTiltY = 0.0
+        hovering = false
     }
 
     private val frame: (Double) -> Unit = { now ->
-        rafHandle = 0
         val dt = if (lastTime == 0.0) SUB_STEP else ((now - lastTime) / 1000.0).coerceAtMost(DT_CLAMP)
         lastTime = now
 
-        // Fixed sub-steps with an exact remainder, so the settle feels identical
-        // at 60Hz and 120Hz rather than stiffer on a faster display.
+        val speed = if (hovering) SPIN_DEG_PER_SEC * HOVER_SPIN_MULTIPLIER else SPIN_DEG_PER_SEC
+        spinY = (spinY + speed * dt) % 360.0
+
+        // Fixed sub-steps with an exact remainder, so the tilt spring feels
+        // identical at 60Hz and 120Hz rather than stiffer on a faster display.
         var remaining = dt
         while (remaining > 0.0) {
             val h = if (remaining > SUB_STEP) SUB_STEP else remaining
-            spring.step(rotX, targetX, h)
-            spring.step(rotY, targetY, h)
+            spring.step(tiltX, targetTiltX, h)
+            spring.step(tiltY, targetTiltY, h)
             remaining -= h
         }
 
         render()
-
-        val atRest = abs(rotX.v) < REST_VELOCITY && abs(rotX.x - targetX) < REST_DELTA &&
-            abs(rotY.v) < REST_VELOCITY && abs(rotY.x - targetY) < REST_DELTA
-        if (atRest) {
-            // Snap and stop. At rest the rAF handle is 0 and idle cost is zero.
-            rotX.x = targetX; rotX.v = 0.0
-            rotY.x = targetY; rotY.v = 0.0
-            render()
-            lastTime = 0.0
-        } else {
-            rafHandle = window.requestAnimationFrame(frame)
-        }
+        // Never stops: the idle spin is perpetual, so there is no rest state to
+        // detect and no reason to cancel the rAF handle mid-flight.
+        rafHandle = window.requestAnimationFrame(frame)
     }
 
     private fun render() {
-        val next = "rotateX(${rotX.x.fx(2)}deg) rotateY(${rotY.x.fx(2)}deg)"
+        val next = "rotateX(${(REST_X + tiltX.x).fx(2)}deg) rotateY(${(spinY + tiltY.x).fx(2)}deg)"
         if (next != lastTransform) {
             lastTransform = next
             el.style.setProperty("transform", next)
-        }
-    }
-
-    private fun start() {
-        if (rafHandle == 0) {
-            lastTime = 0.0
-            rafHandle = window.requestAnimationFrame(frame)
         }
     }
 
@@ -148,6 +143,10 @@ private class CubeController(
         frameEl.addEventListener("pointermove", onPointerMove)
         frameEl.addEventListener("pointerleave", onPointerLeave)
         frameEl.addEventListener("pointercancel", onPointerLeave)
+        if (rafHandle == 0) {
+            lastTime = 0.0
+            rafHandle = window.requestAnimationFrame(frame)
+        }
     }
 
     /** Every listener is a stored `val`, so removal gets the identical reference. */
@@ -160,9 +159,7 @@ private class CubeController(
     }
 
     fun renderStatic() {
-        rotX.x = REST_X
-        rotY.x = REST_Y
-        render()
+        el.style.setProperty("transform", "rotateX(${REST_X.fx(2)}deg) rotateY(0deg)")
     }
 }
 
