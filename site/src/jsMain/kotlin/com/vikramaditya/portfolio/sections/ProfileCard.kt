@@ -168,20 +168,31 @@ fun ProfileCard() {
         Div(attrs = HeroCopyStyle.toModifier().toAttrs()) {
             H1(
                 attrs = HeroNameStyle.toModifier()
+                    .fillMaxWidth()
                     .margin(0.px)
                     .fontFace(Font.DISPLAY)
                     .color(c.textPrimary)
+                    .styleModifier { property("overflow-wrap", "break-word") }
                     .toAttrs()
             ) {
                 org.jetbrains.compose.web.dom.Text("Vikramaditya Khupse")
             }
 
+            // `display: block` plus an explicit width is what actually forces this
+            // to wrap: a bare inline SpanText inside a flex column can end up
+            // sized to its own text run rather than the container, and a mono
+            // string this long then runs straight off the edge on a phone.
             SpanText(
                 "Full Stack · AI/ML · DevOps & Cloud",
                 Modifier
+                    .fillMaxWidth()
                     .textStyle(Type.Title)
                     .fontFace(Font.BODY)
                     .color(c.accent)
+                    .styleModifier {
+                        property("display", "block")
+                        property("overflow-wrap", "break-word")
+                    }
             )
 
             CodeBox()

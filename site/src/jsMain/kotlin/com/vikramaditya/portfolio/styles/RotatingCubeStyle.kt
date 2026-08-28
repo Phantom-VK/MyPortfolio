@@ -2,7 +2,6 @@ package com.vikramaditya.portfolio.styles
 
 import com.varabyte.kobweb.compose.css.BackfaceVisibility
 import com.varabyte.kobweb.compose.css.Background
-import com.varabyte.kobweb.compose.css.Cursor
 import com.varabyte.kobweb.compose.css.Overflow
 import com.varabyte.kobweb.compose.css.TransformStyle
 import com.varabyte.kobweb.compose.css.Transition
@@ -75,12 +74,13 @@ val BoxCardStyle = CssStyle {
             .position(Position.Relative)
             .userSelect(UserSelect.None)
             .transformStyle(TransformStyle.Preserve3d)
-            .cursor(Cursor.Grab)
+            // Default cursor, not grab/grabbing: rotation tracks pointer position
+            // on hover, it isn't a drag gesture, and a grab hand promises an
+            // interaction the cube doesn't have.
             .size(CUBE_SIZE_SM.px)
     }
     Breakpoint.MD { Modifier.size(CUBE_SIZE_MD.px) }
     Breakpoint.LG { Modifier.size(CUBE_SIZE_LG.px) }
-    cssRule(":active") { Modifier.cursor(Cursor.Grabbing) }
 }
 
 val FaceStyle = CssStyle {

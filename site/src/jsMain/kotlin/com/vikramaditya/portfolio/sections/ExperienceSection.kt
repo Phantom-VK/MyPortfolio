@@ -19,7 +19,6 @@ import com.vikramaditya.portfolio.utils.theme.colors
 import com.vikramaditya.portfolio.utils.theme.fontFace
 import com.vikramaditya.portfolio.utils.theme.textStyle
 import org.jetbrains.compose.web.css.LineStyle
-import org.jetbrains.compose.web.css.Position
 import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
 
@@ -94,18 +93,24 @@ private fun ExperienceEntry(
     colors: ThemeColors,
     isLast: Boolean,
 ) {
-    Box(
+    // A Row, not a Box with an absolutely positioned child: Kobweb's Box lays
+    // its children out side by side rather than stacking them, so `position:
+    // absolute` on the node never actually took it out of that flow — it just
+    // rendered as a normal flex item glued to the heading that followed it.
+    Row(
         modifier = Modifier
             .fillMaxWidth()
-            .position(Position.Relative)
-            .padding(left = Space.xl, bottom = if (isLast) 0.px else Section.gapSm)
+            .margin(bottom = if (isLast) 0.px else Section.gapSm),
+        verticalAlignment = Alignment.Top
     ) {
-        // Node. Pulled half its width to the left so it straddles the rail.
+        // Marker: a fixed-size dot with its own right margin providing the gap
+        // to the heading, the same shape as the highlight bullets below. No
+        // nested box, no negative offset — both fought the row's own sizing
+        // instead of just sitting where they were put.
         Box(
             modifier = Modifier
-                .position(Position.Absolute)
-                .left((-5).px)
-                .top(Space.sm)
+                .flexShrink(0)
+                .margin(top = Space.sm, right = Space.lg)
                 .size(9.px)
                 .borderRadius(50.percent)
                 .backgroundColor(colors.accent)

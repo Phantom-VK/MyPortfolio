@@ -22,6 +22,7 @@ import com.vikramaditya.portfolio.utils.theme.Type
 import com.vikramaditya.portfolio.utils.theme.colors
 import com.vikramaditya.portfolio.utils.theme.fontFace
 import com.vikramaditya.portfolio.utils.theme.textStyle
+import org.jetbrains.compose.web.css.em
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.dom.Div
 
@@ -139,9 +140,10 @@ private fun SkillEntry(skill: Skill, colors: ThemeColors, isLead: Boolean) {
             text = skill.label,
             modifier = Modifier
                 .margin(top = Space.sm)
-                .textStyle(Type.Micro)
-                .fontFace(Font.BODY)
-                .color(colors.accent)
+                .textStyle(Type.Small)
+                .fontFace(Font.DISPLAY)
+                .letterSpacing(0.08.em)
+                .color(colors.textPrimary)
         )
     }
 }
