@@ -54,7 +54,7 @@ object AchievementsData {
             title = "Published Paper — IEEE RCSM 2025",
             issuer = "IEEE Madhya Pradesh Section · MANIT Bhopal",
             year = "2025",
-            caption = "Presented at the 1st International Conference on Recent Trends in Computing and Smart Mobility, MANIT Bhopal.",
+            caption = "Presented research paper at the 1st International Conference on Recent Trends in Computing and Smart Mobility, MANIT Bhopal.",
             imageUrl = "images/achievements/ResearchPaper1.jpeg",
         ),
         Achievement(

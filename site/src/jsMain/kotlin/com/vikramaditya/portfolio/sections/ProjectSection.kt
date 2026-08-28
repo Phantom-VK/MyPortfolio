@@ -30,7 +30,7 @@ private val projects = listOf(
     Project(
         title = "NoRefund",
         description = "Offline desktop app that counts tokens and estimates LLM API cost across 21 models before you spend a cent — analysis never leaves your machine.",
-        imageUrl = "images/projectthumbnails/norefund.webp",
+        imageUrl = "images/projectthumbnails/norefund.png",
         mainTechStack = "React · TypeScript",
         otherTechStack = "Python, pywebview, Vite",
         icons = listOf(
@@ -45,7 +45,7 @@ private val projects = listOf(
     Project(
         title = "RFPilot",
         description = "Agentic Map→Reduce→Consolidate pipeline that turns messy RFP PDFs and HTML bids into clean, structured JSON.",
-        imageUrl = "images/projectthumbnails/rfpilot.webp",
+        imageUrl = "images/projectthumbnails/rfpilot.png",
         mainTechStack = "Python",
         otherTechStack = "Docling, DeepSeek, asyncio",
         icons = listOf(Res.Logo.PYTHON_LOGO, Res.Logo.DEEPSEEK_LOGO, Res.Logo.PYCHARM_LOGO, Res.Logo.GITHUB_LOGO),
@@ -54,7 +54,7 @@ private val projects = listOf(
     Project(
         title = "VR-ETL",
         description = "Vectorless, agentic RAG over long reports — a PageIndex tree, LangGraph orchestration, and streamed answers with citations, no vector database.",
-        imageUrl = "images/projectthumbnails/vretl.webp",
+        imageUrl = "images/projectthumbnails/vretl.png",
         mainTechStack = "FastAPI · LangGraph",
         otherTechStack = "PageIndex, DeepSeek, Sympy",
         icons = listOf(
@@ -87,7 +87,7 @@ private val projects = listOf(
     Project(
         title = "ICRS",
         description = "AI grievance platform with RAG + pgvector semantic search, role-based React/Spring portals, and JWT security.",
-        imageUrl = "images/projectthumbnails/chatbot.webp",
+        imageUrl = "images/projectthumbnails/icrs.png",
         mainTechStack = "Spring Boot · React",
         otherTechStack = "PostgreSQL + pgvector, RAG, JWT",
         icons = listOf(Res.Logo.JAVA_LOGO, Res.Logo.INTELLIJ_LOGO, Res.Logo.GITHUB_LOGO),

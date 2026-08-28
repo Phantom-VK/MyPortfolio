@@ -76,9 +76,9 @@ fun AboutMe() {
 
         SpanText(
             text = "I like to develop all kinds of stuff on computers. I hate web development though, " +
-                "(HTML, CSS, JS...). Currently interning at Emplay Analytics as an Agentic AI Automation " +
+                "(HTML, CSS, JS...). Currently working at Emplay Analytics as an Agentic AI Automation " +
                 "Engineer, building enterprise AI copilots with LLMs and agentic workflows. My main focus " +
-                "areas are AI/ML applications, GenAI, Agentic AI, and full stack development.",
+                "areas are AI/ML applications, and full stack development.",
             modifier = Modifier
                 .textStyle(Type.Body)
                 .fontFace(Font.BODY)

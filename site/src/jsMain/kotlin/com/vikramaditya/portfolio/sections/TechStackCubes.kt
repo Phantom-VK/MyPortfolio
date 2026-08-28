@@ -59,11 +59,11 @@ fun TechStackCubes(){
         Cube3D(
             icons = listOf(
                 Res.Logo.CMP_LOGO to "Compose Multiplatform",
-                Res.Logo.FIREBASE_LOGO to "Firebase",
+                Res.Logo.FLASK_LOGO to "Flask",
                 Res.Logo.GIT_LOGO to "Git",
                 Res.Logo.DJANGO_LOGO to "Django",
                 Res.Logo.GITHUB_LOGO to "GitHub",
-                Res.Logo.FLASK_LOGO to "Flask"
+                Res.Logo.FIREBASE_LOGO to "Firebase",
             )
         )
     }

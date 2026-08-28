@@ -37,9 +37,9 @@ private val experiences = listOf(
         period = "Jun 2026 - Present · Remote",
         location = "Dublin, California, USA",
         highlights = listOf(
-            "Building and testing AI workflows using LLMs, RAG, and agentic orchestration frameworks.",
+            "Building forecasting system for a giant telecom company",
             "Supporting enterprise client delivery across Sales, Procurement, and Marketing use cases.",
-            "Prompt engineering, data validation with SQL, and UAT for AI copilot deployments.",
+            "Developing AI workflows using LLMs, RAG, and agentic orchestration frameworks..",
         ),
     ),
     Experience(
