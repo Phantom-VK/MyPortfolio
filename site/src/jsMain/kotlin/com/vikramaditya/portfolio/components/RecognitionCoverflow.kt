@@ -19,7 +19,7 @@ import com.varabyte.kobweb.silk.style.animation.toAnimation
 import com.varabyte.kobweb.silk.style.toModifier
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.vikramaditya.portfolio.styles.*
-import com.vikramaditya.portfolio.utils.Achievement
+import com.vikramaditya.portfolio.utils.Recognition
 import com.vikramaditya.portfolio.utils.rememberPrefersReducedMotion
 import com.vikramaditya.portfolio.utils.theme.Font
 import com.vikramaditya.portfolio.utils.theme.Space
@@ -38,20 +38,22 @@ import org.jetbrains.compose.web.dom.P
 import org.jetbrains.compose.web.dom.Text
 
 /**
- * A drag-and-flick coverflow of achievement images.
+ * A drag-and-flick coverflow of recognition images (achievements, certifications).
  *
  * Branches at the composable level rather than in CSS, so under reduced motion no
  * pointer listeners and no animation loop are ever created in the first place.
  */
 @Composable
-fun AchievementCoverflow(
-    items: List<Achievement>,
+fun RecognitionCoverflow(
+    items: List<Recognition>,
     modifier: Modifier = Modifier,
     label: String = "Achievements",
+    emptyTitle: String,
+    emptySubtitle: String,
 ) {
     val reduced = rememberPrefersReducedMotion()
     when {
-        items.isEmpty() -> CoverflowEmpty(modifier)
+        items.isEmpty() -> CoverflowEmpty(emptyTitle, emptySubtitle, modifier)
         reduced -> AchievementStrip(items, modifier, label)
         else -> CoverflowPhysics(items, modifier, label)
     }
@@ -59,7 +61,7 @@ fun AchievementCoverflow(
 
 @Composable
 private fun CoverflowPhysics(
-    items: List<Achievement>,
+    items: List<Recognition>,
     modifier: Modifier,
     label: String,
 ) {
@@ -159,7 +161,7 @@ private fun CoverflowPhysics(
         ) {
             Button(
                 attrs = CoverflowNavButtonStyle.toModifier().toAttrs {
-                    attr("aria-label", "Previous achievement")
+                    attr("aria-label", "Previous item")
                     attr("type", "button")
                     if (activeIndex <= 0) attr("disabled", "")
                     onClick { controller.step(-1) }
@@ -169,7 +171,7 @@ private fun CoverflowPhysics(
             Div(
                 attrs = CoverflowDotsStyle.toModifier().toAttrs {
                     attr("role", "group")
-                    attr("aria-label", "Choose achievement")
+                    attr("aria-label", "Choose item")
                 }
             ) {
                 items.forEachIndexed { index, item ->
@@ -186,7 +188,7 @@ private fun CoverflowPhysics(
 
             Button(
                 attrs = CoverflowNavButtonStyle.toModifier().toAttrs {
-                    attr("aria-label", "Next achievement")
+                    attr("aria-label", "Next item")
                     attr("type", "button")
                     if (activeIndex >= lastIndex) attr("disabled", "")
                     onClick { controller.step(1) }
@@ -204,14 +206,14 @@ private fun CoverflowPhysics(
             if (active != null) Text("Showing ${activeIndex + 1} of ${items.size}: ${active.title}")
         }
         Div(attrs = VisuallyHiddenStyle.toModifier().toAttrs { attr("id", "coverflow-help") }) {
-            Text("Use the left and right arrow keys to move between achievements.")
+            Text("Use the left and right arrow keys to move between items.")
         }
     }
 }
 
 /** The card's inner face: the image, or a typographic stand-in until one exists. */
 @Composable
-private fun CoverflowCardFace(item: Achievement) {
+private fun CoverflowCardFace(item: Recognition) {
     val c = colors(ColorMode.current)
     val imageUrl = item.imageUrl
 
@@ -259,7 +261,7 @@ private fun CoverflowCardFace(item: Achievement) {
  */
 @Composable
 private fun AchievementStrip(
-    items: List<Achievement>,
+    items: List<Recognition>,
     modifier: Modifier,
     label: String,
 ) {
@@ -310,11 +312,15 @@ private fun AchievementStrip(
 }
 
 /**
- * Shown until the first achievement is added. Sized like a real card so the
+ * Shown until the first item is added. Sized like a real card so the
  * section does not change height when content arrives.
  */
 @Composable
-private fun CoverflowEmpty(modifier: Modifier = Modifier) {
+private fun CoverflowEmpty(
+    emptyTitle: String,
+    emptySubtitle: String,
+    modifier: Modifier = Modifier,
+) {
     val c = colors(ColorMode.current)
 
     Box(
@@ -326,14 +332,14 @@ private fun CoverflowEmpty(modifier: Modifier = Modifier) {
     ) {
         Div(attrs = CoverflowEmptyStyle.toModifier().toAttrs()) {
             SpanText(
-                "Felicitations",
+                emptyTitle,
                 modifier = Modifier
                     .textStyle(Type.Title)
                     .fontFace(Font.DISPLAY)
                     .color(c.textPrimary)
             )
             SpanText(
-                "Awards and recognitions are being added here.",
+                emptySubtitle,
                 modifier = Modifier
                     .margin(top = Space.sm)
                     .textStyle(Type.Small)
