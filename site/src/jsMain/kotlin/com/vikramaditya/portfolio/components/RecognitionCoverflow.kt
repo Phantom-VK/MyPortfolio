@@ -70,6 +70,7 @@ private fun CoverflowPhysics(
     val controller = remember(items.size) { CoverflowController(activeIndexState, items.size) }
     val c = colors(ColorMode.current)
     val lastIndex = items.lastIndex
+    val helpId = remember(label) { "coverflow-help-" + label.lowercase().replace(Regex("[^a-z0-9]+"), "-") }
 
     Column(modifier = Modifier.fillMaxWidth().then(modifier)) {
         Box(modifier = CoverflowOuterStyle.toModifier()) {
@@ -78,7 +79,7 @@ private fun CoverflowPhysics(
                     attr("role", "group")
                     attr("aria-roledescription", "carousel")
                     attr("aria-label", label)
-                    attr("aria-describedby", "coverflow-help")
+                    attr("aria-describedby", helpId)
                     attr("tabindex", "0")
                 }
             ) {
@@ -205,7 +206,7 @@ private fun CoverflowPhysics(
         ) {
             if (active != null) Text("Showing ${activeIndex + 1} of ${items.size}: ${active.title}")
         }
-        Div(attrs = VisuallyHiddenStyle.toModifier().toAttrs { attr("id", "coverflow-help") }) {
+        Div(attrs = VisuallyHiddenStyle.toModifier().toAttrs { attr("id", helpId) }) {
             Text("Use the left and right arrow keys to move between items.")
         }
     }
