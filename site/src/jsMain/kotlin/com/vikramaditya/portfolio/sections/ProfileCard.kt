@@ -183,7 +183,7 @@ fun ProfileCard() {
             // sized to its own text run rather than the container, and a mono
             // string this long then runs straight off the edge on a phone.
             SpanText(
-                "Full Stack · AI/ML · DevOps & Cloud",
+                "AN \"ENGINEER\"",
                 Modifier
                     .fillMaxWidth()
                     .textStyle(Type.Title)

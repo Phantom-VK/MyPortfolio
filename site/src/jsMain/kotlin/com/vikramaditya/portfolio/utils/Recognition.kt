@@ -1,13 +1,13 @@
 package com.vikramaditya.portfolio.utils
 
 /**
- * One felicitation, award, or recognition.
+ * One felicitation, award, certification, or recognition.
  *
  * Only [id] and [title] are required, so entries can be added now and their
  * images supplied later without touching the carousel. A null [imageUrl] renders
  * a designed typographic face rather than a broken image.
  */
-data class Achievement(
+data class Recognition(
     val id: String,
     val title: String,
     val issuer: String? = null,
@@ -33,15 +33,15 @@ data class Achievement(
  * height does not change when the first entry is added.
  */
 object AchievementsData {
-    val items: List<Achievement> = listOf(
-        Achievement(
+    val items: List<Recognition> = listOf(
+        Recognition(
             id = "hackfusion-bog",
             title = "HackFusion — Felicitated by Board of Governance",
             issuer = "HackFusion National Hackathon",
             caption = "Served as Vice President and co-organizer; felicitated by the Board of Governance.",
             imageUrl = "images/achievements/BOG_hackfusion_pic.jpeg",
         ),
-        Achievement(
+        Recognition(
             id = "psb-idea-hackathon",
             title = "PSBs iDEA Hackathon — Winner, ₹1,00,000",
             issuer = "Union Bank of India · PSBs Hackathon Series",
@@ -49,7 +49,7 @@ object AchievementsData {
             caption = "Led the team to win the Special Category, awarded a ₹1 lakh prize.",
             imageUrl = "images/achievements/PSB_Hackathon_win.jpeg",
         ),
-        Achievement(
+        Recognition(
             id = "ieee-rcsm-paper",
             title = "Published Paper — IEEE RCSM 2025",
             issuer = "IEEE Madhya Pradesh Section · MANIT Bhopal",
@@ -57,7 +57,7 @@ object AchievementsData {
             caption = "Presented research paper at the 1st International Conference on Recent Trends in Computing and Smart Mobility, MANIT Bhopal.",
             imageUrl = "images/achievements/ResearchPaper1.jpeg",
         ),
-        Achievement(
+        Recognition(
             id = "best-performer-club",
             title = "Best Performer Club of the Year",
             caption = "Won against clubs a decade older, just two years after founding.",
