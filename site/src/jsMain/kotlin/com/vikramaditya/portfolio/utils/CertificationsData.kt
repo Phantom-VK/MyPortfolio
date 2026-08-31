@@ -9,28 +9,12 @@ package com.vikramaditya.portfolio.utils
 object CertificationsData {
     val items: List<Recognition> = listOf(
         Recognition(
-            id = "agentic-ai-engineer",
-            title = "Agentic AI Engineer",
-            caption = "Agentic AI, MCP, AI Agents",
-            imageUrl = "images/certifications/agenticai.jpg",
-            intrinsicWidth = 1600,
-            intrinsicHeight = 1190,
-        ),
-        Recognition(
-            id = "complete-ai-ml",
-            title = "Complete AI/ML",
-            caption = "Data Science, Machine Learning, Deep Learning, Natural Language Processing",
-            imageUrl = "images/certifications/aiml.jpg",
-            intrinsicWidth = 1600,
-            intrinsicHeight = 1190,
-        ),
-        Recognition(
-            id = "android-development",
-            title = "Android Development",
-            caption = "Using Jetpack Compose and Kotlin",
-            imageUrl = "images/certifications/android.jpg",
-            intrinsicWidth = 1600,
-            intrinsicHeight = 1190,
+            id = "aws-ai-practitioner",
+            title = "AWS Certified AI Practitioner",
+            caption = "AIF-C01",
+            imageUrl = "images/certifications/awsai.png",
+            intrinsicWidth = 960,
+            intrinsicHeight = 600,
         ),
         Recognition(
             id = "oci-ai-foundations",
@@ -56,5 +40,29 @@ object CertificationsData {
             intrinsicWidth = 1600,
             intrinsicHeight = 1236,
         ),
+        Recognition(
+            id = "agentic-ai-engineer",
+            title = "Agentic AI Engineer",
+            caption = "Agentic AI, MCP, AI Agents",
+            imageUrl = "images/certifications/agenticai.jpg",
+            intrinsicWidth = 1600,
+            intrinsicHeight = 1190,
+        ),
+        Recognition(
+            id = "complete-ai-ml",
+            title = "Complete AI/ML",
+            caption = "Data Science, Machine Learning, Deep Learning, Natural Language Processing",
+            imageUrl = "images/certifications/aiml.jpg",
+            intrinsicWidth = 1600,
+            intrinsicHeight = 1190,
+        ),
+        Recognition(
+            id = "android-development",
+            title = "Android Development",
+            caption = "Using Jetpack Compose and Kotlin",
+            imageUrl = "images/certifications/android.jpg",
+            intrinsicWidth = 1600,
+            intrinsicHeight = 1190,
+        )
     )
 }
