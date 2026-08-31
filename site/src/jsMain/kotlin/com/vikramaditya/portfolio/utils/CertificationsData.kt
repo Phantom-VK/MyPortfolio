@@ -10,8 +10,8 @@ object CertificationsData {
     val items: List<Recognition> = listOf(
         Recognition(
             id = "aws-ai-practitioner",
-            title = "AWS Certified AI Practitioner",
-            caption = "AIF-C01",
+            title = "AIF-C01",
+            caption = "AWS Certified AI Practitioner",
             imageUrl = "images/certifications/awsai.png",
             intrinsicWidth = 960,
             intrinsicHeight = 600,
