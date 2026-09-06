@@ -55,6 +55,7 @@ fun HomePage() {
             ProfileCard()
 
             RevealedSection("About Me", id = "about-me") { AboutMe() }
+            RevealedSection("Education", id = "education") { EducationSection() }
             RevealedSection("Experience", id = "experience") { ExperienceSection() }
             RevealedSection("What I do?", id = "what-i-do") { WhatIDo() }
             RevealedSection("Achievements", id = "achievements", animateBody = false) { AchievementsSection() }
