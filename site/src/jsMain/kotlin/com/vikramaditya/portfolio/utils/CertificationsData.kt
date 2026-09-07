@@ -17,6 +17,14 @@ object CertificationsData {
             intrinsicHeight = 600,
         ),
         Recognition(
+            id = "aws-cloud-practitioner",
+            title = "CLF-C02",
+            caption = "AWS Certified Cloud Practitioner",
+            imageUrl = "images/certifications/awscloudpractitioner.png",
+            intrinsicWidth = 960,
+            intrinsicHeight = 600,
+        ),
+        Recognition(
             id = "oci-ai-foundations",
             title = "Oracle Certified Professional",
             caption = "AI Foundations Associate",
