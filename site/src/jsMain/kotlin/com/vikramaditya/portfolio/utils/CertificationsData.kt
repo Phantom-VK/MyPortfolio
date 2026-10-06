@@ -71,6 +71,30 @@ object CertificationsData {
             imageUrl = "images/certifications/android.jpg",
             intrinsicWidth = 1600,
             intrinsicHeight = 1190,
-        )
+        ),
+        Recognition(
+            id = "glide-level-1",
+            title = "Glide Certified",
+            caption = "Glide Certification — Level 1",
+            imageUrl = "images/certifications/glide-level1.png",
+            intrinsicWidth = 1000,
+            intrinsicHeight = 610,
+        ),
+        Recognition(
+            id = "glide-level-2",
+            title = "Glide Certified",
+            caption = "Glide Certification — Level 2",
+            imageUrl = "images/certifications/glide-level2.png",
+            intrinsicWidth = 1000,
+            intrinsicHeight = 590,
+        ),
+        Recognition(
+            id = "glide-level-3",
+            title = "Glide Certified",
+            caption = "Glide Certification — Level 3",
+            imageUrl = "images/certifications/glide-level3.png",
+            intrinsicWidth = 1000,
+            intrinsicHeight = 588,
+        ),
     )
 }
