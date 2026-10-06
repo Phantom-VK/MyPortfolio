@@ -32,25 +32,25 @@ private data class Experience(
 
 private val experiences = listOf(
     Experience(
-        role = "Agentic AI Automation Intern",
-        company = "Emplay Analytics Inc",
+        role = "Agentic AI Automation Engineer Intern",
+        company = "Emplay Inc.",
         period = "Jun 2026 - Present · Remote",
         location = "Dublin, California, USA",
         highlights = listOf(
-            "Building forecasting system for a giant telecom company",
-            "Supporting enterprise client delivery across Sales, Procurement, and Marketing use cases.",
-            "Developing AI workflows using LLMs, RAG, and agentic orchestration frameworks..",
+            "Worked on RAG and agentic AI fundamentals, then built AI agents and workflows into Emplay's internal software.",
+            "Built a monthly demand-forecasting system for a giant telecom company - a per-series model horse-race (ARIMA, SARIMA) forecasting outbound minutes 12 months out to size send-or-pay commitments.",
+            "Took ownership of the ML forecasting codebase handed off from a senior engineer - built the UI prototype end-to-end, authored HLD/LLD/database schema docs, and worked directly with the client on requirements.",
         ),
     ),
     Experience(
-        role = "Associate Software Engineer (Intern)",
+        role = "Associate Software Engineer - DevOps Intern",
         company = "Better Software",
         period = "Oct 2025 - Feb 2026",
         location = "Rajasthan, India",
         highlights = listOf(
-            "Architected CI/CD pipelines with GitHub Actions + Docker to automate build, test, and deploy.",
-            "Built multi-cloud release workflows across AWS and DigitalOcean with environment-specific rollouts.",
-            "Hardened delivery with monitoring hooks and automated checks for production safety.",
+            "Developed and maintained multi-cloud deployment workflows across AWS and DigitalOcean using GitHub Actions for reliable, environment-specific releases.",
+            "Independently diagnosed and fixed an iOS/Android CI/CD pipeline (GitHub Actions + Fastlane) broken for months, restoring automated store releases and cutting 30 minutes of manual build time per feature.",
+            "Owned end-to-end CI/CD for a React Native project and resolved emergency production issues spanning MongoDB and Kubernetes.",
         ),
     ),
 )
