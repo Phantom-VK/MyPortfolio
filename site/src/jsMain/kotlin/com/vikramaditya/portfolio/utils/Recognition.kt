@@ -35,19 +35,14 @@ data class Recognition(
 object AchievementsData {
     val items: List<Recognition> = listOf(
         Recognition(
-            id = "hackfusion-bog",
-            title = "HackFusion — Felicitated by Board of Governance",
-            issuer = "HackFusion National Hackathon",
-            caption = "Served as Vice President and co-organizer; felicitated by the Board of Governance.",
-            imageUrl = "images/achievements/BOG_hackfusion_pic.jpeg",
-        ),
-        Recognition(
-            id = "psb-idea-hackathon",
-            title = "PSBs iDEA Hackathon — Winner, ₹1,00,000",
-            issuer = "Union Bank of India · PSBs Hackathon Series",
-            year = "2025",
-            caption = "Led the team to win the Special Category, awarded a ₹1 lakh prize.",
-            imageUrl = "images/achievements/PSB_Hackathon_win.jpeg",
+            id = "gate-2026-dsai",
+            title = "GATE 2026 — Data Science and Artificial Intelligence",
+            issuer = "IIT · Graduate Aptitude Test in Engineering",
+            year = "2026",
+            caption = "Qualified GATE DA, Open Category, AIR 4412 — without any special preparation.",
+            imageUrl = "images/achievements/GATE2026.png",
+            intrinsicWidth = 1068,
+            intrinsicHeight = 668,
         ),
         Recognition(
             id = "ieee-rcsm-paper",
@@ -58,10 +53,26 @@ object AchievementsData {
             imageUrl = "images/achievements/ResearchPaper1.jpeg",
         ),
         Recognition(
+            id = "psb-idea-hackathon",
+            title = "PSBs iDEA Hackathon — Winner, ₹1,00,000",
+            issuer = "Union Bank of India · PSBs Hackathon Series",
+            year = "2025",
+            caption = "Led the team to win the Special Category, awarded a ₹1 lakh prize.",
+            imageUrl = "images/achievements/PSB_Hackathon_win.jpeg",
+        ),
+        Recognition(
+            id = "hackfusion-bog",
+            title = "HackFusion — Felicitated by Board of Governance",
+            issuer = "HackFusion National Hackathon",
+            caption = "Served as Vice President and co-organizer; felicitated by the Board of Governance.",
+            imageUrl = "images/achievements/BOG_hackfusion_pic.jpeg",
+        ),
+        Recognition(
             id = "best-performer-club",
             title = "Best Performer Club of the Year",
             caption = "Won against clubs a decade older, just two years after founding.",
             imageUrl = "images/achievements/WellPerformerClubPic.jpeg",
         ),
+
     )
 }
