@@ -28,6 +28,22 @@ private data class Project(
 
 private val projects = listOf(
     Project(
+        title = "ADlyser",
+        description = "Context-aware ad-break placement for long-form video: a LangGraph agent pipeline finds natural cut points, times breaks against pacing rules, and matches brands to scenes — output is a playable IAB VMAP manifest.",
+        imageUrl = "images/projectthumbnails/adlyser.png",
+        mainTechStack = "FastAPI · LangGraph",
+        otherTechStack = "DeepSeek Vision, React, Terraform, AWS",
+        icons = listOf(
+            Res.Logo.PYTHON_LOGO,
+            Res.Logo.FASTAPI_LOGO,
+            Res.Logo.LANGGRAPH_LOGO,
+            Res.Logo.DEEPSEEK_LOGO,
+            Res.Logo.REACT_LOGO,
+            Res.Logo.GITHUB_LOGO,
+        ),
+        href = "https://github.com/Phantom-VK/ADlyser",
+    ),
+    Project(
         title = "NoRefund",
         description = "Offline desktop app that counts tokens and estimates LLM API cost across 21 models before you spend a cent — analysis never leaves your machine.",
         imageUrl = "images/projectthumbnails/norefund.png",
