@@ -6,7 +6,7 @@ import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.padding
-import com.vikramaditya.portfolio.components.RecognitionCoverflow
+import com.vikramaditya.portfolio.components.RecognitionGridCarousel
 import com.vikramaditya.portfolio.utils.AchievementsData
 import com.vikramaditya.portfolio.utils.theme.Section
 import com.vikramaditya.portfolio.utils.theme.Space
@@ -25,11 +25,12 @@ fun AchievementsSection() {
             .padding(leftRight = Space.lg, topBottom = Section.gapSm),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        RecognitionCoverflow(
+        RecognitionGridCarousel(
             items = AchievementsData.items,
             label = "Achievements",
             emptyTitle = "Felicitations",
             emptySubtitle = "Awards and recognitions are being added here.",
+            rows = 1,
         )
     }
 }

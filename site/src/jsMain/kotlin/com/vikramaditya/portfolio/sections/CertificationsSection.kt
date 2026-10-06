@@ -6,7 +6,7 @@ import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.padding
-import com.vikramaditya.portfolio.components.RecognitionCoverflow
+import com.vikramaditya.portfolio.components.RecognitionGridCarousel
 import com.vikramaditya.portfolio.utils.CertificationsData
 import com.vikramaditya.portfolio.utils.theme.Section
 import com.vikramaditya.portfolio.utils.theme.Space
@@ -25,7 +25,7 @@ fun CertificationsSection() {
             .padding(leftRight = Space.lg, topBottom = Section.gapSm),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        RecognitionCoverflow(
+        RecognitionGridCarousel(
             items = CertificationsData.items,
             label = "Certifications",
             emptyTitle = "Certifications",

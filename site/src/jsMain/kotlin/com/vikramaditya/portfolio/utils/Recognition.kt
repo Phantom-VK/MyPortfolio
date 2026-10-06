@@ -12,7 +12,7 @@ data class Recognition(
     val title: String,
     val issuer: String? = null,
     val year: String? = null,
-    /** One line shown under the carousel while this card is active. */
+    /** One line of description shown under the card's image. */
     val caption: String = "",
     /** Path relative to `resources/public`, e.g. "images/achievements/foo.webp". */
     val imageUrl: String? = null,
