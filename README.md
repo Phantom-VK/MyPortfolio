@@ -3,6 +3,9 @@
 <a href="https://kobweb.varabyte.com/docs">
 ![User Guide docs](https://img.shields.io/badge/User_Guide-royalblue?logo=readthedocs)
 </a>
+<a href="LICENSE">
+![License: MIT](https://img.shields.io/badge/License-MIT-green)
+</a>
 
 # Personal Portfolio Website — 100% Kotlin
 
@@ -125,3 +128,7 @@ Set these values in Render:
 
 After deploy, Render will give you a service URL like `https://your-service.onrender.com`. Put that in the GitHub
 variable `VISIT_NOTIFY_API_BASE_URL` before you next export or deploy the frontend.
+
+## License
+
+MIT — see [LICENSE](LICENSE). Free to use, modify, and distribute.
