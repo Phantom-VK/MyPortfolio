@@ -16,7 +16,13 @@ concurrency:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    # Pinned, not ubuntu-latest: ubuntu-latest moved to 26.04, which the
+    # Playwright version Kobweb's export step bundles can't install Chromium
+    # on ("Playwright does not support chromium on ubuntu26.04-x64"). A fresh
+    # runner has no pre-existing browser cache to fall back to, so the
+    # kobwebExport task hard-fails rather than just warning. 24.04 is a
+    # supported target for this Playwright version.
+    runs-on: ubuntu-24.04
     env:
       VISIT_NOTIFY_API_BASE_URL: ${{ vars.VISIT_NOTIFY_API_BASE_URL }}
     steps:
